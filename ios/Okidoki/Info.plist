@@ -47,9 +47,9 @@
       </dict>
     </dict>
     <key>NSHealthShareUsageDescription</key>
-    <string>Allow $(PRODUCT_NAME) to check health info</string>
+    <string>Custom health share permission</string>
     <key>NSHealthUpdateUsageDescription</key>
-    <string>Allow $(PRODUCT_NAME) to update health info</string>
+    <string>Custom health update permission</string>
     <key>UILaunchStoryboardName</key>
     <string>SplashScreen</string>
     <key>UIRequiredDeviceCapabilities</key>
