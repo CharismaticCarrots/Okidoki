@@ -1,10 +1,10 @@
 import { HealthKitProvider } from './Healthkit';
-import Steps from './Components/Steps';
+import Home from './Components/Home';
 
 export default function App() {
   return (
     <HealthKitProvider>
-      <Steps />
+      <Home />
     </HealthKitProvider>
   );
-}
+};
