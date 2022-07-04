@@ -1,3 +1,4 @@
+
 node_modules/
 .expo/
 dist/
@@ -73,3 +74,7 @@ web-build/
 dist/
 
 # @end expo-cli
+
+android/app/src/main/AndroidManifest.xml
+ios/Okidoki/Supporting/Expo.plist
+ios/Okidoki.xcodeproj/project.pbxproj
