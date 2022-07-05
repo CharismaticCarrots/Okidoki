@@ -9,7 +9,6 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "start-dev": "node server",
     "seed": "node script/seed.js",
     "test": "jest --watch --coverage=false --changedSince=origin/main",
     "testFinal": "jest"
@@ -21,6 +20,8 @@
     ]
   },
   "dependencies": {
+    "@react-navigation/native": "^6.0.11",
+    "@react-navigation/native-stack": "^6.7.0",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "expo": "~45.0.0",
@@ -38,6 +39,8 @@
     "react-native": "0.68.2",
     "react-native-health": "^1.12.0",
     "react-native-paper": "^4.12.2",
+    "react-native-safe-area-context": "4.2.4",
+    "react-native-screens": "~3.11.1",
     "react-native-web": "0.17.7",
     "react-query": "^3.39.1",
     "sequelize": "^6.21.2",

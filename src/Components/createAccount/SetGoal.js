@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 
 const SetGoal = () => {
   return (
     <View>
-      <Text>Test</Text>
+      <Text>Select Your Daily Step Goal</Text>
+      <TextInput placeholder="Step Goal" />
     </View>
   );
 };
