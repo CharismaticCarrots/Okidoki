@@ -12,17 +12,23 @@ const User_Doki = db.define('user_doki', {
   moodLevel: {
     type: Sequelize.INTEGER,
     defaultValue: 75,
-    min: 0,
-    max: 100
+    validate: {
+      min: 0,
+      max: 100
+    }
   },
   hungerLevel: {
     type: Sequelize.INTEGER,
     defaultValue: 75,
-    min: 0,
-    max: 100
+    validate: {
+      min: 0,
+      max: 100
+    }
   },
   isEgg: {
     type: Sequelize.BOOLEAN,
     defaultValue: "true"
   }
 })
+
+module.exports = User_Doki;

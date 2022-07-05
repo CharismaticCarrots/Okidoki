@@ -35,12 +35,16 @@ const User = db.define('user', {
   carrotCount: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
-    min: 0,
+    validate: {
+      min: 0,
+    },
   },
   dailyStepGoal: {
     type: Sequelize.INTEGER,
-    defaultValue: 5000,
-    min: 0,
+    defaultValue: 1000,
+    validate: {
+      min: 1000,
+    },
   },
 });
 
