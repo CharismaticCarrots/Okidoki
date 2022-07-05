@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const app = express();
 
 app.use(morgan('dev'));
-app.use('/public', express.static(path.join(__dirname, '../assets')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -15,19 +14,18 @@ app.use('/api', require('./api'));
 
 app.use((req, res, next) => {
   if (path.extname(req.path).length) {
-    const err = new Error('Not found')
-    err.status = 404
-    next(err)
+    const err = new Error('Not found');
+    err.status = 404;
+    next(err);
   } else {
-    next()
+    next();
   }
-})
+});
 
 app.use(function (err, req, res, next) {
   console.error(err);
   console.error(err.stack);
   res.status(err.status || 500).send(err.message || 'Internal server error.');
-})
+});
 
 module.exports = app;
-
