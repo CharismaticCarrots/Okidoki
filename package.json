@@ -8,7 +8,8 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "start-dev": "node server"
+    "start-dev": "node server",
+    "seed": "node script/seed.js"
   },
   "dependencies": {
     "axios": "^0.27.2",
