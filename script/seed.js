@@ -2,7 +2,7 @@ const { db, Doki} = require('../server/db/')
 
 const dokis = [
     {
-        type: 'cat'
+        type: 'cat',
     },
     {
         type: 'bunny'
