@@ -1,25 +1,11 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import axios from 'axios';
-import { useQuery } from 'react-query';
 import Steps from "./Steps";
 import Sprite from "./Sprite";
-
-// Fetch call
-const fetchDitto = async () => {
-  const { data } = await axios.get('https://pokeapi.co/api/v2/pokemon/ditto');
-  return data;
-};
+import { useDitto } from "../hooks/useDitto";
 
 const Home = () => {
-  const { isLoading, isError, data : ditto, error } = useQuery('ditto', fetchDitto);
-
-  if (isLoading) {
-    return <Text>Loading...</Text>
-  }
-  if (isError) {
-    return <Text>Error: {error.message}</Text>
-  }
+  const { isLoading, isError, data : ditto, error } = useDitto();
 
   return (
     <View style={styles.container}>
@@ -30,8 +16,8 @@ const Home = () => {
         scale={2}
         framesPerSprite={8}
       />
+      <Text>{isLoading ? 'Loading..' : `Name: ${ditto.abilities[0].ability.name}`}</Text>
       <Steps />
-      <Text>NAME: {ditto.name}</Text>
     </View>
   );
 };
