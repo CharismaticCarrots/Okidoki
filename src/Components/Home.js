@@ -1,9 +1,19 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import axios from 'axios';
+import { useQueryClient, useQuery } from 'react-query';
 import Steps from "./Steps";
 import Sprite from "./Sprite";
 
+// Fetch call
+const fetchDitto = async () => {
+  const { data } = await axios.get('https://pokeapi.co/api/v2/pokemon/ditto');
+  return data;
+};
+
 const Home = () => {
+  const { isLoading, isError, data : ditto, error } = useQuery('ditto', fetchDitto);
+
   return (
     <View style={styles.container}>
       <Sprite
