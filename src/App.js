@@ -19,12 +19,12 @@ export default function App() {
             <Stack.Screen
               name="Links"
               component={Links}
-              options={{ title: 'Home' }}
+              options={{ title: 'Links Page' }}
             />
             <Stack.Screen name="SetGoal" component={SetGoal} />
+            <Stack.Screen name="Home" component={Home} />
           </Stack.Navigator>
         </NavigationContainer>
-        <Home />
       </HealthKitProvider>
     </QueryClientProvider>
   );

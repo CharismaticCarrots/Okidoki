@@ -18,7 +18,7 @@ const Links = ({ navigation }) => {
         <Button
           title="Set Goal"
           onPress={() => {
-            navigation.navigate('Set Goal');
+            navigation.navigate('SetGoal');
           }}
         />
       </View>

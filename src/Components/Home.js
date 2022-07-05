@@ -20,12 +20,6 @@ const Home = ({ navigation }) => {
         {isLoading ? 'Loading..' : `Name: ${ditto.abilities[0].ability.name}`}
       </Text>
       <Steps />
-      <Button
-        title="set goal"
-        onPress={() => {
-          navigation.navigate('SetGoal');
-        }}
-      />
     </View>
   );
 };
