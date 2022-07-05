@@ -1,5 +1,6 @@
 const db = require('./db');
 
+const Doki = require('./models/Doki')
 
 // Model Assocations
 
@@ -7,4 +8,5 @@ const db = require('./db');
 
 module.exports = {
   db,
+  Doki
 };
