@@ -44,7 +44,6 @@ export const useHealthkit = () => {
 
 export const useStepCount = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
-  console.log(isLoaded);
   const [steps, setSteps] = useState(0);
   useEffect(() => {
     if (isLoaded) {
@@ -56,6 +55,5 @@ export const useStepCount = () => {
       });
     }
   }, [isLoaded]);
-  console.log(steps);
   return steps;
 };
