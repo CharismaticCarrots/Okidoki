@@ -1,7 +1,4 @@
-import AppleHealthKit, {
-  HealthValue,
-  HealthKitPermissions,
-} from 'react-native-health';
+import AppleHealthKit from 'react-native-health';
 
 import React, { useEffect, useState, useContext } from 'react';
 
