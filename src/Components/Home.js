@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import axios from 'axios';
-import { useQueryClient, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 import Steps from "./Steps";
 import Sprite from "./Sprite";
 
@@ -12,7 +12,14 @@ const fetchDitto = async () => {
 };
 
 const Home = () => {
-  // const { isLoading, isError, data : ditto, error } = useQuery('ditto', fetchDitto);
+  const { isLoading, isError, data : ditto, error } = useQuery('ditto', fetchDitto);
+
+  if (isLoading) {
+    return <Text>Loading...</Text>
+  }
+  if (isError) {
+    return <Text>Error: {error.message}</Text>
+  }
 
   return (
     <View style={styles.container}>
@@ -24,6 +31,7 @@ const Home = () => {
         framesPerSprite={8}
       />
       <Steps />
+      <Text>NAME: {ditto.name}</Text>
     </View>
   );
 };
