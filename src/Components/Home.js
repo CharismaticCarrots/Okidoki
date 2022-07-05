@@ -12,12 +12,12 @@ const fetchDitto = async () => {
 };
 
 const Home = () => {
-  const { isLoading, isError, data : ditto, error } = useQuery('ditto', fetchDitto);
+  // const { isLoading, isError, data : ditto, error } = useQuery('ditto', fetchDitto);
 
   return (
     <View style={styles.container}>
       <Sprite
-        src={require("../assets/sprite.png")}
+        src={require("../../assets/sprite.png")}
         totalSprites={4}
         tile={{ width: 20, height: 24 }}
         scale={2}

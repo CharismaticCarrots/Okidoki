@@ -1,6 +1,6 @@
 import { HealthKitProvider } from './Healthkit';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import Home from './Components/Home';
+import Home from './components/Home';
 
 const queryClient = new QueryClient();
 
