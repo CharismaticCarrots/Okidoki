@@ -27,7 +27,7 @@ const User_Doki = db.define('user_doki', {
   },
   isEgg: {
     type: Sequelize.BOOLEAN,
-    defaultValue: "true"
+    defaultValue: true
   }
 })
 
