@@ -1,18 +1,22 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import Steps from "./Steps";
 import Sprite from "./Sprite";
+import { useDitto } from "../hooks/useDitto";
 
 const Home = () => {
+  const { isLoading, isError, data : ditto, error } = useDitto();
+
   return (
     <View style={styles.container}>
       <Sprite
-        src={require("../assets/sprite.png")}
+        src={require("../../assets/sprite.png")}
         totalSprites={4}
         tile={{ width: 20, height: 24 }}
         scale={2}
         framesPerSprite={8}
       />
+      <Text>{isLoading ? 'Loading..' : `Name: ${ditto.abilities[0].ability.name}`}</Text>
       <Steps />
     </View>
   );
