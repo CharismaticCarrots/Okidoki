@@ -62,7 +62,6 @@ const StyledInternalContainer = styled(View)`
   flex-direction: row;
   justify-content: space-between;
   padding: 10px;
-  fontweight: bold;
 `;
 
 export {
