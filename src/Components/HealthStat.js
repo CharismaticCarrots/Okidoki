@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  ActivityIndicator,
-  Dimensions,
-} from 'react-native';
+import { View, ActivityIndicator, Dimensions } from 'react-native';
+import { Text, Surface } from 'react-native-paper';
 import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 import { BarChart } from 'react-native-chart-kit';
@@ -13,42 +8,42 @@ import { BarChart } from 'react-native-chart-kit';
 import Steps from './Steps';
 import { useDailyStepCount } from '../Healthkit';
 
+import { StyledHealthStatContainer } from './styles';
+
 const HealthStat = () => {
   const dailySteps = useDailyStepCount();
 
   if (!dailySteps) {
     return <ActivityIndicator size="large" />;
   }
+
+  let data = {
+    labels: dailySteps.map((day) => format(parseISO(day.startDate), 'eeeeee')),
+    datasets: [
+      {
+        data: dailySteps.map((day) => day.value),
+      },
+    ],
+  };
+
   return (
-    <View style={styles.container}>
+    <StyledHealthStatContainer>
+      <Text variant="displayLarge">Steps</Text>
       <View>
-        <Text>Bezier Line Chart</Text>
+        <Text variant="displayMedium">Current Week:</Text>
         <BarChart
-          data={{
-            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-            datasets: [
-              {
-                data: [
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                ],
-              },
-            ],
-          }}
+          data={data}
           width={Dimensions.get('window').width} // from react-native
-          height={220}
-          yAxisLabel="$"
-          yAxisSuffix="k"
-          yAxisInterval={1} // optional, defaults to 1
+          height={300}
+          // yAxisSuffix="k"
+          // yAxisInterval={1} // optional, defaults to 1
+          formatYLabel={() => yLabelIterator.next().value}
+          fromZero={true}
           chartConfig={{
             backgroundColor: '#e26a00',
             backgroundGradientFrom: '#fb8c00',
             backgroundGradientTo: '#ffa726',
-            decimalPlaces: 2, // optional, defaults to 2dp
+            decimalPlaces: 0, // optional, defaults to 2dp
             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             style: {
@@ -60,7 +55,6 @@ const HealthStat = () => {
               stroke: '#ffa726',
             },
           }}
-          bezier
           style={{
             marginVertical: 8,
             borderRadius: 16,
@@ -77,17 +71,8 @@ const HealthStat = () => {
           );
         })}
       </View> */}
-    </View>
+    </StyledHealthStatContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-  },
-});
 
 export default HealthStat;

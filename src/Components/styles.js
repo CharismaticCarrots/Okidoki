@@ -1,6 +1,6 @@
 // Index of Styled Components
 import styled from 'styled-components';
-import { View, Image, ImageBackground } from "react-native";
+import { View, Image, ImageBackground } from 'react-native';
 
 // Sprite Component
 const StyledSpriteContainer = styled(View)`
@@ -43,6 +43,14 @@ const StyledDokiEggContainer = styled(View)`
   height: 300px;
 `;
 
+//health stats component
+const StyledHealthStatContainer = styled(View)`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
+
 export {
   // Sprite Component
   StyledSpriteContainer,
@@ -51,4 +59,6 @@ export {
   // DokiHome component
   StyledDokiHomeBackground,
   StyledDokiEggContainer,
+  //healthState component
+  StyledHealthStatContainer,
 };
