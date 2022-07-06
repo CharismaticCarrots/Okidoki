@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Home from './components/Home';
 import SetGoal from './components/createAccount/SetGoal';
+import DokiHome from './components/DokiHome';
 import Links from './components/Links';
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ export default function App() {
             />
             <Stack.Screen name="SetGoal" component={SetGoal} />
             <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="DokiHome" component={DokiHome} />
           </Stack.Navigator>
         </NavigationContainer>
       </HealthKitProvider>

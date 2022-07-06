@@ -21,6 +21,12 @@ const Links = ({ navigation }) => {
             navigation.navigate('SetGoal');
           }}
         />
+        <Button
+          title="DokiHome"
+          onPress={() => {
+            navigation.navigate('DokiHome');
+          }}
+        />
       </View>
     </View>
   );
