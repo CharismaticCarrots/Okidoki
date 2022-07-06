@@ -4,11 +4,15 @@ import { View, Image } from "react-native";
 
 // Sprite Component
 const StyledSpriteContainer = styled(View)`
-  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100px;
 `;
 
-// Tile Component
 const StyledTileContainer = styled(View)`
+  display: flex;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
   overflow: hidden;
@@ -23,7 +27,6 @@ const StyledSpriteImage = styled(Image)`
 export {
 // Sprite Component
   StyledSpriteContainer,
-// Tile Component
   StyledTileContainer,
   StyledSpriteImage,
 };
