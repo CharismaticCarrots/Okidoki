@@ -57,3 +57,26 @@ export const useStepCount = () => {
   }, [isLoaded]);
   return steps;
 };
+
+export const useWeeklyStepCount = () => {
+  const { isLoaded, AppleHealthKit } = useHealthkit();
+  const [weekSteps, setWeekSteps] = useState(0);
+
+  let options = {
+    startDate: new Date('2022-07-04').toISOString(),
+    endDate: new Date().toISOString(),
+  };
+
+  useEffect(() => {
+    if (isLoaded) {
+      AppleHealthKit.getDailyStepCountSamples(options, (err, results) => {
+        if (err) {
+          return;
+        }
+
+        setWeekSteps(results);
+      });
+    }
+  }, [isLoaded]);
+  return weekSteps;
+};
