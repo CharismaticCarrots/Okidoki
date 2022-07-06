@@ -27,6 +27,12 @@ const Links = ({ navigation }) => {
             navigation.navigate('DokiHome');
           }}
         />
+        <Button
+          title="Select Egg"
+          onPress={() => {
+            navigation.navigate('SelectEgg');
+          }}
+        />
       </View>
     </View>
   );
