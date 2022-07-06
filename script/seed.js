@@ -1,8 +1,11 @@
-const { db, Doki } = require('../server/db/');
+const { db, Doki, User } = require('../server/db/');
 
 const dokis = [
   {
     type: 'cat',
+    spriteSheet: {
+      idle: '../../assets/catSprites/cat.png'
+    }
   },
   {
     type: 'bunny',
@@ -12,14 +15,52 @@ const dokis = [
   },
 ];
 
+const users = [
+  {
+    email: 'hello@gmail.com',
+    password: 'password',
+    firstName: 'Con',
+    lastName: 'Man',
+  },
+  {
+    email: 'bye@gmail.com',
+    password: 'password',
+    firstName: 'Angel',
+    lastName: 'Y',
+  },
+  {
+    email: 'hey@gmail.com',
+    password: 'password',
+    firstName: 'Kris',
+    lastName: 'Tin',
+  },
+  {
+    email: 'test@gmail.com',
+    password: 'password',
+    firstName: 'Ly',
+    lastName: 'Diaaa',
+  },
+]
+
+
+
 const seed = async () => {
   try {
     await db.sync({ force: true });
-    await Promise.all(
+    const [catDoki, rabbitDoki, foxDoki] = await Promise.all(
       dokis.map((doki) => {
         return Doki.create(doki);
       })
     );
+    const [user1, user2, user3, user4] = await Promise.all(
+      users.map((user) => {
+        return User.create(user);
+      })
+    );
+    await catDoki.addUser(user1, {through: {dokiName: 'Conbot'}})
+    await catDoki.addUser(user2, {through: {dokiName: 'Snow Angel'}})
+    await catDoki.addUser(user3, {through: {dokiName: 'Kris Kross'}})
+    await catDoki.addUser(user4, {through: {dokiName: 'Ldyster'}})
   } catch (error) {
     console.log(error);
   }
