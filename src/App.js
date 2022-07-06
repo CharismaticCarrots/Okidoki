@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Home from './components/Home';
 import SetGoal from './components/createAccount/SetGoal';
-import DokiHome from './components/DokiHome';
+import DokiHome from './components/dokiHome/DokiHome';
 import Links from './components/Links';
 
 const queryClient = new QueryClient();
