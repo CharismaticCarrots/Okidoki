@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, ActivityIndicator, Dimensions } from 'react-native';
+import {
+  View,
+  ActivityIndicator,
+  Dimensions,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
 import { Text, Surface } from 'react-native-paper';
 import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
@@ -8,7 +14,11 @@ import { BarChart } from 'react-native-chart-kit';
 import Steps from './Steps';
 import { useDailyStepCount } from '../Healthkit';
 
-import { StyledHealthStatContainer } from './styles';
+import {
+  StyledHealthStatContainer,
+  StyledDayContainer,
+  StyledInternalContainer,
+} from './styles';
 
 const HealthStat = () => {
   const dailySteps = useDailyStepCount();
@@ -61,18 +71,34 @@ const HealthStat = () => {
           }}
         />
       </View>
-      {/* <View>
+      <ScrollView>
         {dailySteps.map((day) => {
           return (
-            <View>
-              <Text>Day: {format(parseISO(day.startDate), 'eeeeee')}</Text>
-              <Text>Steps: {day.value}</Text>
-            </View>
+            <StyledDayContainer>
+              <Surface style={styles.surface} elevation={4}>
+                <StyledInternalContainer>
+                  <Text>{format(parseISO(day.startDate), 'eeee')}: </Text>
+
+                  <Text>{day.value} Steps</Text>
+                </StyledInternalContainer>
+              </Surface>
+            </StyledDayContainer>
           );
         })}
-      </View> */}
+      </ScrollView>
     </StyledHealthStatContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  surface: {
+    padding: 8,
+    height: 80,
+    width: Dimensions.get('window').width,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+  },
+});
 
 export default HealthStat;
