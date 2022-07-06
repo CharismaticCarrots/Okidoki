@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const  Doki  = require('../db/models/Doki')
+const  {Doki} = require('../db')
 
 module.exports = router
 
