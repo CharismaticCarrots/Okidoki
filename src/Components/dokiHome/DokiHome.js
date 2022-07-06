@@ -1,23 +1,22 @@
-import React from "react";
-import { View, Text, ImageBackground } from "react-native";
-import styled from "styled-components";
+import React, { useState } from "react";
+import { View } from "react-native";
+import { Button } from 'react-native-paper';
+import { StyledDokiHomeBackground, StyledDokiEggContainer } from '../styles';
 import DokiEgg from "./DokiEgg";
-
-const StyledImageBackground = styled(ImageBackground)`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import Doki from "./Doki";
 
 const DokiHome = () => {
+  const [isEgg, setEggStatus] = useState(true); // Dummy data
   return (
     <View>
-      <StyledImageBackground source={require("../../../assets/dokihome_background.png")} resizeMode="cover">
-      {/* <Text>THIS IS THE DOKIHOME</Text> */}
-      <DokiEgg />
-      </StyledImageBackground>
+      <StyledDokiHomeBackground source={require("../../../assets/dokihome_background.png")} resizeMode="cover">
+        <StyledDokiEggContainer>
+          {isEgg ? <DokiEgg /> : <Doki />}
+        </StyledDokiEggContainer>
+        <Button onPress={() => setEggStatus(false) } mode='contained'>
+          Hatch
+        </Button>
+      </StyledDokiHomeBackground>
     </View>
   );
 };
