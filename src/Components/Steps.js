@@ -8,7 +8,6 @@ const Steps = () => {
   return (
     <View style={styles.container}>
       <Text>Steps: {steps}</Text>
-      <Text>Test</Text>
       <StatusBar style="auto" />
     </View>
   );

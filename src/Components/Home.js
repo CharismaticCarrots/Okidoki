@@ -10,11 +10,11 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Sprite
-        src={require('../../assets/sprite.png')}
-        totalSprites={4}
-        tile={{ width: 20, height: 24 }}
-        scale={2}
-        framesPerSprite={8}
+        src={require('../../assets/catSprites/cat-eat.png')}
+        totalSprites={6}
+        tile={{ width: 127, height: 90 }}
+        scale={3}
+        framesPerSprite={15}
       />
       <Text>
         {isLoading ? 'Loading..' : `Name: ${ditto.abilities[0].ability.name}`}
@@ -31,6 +31,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
   },
 });

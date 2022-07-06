@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 // Match routes
-// router.use('/users', require('./users'));
+router.use('/dokis', require('./dokis'))
 
 
 router.use(function (req, res, next) {
@@ -11,3 +11,5 @@ router.use(function (req, res, next) {
 });
 
 module.exports = router;
+
+
