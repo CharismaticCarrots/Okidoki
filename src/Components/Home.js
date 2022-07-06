@@ -10,8 +10,8 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Sprite
-        src={require('../../assets/catSprites/cat-eat.png')}
-        totalSprites={18}
+        src={require('../../assets/catSprites/cat.png')}
+        totalSprites={6}
         tile={{ width: 127, height: 90 }}
         scale={3}
         framesPerSprite={15}
