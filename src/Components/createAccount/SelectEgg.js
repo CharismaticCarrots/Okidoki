@@ -28,33 +28,39 @@ const SelectEgg = () => {
   return (
     <View >
       <StyledDokiHomeBackground source={require("../../../assets/selectEgg.png")} resizeMode="cover">
-      <View style={styles.container}>
-      <Text style={styles.text}>Select a Doki Egg</Text>
-      <TextInput placeholder="Doki Name"  style={styles.input}/>
-      <View style={styles.eggs}>
-      <Animated.View style={egg === 'egg1' ? {transform: [{rotate: spin}]} : {} } >
-      <TouchableOpacity onPress={() => setEgg("egg1")}> 
-        <Image
-         style={styles.image} source={require('../../../assets/egg.png')} />
-       </TouchableOpacity>
-         </Animated.View>
-         <Animated.View style={egg === 'egg2'  ? {transform: [{rotate: spin}] } : {} } >
-      <TouchableOpacity onPress={() => setEgg("egg2")}> 
-        <Image
-         style={styles.image} source={require('../../../assets/egg.png')} />
-       </TouchableOpacity>
-         </Animated.View>
-         <Animated.View style={egg === 'egg3'  ? {transform: [{rotate: spin}] } : {} } >
-      <TouchableOpacity onPress={() => setEgg("egg3")}> 
-        <Image
-         style={styles.image} source={require('../../../assets/egg.png')} />
-       </TouchableOpacity>
-         </Animated.View>
-      </View>
-      <Button mode='contained'>
-        SUBMIT
-      </Button>
-      </View>
+        <View style={styles.container}>
+          <Text style={styles.text}>Select a Doki Egg</Text>
+          <TextInput placeholder="Doki Name"  style={styles.input}/>
+          <View style={styles.eggs}>
+            <Animated.View style={egg === 'egg1' ? {transform: [{rotate: spin}]} : {} } >
+                <TouchableOpacity onPress={() => setEgg("egg1")}> 
+                  <Image
+                    style={styles.image} 
+                    source={require('../../../assets/egg.png')} 
+                    />
+                </TouchableOpacity>
+              </Animated.View>
+              <Animated.View style={egg === 'egg2'  ? {transform: [{rotate: spin}] } : {} } >
+                <TouchableOpacity onPress={() => setEgg("egg2")}> 
+                  <Image
+                    style={styles.image} 
+                    source={require('../../../assets/egg.png')} 
+                    />
+                </TouchableOpacity>
+              </Animated.View>
+              <Animated.View style={egg === 'egg3'  ? {transform: [{rotate: spin}] } : {} } >
+                <TouchableOpacity onPress={() => setEgg("egg3")}> 
+                  <Image
+                    style={styles.image} 
+                    source={require('../../../assets/egg.png')} 
+                    />
+                </TouchableOpacity>
+              </Animated.View>
+          </View>
+          <Button mode='contained'>
+            SUBMIT
+          </Button>
+        </View>
       </StyledDokiHomeBackground>
     </View>
   )

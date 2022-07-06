@@ -4,8 +4,8 @@ const dokis = [
   {
     type: 'cat',
     spriteSheet: {
-      idle: '../../assets/catSprites/cat.png'
-    }
+      idle: '../../assets/catSprites/cat.png',
+    },
   },
   {
     type: 'bunny',
@@ -18,31 +18,29 @@ const dokis = [
 const users = [
   {
     email: 'hello@gmail.com',
-    password: 'password',
+    password: 't',
     firstName: 'Con',
     lastName: 'Man',
   },
   {
     email: 'bye@gmail.com',
-    password: 'password',
+    password: 't',
     firstName: 'Angel',
     lastName: 'Y',
   },
   {
     email: 'hey@gmail.com',
-    password: 'password',
+    password: 't',
     firstName: 'Kris',
     lastName: 'Tin',
   },
   {
     email: 'test@gmail.com',
-    password: 'password',
+    password: 't',
     firstName: 'Ly',
     lastName: 'Diaaa',
   },
-]
-
-
+];
 
 const seed = async () => {
   try {
@@ -57,10 +55,10 @@ const seed = async () => {
         return User.create(user);
       })
     );
-    await catDoki.addUser(user1, {through: {dokiName: 'Conbot'}})
-    await catDoki.addUser(user2, {through: {dokiName: 'Snow Angel'}})
-    await catDoki.addUser(user3, {through: {dokiName: 'Kris Kross'}})
-    await catDoki.addUser(user4, {through: {dokiName: 'Ldyster'}})
+    await catDoki.addUser(user1, { through: { dokiName: 'Conbot' } });
+    await catDoki.addUser(user2, { through: { dokiName: 'Snow Angel' } });
+    await catDoki.addUser(user3, { through: { dokiName: 'Kris Kross' } });
+    await catDoki.addUser(user4, { through: { dokiName: 'Ldyster' } });
   } catch (error) {
     console.log(error);
   }
@@ -71,6 +69,8 @@ module.exports = seed;
 if (require.main === module) {
   seed()
     .then(() => {
+      console.log(`seeded ${users.length} users`);
+      console.log(`seeded ${dokis.length} dokis`);
       console.log('Seeding success!');
     })
     .catch((err) => {
