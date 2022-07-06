@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, ImageBackground } from "react-native";
 import styled from "styled-components";
+import DokiEgg from "./DokiEgg";
 
 const StyledImageBackground = styled(ImageBackground)`
   width: 100%;
@@ -13,8 +14,9 @@ const StyledImageBackground = styled(ImageBackground)`
 const DokiHome = () => {
   return (
     <View>
-      <StyledImageBackground source={require("../../assets/dokihome_background.png")} resizeMode="cover">
-      <Text>THIS IS THE DOKIHOME</Text>
+      <StyledImageBackground source={require("../../../assets/dokihome_background.png")} resizeMode="cover">
+      {/* <Text>THIS IS THE DOKIHOME</Text> */}
+      <DokiEgg />
       </StyledImageBackground>
     </View>
   );
