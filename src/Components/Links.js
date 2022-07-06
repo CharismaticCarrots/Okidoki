@@ -27,6 +27,12 @@ const Links = ({ navigation }) => {
             navigation.navigate('DokiHome');
           }}
         />
+        <Button
+          title="HealthStat"
+          onPress={() => {
+            navigation.navigate('HealthStat');
+          }}
+        />
       </View>
     </View>
   );
