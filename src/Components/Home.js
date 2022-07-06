@@ -11,7 +11,7 @@ const Home = ({ navigation }) => {
     <View style={styles.container}>
       <Sprite
         src={require('../../assets/catSprites/cat-eat.png')}
-        totalSprites={6}
+        totalSprites={18}
         tile={{ width: 127, height: 90 }}
         scale={3}
         framesPerSprite={15}
