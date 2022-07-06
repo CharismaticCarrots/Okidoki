@@ -47,21 +47,20 @@ const users = [
 const seed = async () => {
   try {
     await db.sync({ force: true });
-    await Promise.all(
+    const [catDoki, rabbitDoki, foxDoki] = await Promise.all(
       dokis.map((doki) => {
         return Doki.create(doki);
       })
     );
-    await Promise.all(
+    const [user1, user2, user3, user4] = await Promise.all(
       users.map((user) => {
         return User.create(user);
       })
     );
-    const Doki1 = await Doki.findByPk(1)
-    await Doki1.addUser(1, {through: {dokiName: 'Conbot'}})
-    await Doki1.addUser(2, {through: {dokiName: 'Snow Angel'}})
-    await Doki1.addUser(3, {through: {dokiName: 'Kris Kross'}})
-    await Doki1.addUser(4, {through: {dokiName: 'Ldyster'}})
+    await catDoki.addUser(user1, {through: {dokiName: 'Conbot'}})
+    await catDoki.addUser(user2, {through: {dokiName: 'Snow Angel'}})
+    await catDoki.addUser(user3, {through: {dokiName: 'Kris Kross'}})
+    await catDoki.addUser(user4, {through: {dokiName: 'Ldyster'}})
   } catch (error) {
     console.log(error);
   }
