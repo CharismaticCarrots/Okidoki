@@ -1,14 +1,30 @@
-import { StyleSheet, Text, View, TextInput } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { StyledDokiHomeBackground } from '../styles'
-import Sprite from '../Sprite'
-import {Animated} from 'react-native';
-import { TouchableOpacity } from 'react-native-web';
+import {Animated, Easing} from 'react-native';
 import { Button } from 'react-native-paper';
-
+import { TextInput } from 'react-native-paper';
 
 const SelectEgg = () => {
   const [egg, setEgg] = useState(null)
+  spinValue = new Animated.Value(0);
+
+  Animated.loop(
+  Animated.timing(
+      this.spinValue,
+    {
+      toValue: 1,
+      duration: 2000,
+      easing: Easing.linear, 
+      useNativeDriver: true  
+    }
+  )).start()
+
+  const spin = this.spinValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['-20deg', '20deg']
+  })
+
   return (
     <View >
       <StyledDokiHomeBackground source={require("../../../assets/selectEgg.png")} resizeMode="cover">
@@ -16,39 +32,24 @@ const SelectEgg = () => {
       <Text style={styles.text}>Select a Doki Egg</Text>
       <TextInput placeholder="Doki Name"  style={styles.input}/>
       <View style={styles.eggs}>
-      <Button
-      onPress={() => setEgg('egg1')}
-      >
-      <Sprite
-        src={require('../../../assets/greenEgg.png')}
-        totalSprites={egg == 'egg1' ? 1 :2}
-        tile={{ width: 600, height: 719 }}
-        scale={0.1}
-        framesPerSprite={29}
-      />
-      </Button>
-      <Button
-      onPress={() => setEgg('egg2')}
-      >
-      <Sprite
-        src={require('../../../assets/greenEgg.png')}
-        totalSprites={egg == 'egg2' ? 1 :2}
-        tile={{ width: 600, height: 719 }}
-        scale={0.1}
-        framesPerSprite={29}
-      />
-      </Button>
-      <Button
-      onPress={() => setEgg('egg3')}
-      >
-      <Sprite
-        src={require('../../../assets/greenEgg.png')}
-        totalSprites={egg == 'egg3' ? 1 :2}
-        tile={{ width: 600, height: 719 }}
-        scale={0.1}
-        framesPerSprite={29}
-      />
-      </Button>
+      <Animated.View style={egg === 'egg1' ? {transform: [{rotate: spin}]} : {} } >
+      <TouchableOpacity onPress={() => setEgg("egg1")}> 
+        <Image
+         style={styles.image} source={require('../../../assets/egg.png')} />
+       </TouchableOpacity>
+         </Animated.View>
+         <Animated.View style={egg === 'egg2'  ? {transform: [{rotate: spin}] } : {} } >
+      <TouchableOpacity onPress={() => setEgg("egg2")}> 
+        <Image
+         style={styles.image} source={require('../../../assets/egg.png')} />
+       </TouchableOpacity>
+         </Animated.View>
+         <Animated.View style={egg === 'egg3'  ? {transform: [{rotate: spin}] } : {} } >
+      <TouchableOpacity onPress={() => setEgg("egg3")}> 
+        <Image
+         style={styles.image} source={require('../../../assets/egg.png')} />
+       </TouchableOpacity>
+         </Animated.View>
       </View>
       <Button mode='contained'>
         SUBMIT
@@ -81,5 +82,9 @@ const styles = StyleSheet.create({
     flex: 2,
     alignItems: 'center',
     justifyContent: 'space-evenly'
+  },
+  image: {
+    height: 120,
+    width: 100
   }
 })
