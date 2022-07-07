@@ -6,7 +6,6 @@ module.exports = router;
 // POST /auth/signup
 router.post('/signup', async (req, res, next) => {
   try {
-    console.log('im in the post route');
     const newUser = await User.create(req.body);
     res.status(201).json(newUser);
   } catch (err) {

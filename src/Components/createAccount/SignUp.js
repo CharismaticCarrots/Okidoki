@@ -13,7 +13,7 @@ const SignUp = ({ navigation }) => {
 
   const { mutate } = useCreateUser();
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     mutate(userData);
     navigation.navigate('SetGoal');
   };
