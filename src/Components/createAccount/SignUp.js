@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyledContainer, StyledHeading1 } from '../styles';
 import { TextInput, Button } from 'react-native-paper';
+import { useCreateUser } from '../../hooks/useUsersData';
 
 const SignUp = () => {
   const [userData, setUserData] = useState({
@@ -10,11 +11,11 @@ const SignUp = () => {
     password: '',
   });
 
+  const { mutate: createUser } = useCreateUser();
+
   const handleSubmit = async () => {
-    console.log('firstName: ', userData.firstName);
-    console.log('lastName: ', userData.lastName);
-    console.log('email: ', userData.email);
-    console.log('password: ', userData.password);
+    // console.log(userData);
+    createUser(userData);
   };
 
   return (
