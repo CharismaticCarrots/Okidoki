@@ -16,10 +16,10 @@ const StyledCarrotText = styled(Text)`
   margin: 10px;
 `;
 
-const CarrotCount = () => {
+const CarrotCount = ({carrotCount}) => {
   return(
     <StyledCarrotCountContainer>
-      <StyledCarrotText>30</StyledCarrotText>
+      <StyledCarrotText>{carrotCount}</StyledCarrotText>
       <FontAwesome5 name={'carrot'} style={{fontSize: 40}} />
     </StyledCarrotCountContainer>
   );

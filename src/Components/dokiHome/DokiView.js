@@ -8,6 +8,7 @@ import CarrotCount from "./CarrotCount";
 const DokiView = () => {
   const [doki, setDoki] = useState({type: "bunny"});
   const randomDoki = ["fox", "cat", "bunny"][Math.floor(Math.random() * 3)];
+  const [carrotCount, setCarrotCount] = useState(20);
 
   return (
     <StyledDokiHomeBackground source={require("../../../assets/dokihome_background.png")} resizeMode="cover">
@@ -17,7 +18,7 @@ const DokiView = () => {
     </StyledOuterProgressBarContainer>
     <StyledOuterCountersContainer>
       <CarrotCount />
-      <CarrotCount />
+      <CarrotCount carrotCount={carrotCount}/>
     </StyledOuterCountersContainer>
     <StyledDokiEggContainer>
       <Doki doki={doki}/>
