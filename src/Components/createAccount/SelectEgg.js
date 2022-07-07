@@ -7,11 +7,12 @@ import { TextInput } from 'react-native-paper';
 
 const SelectEgg = ({navigation}) => {
   const [egg, setEgg] = useState(null)
-  spinValue = new Animated.Value(0);
+  const spinValue = new Animated.Value(0);
+ 
 
   Animated.loop(
   Animated.timing(
-      this.spinValue,
+      spinValue,
     {
       toValue: 1,
       duration: 2000,
@@ -20,9 +21,9 @@ const SelectEgg = ({navigation}) => {
     }
   )).start()
 
-  const spin = this.spinValue.interpolate({
+  const spin = spinValue.interpolate({
     inputRange: [0, 1],
-    outputRange: ['-20deg', '20deg']
+    outputRange: ['-10deg', '10deg']
   })
 
   const handleSubmit = async () => {
@@ -35,7 +36,7 @@ const SelectEgg = ({navigation}) => {
       <StyledDokiHomeBackground source={require("../../../assets/selectEgg.png")} resizeMode="cover">
         <View style={styles.container}>
           <Text style={styles.text}>Select a Doki Egg</Text>
-          <TextInput placeholder="Doki Name"  style={styles.input}/>
+          <TextInput placeholder="Doki Name" style={styles.input}/>
           <View style={styles.eggs}>
             <Animated.View style={egg === 'egg1' ? {transform: [{rotate: spin}]} : {} } >
                 <TouchableOpacity onPress={() => setEgg("egg1")}> 
