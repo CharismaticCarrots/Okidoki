@@ -1,6 +1,7 @@
 // Index of Styled Components
 import styled from 'styled-components';
-import { View, Image, ImageBackground } from "react-native";
+import { View, Image, ImageBackground, Text } from "react-native";
+import { ProgressBar } from 'react-native-paper';
 
 // Sprite Component
 const StyledSpriteContainer = styled(View)`
@@ -27,7 +28,6 @@ const StyledSpriteImage = styled(Image)`
 // DokiHome Component
 const StyledDokiHomeBackground = styled(ImageBackground)`
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 100%;
@@ -38,9 +38,37 @@ const StyledDokiEggContainer = styled(View)`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 50px;
+  margin: 0px 50px;
+  margin-top: 150px;
   width: 300px;
   height: 300px;
+`;
+
+const StyledOuterProgressBarContainer = styled(View)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 20px;
+`;
+
+// DokiProgressBar Component
+const StyledProgressBarContainer = styled(View)`
+`;
+
+const StyledProgressBar = styled(ProgressBar)`
+  align-self: center;
+  width: 300px;
+  height: 10px;
+  border: solid gray 2.5px;
+  border-radius: 30px;
+  background-color: gray;
+`;
+
+const StyledProgressText = styled(Text)`
+  align-self: flex-end;
+  font-size: 22px;
+  font-weight: bold;
+  padding: 5px 0px;
 `;
 
 export {
@@ -48,7 +76,12 @@ export {
   StyledSpriteContainer,
   StyledTileContainer,
   StyledSpriteImage,
-  // DokiHome component
+  // DokiHome Component
   StyledDokiHomeBackground,
   StyledDokiEggContainer,
+  StyledOuterProgressBarContainer,
+  // DokiProgressBar Component
+  StyledProgressBarContainer,
+  StyledProgressBar,
+  StyledProgressText,
 };
