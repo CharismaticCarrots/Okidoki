@@ -3,7 +3,7 @@ const { User } = require('../db');
 
 module.exports = router;
 
-// POST /signup
+// POST /auth/signup
 router.post('/signup', async (req, res, next) => {
   try {
     const newUser = await User.create(req.body);
