@@ -28,10 +28,15 @@ const Links = ({ navigation }) => {
           }}
         />
         <Button
-          title="HealthStat"
+          title="Select Egg"
           onPress={() => {
-            navigation.navigate('HealthStat');
-          }}
+            navigation.navigate('SelectEgg')}}
+        />
+        <Button
+        title="HealthStat"
+        onPress={() => {
+          navigation.navigate('HealthStat');
+        }}
         />
       </View>
     </View>

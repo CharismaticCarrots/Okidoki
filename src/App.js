@@ -7,6 +7,7 @@ import Home from './components/Home';
 import SetGoal from './components/createAccount/SetGoal';
 import DokiHome from './components/dokiHome/DokiHome';
 import Links from './components/Links';
+import SelectEgg from './components/createAccount/SelectEgg';
 import HealthStat from './components/HealthStat';
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ export default function App() {
             <Stack.Screen name="SetGoal" component={SetGoal} />
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="DokiHome" component={DokiHome} />
+            <Stack.Screen name="SelectEgg" component={SelectEgg} />
             <Stack.Screen name="HealthStat" component={HealthStat} />
           </Stack.Navigator>
         </NavigationContainer>
