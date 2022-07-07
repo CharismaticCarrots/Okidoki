@@ -1,5 +1,4 @@
 import { View, Button } from 'react-native';
-import CarrotCount from './dokiHome/CarrotCount';
 
 const Links = ({ navigation }) => {
   return (
@@ -30,6 +29,12 @@ const Links = ({ navigation }) => {
           }}
         />
         <Button
+          title="DokiView"
+          onPress={() => {
+            navigation.navigate('DokiView');
+          }}
+        />
+        <Button
           title="Select Egg"
           onPress={() => {
             navigation.navigate('SelectEgg')}}
@@ -40,7 +45,6 @@ const Links = ({ navigation }) => {
           navigation.navigate('HealthStat');
         }}
         />
-        <CarrotCount />
       </View>
     </View>
   );
