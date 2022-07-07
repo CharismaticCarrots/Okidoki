@@ -5,7 +5,7 @@ import {Animated, Easing} from 'react-native';
 import { Button } from 'react-native-paper';
 import { TextInput } from 'react-native-paper';
 
-const SelectEgg = () => {
+const SelectEgg = ({navigation}) => {
   const [egg, setEgg] = useState(null)
   spinValue = new Animated.Value(0);
 
@@ -24,6 +24,11 @@ const SelectEgg = () => {
     inputRange: [0, 1],
     outputRange: ['-20deg', '20deg']
   })
+
+  const handleSubmit = async () => {
+    navigation.navigate('DokiHome');
+  };
+
 
   return (
     <View >
@@ -57,7 +62,12 @@ const SelectEgg = () => {
                 </TouchableOpacity>
               </Animated.View>
           </View>
-          <Button mode='contained'>
+          <Button 
+          mode='contained'
+          onPress={() => {
+            handleSubmit();
+          }}
+          >
             SUBMIT
           </Button>
         </View>
