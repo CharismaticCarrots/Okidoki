@@ -1,17 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
+import { useMutation } from 'react-query';
+import axios from 'axios';
+import { useState } from 'react';
+import { API_URL } from '../../../secrets.js';
 import { StyleSheet, Text, View } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 
-const SetGoal = ({navigation}) => {
+const SetGoal = ({ navigation }) => {
+  const [stepGoal, setStepGoal] = useState('0');
+  const mutation = useMutation(
+    (stepGoal) => {
+      return axios.put(
+        `http://${API_URL}/api/user`,
+        { stepGoal },
+        {
+          headers: { Authorization: '1234' },
+        }
+      );
+    },
+    {
+      onSuccess: () => {
+        navigation.navigate('SelectEgg');
+      },
+    }
+  );
 
   const handleSubmit = async () => {
-    navigation.navigate('SelectEgg');
+    mutation.mutate(stepGoal);
   };
 
   return (
     <View>
       <Text>Select Your Daily Step Goal</Text>
-      <TextInput placeholder="Step Goal" />
+      <TextInput
+        placeholder="Step Goal"
+        value={stepGoal}
+        onChangeText={setStepGoal}
+      />
       <Button
         mode="contained"
         onPress={() => {
