@@ -1,4 +1,5 @@
 import AppleHealthKit from 'react-native-health';
+import subDays from 'date-fns/subDays';
 
 import React, { useEffect, useState, useContext } from 'react';
 
@@ -56,4 +57,26 @@ export const useStepCount = () => {
     }
   }, [isLoaded]);
   return steps;
+};
+
+export const useDailyStepCount = () => {
+  const { isLoaded, AppleHealthKit } = useHealthkit();
+  const [weekSteps, setWeekSteps] = useState(null);
+
+  let options = {
+    startDate: subDays(new Date(), 7).toISOString(),
+  };
+
+  useEffect(() => {
+    if (isLoaded) {
+      AppleHealthKit.getDailyStepCountSamples(options, (err, results) => {
+        if (err) {
+          return;
+        }
+
+        setWeekSteps(results);
+      });
+    }
+  }, [isLoaded]);
+  return weekSteps;
 };
