@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyledContainer, StyledHeading1 } from '../styles';
 import { TextInput, Button } from 'react-native-paper';
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
   const [userData, setUserData] = useState({
     firstName: '',
     lastName: '',
@@ -11,10 +11,7 @@ const SignUp = () => {
   });
 
   const handleSubmit = async () => {
-    console.log('firstName: ', userData.firstName);
-    console.log('lastName: ', userData.lastName);
-    console.log('email: ', userData.email);
-    console.log('password: ', userData.password);
+    navigation.navigate('SetGoal');
   };
 
   return (
