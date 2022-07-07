@@ -3,12 +3,16 @@ import { Button } from 'react-native-paper';
 import { StyledDokiHomeBackground, StyledDokiEggContainer, StyledOuterProgressBarContainer, StyledOuterCountersContainer } from '../styles';
 import DokiProgressBar from "./DokiProgressBar";
 import Doki from "./Doki";
-import CarrotCount from "./CarrotCount";
+import CountDisplay from "./CountDisplay";
+import { useStepCount } from '../../Healthkit';
 
 const DokiView = () => {
   const [doki, setDoki] = useState({type: "bunny"});
-  const randomDoki = ["fox", "cat", "bunny"][Math.floor(Math.random() * 3)];
   const [carrotCount, setCarrotCount] = useState(20);
+  const [stepGoal, setStepGoal] = useState(5000);
+
+  const randomDoki = ["fox", "cat", "bunny"][Math.floor(Math.random() * 3)];
+  const stepCount = useStepCount();
 
   return (
     <StyledDokiHomeBackground source={require("../../../assets/dokihome_background.png")} resizeMode="cover">
@@ -17,8 +21,8 @@ const DokiView = () => {
       <DokiProgressBar name="Hunger" progress={0.75}/>
     </StyledOuterProgressBarContainer>
     <StyledOuterCountersContainer>
-      <CarrotCount />
-      <CarrotCount carrotCount={carrotCount}/>
+      <CountDisplay counterType={"step"} count={stepCount} goalCount={stepGoal}/>
+      <CountDisplay counterType={"carrot"} count={carrotCount}/>
     </StyledOuterCountersContainer>
     <StyledDokiEggContainer>
       <Doki doki={doki}/>
