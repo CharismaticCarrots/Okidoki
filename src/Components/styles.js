@@ -1,6 +1,6 @@
 // Index of Styled Components
 import styled from 'styled-components';
-import { View, Image, ImageBackground, Text } from "react-native";
+import { View, Image, ImageBackground, Text, Dimensions } from "react-native";
 import { ProgressBar } from 'react-native-paper';
 
 // Sprite Component
@@ -72,6 +72,27 @@ const StyledProgressText = styled(Text)`
   padding: 5px 0px;
 `;
 
+// Health stats component
+const StyledHealthStatContainer = styled(View)`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
+
+const StyledDayContainer = styled(View)`
+  display: flex;
+  align-items: stretch;
+  margin: 10px;
+`;
+
+const StyledInternalContainer = styled(View)`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+`;
+
 export {
   // Sprite Component
   StyledSpriteContainer,
@@ -85,4 +106,8 @@ export {
   StyledProgressBarContainer,
   StyledProgressBar,
   StyledProgressText,
+  //healthState component
+  StyledHealthStatContainer,
+  StyledDayContainer,
+  StyledInternalContainer,
 };
