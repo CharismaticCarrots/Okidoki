@@ -1,43 +1,38 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
-import React, { useState } from 'react'
-import {Animated, Easing} from 'react-native';
+import React, { useRef } from 'react';
+import { StyleSheet, Image, Animated, Easing} from 'react-native';
 
 const DokiEgg = () => {
-  spinValue = new Animated.Value(0);
+  // spinValue = new Animated.Value(0);
+  const spinAnim = useRef(new Animated.Value(0)).current;
 
   Animated.loop(
   Animated.timing(
-      this.spinValue,
+      spinAnim,
     {
       toValue: 1,
       duration: 2000,
-      easing: Easing.linear, 
-      useNativeDriver: true  
+      easing: Easing.linear,
+      useNativeDriver: true
     }
   )).start()
 
-  const spin = this.spinValue.interpolate({
+  const spin = spinAnim.interpolate({
     inputRange: [0, 1],
-    outputRange: ['-20deg', '20deg']
-  })
+    outputRange: ['-5deg', '5deg']
+  });
 
-  const back = this.spinValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['30deg', '-30deg']
-  })
   return (
     <Animated.View style={ {transform: [{rotate: spin}] } } >
-      <Image
-       style={styles.image} source={require('../../../assets/egg.png')} />
-       </Animated.View>
+      <Image style={styles.image} source={require('../../../assets/egg.png')} />
+    </Animated.View>
   )
-}
+};
 
-export default DokiEgg
+export default DokiEgg;
 
 const styles = StyleSheet.create({
   image: {
     height: 120,
     width: 100
   }
-})
+});
