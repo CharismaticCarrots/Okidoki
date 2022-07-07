@@ -40,6 +40,7 @@ const StyledDokiEggContainer = styled(View)`
   align-items: center;
   margin: 0px 50px;
   margin-top: 150px;
+  margin-bottom: 50px;
   width: 300px;
   height: 300px;
 `;
