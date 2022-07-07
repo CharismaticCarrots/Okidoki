@@ -1,6 +1,6 @@
 // Index of Styled Components
 import styled from 'styled-components';
-import { View, Image, ImageBackground, Text, Dimensions } from 'react-native';
+import { View, Image, ImageBackground, Text } from 'react-native';
 import { ProgressBar, TextInput } from 'react-native-paper';
 
 // General Styles
@@ -59,6 +59,16 @@ const StyledDokiEggContainer = styled(View)`
   height: 300px;
 `;
 
+// DokiView
+
+const StyledOuterCountersContainer = styled(View)`
+  display: flex;
+  width: 360px;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+`;
+
 // SignUp & SignIn Components
 const StyledOuterProgressBarContainer = styled(View)`
   display: flex;
@@ -68,11 +78,12 @@ const StyledOuterProgressBarContainer = styled(View)`
 `;
 
 // DokiProgressBar Component
-const StyledProgressBarContainer = styled(View)``;
+const StyledProgressBarContainer = styled(View)`
+  width: 350px;
+`;
 
 const StyledProgressBar = styled(ProgressBar)`
   align-self: center;
-  width: 300px;
   height: 10px;
   border: solid gray 2.5px;
   border-radius: 30px;
@@ -131,6 +142,8 @@ export {
   StyledProgressBarContainer,
   StyledProgressBar,
   StyledProgressText,
+  // DokiView
+  StyledOuterCountersContainer,
   //healthState component
   StyledHealthStatContainer,
   StyledDayContainer,
