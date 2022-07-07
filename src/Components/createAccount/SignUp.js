@@ -3,7 +3,7 @@ import { StyledContainer, StyledHeading1 } from '../styles';
 import { TextInput, Button } from 'react-native-paper';
 import { useCreateUser } from '../../hooks/useUsersData';
 
-const SignUp = () => {
+const SignUp = ({ navigation }) => {
   const [userData, setUserData] = useState({
     firstName: '',
     lastName: '',
@@ -13,10 +13,9 @@ const SignUp = () => {
 
   const { mutate } = useCreateUser();
 
-  const handleSubmit = () => {
-    console.log(userData);
-
+  const handleSubmit = async () => {
     mutate(userData);
+    navigation.navigate('SetGoal');
   };
 
   return (

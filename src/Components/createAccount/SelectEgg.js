@@ -4,14 +4,16 @@ import { StyledDokiHomeBackground } from '../styles'
 import {Animated, Easing} from 'react-native';
 import { Button } from 'react-native-paper';
 import { TextInput } from 'react-native-paper';
+import { StyledInput, StyledHeading1 } from '../styles';
 
-const SelectEgg = () => {
+const SelectEgg = ({navigation}) => {
   const [egg, setEgg] = useState(null)
-  spinValue = new Animated.Value(0);
+  const spinValue = new Animated.Value(0);
+ 
 
   Animated.loop(
   Animated.timing(
-      this.spinValue,
+      spinValue,
     {
       toValue: 1,
       duration: 2000,
@@ -20,17 +22,23 @@ const SelectEgg = () => {
     }
   )).start()
 
-  const spin = this.spinValue.interpolate({
+  const spin = spinValue.interpolate({
     inputRange: [0, 1],
-    outputRange: ['-20deg', '20deg']
+    outputRange: ['-10deg', '10deg']
   })
+
+  const handleSubmit = async () => {
+    navigation.navigate('DokiHome');
+  };
+
 
   return (
     <View >
       <StyledDokiHomeBackground source={require("../../../assets/selectEgg.png")} resizeMode="cover">
         <View style={styles.container}>
-          <Text style={styles.text}>Select a Doki Egg</Text>
-          <TextInput placeholder="Doki Name"  style={styles.input}/>
+          <StyledHeading1>Select a Doki Egg</StyledHeading1>
+         
+          <StyledInput placeholder='Doki Name' style={backgroundColor = "#fff"}/>
           <View style={styles.eggs}>
             <Animated.View style={egg === 'egg1' ? {transform: [{rotate: spin}]} : {} } >
                 <TouchableOpacity onPress={() => setEgg("egg1")}> 
@@ -57,7 +65,12 @@ const SelectEgg = () => {
                 </TouchableOpacity>
               </Animated.View>
           </View>
-          <Button mode='contained'>
+          <Button 
+          mode='contained'
+          onPress={() => {
+            handleSubmit();
+          }}
+          >
             SUBMIT
           </Button>
         </View>
@@ -69,14 +82,6 @@ const SelectEgg = () => {
 export default SelectEgg
 
 const styles = StyleSheet.create({
-  input: {
-    backgroundColor: "#fff",
-    height: 40,
-    width: 200
-  },
-  text: {
-    fontSize: 40
-  },
   eggs: {
     flex: 0.35,
     flexDirection: 'row',

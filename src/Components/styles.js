@@ -1,7 +1,7 @@
 // Index of Styled Components
 import styled from 'styled-components';
 import { View, Image, ImageBackground, Text, Dimensions } from 'react-native';
-import { ProgressBar } from 'react-native-paper';
+import { ProgressBar, TextInput } from 'react-native-paper';
 
 // General Styles
 const StyledHeading1 = styled(Text)`
@@ -107,6 +107,14 @@ const StyledInternalContainer = styled(View)`
   padding: 10px;
 `;
 
+//SelectEgg
+
+const StyledInput = styled(TextInput)`
+backgroundColor: #fff;
+height: 40px;
+width: 200px;
+`;
+
 export {
   // General Styles
   StyledHeading1,
@@ -127,4 +135,6 @@ export {
   StyledHealthStatContainer,
   StyledDayContainer,
   StyledInternalContainer,
+  //SelectEgg component
+  StyledInput
 };
