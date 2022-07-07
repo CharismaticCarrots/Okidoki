@@ -1,24 +1,7 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import styled from "styled-components";
-
-const StyledCarrotCountContainer = styled(View)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100px;
-`;
-
-const StyledStepCountContainer = styled(StyledCarrotCountContainer)`
-  width: 200px;
-`;
-
-const StyledCounterText = styled(Text)`
-  font-size: 25px;
-  font-weight: 900;
-  margin: 10px;
-`;
+import { StyledCarrotCountContainer, StyledStepCountContainer, StyledCounterText } from "../styles";
 
 const CountDisplay = ({counterType, count, goalCount}) => {
   return(

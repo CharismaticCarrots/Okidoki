@@ -60,7 +60,6 @@ const StyledDokiEggContainer = styled(View)`
 `;
 
 // DokiView
-
 const StyledOuterCountersContainer = styled(View)`
   display: flex;
   width: 360px;
@@ -95,6 +94,24 @@ const StyledProgressText = styled(Text)`
   font-size: 22px;
   font-weight: bold;
   padding: 5px 0px;
+`;
+
+// CountDisplay Component
+const StyledCarrotCountContainer = styled(View)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100px;
+`;
+
+const StyledStepCountContainer = styled(StyledCarrotCountContainer)`
+  width: 200px;
+`;
+
+const StyledCounterText = styled(Text)`
+  font-size: 25px;
+  font-weight: 900;
+  margin: 10px;
 `;
 
 // Health stats component
@@ -142,8 +159,12 @@ export {
   StyledProgressBarContainer,
   StyledProgressBar,
   StyledProgressText,
-  // DokiView
+  // DokiView Component
   StyledOuterCountersContainer,
+  // CountDisplay Component
+  StyledCarrotCountContainer,
+  StyledStepCountContainer,
+  StyledCounterText,
   //healthState component
   StyledHealthStatContainer,
   StyledDayContainer,
