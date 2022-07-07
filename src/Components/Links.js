@@ -1,7 +1,5 @@
-//temporary view component to house links to all the components to test rendering
-//until the routes are set up correctly
-
 import { View, Button } from 'react-native';
+import CarrotCount from './dokiHome/CarrotCount';
 
 const Links = ({ navigation }) => {
   return (
@@ -42,6 +40,7 @@ const Links = ({ navigation }) => {
           navigation.navigate('HealthStat');
         }}
         />
+        <CarrotCount />
       </View>
     </View>
   );
