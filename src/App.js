@@ -2,6 +2,7 @@ import { HealthKitProvider } from './Healthkit';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 import Home from './components/Home';
 import SetGoal from './components/createAccount/SetGoal';
