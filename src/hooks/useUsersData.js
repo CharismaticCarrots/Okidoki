@@ -8,3 +8,14 @@ export const useCreateUser = () => {
     return data;
   });
 };
+
+const updateUserStepGoal = async (stepGoal, token) => {
+  const { data } = await axios.put('http://${API_URL}/api/user', stepGoal, {
+    headers: { Authorization: token },
+  });
+  return data;
+};
+
+export const useUser = () => {
+  return useQuery('stepGoal', updateUserStepGoal);
+};
