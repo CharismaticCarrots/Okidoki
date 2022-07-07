@@ -38,9 +38,9 @@ const HealthStat = () => {
 
   return (
     <StyledHealthStatContainer>
-      <Text variant="displayLarge">Steps</Text>
+      <Text>Steps</Text>
       <View>
-        <Text variant="displayMedium">Current Week:</Text>
+        <Text>Current Week:</Text>
         <BarChart
           data={data}
           width={Dimensions.get('window').width} // from react-native
@@ -71,6 +71,7 @@ const HealthStat = () => {
           }}
         />
       </View>
+      <Text>History</Text>
       <ScrollView>
         {dailySteps.map((day) => {
           return (
