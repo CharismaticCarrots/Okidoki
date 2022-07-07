@@ -1,11 +1,10 @@
 import { useQuery, useMutation } from 'react-query';
 import axios from 'axios';
-
-const createUser = async (user) => {
-  console.log('user!', user);
-  return await axios.post('/auth/signup', user);
-};
+import { API_URL } from '../../secrets.js';
 
 export const useCreateUser = () => {
-  return useMutation(createUser);
+  return useMutation(async (user) => {
+    const { data } = await axios.post(`http://${API_URL}/auth/signup`, user);
+    return data;
+  });
 };

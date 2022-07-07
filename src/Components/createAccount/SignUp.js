@@ -11,11 +11,12 @@ const SignUp = () => {
     password: '',
   });
 
-  const { mutate: createUser } = useCreateUser();
+  const { mutate } = useCreateUser();
 
-  const handleSubmit = async () => {
-    // console.log(userData);
-    createUser(userData);
+  const handleSubmit = () => {
+    console.log(userData);
+
+    mutate(userData);
   };
 
   return (
