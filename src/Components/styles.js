@@ -1,7 +1,21 @@
 // Index of Styled Components
 import styled from 'styled-components';
-import { View, Image, ImageBackground, Text, Dimensions } from "react-native";
+import { View, Image, ImageBackground, Text, Dimensions } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
+
+// General Styles
+const StyledHeading1 = styled(Text)`
+  font-size: 30px;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 20px;
+`;
+
+const StyledContainer = styled(View)`
+  alignitems: 'center';
+  padding: 20px 30px;
+`;
 
 // Sprite Component
 const StyledSpriteContainer = styled(View)`
@@ -45,6 +59,7 @@ const StyledDokiEggContainer = styled(View)`
   height: 300px;
 `;
 
+// SignUp & SignIn Components
 const StyledOuterProgressBarContainer = styled(View)`
   display: flex;
   flex-direction: column;
@@ -53,8 +68,7 @@ const StyledOuterProgressBarContainer = styled(View)`
 `;
 
 // DokiProgressBar Component
-const StyledProgressBarContainer = styled(View)`
-`;
+const StyledProgressBarContainer = styled(View)``;
 
 const StyledProgressBar = styled(ProgressBar)`
   align-self: center;
@@ -94,6 +108,9 @@ const StyledInternalContainer = styled(View)`
 `;
 
 export {
+  // General Styles
+  StyledHeading1,
+  StyledContainer,
   // Sprite Component
   StyledSpriteContainer,
   StyledTileContainer,

@@ -10,6 +10,7 @@ import DokiHome from './components/dokiHome/DokiHome';
 import Links from './components/Links';
 import SelectEgg from './components/createAccount/SelectEgg';
 import HealthStat from './components/HealthStat';
+import SignUp from './components/createAccount/SignUp';
 
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
@@ -30,6 +31,7 @@ export default function App() {
             <Stack.Screen name="DokiHome" component={DokiHome} />
             <Stack.Screen name="SelectEgg" component={SelectEgg} />
             <Stack.Screen name="HealthStat" component={HealthStat} />
+            <Stack.Screen name="SignUp" component={SignUp} />
           </Stack.Navigator>
         </NavigationContainer>
       </HealthKitProvider>

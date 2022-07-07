@@ -14,6 +14,12 @@ const Links = ({ navigation }) => {
           }}
         />
         <Button
+          title="Sign Up"
+          onPress={() => {
+            navigation.navigate('SignUp');
+          }}
+        />
+        <Button
           title="Set Goal"
           onPress={() => {
             navigation.navigate('SetGoal');
