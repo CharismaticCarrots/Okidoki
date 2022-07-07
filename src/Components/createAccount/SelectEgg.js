@@ -4,6 +4,7 @@ import { StyledDokiHomeBackground } from '../styles'
 import {Animated, Easing} from 'react-native';
 import { Button } from 'react-native-paper';
 import { TextInput } from 'react-native-paper';
+import { StyledInput, StyledHeading1 } from '../styles';
 
 const SelectEgg = ({navigation}) => {
   const [egg, setEgg] = useState(null)
@@ -35,8 +36,9 @@ const SelectEgg = ({navigation}) => {
     <View >
       <StyledDokiHomeBackground source={require("../../../assets/selectEgg.png")} resizeMode="cover">
         <View style={styles.container}>
-          <Text style={styles.text}>Select a Doki Egg</Text>
-          <TextInput placeholder="Doki Name" style={styles.input}/>
+          <StyledHeading1>Select a Doki Egg</StyledHeading1>
+         
+          <StyledInput placeholder='Doki Name' style={backgroundColor = "#fff"}/>
           <View style={styles.eggs}>
             <Animated.View style={egg === 'egg1' ? {transform: [{rotate: spin}]} : {} } >
                 <TouchableOpacity onPress={() => setEgg("egg1")}> 
@@ -80,14 +82,6 @@ const SelectEgg = ({navigation}) => {
 export default SelectEgg
 
 const styles = StyleSheet.create({
-  input: {
-    backgroundColor: "#fff",
-    height: 40,
-    width: 200
-  },
-  text: {
-    fontSize: 40
-  },
   eggs: {
     flex: 0.35,
     flexDirection: 'row',
