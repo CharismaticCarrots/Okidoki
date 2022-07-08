@@ -10,8 +10,13 @@ const SignIn = ({ navigation }) => {
   return (
     <StyledContainer>
       <StyledHeading1>Welcome Back</StyledHeading1>
-      <TextInput label="Email" mode="outlined" />
-      <TextInput label="Password" secureTextEntry={true} mode="outlined" />
+      <TextInput label="Email" mode="outlined" autoCapitalize="none" />
+      <TextInput
+        label="Password"
+        secureTextEntry={true}
+        mode="outlined"
+        autoCapitalize="none"
+      />
 
       <Button
         mode="contained"
