@@ -13,7 +13,9 @@ const StyledHeading1 = styled(Text)`
 `;
 
 const StyledContainer = styled(View)`
-  alignitems: 'center';
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 20px 30px;
 `;
 
@@ -138,9 +140,9 @@ const StyledInternalContainer = styled(View)`
 //SelectEgg
 
 const StyledInput = styled(TextInput)`
-backgroundColor: #fff;
-height: 40px;
-width: 200px;
+  backgroundcolor: #fff;
+  height: 40px;
+  width: 200px;
 `;
 
 export {
@@ -170,5 +172,5 @@ export {
   StyledDayContainer,
   StyledInternalContainer,
   //SelectEgg component
-  StyledInput
+  StyledInput,
 };
