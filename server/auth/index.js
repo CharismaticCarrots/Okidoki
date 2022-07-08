@@ -7,6 +7,7 @@ module.exports = router;
 router.post('/signin', async (req, res, next) => {
   try {
     const user = await User.authenticate(req.body);
+    console.log('tokennnn',user)
     res.json(user);
   } catch (err) {
     res.send('Invalid username or password');

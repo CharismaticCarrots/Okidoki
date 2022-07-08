@@ -13,16 +13,17 @@ router.get('/', requireToken, async (req, res, next) => {
   }
 });
 
-router.post('/doki', requireToken, async (req, res, next) => {
+router.post('/doki', async (req, res, next) => {
   try {
     const user = req.user
+    // const user = await User.findByPk(2)
     const randomDoki = ["fox", "cat", "bunny"][Math.floor(Math.random() * 3)];
     const doki = await Doki.findOne(
       {where: {
         type: randomDoki
       }})
     await user.addDoki(doki, {through: {dokiName:req.body.dokiName}})
-    res.send()
+    res.send({})
   } catch (err) {
     next(err);
   }

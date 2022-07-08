@@ -5,12 +5,34 @@ import {Animated, Easing} from 'react-native';
 import { Button } from 'react-native-paper';
 import { TextInput } from 'react-native-paper';
 import { StyledInput, StyledHeading1 } from '../styles';
+import { useMutation } from 'react-query';
 
 const SelectEgg = ({navigation}) => {
-  const [egg, setEgg] = useState(null)
-  const spinValue = new Animated.Value(0);
- 
+  const [egg, setEgg] = useState('')
+  const [dokiName, setDokiName] = useState(null)
+  const mutation = useMutation(
+    (dokiName) => {
+      console.log('DOKI', dokiName)
+      return axios.post(
+        `http://${API_URL}/api/user/doki`,
+        { dokiName }, {
+          headers: { Authorization: TOKEN },
+        }
+      );
+    },
+    {
+      onSuccess: () => {
+        navigation.navigate('DokiHome');
+      },
+    }
+  );
 
+
+  const handleSubmit = async () => {
+   mutation.mutate(doki)
+  };
+  
+  const spinValue = new Animated.Value(0);
   Animated.loop(
   Animated.timing(
       spinValue,
@@ -27,9 +49,7 @@ const SelectEgg = ({navigation}) => {
     outputRange: ['-10deg', '10deg']
   })
 
-  const handleSubmit = async () => {
-    navigation.navigate('DokiHome');
-  };
+
 
 
   return (
@@ -38,10 +58,13 @@ const SelectEgg = ({navigation}) => {
         <View style={styles.container}>
           <StyledHeading1>Select a Doki Egg</StyledHeading1>
          
-          <StyledInput placeholder='Doki Name' style={backgroundColor = "#fff"}/>
+          <StyledInput 
+            placeholder='Doki Name' 
+            onChangeText={setDokiName}
+            />
           <View style={styles.eggs}>
             <Animated.View style={egg === 'egg1' ? {transform: [{rotate: spin}]} : {} } >
-                <TouchableOpacity onPress={() => setEgg("egg1")}> 
+                <TouchableOpacity onPress={(e) => setEgg((prevState) => ({dokiName: e }))}> 
                   <Image
                     style={styles.image} 
                     source={require('../../../assets/egg.png')} 
