@@ -23,7 +23,6 @@ const SignUp = ({ navigation }) => {
       <StyledHeading1>Create Account</StyledHeading1>
       <TextInput
         label="First Name"
-        value={userData.firstName}
         mode="outlined"
         onChangeText={(e) =>
           setUserData((prevState) => ({ ...prevState, firstName: e }))
@@ -31,7 +30,6 @@ const SignUp = ({ navigation }) => {
       />
       <TextInput
         label="Last Name"
-        value={userData.lastName}
         mode="outlined"
         onChangeText={(e) =>
           setUserData((prevState) => ({ ...prevState, lastName: e }))
@@ -39,7 +37,6 @@ const SignUp = ({ navigation }) => {
       />
       <TextInput
         label="Email"
-        value={userData.email}
         mode="outlined"
         onChangeText={(e) =>
           setUserData((prevState) => ({ ...prevState, email: e }))
@@ -61,6 +58,13 @@ const SignUp = ({ navigation }) => {
         }}
       >
         Sign Up
+      </Button>
+      <Button
+        onPress={() => {
+          navigation.navigate('SignIn');
+        }}
+      >
+        Already have an account? Sign in
       </Button>
     </StyledContainer>
   );

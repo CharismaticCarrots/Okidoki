@@ -9,23 +9,9 @@ const SignIn = ({ navigation }) => {
 
   return (
     <StyledContainer>
-      <StyledHeading1>Sign In</StyledHeading1>
-      <TextInput
-        label="Email"
-        value={userData.email}
-        mode="outlined"
-        onChangeText={(e) =>
-          setUserData((prevState) => ({ ...prevState, email: e }))
-        }
-      />
-      <TextInput
-        label="Password"
-        secureTextEntry={true}
-        mode="outlined"
-        onChangeText={(e) =>
-          setUserData((prevState) => ({ ...prevState, password: e }))
-        }
-      />
+      <StyledHeading1>Welcome Back</StyledHeading1>
+      <TextInput label="Email" mode="outlined" />
+      <TextInput label="Password" secureTextEntry={true} mode="outlined" />
 
       <Button
         mode="contained"
@@ -34,6 +20,14 @@ const SignIn = ({ navigation }) => {
         }}
       >
         Sign In
+      </Button>
+
+      <Button
+        onPress={() => {
+          navigation.navigate('SignUp');
+        }}
+      >
+        Don't have an account? Sign up
       </Button>
     </StyledContainer>
   );
