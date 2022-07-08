@@ -15,9 +15,12 @@ const SignUp = ({ navigation }) => {
   });
 
   const mutation = useMutation(
-    async (user) => {
-      const { data } = await axios.post(`http://${API_URL}/auth/signup`, user);
-      await SecureStore.setItemAsync('TOKEN', data.token);
+    async (userInfo) => {
+      const { data: user } = await axios.post(
+        `http://${API_URL}/auth/signup`,
+        userInfo
+      );
+      await SecureStore.setItemAsync('TOKEN', user.token);
     },
     {
       onSuccess: () => {

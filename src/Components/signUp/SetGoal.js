@@ -5,10 +5,14 @@ import axios from 'axios';
 import { StyleSheet, View } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import { StyledContainer, StyledHeading1 } from '../styles';
+import { useUserData } from '../../hooks/useUserData';
 
 import { API_URL, TOKEN } from '../../../secrets.js';
 
 const SetGoal = ({ navigation }) => {
+  const { isLoading, isError, data, error } = useUserData();
+  console.log('who is logged in', data);
+
   const [dailyStepGoal, setDailyStepGoal] = useState('10000');
 
   const mutation = useMutation(
