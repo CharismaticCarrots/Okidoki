@@ -1,7 +1,6 @@
 import { StyleSheet, View, Text } from 'react-native';
 import Steps from './Steps';
 import Sprite from './Sprite';
-import { useHatchProgress } from '../hooks/useHatchProgress';
 
 const Home = () => {
   return (
@@ -13,8 +12,7 @@ const Home = () => {
         scale={3}
         framesPerSprite={15}
       />
-      {/* <Steps /> */}
-      <Text>{useHatchProgress()}</Text>
+      <Steps />
     </View>
   );
 };
