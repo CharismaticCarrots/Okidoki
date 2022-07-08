@@ -12,10 +12,13 @@ const SetGoal = ({ navigation }) => {
   return (
     <StyledContainer style={styles.background}>
       <StyledHeading1>Set Your Daily Step Goal</StyledHeading1>
-      <TextInput style={styles.input} placeholder="Example: 10,000" />
+      <TextInput
+        left={<TextInput.Icon name={'shoe-print'} />}
+        style={styles.input}
+        placeholder="Example: 10,000"
+      />
       <View>
         <Button
-          icon=""
           style={styles.button}
           mode="contained"
           color="#DDBB67"
