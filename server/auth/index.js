@@ -9,7 +9,7 @@ router.post('/signin', async (req, res, next) => {
     const user = await User.authenticate(req.body);
     res.json(user);
   } catch (err) {
-    next(err);
+    res.send('Invalid username or password');
   }
 });
 
@@ -20,6 +20,10 @@ router.post('/signup', async (req, res, next) => {
     const newUser = await User.create({ email, password, firstName, lastName });
     res.status(201).json(newUser);
   } catch (err) {
-    next(err);
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      res.status(401).send('That email address is already in use.');
+    } else {
+      next(err);
+    }
   }
 });

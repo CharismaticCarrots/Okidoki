@@ -84,7 +84,7 @@ User.authenticate = async ({ email, password }) => {
     }
   }
   const error = Error('bad credentials');
-  error.status(401);
+  error.status = 401;
   throw error;
 };
 
