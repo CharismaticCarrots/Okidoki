@@ -15,8 +15,8 @@ router.get('/', requireToken, async (req, res, next) => {
 
 router.put('/', requireToken, async (req, res, next) => {
   try {
-    const userStepGoal = await req.user.update(req.body);
-    res.json(userStepGoal);
+    const updatedUser = await req.user.update(req.body);
+    res.json(updatedUser);
   } catch (err) {
     next(err);
   }
