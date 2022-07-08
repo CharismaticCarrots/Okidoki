@@ -1,5 +1,5 @@
 import { useUserData } from "./useUserData";
-import { useStepCountTrend, useTotalStepCount } from "../Healthkit";
+import { useTotalStepCount } from "../Healthkit";
 import add from 'date-fns/add';
 
 export const useHatchProgress = () => {
@@ -9,7 +9,7 @@ export const useHatchProgress = () => {
     days: 7,
   }).toISOString();
 
-  const [stepSamples, totalSteps] =  useStepCountTrend(dokiCreatedDate, sevenDaysLater);
+  const totalSteps =  useTotalStepCount(dokiCreatedDate, sevenDaysLater);
 
   const { isLoading, isError, data: user, error } = useUserData();
   if (isError) console.log(error);
