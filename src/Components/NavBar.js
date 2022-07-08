@@ -37,7 +37,7 @@ const Tabs = () => {
         ],
         tabBarIcon: () => {
           switch (route.name) {
-            case 'HOME':
+            case 'DOKI HOME':
               return (
                 <FontAwesome5 
                   name={'home'} 
@@ -60,7 +60,7 @@ const Tabs = () => {
                 color='#333'
               />
               )
-            case 'STORE':
+            case 'DOKI STORE':
               return (
                 <FontAwesome5 
                 name={'store'}   
@@ -74,10 +74,10 @@ const Tabs = () => {
         },
       })}
       >
-        <Tab.Screen name="HOME" component={DokiView}/>
+        <Tab.Screen name="DOKI HOME" component={DokiView}/>
         <Tab.Screen name="BACKPACK" component={SignIn}/>
         <Tab.Screen name="HEALTH DATA" component={HealthStat}/>
-        <Tab.Screen name="STORE" component={SetGoal}/>
+        <Tab.Screen name="DOKI STORE" component={SetGoal}/>
       </Tab.Navigator>
   );
 };
