@@ -42,6 +42,10 @@ const users = [
   },
 ];
 
+const curTime = new Date();
+const oneHrAgo = new Date(curTime.getTime() - (1000*60*60));
+const fiveHrsAgo = new Date(curTime.getTime() - (1000*60*60*5));
+
 const seed = async () => {
   try {
     await db.sync({ force: true });
@@ -55,10 +59,25 @@ const seed = async () => {
         return User.create(user);
       })
     );
-    await catDoki.addUser(user1, { through: { dokiName: 'Conbot' } });
-    await catDoki.addUser(user2, { through: { dokiName: 'Snow Angel' } });
-    await catDoki.addUser(user3, { through: { dokiName: 'Kris Kross' } });
-    await catDoki.addUser(user4, { through: { dokiName: 'Ldyster' } });
+    await catDoki.addUser(user1, { through: {
+      dokiName: 'Conbot',
+      lastFed: curTime,
+    }});
+
+    await catDoki.addUser(user2, { through: {
+      dokiName: 'Snow Angel',
+      lastFed: oneHrAgo,
+    }});
+
+    await rabbitDoki.addUser(user3, { through: {
+      dokiName: 'Kris Kross',
+      lastFed: fiveHrsAgo,
+    }});
+
+    await foxDoki.addUser(user4, { through: {
+      dokiName: 'Ldyster'
+    }});
+
   } catch (error) {
     console.log(error);
   }
@@ -77,4 +96,4 @@ if (require.main === module) {
       console.error('Oh noes! Something went wrong!');
       console.error(err);
     });
-}
+};
