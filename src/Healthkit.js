@@ -60,12 +60,16 @@ export const useDailyStepCount = () => {
   return steps;
 };
 
-export const useStepCountTrend = () => {
+export const useStepCountTrend = (startDate, endDate) => {
+  console.log("START DATE", startDate)
+  console.log("END DATE", endDate)
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [weekSteps, setWeekSteps] = useState(null);
 
   let options = {
-    startDate: subDays(new Date(), 7).toISOString(),
+    // startDate: subDays(new Date(), 7).toISOString(),
+    startDate: startDate,
+    endDate: endDate,
   };
 
   useEffect(() => {

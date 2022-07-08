@@ -10,8 +10,7 @@ import { Text, Surface } from 'react-native-paper';
 import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 import { BarChart } from 'react-native-chart-kit';
-
-import Steps from './Steps';
+import subDays from 'date-fns/subDays';
 import { useStepCountTrend } from '../Healthkit';
 
 import {
@@ -21,7 +20,10 @@ import {
 } from './styles';
 
 const HealthStat = () => {
-  const dailySteps = useStepCountTrend();
+  const lastWeek = subDays(new Date(), 7).toISOString();
+  const curDate = new Date().toISOString();
+
+  const dailySteps = useStepCountTrend(lastWeek, curDate);
 
   if (!dailySteps) {
     return <ActivityIndicator size="large" />;
