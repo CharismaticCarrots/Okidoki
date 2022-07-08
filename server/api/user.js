@@ -32,14 +32,24 @@ router.post('/', async (req, res, next) => {
         }
       }
     )
-    await userDoki.set(
-      {
-      dokiName: req.body.dokiName
-      }
-    )
-    console.log('USERDOKI', userDoki)
+    await userDoki.set({dokiName: req.body.dokiName})
     res.send(await userDoki.save())
   } catch (err) {
     next(err);
   }
 })
+
+router.get('/doki',async (req, res, next) => {
+  try {
+    const randomUser = await User.findByPk(2)
+    let userDoki = await User_Doki.findOne(
+      {where: {
+          userId: randomUser.id
+        }
+      }
+    )
+    res.json(userDoki)
+  } catch (err) {
+    next(err);
+  }
+} )
