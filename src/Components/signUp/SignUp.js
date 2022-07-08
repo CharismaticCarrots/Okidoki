@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import { API_URL } from '../../../secrets.js';
+import * as SecureStore from 'expo-secure-store';
 import { TextInput, Button } from 'react-native-paper';
 import { StyledContainer, StyledHeading1 } from '../styles';
 
@@ -16,12 +17,11 @@ const SignUp = ({ navigation }) => {
   const mutation = useMutation(
     async (user) => {
       const { data } = await axios.post(`http://${API_URL}/auth/signup`, user);
-      return data;
+      await SecureStore.setItemAsync('TOKEN', data.token);
     },
     {
       onSuccess: () => {
         navigation.navigate('SetGoal');
-        console.log('data,', data);
       },
     }
   );
