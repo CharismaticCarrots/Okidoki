@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextInput, Button } from 'react-native-paper';
-import { useCreateUser } from '../../hooks/useUsersData';
+import { useCreateUser } from '../../hooks/useCreateUser';
 import { StyledContainer, StyledHeading1 } from '../styles';
 
 const SignUp = ({ navigation }) => {
