@@ -1,16 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
+import { StyledContainer, StyledHeading1 } from '../styles';
 
-const SetGoal = ({navigation}) => {
-
+const SetGoal = ({ navigation }) => {
   const handleSubmit = async () => {
     navigation.navigate('SelectEgg');
   };
 
   return (
-    <View>
-      <Text>Select Your Daily Step Goal</Text>
+    <StyledContainer>
+      <StyledHeading1>Select Your Daily Step Goal</StyledHeading1>
       <TextInput placeholder="Step Goal" />
       <Button
         mode="contained"
@@ -20,7 +20,7 @@ const SetGoal = ({navigation}) => {
       >
         SUBMIT
       </Button>
-    </View>
+    </StyledContainer>
   );
 };
 

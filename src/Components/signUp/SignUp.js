@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { StyledContainer, StyledHeading1 } from '../styles';
 import { TextInput, Button } from 'react-native-paper';
 import { useCreateUser } from '../../hooks/useUsersData';
+import { StyledContainer, StyledHeading1 } from '../styles';
 
 const SignUp = ({ navigation }) => {
   const [userData, setUserData] = useState({
@@ -20,7 +20,7 @@ const SignUp = ({ navigation }) => {
 
   return (
     <StyledContainer>
-      <StyledHeading1>Sign Up</StyledHeading1>
+      <StyledHeading1>Create Account</StyledHeading1>
       <TextInput
         label="First Name"
         value={userData.firstName}

@@ -5,12 +5,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider as PaperProvider } from 'react-native-paper';
 
 import Home from './components/Home';
-import SetGoal from './components/createAccount/SetGoal';
+import SetGoal from './components/signUp/SetGoal';
 import DokiHome from './components/dokiHome/DokiHome';
 import Links from './components/Links';
-import SelectEgg from './components/createAccount/SelectEgg';
+import SelectEgg from './components/signUp/SelectEgg';
 import HealthStat from './components/HealthStat';
-import SignUp from './components/createAccount/SignUp';
+import SignUp from './components/signUp/SignUp';
 
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
