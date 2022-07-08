@@ -29,7 +29,7 @@ const HealthStat = () => {
   }
 
   let data = {
-    labels: dailySteps.map((day) => format(parseISO(day.startDate), 'eeeeee')),
+    labels: dailySteps.map((day) => format(parseISO(day.day), 'eeeeee')),
     datasets: [
       {
         data: dailySteps.map((day) => day.value),
@@ -54,9 +54,9 @@ const HealthStat = () => {
               backgroundGradientFrom: '#397887',
               backgroundGradientTo: '#397887',
               decimalPlaces: 0,
-              color: (opacity = 1.5) => `rgba(246, 244, 210, ${opacity})`,
+              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(5, 5, 5, ${opacity})`,
-              barPercentage: 0.6,
+              barPercentage: 0.7,
               propsForLabels: {
                 fontSize: '13',
                 fontWeight: 'bold',
@@ -64,7 +64,6 @@ const HealthStat = () => {
             }}
             style={{
               marginVertical: 8,
-              borderRadius: 10,
             }}
           />
         </View>

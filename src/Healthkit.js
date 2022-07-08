@@ -1,5 +1,7 @@
 import AppleHealthKit from 'react-native-health';
 import subDays from 'date-fns/subDays';
+import compareAsc from 'date-fns/compareAsc';
+import parseISO from 'date-fns/parseISO';
 
 import React, { useEffect, useState, useContext } from 'react';
 
@@ -74,10 +76,27 @@ export const useDailyStepCount = () => {
           return;
         }
 
-        setWeekSteps(results);
+        const reformattedWeekSteps = results.reduce((previous, day) => {
+          const onlyDate = day.startDate.slice(0, 10);
+          const findDate = previous.find(
+            (dayObject) => dayObject.day === onlyDate
+          );
+          if (!findDate) {
+            return [...previous, { day: onlyDate, value: day.value }];
+          } else {
+            findDate.value += day.value;
+
+            return previous;
+          }
+        }, []);
+
+        reformattedWeekSteps.sort((a, b) => {
+          return compareAsc(parseISO(a.day), parseISO(b.day));
+        });
+
+        setWeekSteps(reformattedWeekSteps);
       });
     }
   }, [isLoaded]);
-
   return weekSteps;
 };
