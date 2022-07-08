@@ -15,8 +15,9 @@ export const useHatchProgress = () => {
   if (isError) console.log(error);
 
   if (!isLoading) {
-    const hatchProgress = totalSteps / user.dailyStepGoal;
-    console.log("HATCH PROGRESS", user.firstName, totalSteps, user.dailyStepGoal)
-    return hatchProgress;
+    const userGoal = user.dailyStepGoal;
+    const hatchProgress = totalSteps / userGoal;
+
+    return [hatchProgress, totalSteps, userGoal];
   }
 };
