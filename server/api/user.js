@@ -15,9 +15,7 @@ router.get('/', requireToken, async (req, res, next) => {
 
 router.put('/', requireToken, async (req, res, next) => {
   try {
-    const userStepGoal = await req.user.update({
-      dailyStepGoal: req.body.stepGoal,
-    });
+    const userStepGoal = await req.user.update(req.body);
     res.json(userStepGoal);
   } catch (err) {
     next(err);

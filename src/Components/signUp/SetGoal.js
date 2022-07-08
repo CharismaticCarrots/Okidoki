@@ -9,13 +9,13 @@ import { StyledContainer, StyledHeading1 } from '../styles';
 import { API_URL, TOKEN } from '../../../secrets.js';
 
 const SetGoal = ({ navigation }) => {
-  const [stepGoal, setStepGoal] = useState('10000');
+  const [dailyStepGoal, setDailyStepGoal] = useState('10000');
 
   const mutation = useMutation(
-    (stepGoal) => {
+    (dailyStepGoal) => {
       return axios.put(
         `http://${API_URL}/api/user`,
-        { stepGoal },
+        { dailyStepGoal },
         {
           headers: { Authorization: TOKEN },
         }
@@ -29,7 +29,7 @@ const SetGoal = ({ navigation }) => {
   );
 
   const handleSubmit = async () => {
-    mutation.mutate(stepGoal);
+    mutation.mutate(dailyStepGoal);
   };
 
   return (
@@ -39,8 +39,8 @@ const SetGoal = ({ navigation }) => {
         left={<TextInput.Icon name={'shoe-print'} />}
         style={styles.input}
         placeholder="Example: 10,000"
-        value={stepGoal}
-        onChangeText={setStepGoal}
+        value={dailyStepGoal}
+        onChangeText={setDailyStepGoal}
       />
       <View>
         <Button
