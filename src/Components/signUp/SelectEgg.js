@@ -1,27 +1,24 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { StyledDokiHomeBackground } from '../styles'
 import {Animated, Easing} from 'react-native';
-import { Button } from 'react-native-paper';
-import { TextInput } from 'react-native-paper';
-import { StyledInput, StyledHeading1 } from '../styles';
+import { TextInput, Button } from 'react-native-paper';
+import { StyledDokiHomeBackground, StyledInput, StyledHeading1 } from '../styles';
 import { useMutation } from 'react-query';
+import { API_URL, TOKEN } from '../../../secrets.js';
+import axios from 'axios';
 
 const SelectEgg = ({navigation}) => {
   const [egg, setEgg] = useState('')
   const [dokiName, setDokiName] = useState(null)
   const mutation = useMutation(
     (dokiName) => {
-      console.log('DOKI', dokiName)
       return axios.post(
         `http://${API_URL}/api/user/doki`,
-        { dokiName }, {
-          headers: { Authorization: TOKEN },
-        }
+        { dokiName }, 
+        {headers: { Authorization: TOKEN }}
       );
     },
-    {
-      onSuccess: () => {
+    {onSuccess: () => {
         navigation.navigate('DokiHome');
       },
     }
@@ -29,7 +26,7 @@ const SelectEgg = ({navigation}) => {
 
 
   const handleSubmit = async () => {
-   mutation.mutate(doki)
+   mutation.mutate(dokiName)
   };
   
   const spinValue = new Animated.Value(0);
