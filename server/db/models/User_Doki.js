@@ -4,7 +4,7 @@ const db = require('../db');
 const User_Doki = db.define('user_doki', {
   dokiName: {
     type: Sequelize.STRING,
-    // allowNull: false,
+    allowNull: false,
     validate: {
       notEmpty: true,
     },
