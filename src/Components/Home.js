@@ -6,6 +6,8 @@ import { useUserData } from '../hooks/useUserData';
 const Home = () => {
   const { isLoading, isError, data: user, error } = useUserData();
 
+  if (isError) console.log(error);
+
   return (
     <View style={styles.container}>
       <Sprite
@@ -17,7 +19,7 @@ const Home = () => {
       />
       <Steps />
       <Text>
-        {isLoading ? 'Loading..' : `Name: ${user.firstName}`}
+        {isLoading ? 'Loading..' : `Name: ${user.email}`}
       </Text>
     </View>
   );
