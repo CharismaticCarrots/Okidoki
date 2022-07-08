@@ -1,8 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
-
-import { StyledHeading1, StyledContainer } from '../styles';
+import { StyledContainer, StyledHeading1 } from '../styles';
 
 const SetGoal = ({ navigation }) => {
   const handleSubmit = async () => {
