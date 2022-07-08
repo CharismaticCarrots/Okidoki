@@ -41,32 +41,35 @@ const HealthStat = () => {
     <StyledHealthStatContainer style={styles.background}>
       <StyledHeading1>Health Stats</StyledHeading1>
       <View>
-        <StyledHeading2>Steps</StyledHeading2>
-        <BarChart
-          data={data}
-          width={Dimensions.get('window').width}
-          height={300}
-          formatYLabel={() => yLabelIterator.next().value}
-          fromZero={true}
-          chartConfig={{
-            backgroundColor: '#DDBB67',
-            backgroundGradientFrom: '#DDBB67',
-            backgroundGradientTo: '#ad9250',
-            decimalPlaces: 0,
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            style: {
-              borderRadius: 8,
-            },
-            propsForBackgroundLines: {},
-          }}
-          style={{
-            marginVertical: 8,
-            borderRadius: 8,
-          }}
-        />
+        <StyledHeading2>Steps: Last 7 Days</StyledHeading2>
+        <View>
+          <BarChart
+            data={data}
+            width={Dimensions.get('screen').width}
+            height={250}
+            fromZero={true}
+            showValuesOnTopOfBars={true}
+            chartConfig={{
+              backgroundColor: '#4fa4b8',
+              backgroundGradientFrom: '#397887',
+              backgroundGradientTo: '#397887',
+              decimalPlaces: 0,
+              color: (opacity = 1.5) => `rgba(246, 244, 210, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(5, 5, 5, ${opacity})`,
+              barPercentage: 0.6,
+              propsForLabels: {
+                fontSize: '13',
+                fontWeight: 'bold',
+              },
+            }}
+            style={{
+              marginVertical: 8,
+              borderRadius: 10,
+            }}
+          />
+        </View>
       </View>
-      <Text>History</Text>
+      <StyledHeading2>History</StyledHeading2>
       <ScrollView>
         {dailySteps.map((day) => {
           return (
