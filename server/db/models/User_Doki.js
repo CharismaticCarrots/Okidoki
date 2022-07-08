@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require('sequelize');
+const db = require('../db');
 
 const User_Doki = db.define('user_doki', {
   dokiName: {
@@ -9,26 +9,12 @@ const User_Doki = db.define('user_doki', {
       notEmpty: true,
     },
   },
-  moodLevel: {
-    type: Sequelize.INTEGER,
-    defaultValue: 75,
-    validate: {
-      min: 0,
-      max: 100
-    }
+  lastFed: {
+    type: Sequelize.DATE,
   },
-  hungerLevel: {
-    type: Sequelize.INTEGER,
-    defaultValue: 75,
-    validate: {
-      min: 0,
-      max: 100
-    }
-  },
-  isEgg: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: true
+  lastPlayed: {
+    type: Sequelize.DATE,
   }
-})
+});
 
 module.exports = User_Doki;

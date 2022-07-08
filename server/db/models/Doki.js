@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require('sequelize');
+const db = require('../db');
 
 const Doki = db.define('doki', {
     type: {
@@ -10,6 +10,6 @@ const Doki = db.define('doki', {
     spriteSheet: {
         type: Sequelize.JSON
     }
-})
+});
 
-module.exports = Doki
+module.exports = Doki;

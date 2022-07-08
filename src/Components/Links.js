@@ -1,6 +1,3 @@
-//temporary view component to house links to all the components to test rendering
-//until the routes are set up correctly
-
 import { View, Button } from 'react-native';
 
 const Links = ({ navigation }) => {
@@ -20,6 +17,12 @@ const Links = ({ navigation }) => {
           }}
         />
         <Button
+          title="Sign In"
+          onPress={() => {
+            navigation.navigate('SignIn');
+          }}
+        />
+        <Button
           title="Set Goal"
           onPress={() => {
             navigation.navigate('SetGoal');
@@ -32,15 +35,22 @@ const Links = ({ navigation }) => {
           }}
         />
         <Button
-          title="Select Egg"
+          title="DokiView"
           onPress={() => {
-            navigation.navigate('SelectEgg')}}
+            navigation.navigate('DokiView');
+          }}
         />
         <Button
-        title="HealthStat"
-        onPress={() => {
-          navigation.navigate('HealthStat');
-        }}
+          title="Select Egg"
+          onPress={() => {
+            navigation.navigate('SelectEgg');
+          }}
+        />
+        <Button
+          title="HealthStat"
+          onPress={() => {
+            navigation.navigate('HealthStat');
+          }}
         />
       </View>
     </View>
