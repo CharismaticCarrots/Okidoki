@@ -1,8 +1,8 @@
 const router = require('express').Router();
 
 // Match routes
-router.use('/dokis', require('./dokis'))
-
+router.use('/dokis', require('./dokis'));
+router.use('/user', require('./user'));
 
 router.use(function (req, res, next) {
   const err = new Error('Not found.');
@@ -11,5 +11,3 @@ router.use(function (req, res, next) {
 });
 
 module.exports = router;
-
-
