@@ -61,7 +61,7 @@ const SelectEgg = ({navigation}) => {
             />
           <View style={styles.eggs}>
             <Animated.View style={egg === 'egg1' ? {transform: [{rotate: spin}]} : {} } >
-                <TouchableOpacity onPress={(e) => setEgg((prevState) => ({dokiName: e }))}> 
+                <TouchableOpacity onPress={(e) => setEgg('egg1')}> 
                   <Image
                     style={styles.image} 
                     source={require('../../../assets/egg.png')} 
