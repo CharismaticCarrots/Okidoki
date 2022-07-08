@@ -1,18 +1,20 @@
-import { useStepCount } from "../Healthkit";
-import { useDailyStepCount } from "../Healthkit";
 import { useUserData } from "./useUserData";
+import { useStepCountTrend, useTotalStepCount } from "../Healthkit";
+import add from 'date-fns/add';
 
 export const useHatchProgress = () => {
-  const weeklyStepCount = useStepCount(7);
-  const trendWeeklyStepCount = useDailyStepCount();
+  // Dummy data for query to GET /api/user/doki createdDate
+  const dokiCreatedDate = new Date().toISOString();;
+  const sevenDaysLater = add(new Date(), {
+    days: 7,
+  }).toISOString();
+
+  const [stepSamples, totalSteps] =  useStepCountTrend(dokiCreatedDate, sevenDaysLater);
 
   const { isLoading, isError, data: user, error } = useUserData();
   if (isError) console.log(error);
   if (!isLoading) {
-    const hatchProgress = weeklyStepCount / user.dailyStepGoal;
-    console.log("WEEKLY COUNT", weeklyStepCount);
-    console.log("WEEKLY TREND", trendWeeklyStepCount.value);
-    console.log("HATCH PROGRESS", hatchProgress);
+    const hatchProgress = totalSteps / user.dailyStepGoal;
     return hatchProgress;
   }
 };
