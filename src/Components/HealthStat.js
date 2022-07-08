@@ -70,7 +70,8 @@ const HealthStat = () => {
         </View>
       </View>
       <StyledHeading2>History</StyledHeading2>
-      <ScrollView>
+      <Text>More to come in Tier 2...</Text>
+      {/* <ScrollView>
         {dailySteps.map((day) => {
           return (
             <StyledDayContainer>
@@ -84,7 +85,7 @@ const HealthStat = () => {
             </StyledDayContainer>
           );
         })}
-      </ScrollView>
+      </ScrollView> */}
     </StyledHealthStatContainer>
   );
 };
