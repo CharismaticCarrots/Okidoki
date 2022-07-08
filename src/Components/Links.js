@@ -1,6 +1,3 @@
-//temporary view component to house links to all the components to test rendering
-//until the routes are set up correctly
-
 import { View, Button } from 'react-native';
 
 const Links = ({ navigation }) => {
@@ -29,6 +26,12 @@ const Links = ({ navigation }) => {
           title="DokiHome"
           onPress={() => {
             navigation.navigate('DokiHome');
+          }}
+        />
+        <Button
+          title="DokiView"
+          onPress={() => {
+            navigation.navigate('DokiView');
           }}
         />
         <Button
