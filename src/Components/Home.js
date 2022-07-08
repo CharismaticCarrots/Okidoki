@@ -1,11 +1,10 @@
-import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import Steps from './Steps';
 import Sprite from './Sprite';
-import { useDitto } from '../hooks/useDitto';
+import { useUserData } from '../hooks/useUserData';
 
-const Home = ({ navigation }) => {
-  const { isLoading, isError, data: ditto, error } = useDitto();
+const Home = () => {
+  const { isLoading, isError, data: user, error } = useUserData();
 
   return (
     <View style={styles.container}>
@@ -16,10 +15,10 @@ const Home = ({ navigation }) => {
         scale={3}
         framesPerSprite={15}
       />
-      <Text>
-        {isLoading ? 'Loading..' : `Name: ${ditto.abilities[0].ability.name}`}
-      </Text>
       <Steps />
+      <Text>
+        {isLoading ? 'Loading..' : `Name: ${user.firstName}`}
+      </Text>
     </View>
   );
 };
