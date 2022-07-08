@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { useStepCount } from '../Healthkit';
 
 const Steps = () => {
-  const steps = useStepCount();
+  const steps = useStepCount(1);
   return (
     <View style={styles.container}>
       <Text>Steps: {steps}</Text>

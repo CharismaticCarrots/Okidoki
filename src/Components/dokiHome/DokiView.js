@@ -11,6 +11,7 @@ const DokiView = () => {
   const [doki, setDoki] = useState({type: "bunny"});
 
   const randomDoki = ["fox", "cat", "bunny"][Math.floor(Math.random() * 3)];
+
   const stepCount = useStepCount();
 
   const { isLoading, isError, data: user, error } = useUserData();
