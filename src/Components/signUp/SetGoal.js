@@ -1,11 +1,35 @@
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
+import { useMutation } from 'react-query';
+import axios from 'axios';
 import { StyleSheet, View } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import { StyledContainer, StyledHeading1 } from '../styles';
 
+import { API_URL, TOKEN } from '../../../secrets.js';
+
 const SetGoal = ({ navigation }) => {
+  const [stepGoal, setStepGoal] = useState('10000');
+
+  const mutation = useMutation(
+    (stepGoal) => {
+      return axios.put(
+        `http://${API_URL}/api/user`,
+        { stepGoal },
+        {
+          headers: { Authorization: TOKEN },
+        }
+      );
+    },
+    {
+      onSuccess: () => {
+        navigation.navigate('SelectEgg');
+      },
+    }
+  );
+
   const handleSubmit = async () => {
-    navigation.navigate('SelectEgg');
+    mutation.mutate(stepGoal);
   };
 
   return (
@@ -15,6 +39,8 @@ const SetGoal = ({ navigation }) => {
         left={<TextInput.Icon name={'shoe-print'} />}
         style={styles.input}
         placeholder="Example: 10,000"
+        value={stepGoal}
+        onChangeText={setStepGoal}
       />
       <View>
         <Button
