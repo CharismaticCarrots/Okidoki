@@ -43,7 +43,7 @@ export const useHealthkit = () => {
   return useContext(HealthkitContext);
 };
 
-export const useStepCount = () => {
+export const useDailyStepCount = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [steps, setSteps] = useState(0);
 
@@ -60,7 +60,7 @@ export const useStepCount = () => {
   return steps;
 };
 
-export const useDailyStepCount = () => {
+export const useStepCountTrend = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [weekSteps, setWeekSteps] = useState(null);
 

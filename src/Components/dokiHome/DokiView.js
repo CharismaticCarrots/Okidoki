@@ -4,7 +4,7 @@ import { StyledDokiHomeBackground, StyledDokiEggContainer, StyledOuterProgressBa
 import DokiProgressBar from "./DokiProgressBar";
 import Doki from "./Doki";
 import CountDisplay from "./CountDisplay";
-import { useStepCount } from '../../Healthkit';
+import { useDailyStepCount } from '../../Healthkit';
 import { useUserData } from '../../hooks/useUserData';
 
 const DokiView = () => {
@@ -12,7 +12,7 @@ const DokiView = () => {
 
   const randomDoki = ["fox", "cat", "bunny"][Math.floor(Math.random() * 3)];
 
-  const stepCount = useStepCount();
+  const stepCount = useDailyStepCount();
 
   const { isLoading, isError, data: user, error } = useUserData();
   if (isError) console.log(error);
