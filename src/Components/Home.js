@@ -1,13 +1,8 @@
 import { StyleSheet, View, Text } from 'react-native';
 import Steps from './Steps';
 import Sprite from './Sprite';
-import { useUserData } from '../hooks/useUserData';
 
 const Home = () => {
-  const { isLoading, isError, data: user, error } = useUserData();
-
-  if (isError) console.log(error);
-
   return (
     <View style={styles.container}>
       <Sprite
@@ -18,9 +13,6 @@ const Home = () => {
         framesPerSprite={15}
       />
       <Steps />
-      <Text>
-        {isLoading ? 'Loading..' : `Name: ${user.email}`}
-      </Text>
     </View>
   );
 };
