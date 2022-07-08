@@ -23,7 +23,7 @@ const HealthStat = () => {
   const lastWeek = subDays(new Date(), 7).toISOString();
   const curDate = new Date().toISOString();
 
-  const dailySteps = useStepCountTrend(lastWeek, curDate);
+  const [dailySteps, totalSteps] = useStepCountTrend(lastWeek, curDate);
 
   if (!dailySteps) {
     return <ActivityIndicator size="large" />;
