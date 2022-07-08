@@ -11,6 +11,7 @@ import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 import { BarChart } from 'react-native-chart-kit';
 
+import { StyledHeading2, StyledHeading1 } from './styles';
 import Steps from './Steps';
 import { useDailyStepCount } from '../Healthkit';
 
@@ -37,37 +38,31 @@ const HealthStat = () => {
   };
 
   return (
-    <StyledHealthStatContainer>
-      <Text>Steps</Text>
+    <StyledHealthStatContainer style={styles.background}>
+      <StyledHeading1>Health Stats</StyledHeading1>
       <View>
-        <Text>Current Week:</Text>
+        <StyledHeading2>Steps</StyledHeading2>
         <BarChart
           data={data}
-          width={Dimensions.get('window').width} // from react-native
+          width={Dimensions.get('window').width}
           height={300}
-          // yAxisSuffix="k"
-          // yAxisInterval={1} // optional, defaults to 1
           formatYLabel={() => yLabelIterator.next().value}
           fromZero={true}
           chartConfig={{
-            backgroundColor: '#e26a00',
-            backgroundGradientFrom: '#fb8c00',
-            backgroundGradientTo: '#ffa726',
-            decimalPlaces: 0, // optional, defaults to 2dp
+            backgroundColor: '#DDBB67',
+            backgroundGradientFrom: '#DDBB67',
+            backgroundGradientTo: '#ad9250',
+            decimalPlaces: 0,
             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             style: {
-              borderRadius: 16,
+              borderRadius: 8,
             },
-            propsForDots: {
-              r: '6',
-              strokeWidth: '2',
-              stroke: '#ffa726',
-            },
+            propsForBackgroundLines: {},
           }}
           style={{
             marginVertical: 8,
-            borderRadius: 16,
+            borderRadius: 8,
           }}
         />
       </View>
@@ -99,6 +94,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 8,
+  },
+  background: {
+    backgroundColor: '#4FA4B8',
+    height: '100%',
   },
 });
 

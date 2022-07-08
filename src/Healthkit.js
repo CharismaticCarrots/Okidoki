@@ -78,5 +78,6 @@ export const useDailyStepCount = () => {
       });
     }
   }, [isLoaded]);
+  console.log(weekSteps);
   return weekSteps;
 };
