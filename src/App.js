@@ -11,6 +11,7 @@ import Links from './components/Links';
 import SelectEgg from './components/createAccount/SelectEgg';
 import HealthStat from './components/HealthStat';
 import SignUp from './components/createAccount/SignUp';
+import Tabs from './components/NavBar';
 
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
@@ -20,7 +21,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <HealthKitProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Links">
+          {/* <Stack.Navigator initialRouteName="Links">
             <Stack.Screen
               name="Links"
               component={Links}
@@ -32,7 +33,8 @@ export default function App() {
             <Stack.Screen name="SelectEgg" component={SelectEgg} />
             <Stack.Screen name="HealthStat" component={HealthStat} />
             <Stack.Screen name="SignUp" component={SignUp} />
-          </Stack.Navigator>
+          </Stack.Navigator> */}
+          <Tabs/>
         </NavigationContainer>
       </HealthKitProvider>
     </QueryClientProvider>

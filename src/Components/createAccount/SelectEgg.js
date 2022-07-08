@@ -5,6 +5,7 @@ import {Animated, Easing} from 'react-native';
 import { Button } from 'react-native-paper';
 import { TextInput } from 'react-native-paper';
 import { StyledInput, StyledHeading1 } from '../styles';
+import NavBar from '../NavBar'
 
 const SelectEgg = ({navigation}) => {
   const [egg, setEgg] = useState(null)
@@ -99,3 +100,5 @@ const styles = StyleSheet.create({
     width: 100
   }
 })
+
+

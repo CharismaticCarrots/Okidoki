@@ -1,59 +1,29 @@
-// import { StyleSheet, Text, View } from 'react-native'
-// import React from 'react'
-// import { BottomNavigation, Text } from 'react-native-paper';
-
-
-// const NavBar = () => {
-//   const Home = () => <Text>Home</Text>;
-
-// const Backpack = () => <Text>Backpack</Text>;
-
-// const HealthData = () => <Text>Health Data</Text>;
-
-// const DokiStore = () => <Text>Store</Text>;
-//   return (
-//     <View>
-//       <Text>NavBar</Text>
-//     </View>
-//   )
-// }
-
-// export default NavBar
-
-// const styles = StyleSheet.create({})
-
-
 import * as React from 'react';
-import { BottomNavigation, Text } from 'react-native-paper';
+import { Text, StyleSheet } from 'react-native';
+import { Card, Provider ,Appbar ,Title,Paragraph , BottomNavigation} from 'react-native-paper';
+import HealthStat from './HealthStat';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import SignUp from './createAccount/SignUp';
+import SetGoal from './createAccount/SetGoal';
+import DokiHome from './dokiHome/DokiHome';
 
-const MusicRoute = () => <Text>Music</Text>;
+const Tab = createMaterialBottomTabNavigator();
 
-const AlbumsRoute = () => <Text>Albums</Text>;
+const Tabs = () => {
 
-const RecentsRoute = () => <Text>Recents</Text>;
-
-const NavBar = () => {
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    { key: 'music', title: 'Favorites', focusedIcon: 'heart', unfocusedIcon: 'heart-outline'},
-    { key: 'albums', title: 'Albums', focusedIcon: 'album' },
-    { key: 'recents', title: 'Recents', focusedIcon: 'history' },
-    { key: 'notifications', title: 'Notifications', focusedIcon: 'bell', unfocusedIcon: 'bell-outline' },
-  ]);
-
-  const renderScene = BottomNavigation.SceneMap({
-    music: MusicRoute,
-    albums: AlbumsRoute,
-    recents: RecentsRoute,
-  });
 
   return (
-    <BottomNavigation
-      navigationState={{ index, routes }}
-      onIndexChange={setIndex}
-      renderScene={renderScene}
-    />
+      <Tab.Navigator
+        tabBarOptions = {{
+          showLabel:false 
+        }} 
+      >
+        <Tab.Screen name="Backpack" component={SignUp}/>
+        <Tab.Screen name="Home" component={DokiHome}/>
+        <Tab.Screen name="Health Data " component={HealthStat}/>
+        <Tab.Screen name="Store" component={SetGoal}/>
+      </Tab.Navigator>
   );
 };
 
-export default Navbar;
+export default Tabs;
