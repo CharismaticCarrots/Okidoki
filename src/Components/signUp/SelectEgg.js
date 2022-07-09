@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import {Animated, Easing} from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
-import { StyledDokiHomeBackground, StyledInput, StyledHeading1 } from '../styles';
+import { StyledDokiHomeBackground, StyledInput, StyledHeader } from '../styles';
 import { useMutation } from 'react-query';
 import { API_URL, TOKEN } from '../../../secrets.js';
 import axios from 'axios';
@@ -53,7 +53,7 @@ const SelectEgg = ({navigation}) => {
     <View >
       <StyledDokiHomeBackground source={require("../../../assets/selectEgg.png")} resizeMode="cover">
         <View style={styles.container}>
-          <StyledHeading1>Select a Doki Egg</StyledHeading1>
+          <StyledHeader>Select a Doki Egg</StyledHeader>
          
           <StyledInput 
             placeholder='Doki Name' 
