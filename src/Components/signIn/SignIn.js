@@ -13,8 +13,8 @@ const SignIn = ({ navigation }) => {
     password: '',
   });
 
-  const { isLoading, isError, data, error } = useUserData();
-  console.log('who is logged in', data);
+  const user = useUserData();
+  console.log('who is logged in', user);
 
   const mutation = useMutation(
     async (userInfo) => {

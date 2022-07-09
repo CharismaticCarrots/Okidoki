@@ -10,8 +10,8 @@ import { useUserData } from '../../hooks/useUserData';
 import { API_URL, TOKEN } from '../../../secrets.js';
 
 const SetGoal = ({ navigation }) => {
-  const { isLoading, isError, data, error } = useUserData();
-  console.log('who is logged in', data);
+  const user = useUserData();
+  console.log('who is logged in', user);
 
   const [dailyStepGoal, setDailyStepGoal] = useState('10000');
 
