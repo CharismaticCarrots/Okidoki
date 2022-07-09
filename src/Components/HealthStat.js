@@ -12,7 +12,7 @@ import format from 'date-fns/format';
 import { BarChart } from 'react-native-chart-kit';
 import { StyledHeading2, StyledHeading1 } from './styles';
 import Steps from './Steps';
-import { useStepsTrend } from '../Healthkit';
+import { useStepCountSamples } from '../Healthkit';
 
 import {
   StyledHealthStatContainer,
@@ -21,7 +21,7 @@ import {
 } from './styles';
 
 const HealthStat = () => {
-  const dailySteps = useStepsTrend();
+  const dailySteps = useStepCountSamples();
 
   if (!dailySteps) {
     return <ActivityIndicator size="large" />;

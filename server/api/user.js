@@ -4,7 +4,6 @@ const { requireToken } = require('./middleware.js');
 
 module.exports = router;
 
-// GET /user
 router.get('/', requireToken, async (req, res, next) => {
   try {
     res.json(req.user);

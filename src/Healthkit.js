@@ -11,8 +11,7 @@ const permissions = {
       AppleHealthKit.Constants.Permissions.HeartRate,
       AppleHealthKit.Constants.Permissions.Height,
       AppleHealthKit.Constants.Permissions.Steps,
-    ],
-    write: [AppleHealthKit.Constants.Permissions.Steps],
+    ]
   },
 };
 
@@ -62,7 +61,7 @@ export const useDailyStepCount = () => {
   return steps;
 };
 
-export const useStepsTrend = () => {
+export const useStepCountSamples = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [weekSteps, setWeekSteps] = useState(null);
   let options = {

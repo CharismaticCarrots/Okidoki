@@ -5,11 +5,15 @@ import axios from 'axios';
 import { StyleSheet, View } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import { StyledContainer, StyledHeading1 } from '../styles';
+import { useUserData } from '../../hooks/useUserData';
 
-import { API_URL, TOKEN } from '../../../secrets.js';
+import { API_URL } from '../../../secrets.js';
 
 const SetGoal = ({ navigation }) => {
   const [dailyStepGoal, setDailyStepGoal] = useState('10000');
+
+  const user = useUserData();
+  const token = user.token;
 
   const mutation = useMutation(
     (dailyStepGoal) => {
@@ -17,7 +21,7 @@ const SetGoal = ({ navigation }) => {
         `http://${API_URL}/api/user`,
         { dailyStepGoal },
         {
-          headers: { Authorization: TOKEN },
+          headers: { authorization: token },
         }
       );
     },

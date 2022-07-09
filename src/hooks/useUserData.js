@@ -1,26 +1,27 @@
-import { useQuery } from "react-query";
-import axios from "axios";
-import { API_URL, TOKEN } from '../../secrets.js';
+import { useQuery } from 'react-query';
+import axios from 'axios';
+import { API_URL } from '../../secrets.js';
+import * as SecureStore from 'expo-secure-store';
 
 const fetchUserData = async () => {
-  debugger
-  const { data } = await axios.get(`http://${API_URL}/api/user`, {
-    headers: {
-      authorization: TOKEN
-    }
-  });
-  return data;
+  const token = await SecureStore.getItemAsync('TOKEN');
+
+  if (token) {
+    const { data } = await axios.get(`http://${API_URL}/api/user`, {
+      headers: {
+        authorization: token,
+      },
+    });
+    return data;
+  }
 };
 
 export const useUserData = () => {
-  debugger
-  const { isLoading, isError, data: user, error } = useQuery('user', fetchUserData);
-  debugger
+  const {isLoading, isError, error, isSuccess, data : user } = useQuery(['user'], fetchUserData);
 
-  if (isError) console.log(error);
-
-  if (!isLoading && !isError) {
-    debugger
+  if (!isLoading && isSuccess) {
     return user;
+  } else {
+    console.log(error);
   }
 };
