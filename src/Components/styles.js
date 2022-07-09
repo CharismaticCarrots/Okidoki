@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { ProgressBar, TextInput } from 'react-native-paper';
 
+
 // General Styles
 const StyledLogoHeading = styled(Text)`
   font-size: 50px;
@@ -23,6 +24,7 @@ const StyledHeading1 = styled(Text)`
   font-weight: 500;
   text-align: center;
   margin-bottom: 20px;
+  font-family: 'antipasto-bold';
 `;
 
 const StyledHeading2 = styled(Text)`
@@ -31,6 +33,7 @@ const StyledHeading2 = styled(Text)`
   font-weight: 500;
   text-align: center;
   margin-bottom: 10px;
+  font-family: 'antipasto';
 `;
 
 const StyledContainer = styled(View)`
@@ -153,6 +156,7 @@ const StyledProgressText = styled(Text)`
   font-size: 22px;
   font-weight: bold;
   padding: 5px 0px;
+  font-family: 'antipasto';
 `;
 
 // CountDisplay Component
@@ -202,6 +206,15 @@ const StyledInput = styled(TextInput)`
   width: 200px;
 `;
 
+const StyledHeader = styled(Text)`
+font-size: 40px;
+color: #fff;
+font-weight: 800;
+text-align: center;
+margin-bottom: 20px;
+font-family: 'antipasto-bold';
+`
+
 export {
   // General Styles
   StyledLogoHeading,
@@ -238,4 +251,5 @@ export {
   StyledInternalContainer,
   // SelectEgg Component
   StyledInput,
+  StyledHeader
 };
