@@ -2,8 +2,11 @@ import { StyledDokiHomeBackground, StyledDokiEggContainer, StyledOuterProgressBa
 import { Button } from 'react-native-paper';
 import DokiProgressBar from './DokiProgressBar';
 import DokiEgg from './DokiEgg';
+import { useHatchProgress } from '../../hooks/useHatchProgress';
 
 const DokiEggView = ({ navigation }) => {
+  const [ hatchProgress, totalSteps, userGoal ] = useHatchProgress();
+
   return (
     <StyledDokiHomeBackground source={require("../../../assets/dokihome_background.png")} resizeMode="cover">
         <StyledOuterProgressBarContainer>
@@ -13,7 +16,7 @@ const DokiEggView = ({ navigation }) => {
         <DokiEgg />
       </StyledDokiEggContainer>
       <Button onPress={() => navigation.navigate('DokiView') } mode='contained'>
-          Hatch
+          {userGoal}
       </Button>
     </StyledDokiHomeBackground>
   );
