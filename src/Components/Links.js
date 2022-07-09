@@ -11,6 +11,12 @@ const Links = ({ navigation }) => {
           }}
         />
         <Button
+          title="LoginOptions"
+          onPress={() => {
+            navigation.navigate('LoginOptions');
+          }}
+        />
+        {/* <Button
           title="Sign Up"
           onPress={() => {
             navigation.navigate('SignUp');
@@ -21,7 +27,7 @@ const Links = ({ navigation }) => {
           onPress={() => {
             navigation.navigate('SignIn');
           }}
-        />
+        /> */}
         <Button
           title="Set Goal"
           onPress={() => {
