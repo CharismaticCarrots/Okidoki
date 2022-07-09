@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import {
   StyledFormContainer,
   StyledFormBackground,
   StyledFormContentContainer,
+  StyledFormDescription,
   StyledFormButton,
   StyledFormButtonText,
   StyledLogoHeading,
@@ -17,43 +18,25 @@ const LoginOptions = ({ navigation }) => {
         resizeMode="cover"
       >
         <StyledFormContentContainer>
-          <StyledLogoHeading style={{ marginBottom: 10 }}>
-            Okidoki
-          </StyledLogoHeading>
-          <Text>
-            put some cute description here welcoming people to the app
-          </Text>
-          <StyledFormButton
-            style={{ marginBottom: 10 }}
-            onPress={() => navigation.navigate('SignIn')}
-          >
-            <StyledFormButtonText>Sign In</StyledFormButtonText>
-          </StyledFormButton>
-
-          <StyledFormButton onPress={() => navigation.navigate('SignUp')}>
-            <StyledFormButtonText>Create Account</StyledFormButtonText>
-          </StyledFormButton>
+          <View>
+            <StyledLogoHeading>Okidoki</StyledLogoHeading>
+            <StyledFormDescription>some cool slogan</StyledFormDescription>
+          </View>
+          <View>
+            <StyledFormButton
+              style={{ marginBottom: 10 }}
+              onPress={() => navigation.navigate('SignUp')}
+            >
+              <StyledFormButtonText>Create Account</StyledFormButtonText>
+            </StyledFormButton>
+            <StyledFormButton onPress={() => navigation.navigate('SignIn')}>
+              <StyledFormButtonText>Sign In</StyledFormButtonText>
+            </StyledFormButton>
+          </View>
         </StyledFormContentContainer>
       </StyledFormBackground>
     </StyledFormContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 10,
-  },
-  button: {
-    alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    padding: 10,
-  },
-  countContainer: {
-    alignItems: 'center',
-    padding: 10,
-  },
-});
 
 export default LoginOptions;
