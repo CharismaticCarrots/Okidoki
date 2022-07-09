@@ -7,13 +7,13 @@ import { TextInput, Button } from 'react-native-paper';
 import { StyledContainer, StyledHeading1 } from '../styles';
 import { useUserData } from '../../hooks/useUserData';
 
-import { API_URL, TOKEN } from '../../../secrets.js';
+import { API_URL } from '../../../secrets.js';
 
 const SetGoal = ({ navigation }) => {
-  const { isLoading, isError, data, error } = useUserData();
-  console.log('who is logged in', data);
-
   const [dailyStepGoal, setDailyStepGoal] = useState('10000');
+
+  const { data } = useUserData();
+  const token = data.token;
 
   const mutation = useMutation(
     (dailyStepGoal) => {
@@ -21,7 +21,7 @@ const SetGoal = ({ navigation }) => {
         `http://${API_URL}/api/user`,
         { dailyStepGoal },
         {
-          headers: { Authorization: TOKEN },
+          headers: { authorization: token },
         }
       );
     },
