@@ -11,8 +11,9 @@ import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 import { BarChart } from 'react-native-chart-kit';
 
+import { StyledHeading2, StyledHeading1 } from './styles';
 import Steps from './Steps';
-import { useDailyStepCount } from '../Healthkit';
+import { useStepCountSamples } from '../Healthkit';
 
 import {
   StyledHealthStatContainer,
@@ -21,14 +22,14 @@ import {
 } from './styles';
 
 const HealthStat = () => {
-  const dailySteps = useDailyStepCount();
+  const dailySteps = useStepCountSamples();
 
   if (!dailySteps) {
     return <ActivityIndicator size="large" />;
   }
 
   let data = {
-    labels: dailySteps.map((day) => format(parseISO(day.startDate), 'eeeeee')),
+    labels: dailySteps.map((day) => format(parseISO(day.day), 'eeeeee')),
     datasets: [
       {
         data: dailySteps.map((day) => day.value),
@@ -37,42 +38,39 @@ const HealthStat = () => {
   };
 
   return (
-    <StyledHealthStatContainer>
-      <Text>Steps</Text>
+    <StyledHealthStatContainer style={styles.background}>
+      <StyledHeading1>Health Stats</StyledHeading1>
       <View>
-        <Text>Current Week:</Text>
-        <BarChart
-          data={data}
-          width={Dimensions.get('window').width} // from react-native
-          height={300}
-          // yAxisSuffix="k"
-          // yAxisInterval={1} // optional, defaults to 1
-          formatYLabel={() => yLabelIterator.next().value}
-          fromZero={true}
-          chartConfig={{
-            backgroundColor: '#e26a00',
-            backgroundGradientFrom: '#fb8c00',
-            backgroundGradientTo: '#ffa726',
-            decimalPlaces: 0, // optional, defaults to 2dp
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            style: {
-              borderRadius: 16,
-            },
-            propsForDots: {
-              r: '6',
-              strokeWidth: '2',
-              stroke: '#ffa726',
-            },
-          }}
-          style={{
-            marginVertical: 8,
-            borderRadius: 16,
-          }}
-        />
+        <StyledHeading2>Steps: Last 7 Days</StyledHeading2>
+        <View>
+          <BarChart
+            data={data}
+            width={Dimensions.get('screen').width}
+            height={250}
+            fromZero={true}
+            showValuesOnTopOfBars={true}
+            chartConfig={{
+              backgroundColor: '#4fa4b8',
+              backgroundGradientFrom: '#397887',
+              backgroundGradientTo: '#397887',
+              decimalPlaces: 0,
+              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(5, 5, 5, ${opacity})`,
+              barPercentage: 0.7,
+              propsForLabels: {
+                fontSize: '13',
+                fontWeight: 'bold',
+              },
+            }}
+            style={{
+              marginVertical: 8,
+            }}
+          />
+        </View>
       </View>
-      <Text>History</Text>
-      <ScrollView>
+      <StyledHeading2>History</StyledHeading2>
+      <Text>More to come in Tier 2...</Text>
+      {/* <ScrollView>
         {dailySteps.map((day) => {
           return (
             <StyledDayContainer>
@@ -86,7 +84,7 @@ const HealthStat = () => {
             </StyledDayContainer>
           );
         })}
-      </ScrollView>
+      </ScrollView> */}
     </StyledHealthStatContainer>
   );
 };
@@ -99,6 +97,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 8,
+  },
+  background: {
+    backgroundColor: '#4FA4B8',
+    height: '100%',
   },
 });
 

@@ -1,5 +1,7 @@
 import AppleHealthKit from 'react-native-health';
 import subDays from 'date-fns/subDays';
+import compareAsc from 'date-fns/compareAsc';
+import parseISO from 'date-fns/parseISO';
 
 import React, { useEffect, useState, useContext } from 'react';
 
@@ -9,8 +11,7 @@ const permissions = {
       AppleHealthKit.Constants.Permissions.HeartRate,
       AppleHealthKit.Constants.Permissions.Height,
       AppleHealthKit.Constants.Permissions.Steps,
-    ],
-    write: [AppleHealthKit.Constants.Permissions.Steps],
+    ]
   },
 };
 
@@ -43,7 +44,7 @@ export const useHealthkit = () => {
   return useContext(HealthkitContext);
 };
 
-export const useStepCount = () => {
+export const useDailyStepCount = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [steps, setSteps] = useState(0);
   useEffect(() => {
@@ -59,7 +60,7 @@ export const useStepCount = () => {
   return steps;
 };
 
-export const useDailyStepCount = () => {
+export const useStepCountSamples = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [weekSteps, setWeekSteps] = useState(null);
 
@@ -74,9 +75,56 @@ export const useDailyStepCount = () => {
           return;
         }
 
-        setWeekSteps(results);
+        const reformattedWeekSteps = results.reduce((previous, day) => {
+          const onlyDate = day.startDate.slice(0, 10);
+          const findDate = previous.find(
+            (dayObject) => dayObject.day === onlyDate
+          );
+          if (!findDate) {
+            return [...previous, { day: onlyDate, value: day.value }];
+          } else {
+            findDate.value += day.value;
+
+            return previous;
+          }
+        }, []);
+
+        reformattedWeekSteps.sort((a, b) => {
+          return compareAsc(parseISO(a.day), parseISO(b.day));
+        });
+
+        setWeekSteps(reformattedWeekSteps);
       });
     }
   }, [isLoaded]);
   return weekSteps;
+};
+
+export const useTotalStepCount = (startDate, endDate) => {
+  const { isLoaded, AppleHealthKit } = useHealthkit();
+  const [stepSamples, setStepSamples] = useState([]);
+  const [totalSteps, setTotalSteps] = useState(0);
+
+  let options = {
+    startDate: startDate,
+    endDate: endDate,
+  };
+
+  useEffect(() => {
+    if (isLoaded) {
+      AppleHealthKit.getDailyStepCountSamples(options, (err, results) => {
+        if (err) {
+          return;
+        }
+        setStepSamples(results);
+      });
+    }
+  }, [isLoaded]);
+
+  useEffect(() => {
+    const totalSteps = stepSamples.reduce((totalSteps, curSample) => totalSteps + curSample.value, 0);
+    setTotalSteps(totalSteps);
+  }, [stepSamples])
+
+  return totalSteps;
 };
