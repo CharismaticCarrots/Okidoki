@@ -1,16 +1,27 @@
-import { useQuery } from "react-query";
-import axios from "axios";
-import { API_URL, TOKEN } from '../../secrets.js';
+import { useQuery } from 'react-query';
+import axios from 'axios';
+import { API_URL } from '../../secrets.js';
+import * as SecureStore from 'expo-secure-store';
 
-const fetchUserDoki = async () => {
-  const { data } = await axios.get(`http://${API_URL}/api/user/doki`, {
-    headers: {
-      authorization: TOKEN
-    }
-  });
-  return data;
+const fetchUserDokiData = async () => {
+  const token = await SecureStore.getItemAsync('TOKEN');
+
+  if (token) {
+    const { data } = await axios.get(`http://${API_URL}/api/user/doki`, {
+      headers: {
+        authorization: token,
+      },
+    });
+    return data;
+  }
 };
 
 export const useUserDokiData = () => {
-  return useQuery('userDoki', fetchUserDoki);
+  const {isLoading, isError, error, isSuccess, data : userDoki } = useQuery(['userDoki'], fetchUserDokiData);
+
+  if (!isLoading && isSuccess) {
+    return userDoki;
+  } else {
+    console.log(error);
+  }
 };
