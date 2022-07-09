@@ -5,11 +5,17 @@ import DokiView from './DokiView';
 import { useHatchProgress } from '../../hooks/useHatchProgress';
 
 const DokiHome = ({ navigation }) => {
-  const { hatchProgress } = useHatchProgress();
+  const hatchProgressData = useHatchProgress();
+  const isEgg = hatchProgressData.hatchProgress < 1;
 
   return (
     <View>
-      {(hatchProgress < 1) ? <DokiEggView navigation={navigation} /> : <DokiView />}
+      {isEgg ?
+      <DokiEggView
+        navigation={navigation}
+        hatchProgressData={hatchProgressData}
+      /> :
+      <DokiView />}
     </View>
   );
 };
