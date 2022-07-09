@@ -9,13 +9,21 @@ import {
 } from 'react-native';
 import { ProgressBar, TextInput } from 'react-native-paper';
 
+// Color Palette
+const colorPalette = {
+  primary: '#ffefb4',
+  secondary: '#59b2ff',
+  tertiary: '#C7CDAB',
+};
 
 // General Styles
 const StyledLogoHeading = styled(Text)`
-  font-size: 50px;
+  font-size: 70px;
   font-weight: 500;
   text-align: center;
-  color: papayawhip;
+  color: ${colorPalette.primary};
+  font-family: 'singularity';
+  letter-spacing: 2px;
 `;
 
 const StyledHeading1 = styled(Text)`
@@ -52,32 +60,38 @@ const StyledFormContainer = styled(View)`
 const StyledFormBackground = styled(ImageBackground)`
   display: flex;
   flex: 1;
-  justify-content: center;
   align-items: center;
 `;
 
 const StyledFormContentContainer = styled(View)`
+  height: 100%;
+  justify-content: space-around;
   min-width: 300px;
   max-width: 80%;
   align-items: center;
 `;
 
+const StyledFormDescription = styled(Text)`
+  font-family: 'antipasto-bold';
+  letter-spacing: 1px;
+  font-size: 20px;
+  color: ${colorPalette.primary};
+  text-align: center;
+`;
+
 const StyledFormButton = styled(TouchableOpacity)`
-  align-items: center;
-  background-color: papayawhip;
-  padding: 15px 25px;
+  background-color: ${colorPalette.primary};
+  padding: 15px;
   border-radius: 50px;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  width: 200px;
+  width: 220px;
+  align-items: center;
 `;
 
 const StyledFormButtonText = styled(Text)`
-  font-size: 16px;
-  color: #777;
-  text-transform: uppercase;
-  font-weight: 500;
+  font-family: 'singularity';
+  font-size: 22px;
+  color: ${colorPalette.secondary};
+  letter-spacing: 0.5px;
 `;
 
 // Sprite Component
@@ -221,13 +235,13 @@ const StyledInput = styled(TextInput)`
 `;
 
 const StyledHeader = styled(Text)`
-font-size: 40px;
-color: #fff;
-font-weight: 800;
-text-align: center;
-margin-bottom: 20px;
-font-family: 'antipasto-bold';
-`
+  font-size: 40px;
+  color: #fff;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'antipasto-bold';
+`;
 
 export {
   // General Styles
@@ -239,6 +253,7 @@ export {
   StyledFormContainer,
   StyledFormBackground,
   StyledFormContentContainer,
+  StyledFormDescription,
   StyledFormButton,
   StyledFormButtonText,
   // Sprite Component
@@ -267,5 +282,5 @@ export {
   StyledInternalContainer,
   // SelectEgg Component
   StyledInput,
-  StyledHeader
+  StyledHeader,
 };
