@@ -12,6 +12,7 @@ import DokiView from './components/dokiHome/DokiView';
 import Links from './components/Links';
 import SelectEgg from './components/signUp/SelectEgg';
 import HealthStat from './components/HealthStat';
+import LoginOptions from './components/LoginOptions';
 import SignUp from './components/signUp/SignUp';
 import SignIn from './components/signIn/SignIn';
 
@@ -36,6 +37,7 @@ export default function App() {
             <Stack.Screen name="DokiView" component={DokiView} />
             <Stack.Screen name="SelectEgg" component={SelectEgg} />
             <Stack.Screen name="HealthStat" component={HealthStat} />
+            <Stack.Screen name="LoginOptions" component={LoginOptions} />
             <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="SignIn" component={SignIn} />
           </Stack.Navigator>
