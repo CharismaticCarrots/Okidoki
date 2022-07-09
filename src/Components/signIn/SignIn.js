@@ -5,16 +5,12 @@ import { API_URL } from '../../../secrets.js';
 import * as SecureStore from 'expo-secure-store';
 import { TextInput, Button } from 'react-native-paper';
 import { StyledContainer, StyledHeading1 } from '../styles';
-import { useUserData } from '../../hooks/useUserData';
 
 const SignIn = ({ navigation }) => {
   const [userData, setUserData] = useState({
     email: '',
     password: '',
   });
-
-  const user = useUserData();
-  console.log('who is logged in', user);
 
   const mutation = useMutation(
     async (userInfo) => {
@@ -32,7 +28,6 @@ const SignIn = ({ navigation }) => {
   );
 
   const handleSubmit = () => {
-    console.log('userdata', userData);
     mutation.mutate(userData);
   };
 

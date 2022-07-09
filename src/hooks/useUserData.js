@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
-import { API_URL, TOKEN } from '../../secrets.js';
+import { API_URL } from '../../secrets.js';
 import * as SecureStore from 'expo-secure-store';
 
 const fetchUserData = async () => {
@@ -9,7 +9,7 @@ const fetchUserData = async () => {
   if (token) {
     const { data } = await axios.get(`http://${API_URL}/api/user`, {
       headers: {
-        Authorization: token,
+        authorization: token,
       },
     });
     return data;
