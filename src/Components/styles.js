@@ -11,7 +11,7 @@ const StyledHeading1 = styled(Text)`
   font-weight: 500;
   text-align: center;
   margin-bottom: 20px;
-  font-family: 'singularity';
+  font-family: 'antipasto-bold';
 `;
 
 const StyledHeading2 = styled(Text)`
