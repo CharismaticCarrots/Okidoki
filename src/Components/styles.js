@@ -11,7 +11,7 @@ const StyledHeading1 = styled(Text)`
   font-weight: 500;
   text-align: center;
   margin-bottom: 20px;
-  fontFamily: 'antipasto';
+  font-family: 'singularity';
 `;
 
 const StyledHeading2 = styled(Text)`
@@ -20,7 +20,7 @@ const StyledHeading2 = styled(Text)`
   font-weight: 500;
   text-align: center;
   margin-bottom: 10px;
-  fontFamily: 'antipasto';
+  font-family: 'antipasto';
 `;
 
 const StyledContainer = styled(View)`
@@ -107,7 +107,7 @@ const StyledProgressText = styled(Text)`
   font-size: 22px;
   font-weight: bold;
   padding: 5px 0px;
-  fontFamily: 'antipasto';
+  font-family: 'antipasto';
 `;
 
 // CountDisplay Component
@@ -126,7 +126,6 @@ const StyledCounterText = styled(Text)`
   font-size: 25px;
   font-weight: 900;
   margin: 10px;
-  fontFamily: 'antipasto';
 `;
 
 // Health stats component
@@ -164,7 +163,7 @@ color: #fff;
 font-weight: 800;
 text-align: center;
 margin-bottom: 20px;
-fontFamily: 'antipasto-bold';
+font-family: 'antipasto-bold';
 `
 
 export {

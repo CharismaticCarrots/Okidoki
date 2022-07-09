@@ -8,6 +8,7 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useState, useEffect, useCallback } from 'react';
 import useFonts from '../fonts'
+import AppLoading from 'expo-app-loading';
 
 import Home from './components/Home';
 import SetGoal from './components/signUp/SetGoal';
@@ -24,32 +25,19 @@ const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [appIsReady, setAppIsReady] = useState(false);
-  useEffect(() => {
-    async function prepare() {
-      try {
-        await SplashScreen.preventAutoHideAsync();
-        const LoadFonts = async () => {
-          await useFonts();
-        };
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        setAppIsReady(true);
-      }
-    }
-    prepare();
-  }, []);
-
-  const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
-      await SplashScreen.hideAsync();
-    }
-  }, [appIsReady]);
-
-  if (!appIsReady) {
-    return null;
-  }
+  const [IsReady, SetIsReady] = useState(false);
+  const LoadFonts = async () => {
+    await useFonts();
+  };
+  if (!IsReady) {
+    return (
+      <AppLoading
+        startAsync={LoadFonts}
+        onFinish={() => SetIsReady(true)}
+        onError={() => {}}
+      />
+    )}
+    
   return (
     <QueryClientProvider client={queryClient}>
       <HealthKitProvider>
