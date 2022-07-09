@@ -1,10 +1,23 @@
 // Index of Styled Components
 import styled from 'styled-components';
-import { View, Image, ImageBackground, Text } from 'react-native';
+import {
+  View,
+  Image,
+  ImageBackground,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import { ProgressBar, TextInput } from 'react-native-paper';
 
 
 // General Styles
+const StyledLogoHeading = styled(Text)`
+  font-size: 50px;
+  font-weight: 500;
+  text-align: center;
+  color: papayawhip;
+`;
+
 const StyledHeading1 = styled(Text)`
   font-size: 30px;
   color: #333;
@@ -28,6 +41,43 @@ const StyledContainer = styled(View)`
   flex-direction: column;
   justify-content: center;
   padding: 20px 30px;
+`;
+
+// Forms — SignIn, SignUp, SetGoal
+const StyledFormContainer = styled(View)`
+  display: flex;
+  flex: 1;
+`;
+
+const StyledFormBackground = styled(ImageBackground)`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledFormContentContainer = styled(View)`
+  min-width: 300px;
+  max-width: 80%;
+  align-items: center;
+`;
+
+const StyledFormButton = styled(TouchableOpacity)`
+  align-items: center;
+  background-color: papayawhip;
+  padding: 15px 25px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 200px;
+`;
+
+const StyledFormButtonText = styled(Text)`
+  font-size: 16px;
+  color: #777;
+  text-transform: uppercase;
+  font-weight: 500;
 `;
 
 // Sprite Component
@@ -81,7 +131,7 @@ const StyledOuterCountersContainer = styled(View)`
   margin-top: 10px;
 `;
 
-// SignUp & SignIn Components
+// DokiProgressBar Component
 const StyledOuterProgressBarContainer = styled(View)`
   display: flex;
   flex-direction: column;
@@ -89,7 +139,6 @@ const StyledOuterProgressBarContainer = styled(View)`
   margin-top: 20px;
 `;
 
-// DokiProgressBar Component
 const StyledProgressBarContainer = styled(View)`
   width: 350px;
 `;
@@ -128,7 +177,7 @@ const StyledCounterText = styled(Text)`
   margin: 10px;
 `;
 
-// Health stats component
+// Health Stats Component
 const StyledHealthStatContainer = styled(View)`
   display: flex;
   align-items: center;
@@ -149,7 +198,7 @@ const StyledInternalContainer = styled(View)`
   padding: 10px;
 `;
 
-//SelectEgg
+// SelectEgg Component
 
 const StyledInput = styled(TextInput)`
   backgroundcolor: #fff;
@@ -168,9 +217,16 @@ font-family: 'antipasto-bold';
 
 export {
   // General Styles
+  StyledLogoHeading,
   StyledHeading1,
   StyledHeading2,
   StyledContainer,
+  // Form Styles
+  StyledFormContainer,
+  StyledFormBackground,
+  StyledFormContentContainer,
+  StyledFormButton,
+  StyledFormButtonText,
   // Sprite Component
   StyledSpriteContainer,
   StyledTileContainer,
@@ -189,11 +245,11 @@ export {
   StyledCarrotCountContainer,
   StyledStepCountContainer,
   StyledCounterText,
-  //healthState component
+  // HealthStats Component
   StyledHealthStatContainer,
   StyledDayContainer,
   StyledInternalContainer,
-  //SelectEgg component
+  // SelectEgg Component
   StyledInput,
   StyledHeader
 };
