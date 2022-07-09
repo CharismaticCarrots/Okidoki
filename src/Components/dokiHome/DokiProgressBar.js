@@ -5,7 +5,7 @@ const DokiProgressBar = ({name, progress}) => {
   return (
     <StyledProgressBarContainer>
       <StyledProgressText>{name}</StyledProgressText>
-      <StyledProgressBar progress={progress} color="#ddbb67" />
+      <StyledProgressBar progress={progress} color="#ddbb67"/>
     </StyledProgressBarContainer>
   );
 };

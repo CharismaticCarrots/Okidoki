@@ -111,15 +111,16 @@ const StyledDokiHomeBackground = styled(ImageBackground)`
   height: 100%;
 `;
 
-const StyledDokiEggContainer = styled(View)`
+const StyledDokiContainer = styled(View)`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0px 50px;
-  margin-top: 150px;
-  margin-bottom: 50px;
-  width: 300px;
-  height: 300px;
+  margin: 50px;
+`;
+
+const StyledDokiEggContainer = styled(StyledDokiContainer)`
+  margin-top: 120px;
 `;
 
 // DokiView
@@ -129,6 +130,15 @@ const StyledOuterCountersContainer = styled(View)`
   flex-direction: row;
   justify-content: space-between;
   margin-top: 10px;
+`;
+
+const StyledDokiName = styled(Text)`
+  color: black;
+  font-size: 30px;
+  font-weight: 800;
+  text-align: center;
+  font-family: 'singularity';
+  margin-bottom: 20px;
 `;
 
 // DokiProgressBar Component
@@ -141,6 +151,7 @@ const StyledOuterProgressBarContainer = styled(View)`
 
 const StyledProgressBarContainer = styled(View)`
   width: 350px;
+  padding: 5px 0px;
 `;
 
 const StyledProgressBar = styled(ProgressBar)`
@@ -153,10 +164,10 @@ const StyledProgressBar = styled(ProgressBar)`
 
 const StyledProgressText = styled(Text)`
   align-self: flex-end;
-  font-size: 22px;
-  font-weight: bold;
   padding: 5px 0px;
-  font-family: 'antipasto';
+  font-size: 35px;
+  font-weight: 800;
+  font-family: 'singularity';
 `;
 
 // CountDisplay Component
@@ -165,15 +176,18 @@ const StyledCarrotCountContainer = styled(View)`
   flex-direction: row;
   align-items: center;
   width: 100px;
+  padding-left: 20px;
 `;
 
 const StyledStepCountContainer = styled(StyledCarrotCountContainer)`
   width: 200px;
+  padding-left: 0px;
 `;
 
 const StyledCounterText = styled(Text)`
-  font-size: 25px;
-  font-weight: 900;
+  font-size: 35px;
+  font-weight: 800;
+  font-family: 'singularity';
   margin: 10px;
 `;
 
@@ -233,12 +247,14 @@ export {
   StyledSpriteImage,
   // DokiHome Component
   StyledDokiHomeBackground,
+  StyledDokiContainer,
   StyledDokiEggContainer,
   StyledOuterProgressBarContainer,
   // DokiProgressBar Component
   StyledProgressBarContainer,
   StyledProgressBar,
   StyledProgressText,
+  StyledDokiName,
   // DokiView Component
   StyledOuterCountersContainer,
   // CountDisplay Component
