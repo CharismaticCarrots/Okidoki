@@ -13,7 +13,7 @@ const LoginOptions = ({ navigation }) => {
   return (
     <StyledFormContainer>
       <StyledFormBackground
-        source={require('../../assets/dokihome_background.png')}
+        source={require('../../assets/backgrounds/loginOptions.png')}
         resizeMode="cover"
       >
         <StyledFormContentContainer>
@@ -21,9 +21,9 @@ const LoginOptions = ({ navigation }) => {
             Okidoki
           </StyledLogoHeading>
           <Text>
-            Can we put some cute description here welcoming people to the app?
+            put some cute description here welcoming people to the app
           </Text>
-          <StyledFormButton
+          <StyledFormButtoni
             style={{ marginBottom: 10 }}
             onPress={() => navigation.navigate('SignIn')}
           >

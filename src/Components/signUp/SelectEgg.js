@@ -56,7 +56,7 @@ const SelectEgg = ({ navigation }) => {
   return (
     <View>
       <StyledDokiHomeBackground
-        source={require('../../../assets/selectEgg.png')}
+        source={require('../../../assets/backgrounds/selectEgg.png')}
         resizeMode="cover"
       >
         <View style={styles.container}>
