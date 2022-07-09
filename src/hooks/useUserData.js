@@ -1,6 +1,5 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
-import { API_URL, TOKEN } from '../../secrets.js';
 import * as SecureStore from 'expo-secure-store';
 
 const fetchUserData = async () => {
