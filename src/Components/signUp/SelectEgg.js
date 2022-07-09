@@ -15,7 +15,6 @@ import axios from 'axios';
 const SelectEgg = ({ navigation }) => {
   const [egg, setEgg] = useState('');
   const [dokiName, setDokiName] = useState(null);
-
   const { data } = useUserData();
   const token = data.token;
 

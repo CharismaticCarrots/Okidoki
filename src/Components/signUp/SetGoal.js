@@ -11,7 +11,6 @@ import { API_URL } from '../../../secrets.js';
 
 const SetGoal = ({ navigation }) => {
   const [dailyStepGoal, setDailyStepGoal] = useState('10000');
-
   const { data } = useUserData();
   const token = data.token;
 
