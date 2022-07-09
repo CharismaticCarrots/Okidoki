@@ -12,6 +12,14 @@ const StyledHeading1 = styled(Text)`
   margin-bottom: 20px;
 `;
 
+const StyledHeading2 = styled(Text)`
+  font-size: 20px;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 10px;
+`;
+
 const StyledContainer = styled(View)`
   display: flex;
   flex-direction: column;
@@ -148,6 +156,7 @@ const StyledInput = styled(TextInput)`
 export {
   // General Styles
   StyledHeading1,
+  StyledHeading2,
   StyledContainer,
   // Sprite Component
   StyledSpriteContainer,
