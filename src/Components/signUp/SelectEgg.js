@@ -5,7 +5,7 @@ import { TextInput, Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
   StyledInput,
-  StyledHeading1,
+  StyledHeader
 } from '../styles';
 import { useMutation } from 'react-query';
 import { API_URL } from '../../../secrets.js';
@@ -15,9 +15,8 @@ import axios from 'axios';
 const SelectEgg = ({ navigation }) => {
   const [egg, setEgg] = useState('');
   const [dokiName, setDokiName] = useState(null);
-
-  const { data } = useUserData();
-  const token = data.token;
+  const user = useUserData();
+  const token = user.token;
 
   const mutation = useMutation(
     (dokiName) => {
@@ -60,9 +59,12 @@ const SelectEgg = ({ navigation }) => {
         resizeMode="cover"
       >
         <View style={styles.container}>
-          <StyledHeading1>Select a Doki Egg</StyledHeading1>
-
-          <StyledInput placeholder="Doki Name" onChangeText={setDokiName} />
+          <StyledHeader>Select a Doki Egg</StyledHeader>
+         
+          <StyledInput 
+            placeholder='Doki Name' 
+            onChangeText={setDokiName}
+            />
           <View style={styles.eggs}>
             <Animated.View
               style={egg === 'egg1' ? { transform: [{ rotate: spin }] } : {}}
