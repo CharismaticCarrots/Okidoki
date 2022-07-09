@@ -14,7 +14,6 @@ const SignIn = ({ navigation }) => {
   });
 
   const { isLoading, isError, data, error } = useUserData();
-  console.log('who is logged in', data);
 
   const mutation = useMutation(
     async (userInfo) => {
@@ -32,7 +31,6 @@ const SignIn = ({ navigation }) => {
   );
 
   const handleSubmit = () => {
-    console.log('userdata', userData);
     mutation.mutate(userData);
   };
 
