@@ -5,8 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider as PaperProvider } from 'react-native-paper';
 
 import * as Font from 'expo-font';
-import AppLoading from 'expo-app-loading';
-import React, { useState } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
+import React, { useState, useEffect, useCallback } from 'react';
 import useFonts from '../fonts'
 
 import Home from './components/Home';
@@ -24,20 +24,33 @@ const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [IsReady, SetIsReady] = useState(false);
+  const [appIsReady, setAppIsReady] = useState(false);
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+        // Pre-load fonts, make any API calls you need to do here
+        const LoadFonts = async () => {
+          await useFonts();
+        };
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        // Tell the application to render
+        setAppIsReady(true);
+      }
+    }
+    prepare();
+  }, []);
 
-  const LoadFonts = async () => {
-    await useFonts();
-  };
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
 
-  if (!IsReady) {
-    return (
-      <AppLoading
-        startAsync={LoadFonts}
-        onFinish={() => SetIsReady(true)}
-        onError={() => {}}
-      />
-    );
+  if (!appIsReady) {
+    return null;
   }
   return (
     <QueryClientProvider client={queryClient}>
