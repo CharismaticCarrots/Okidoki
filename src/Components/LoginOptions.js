@@ -11,13 +11,15 @@ import {
 
 const LoginOptions = ({ navigation }) => {
   return (
-    <StyledFormContainer style={{ marginBottom: 10 }}>
+    <StyledFormContainer>
       <StyledFormBackground
         source={require('../../assets/backgrounds/loginOptions.png')}
         resizeMode="cover"
       >
         <StyledFormContentContainer>
-          <StyledLogoHeading>Okidoki</StyledLogoHeading>
+          <StyledLogoHeading style={{ marginBottom: 10 }}>
+            Okidoki
+          </StyledLogoHeading>
           <Text>
             put some cute description here welcoming people to the app
           </Text>
