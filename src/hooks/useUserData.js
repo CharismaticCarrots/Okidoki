@@ -9,7 +9,7 @@ const fetchUserData = async () => {
   if (token) {
     const { data } = await axios.get(`http://${API_URL}/api/user`, {
       headers: {
-        authorization: token,
+        Authorization: token,
       },
     });
     return data;
