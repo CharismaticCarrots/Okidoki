@@ -17,5 +17,11 @@ const fetchUserData = async () => {
 };
 
 export const useUserData = () => {
-  return useQuery('user', fetchUserData);
+  const {isLoading, isError, error, isSuccess, data : user } = useQuery(['user'], fetchUserData);
+
+  if (!isLoading && isSuccess) {
+    return user;
+  } else {
+    console.log(error);
+  }
 };

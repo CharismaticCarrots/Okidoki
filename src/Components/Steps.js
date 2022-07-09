@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { useStepCount } from '../Healthkit';
+import { useDailyStepCount } from '../Healthkit';
 
 const Steps = () => {
-  const steps = useStepCount();
+  const steps = useDailyStepCount();
   return (
     <View style={styles.container}>
       <Text>Steps: {steps}</Text>
