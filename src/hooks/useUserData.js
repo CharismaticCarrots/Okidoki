@@ -16,10 +16,6 @@ const fetchUserData = async () => {
   }
 };
 
-// export const useUserData = () => {
-//   return useQuery('user', fetchUserData);
-// };
-
 export const useUserData = () => {
   const {isLoading, isError, error, isSuccess, data : user } = useQuery(['user'], fetchUserData);
 

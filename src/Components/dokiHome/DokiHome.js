@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import DokiEggView from './DokiEggView';
 import DokiView from './DokiView';
-import { useUserData } from '../../hooks/useUserData';
+import { useHatchProgress } from '../../hooks/useHatchProgress';
 
 const DokiHome = ({ navigation }) => {
-  const { isLoading, isError, data, error } = useUserData();
-  console.log('who is logged in', data);
+  const { hatchProgress } = useHatchProgress();
 
-  const [isEgg, setEggStatus] = useState(true);
   return (
     <View>
-      {isEgg ? <DokiEggView navigation={navigation} /> : <DokiView />}
+      {(hatchProgress < 1) ? <DokiEggView navigation={navigation} /> : <DokiView />}
     </View>
   );
 };

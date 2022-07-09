@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useUserData } from "./useUserData";
 import { useTotalStepCount } from "../Healthkit";
 import add from 'date-fns/add';
@@ -12,15 +11,14 @@ export const useHatchProgress = () => {
 
   const totalSteps =  useTotalStepCount(dokiCreatedDate, sevenDaysLater);
 
-  const { isSuccess, isError, data: user, error } = useUserData();
-  if (isError) console.log(error);
+  const user = useUserData();
 
-  if (isSuccess) {
-    const userGoal = user.dailyStepGoal;
-    const hatchProgress = totalSteps / userGoal;
+  if (user) {
+    const { dailyStepGoal } = user;
+    const hatchProgress = totalSteps / dailyStepGoal;
 
-    return { hatchProgress, totalSteps, userGoal };
+    return { hatchProgress, totalSteps, dailyStepGoal };
   } else {
-    return { error };
+    return {};
   }
 };

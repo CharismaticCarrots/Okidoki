@@ -6,7 +6,7 @@ import CountDisplay from './CountDisplay';
 import { useHatchProgress } from '../../hooks/useHatchProgress';
 
 const DokiEggView = ({ navigation }) => {
-    const { hatchProgress, totalSteps, userGoal } = useHatchProgress();
+    const { hatchProgress, totalSteps, dailyStepGoal } = useHatchProgress();
 
   return (
     <StyledDokiHomeBackground source={require("../../../assets/dokihome_background.png")} resizeMode="cover">
@@ -14,7 +14,7 @@ const DokiEggView = ({ navigation }) => {
         <DokiProgressBar name="Hatch" progress={hatchProgress}/>
       </StyledOuterProgressBarContainer>
       <StyledOuterCountersContainer>
-        <CountDisplay counterType={"step"} count={totalSteps} goalCount={userGoal} />
+        <CountDisplay counterType={"step"} count={totalSteps} goalCount={dailyStepGoal} />
       </StyledOuterCountersContainer>
       <StyledDokiEggContainer>
         <DokiEgg />
