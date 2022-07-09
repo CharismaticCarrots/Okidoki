@@ -100,3 +100,32 @@ export const useDailyStepCount = () => {
   }, [isLoaded]);
   return weekSteps;
 };
+
+export const useTotalStepCount = (startDate, endDate) => {
+  const { isLoaded, AppleHealthKit } = useHealthkit();
+  const [stepSamples, setStepSamples] = useState([]);
+  const [totalSteps, setTotalSteps] = useState(0);
+
+  let options = {
+    startDate: startDate,
+    endDate: endDate,
+  };
+
+  useEffect(() => {
+    if (isLoaded) {
+      AppleHealthKit.getDailyStepCountSamples(options, (err, results) => {
+        if (err) {
+          return;
+        }
+        setStepSamples(results);
+      });
+    }
+  }, [isLoaded]);
+
+  useEffect(() => {
+    const totalSteps = stepSamples.reduce((totalSteps, curSample) => totalSteps + curSample.value, 0);
+    setTotalSteps(totalSteps);
+  }, [stepSamples])
+
+  return totalSteps;
+};
