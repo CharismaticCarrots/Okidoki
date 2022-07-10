@@ -17,11 +17,13 @@ const fetchUserData = async () => {
 };
 
 export const useUserData = () => {
-  const {isLoading, isError, error, isSuccess, data : user } = useQuery(['user'], fetchUserData);
+  const {isLoading, isError, error, data : user } = useQuery(['user'], fetchUserData);
 
-  if (!isLoading && isSuccess) {
-    return user;
+  if (isLoading) {
+    console.log("LOADING")
+  } else if (isError) {
+    console.log("ERROR:", error);
   } else {
-    console.log(error);
+    return user;
   }
 };
