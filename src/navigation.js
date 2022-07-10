@@ -6,6 +6,7 @@ import SelectEgg from './components/signUp/SelectEgg';
 import SignUp from './components/signUp/SignUp';
 import SignIn from './components/signIn/SignIn';
 import LoginOptions from './components/LoginOptions';
+import DokiHome from './components/dokiHome/DokiHome';
 
 const Stack = createNativeStackNavigator()
 
@@ -16,9 +17,7 @@ export const LoginNavigator = ({navigation}) => {
       <Stack.Screen 
         name="LoginOptions" 
         component={LoginOptions} 
-        options={({ navigation }) => ({
-          headerShown: false
-        })}
+        options={{ headerShown: false}}
       />
       <Stack.Screen
         name="SignIn"
@@ -30,11 +29,18 @@ export const LoginNavigator = ({navigation}) => {
       />
       <Stack.Screen 
         name="SetGoal" 
+        options={{ headerShown: false}}
         component={SetGoal} 
       />
       <Stack.Screen 
         name="SelectEgg" 
+        options={{ headerShown: false}}
         component={SelectEgg} 
+      />
+       <Stack.Screen
+        name="DokiHome"
+        options={{ headerShown: false}}
+        component={DokiHome}
       />
     </Stack.Navigator>
   )

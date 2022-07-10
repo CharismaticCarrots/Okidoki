@@ -45,46 +45,9 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <HealthKitProvider>
         <NavigationContainer>
-        {/* <Stack.Navigator headerMode="screen" >
-      <Stack.Screen 
-        name="LoginOptions" 
-        component={LoginOptions} 
-      />
-      <Stack.Screen
-        name="Login"
-        component={SignIn}
-      />
-      <Stack.Screen
-        name="Registration"
-        component={SignUp}
-      />
-      <Stack.Screen 
-        name="SetGoal" 
-        component={SetGoal} 
-      />
-      <Stack.Screen 
-        name="SelectEgg" 
-        component={SelectEgg} 
-      />
-    </Stack.Navigator> */}
-          <LoginNavigator   />
-          {/* <Stack.Navigator initialRouteName="Links">
-            <Stack.Screen
-              name="Links"
-              component={Links}
-              options={{ title: 'Links Page' }}
-            />
-            <Stack.Screen name="SetGoal" component={SetGoal} />
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="DokiHome" component={DokiHome} />
-            <Stack.Screen name="DokiEggView" component={DokiEggView} />
-            <Stack.Screen name="DokiView" component={DokiView} />
-            <Stack.Screen name="SelectEgg" component={SelectEgg} />
-            <Stack.Screen name="HealthStat" component={HealthStat} />
-            <Stack.Screen name="LoginOptions" component={LoginOptions} />
-            <Stack.Screen name="SignUp" component={SignUp} />
-           <Stack.Screen name="SignIn" component={SignIn} />
-          </Stack.Navigator> */}
+        
+          <LoginNavigator  />
+   
           {/* <TabNavigator/> */}
         </NavigationContainer>
       </HealthKitProvider>
