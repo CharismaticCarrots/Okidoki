@@ -18,12 +18,13 @@ export const LoginNavigator = ({navigation}) => {
   const [doki, setUserDoki] = useState(null)
   
   const userDoki = useUserDokiData()
+  // if (userDoki) {setUserDoki(userDoki)}
   useEffect(() => {
     console.log(userDoki, 'DOKIIII')
     if (userDoki){
       setUserDoki(userDoki)
     }
-  }, [])
+  }, [userDoki])
 
   return (
     <NavigationContainer>
