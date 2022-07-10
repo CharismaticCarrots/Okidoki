@@ -71,7 +71,7 @@ const SignIn = ({ navigation }) => {
         />
 
         <StyledFormButton
-          style={{ marginTop: 20, marginBottom: 10, width: '60%' }}
+          style={{ marginTop: 20, marginBottom: 10, width: 160 }}
           onPress={() => {
             handleSubmit();
           }}

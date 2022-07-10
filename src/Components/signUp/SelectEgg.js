@@ -108,18 +108,22 @@ const SelectEgg = ({ navigation }) => {
                 </TouchableOpacity>
               </Animated.View>
             </View>
-            <View>
+            <View style={styles.form}>
               <StyledFormTextInput
-                placeholder="Give your Doki a name"
+                placeholder="Name your Doki"
                 autoCapitalize="none"
                 autoCorrect={false}
                 autoComplete="off"
                 onChangeText={setDokiName}
-                style={{ fontSize: 25 }}
+                style={{ minWidth: '100%' }}
               />
 
               <StyledFormButton
-                style={{ marginTop: 5, marginBottom: 10, width: '60%' }}
+                style={{
+                  marginTop: 5,
+                  marginBottom: 10,
+                  width: 160,
+                }}
                 onPress={() => {
                   handleSubmit();
                 }}
@@ -147,10 +151,15 @@ const styles = StyleSheet.create({
   },
   eggRow: {
     flexDirection: 'row',
-    marginBottom: 35,
+    marginBottom: 40,
   },
   eggImg: {
     height: 125,
     width: 105,
+  },
+  form: {
+    alignItems: 'center',
+    width: '60%',
+    minWidth: 180,
   },
 });

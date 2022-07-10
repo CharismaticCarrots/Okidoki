@@ -77,7 +77,7 @@ const StyledFormTextInput = styled(TextInput)`
   background-color: white;
   border-radius: 50px;
   padding: 15px;
-  font-size: 22px;
+  font-size: 24px;
   margin-bottom: 4px;
   font-family: 'singularity';
   color: ${colors.text.dark};
@@ -93,7 +93,7 @@ const StyledFormButton = styled(TouchableOpacity)`
 
 const StyledFormButtonText = styled(Text)`
   font-family: 'singularity';
-  font-size: 22px;
+  font-size: 24px;
   color: ${colors.secondary};
   letter-spacing: 0.5px;
 `;
