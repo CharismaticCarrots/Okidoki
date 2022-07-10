@@ -3,14 +3,26 @@ import { useMutation } from 'react-query';
 import axios from 'axios';
 import { API_URL } from '../../../secrets.js';
 import * as SecureStore from 'expo-secure-store';
-import { TextInput, Button } from 'react-native-paper';
-import { StyledContainer, StyledHeading1 } from '../styles';
+
+import {
+  StyledHeading1,
+  StyledFormBackground,
+  StyledFormContainer,
+  StyledFormTextInput,
+  StyledFormButton,
+  StyledFormButtonText,
+  StyledFormSuggest,
+} from '../styles';
+import { useUserData } from '../../hooks/useUserData';
 
 const SignIn = ({ navigation }) => {
   const [userData, setUserData] = useState({
     email: '',
     password: '',
   });
+
+  const userObj = useUserData();
+  console.log('User on SignIn: ', userObj);
 
   const mutation = useMutation(
     async (userInfo) => {
@@ -32,43 +44,50 @@ const SignIn = ({ navigation }) => {
   };
 
   return (
-    <StyledContainer>
-      <StyledHeading1>Welcome Back</StyledHeading1>
-      <TextInput
-        label="Email"
-        mode="outlined"
-        autoCapitalize="none"
-        onChangeText={(e) =>
-          setUserData((prevState) => ({ ...prevState, email: e }))
-        }
-      />
-      <TextInput
-        label="Password"
-        secureTextEntry={true}
-        mode="outlined"
-        autoCapitalize="none"
-        onChangeText={(e) =>
-          setUserData((prevState) => ({ ...prevState, password: e }))
-        }
-      />
+    <StyledFormBackground
+      source={require('../../../assets/backgrounds/loginOptions.png')}
+      resizeMode="cover"
+    >
+      <StyledFormContainer>
+        <StyledHeading1>Welcome Back</StyledHeading1>
+        <StyledFormTextInput
+          placeholder="Email"
+          autoCapitalize="none"
+          autoCorrect={false}
+          autoComplete="off"
+          onChangeText={(e) =>
+            setUserData((prevState) => ({ ...prevState, email: e }))
+          }
+        />
+        <StyledFormTextInput
+          placeholder="Password"
+          secureTextEntry={true}
+          autoCapitalize="none"
+          autoCorrect={false}
+          autoComplete="off"
+          onChangeText={(e) =>
+            setUserData((prevState) => ({ ...prevState, password: e }))
+          }
+        />
 
-      <Button
-        mode="contained"
-        onPress={() => {
-          handleSubmit();
-        }}
-      >
-        Sign In
-      </Button>
+        <StyledFormButton
+          style={{ marginTop: 20, marginBottom: 10, width: '60%' }}
+          onPress={() => {
+            handleSubmit();
+          }}
+        >
+          <StyledFormButtonText>Sign In</StyledFormButtonText>
+        </StyledFormButton>
 
-      <Button
-        onPress={() => {
-          navigation.navigate('SignUp');
-        }}
-      >
-        Don't have an account? Sign up
-      </Button>
-    </StyledContainer>
+        <StyledFormSuggest
+          onPress={() => {
+            navigation.navigate('SignUp');
+          }}
+        >
+          Don't have an account? Sign up
+        </StyledFormSuggest>
+      </StyledFormContainer>
+    </StyledFormBackground>
   );
 };
 

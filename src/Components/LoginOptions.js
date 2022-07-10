@@ -1,10 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {
-  StyledFormContainer,
   StyledFormBackground,
-  StyledFormContentContainer,
-  StyledFormDescription,
+  StyledLoginOptionsContainer,
+  StyledLoginOptionsDescription,
   StyledFormButton,
   StyledFormButtonText,
   StyledLogoHeading,
@@ -12,30 +11,30 @@ import {
 
 const LoginOptions = ({ navigation }) => {
   return (
-    <StyledFormContainer>
-      <StyledFormBackground
-        source={require('../../assets/backgrounds/loginOptions.png')}
-        resizeMode="cover"
-      >
-        <StyledFormContentContainer>
-          <View>
-            <StyledLogoHeading>Okidoki</StyledLogoHeading>
-            <StyledFormDescription>some cool slogan</StyledFormDescription>
-          </View>
-          <View>
-            <StyledFormButton
-              style={{ marginBottom: 10 }}
-              onPress={() => navigation.navigate('SignUp')}
-            >
-              <StyledFormButtonText>Create Account</StyledFormButtonText>
-            </StyledFormButton>
-            <StyledFormButton onPress={() => navigation.navigate('SignIn')}>
-              <StyledFormButtonText>Sign In</StyledFormButtonText>
-            </StyledFormButton>
-          </View>
-        </StyledFormContentContainer>
-      </StyledFormBackground>
-    </StyledFormContainer>
+    <StyledFormBackground
+      source={require('../../assets/backgrounds/loginOptions.png')}
+      resizeMode="cover"
+    >
+      <StyledLoginOptionsContainer>
+        <View>
+          <StyledLogoHeading>Okidoki</StyledLogoHeading>
+          <StyledLoginOptionsDescription>
+            some cool slogan
+          </StyledLoginOptionsDescription>
+        </View>
+        <View>
+          <StyledFormButton
+            style={{ marginBottom: 10 }}
+            onPress={() => navigation.navigate('SignUp')}
+          >
+            <StyledFormButtonText>Create Account</StyledFormButtonText>
+          </StyledFormButton>
+          <StyledFormButton onPress={() => navigation.navigate('SignIn')}>
+            <StyledFormButtonText>Sign In</StyledFormButtonText>
+          </StyledFormButton>
+        </View>
+      </StyledLoginOptionsContainer>
+    </StyledFormBackground>
   );
 };
 
