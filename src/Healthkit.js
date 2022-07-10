@@ -8,8 +8,9 @@ import React, { useEffect, useState, useContext } from 'react';
 const permissions = {
   permissions: {
     read: [
-      AppleHealthKit.Constants.Permissions.HeartRate,
-      AppleHealthKit.Constants.Permissions.Height,
+      AppleHealthKit.Constants.Permissions.DistanceWalkingRunning,
+      AppleHealthKit.Constants.Permissions.SleepAnalysis,
+      AppleHealthKit.Constants.Permissions.FlightsClimbed,
       AppleHealthKit.Constants.Permissions.Steps,
     ]
   },
@@ -137,12 +138,12 @@ export const useFlightsClimbed = () => {
   };
   useEffect(() => {
     if (isLoaded) {
-      AppleHealthKit.getDailyFlightsClimbedSamples(options, (err, results) => {
+      AppleHealthKit.getFlightsClimbed(null, (err, results) => {
         if (err) {
           return;
         }
-        console.log('inside healthkit', results, options.startDate)
-        setFlights(results);
+        console.log('inside healthkit', results,)
+        setFlights(results.value);
       });
     }
   }, [isLoaded]);

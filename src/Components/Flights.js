@@ -1,13 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { useDailyStepCount } from '../Healthkit';
+import { useFlightsClimbed } from '../Healthkit';
 
-const Steps = () => {
-  const steps = useDailyStepCount();
+const Flights = () => {
+
+  const flights = useFlightsClimbed()
+
+
   return (
     <View style={styles.container}>
-      <Text>Steps: {steps}</Text>
+      <Text>Flights Climbed: {flights} floors</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -21,4 +24,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Steps;
+export default Flights;
