@@ -19,10 +19,10 @@ const DokiView = () => {
   const stepCount = useDailyStepCount();
   const user = useUserData();
   const userDokiData = useUserDokiData();
-  const randomDoki = ['fox', 'cat', 'bunny'][Math.floor(Math.random() * 3)];
 
   useEffect(()=> {
     if (userDokiData) {
+      userDokiData.type = "fox" // Dummy data to view different sprites
       setUserDoki(userDokiData)
     }
   }, [userDokiData]);
@@ -53,8 +53,8 @@ const DokiView = () => {
         {userDoki && <Doki userDoki={userDoki} />}
         <StyledDokiName>{userDokiData && userDokiData.user_doki.dokiName}</StyledDokiName>
       </StyledDokiContainer>
-      <Button onPress={() => setDoki({ type: randomDoki })} mode="contained">
-        Change Doki
+      <Button onPress={() => console.log("om nom nom")} mode="contained">
+        Feed Doki
       </Button>
     </StyledDokiHomeBackground>
   );
