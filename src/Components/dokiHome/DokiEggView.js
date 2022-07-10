@@ -9,9 +9,11 @@ import { Button } from 'react-native-paper';
 import DokiProgressBar from './DokiProgressBar';
 import DokiEgg from './DokiEgg';
 import CountDisplay from './CountDisplay';
+import { useUserDokiData } from '../../hooks/useUserDokiData';
 
-const DokiEggView = ({ navigation, hatchProgressData, userDoki }) => {
-  const { hatchProgress, totalSteps, dailyStepGoal } = hatchProgressData;
+const DokiEggView = ({ navigation, hatchProgressData }) => {
+  const { totalSteps, dailyStepGoal } = hatchProgressData;
+  const userDokiData = useUserDokiData();
 
   return (
     <StyledDokiHomeBackground
@@ -19,7 +21,11 @@ const DokiEggView = ({ navigation, hatchProgressData, userDoki }) => {
       resizeMode="cover"
     >
       <StyledOuterProgressBarContainer>
-        <DokiProgressBar name="Hatch" progress={hatchProgress} />
+        <DokiProgressBar
+          name="Hatch"
+          level={totalSteps}
+          total={dailyStepGoal}
+        />
       </StyledOuterProgressBarContainer>
       <StyledOuterCountersContainer>
         <CountDisplay
@@ -30,7 +36,7 @@ const DokiEggView = ({ navigation, hatchProgressData, userDoki }) => {
       </StyledOuterCountersContainer>
       <StyledDokiEggContainer>
         <DokiEgg />
-        <StyledDokiName>{userDoki && userDoki.dokiName}</StyledDokiName>
+        <StyledDokiName>{userDokiData && userDokiData.user_doki.dokiName}</StyledDokiName>
       </StyledDokiEggContainer>
       <Button onPress={() => navigation.navigate('DokiView')} mode="contained">
         Hatch

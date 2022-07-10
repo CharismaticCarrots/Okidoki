@@ -157,6 +157,7 @@ const StyledDokiContainer = styled(View)`
   justify-content: center;
   align-items: center;
   margin: 50px;
+  padding-top: 70;
 `;
 
 const StyledDokiEggContainer = styled(StyledDokiContainer)`
@@ -166,10 +167,12 @@ const StyledDokiEggContainer = styled(StyledDokiContainer)`
 // DokiView
 const StyledOuterCountersContainer = styled(View)`
   display: flex;
-  width: 360px;
+  width: 350px;
   flex-direction: row;
   justify-content: space-between;
   margin-top: 10px;
+  padding-right: 5px;
+
 `;
 
 const StyledDokiName = styled(Text)`
@@ -202,12 +205,22 @@ const StyledProgressBar = styled(ProgressBar)`
   background-color: gray;
 `;
 
+const StyledProgressTextContainer = styled(View)`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const StyledProgressText = styled(Text)`
-  align-self: flex-end;
   padding: 5px 0px;
   font-size: 35px;
   font-weight: 800;
   font-family: 'singularity';
+`;
+
+const StyledProgressTextSmall = styled(StyledProgressText)`
+  font-size: 25px;
 `;
 
 // CountDisplay Component
@@ -225,7 +238,7 @@ const StyledStepCountContainer = styled(StyledCarrotCountContainer)`
 `;
 
 const StyledCounterText = styled(Text)`
-  font-size: 35px;
+  font-size: 30px;
   font-weight: 800;
   font-family: 'singularity';
   margin: 10px;
@@ -237,6 +250,7 @@ const StyledHealthStatContainer = styled(View)`
   align-items: center;
   width: 100%;
   height: 100%;
+  padding-top:80;
 `;
 
 const StyledDayContainer = styled(View)`
@@ -297,10 +311,12 @@ export {
   // DokiProgressBar Component
   StyledProgressBarContainer,
   StyledProgressBar,
+  StyledProgressTextContainer,
   StyledProgressText,
-  StyledDokiName,
+  StyledProgressTextSmall,
   // DokiView Component
   StyledOuterCountersContainer,
+  StyledDokiName,
   // CountDisplay Component
   StyledCarrotCountContainer,
   StyledStepCountContainer,

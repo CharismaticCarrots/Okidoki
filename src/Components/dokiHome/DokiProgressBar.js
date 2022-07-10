@@ -1,11 +1,18 @@
 import React from "react";
-import { StyledProgressBarContainer, StyledProgressBar, StyledProgressText } from "../styles";
+import { StyledProgressBarContainer, StyledProgressBar, StyledProgressTextContainer, StyledProgressText, StyledProgressTextSmall } from "../styles";
 
-const DokiProgressBar = ({name, progress}) => {
+const DokiProgressBar = ({name, level, total}) => {
+  const progress = level/total;
+
   return (
     <StyledProgressBarContainer>
-      <StyledProgressText>{name}</StyledProgressText>
-      <StyledProgressBar progress={progress} color="#ddbb67"/>
+      <StyledProgressTextContainer>
+        <StyledProgressText>{name}</StyledProgressText>
+        <StyledProgressTextSmall>
+          {name === "Hatch" ? "" :`${level}/${total}`}
+          </StyledProgressTextSmall>
+      </StyledProgressTextContainer>
+      <StyledProgressBar progress={level && progress} color="#ddbb67"/>
     </StyledProgressBarContainer>
   );
 };

@@ -1,6 +1,5 @@
 const router = require('express').Router();
 
-// Match routes
 router.use('/dokis', require('./dokis'));
 router.use('/user', require('./user'));
 
