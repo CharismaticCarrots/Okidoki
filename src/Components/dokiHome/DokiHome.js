@@ -18,17 +18,31 @@ const DokiHome = ({ navigation }) => {
   const hatchProgressData = useHatchProgress();
   const isEgg = hatchProgressData.hatchProgress < 1;
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
   return (
-    <View>
-      {isEgg ? (
-        <DokiEggView
-          navigation={navigation}
-          hatchProgressData={hatchProgressData}
-        />
-      ) : (
-        <DokiView />
-      )}
-    </View>
+    <SafeAreaView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        <View>
+          {isEgg ? (
+            <DokiEggView
+              navigation={navigation}
+              hatchProgressData={hatchProgressData}
+            />
+          ) : (
+            <DokiView />
+          )}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

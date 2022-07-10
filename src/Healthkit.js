@@ -11,7 +11,7 @@ const permissions = {
       AppleHealthKit.Constants.Permissions.HeartRate,
       AppleHealthKit.Constants.Permissions.Height,
       AppleHealthKit.Constants.Permissions.Steps,
-    ]
+    ],
   },
 };
 
@@ -118,12 +118,15 @@ export const useTotalStepCount = (startDate, endDate) => {
         setStepSamples(results);
       });
     }
-  }, [isLoaded]);
+  }, [isLoaded, startDate, endDate]);
 
   useEffect(() => {
-    const totalSteps = stepSamples.reduce((totalSteps, curSample) => totalSteps + curSample.value, 0);
+    const totalSteps = stepSamples.reduce(
+      (totalSteps, curSample) => totalSteps + curSample.value,
+      0
+    );
     setTotalSteps(totalSteps);
-  }, [stepSamples])
+  }, [stepSamples]);
 
   return totalSteps;
 };
