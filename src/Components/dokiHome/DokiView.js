@@ -13,9 +13,13 @@ import CountDisplay from './CountDisplay';
 import { useDailyStepCount } from '../../Healthkit';
 import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
-import intervalToDuration from 'date-fns/intervalToDuration';
+import { useMutation } from 'react-query';
+import axios from 'axios';
+import { API_URL } from '../../../secrets';
+import * as SecureStore from 'expo-secure-store';
 
 const DokiView = () => {
+  const [curCarrotCount, setCurCarrotCount] = useState(0);
   const [userDoki, setUserDoki] = useState();
   const [curFullnessLvl, setCurFullnessLvl] = useState(0);
   const stepCount = useDailyStepCount();
@@ -23,15 +27,66 @@ const DokiView = () => {
   const userDokiData = useUserDokiData();
 
   useEffect(()=> {
+    if (user) {
+      setCurCarrotCount(user.carrotCount);
+    }
+  }, [user]);
+
+  useEffect(()=> {
     if (userDokiData) {
       userDokiData.type = "fox" // Dummy data to view different sprites
-      setUserDoki(userDokiData)
+      setUserDoki(userDokiData);
 
       const { user_doki } = userDokiData;
       const hrsSinceLastFed = Math.floor((new Date().getTime() - new Date(user_doki.lastFedAt).getTime())/(3600000))
       setCurFullnessLvl(user_doki.lastFedFullnessLevel - hrsSinceLastFed);
     }
   }, [userDokiData]);
+
+  const userDokiMutation = useMutation(async (userDokiUpdate) => {
+    const token = await SecureStore.getItemAsync('TOKEN');
+    if (token) {
+      const { data: updatedUserDoki } = await axios.put(`http://${API_URL}/api/user/doki`, userDokiUpdate, {
+        headers: {
+          authorization: token,
+        },
+      });
+      return updatedUserDoki;
+    }
+  });
+
+const userMutation = useMutation(async (userUpdate) => {
+  const token = await SecureStore.getItemAsync('TOKEN');
+  if (token) {
+    const { data: updatedUserDoki } = await axios.put(`http://${API_URL}/api/user/`, userUpdate, {
+      headers: {
+        authorization: token,
+      },
+    });
+    return updatedUserDoki;
+  }
+});
+
+  const feedDoki = () => {
+    if (curFullnessLvl === 100) {
+      console.log("DOKI IS TOO FULL") // Temporary error message if user tries to feed doki when full
+    } else {
+      const userDokiUpdate = {
+        lastFedAt: new Date(),
+        lastFedFullnessLevel: curFullnessLvl + 1,
+      };
+      userDokiMutation.mutate(userDokiUpdate, {
+        onSuccess: ({lastFedFullnessLevel}) => {
+          setCurFullnessLvl(lastFedFullnessLevel)
+        }
+      });
+      userMutation.mutate({carrotCount: curCarrotCount - 1}, {
+        onSuccess: ({carrotCount}) => {
+          setCurCarrotCount(carrotCount)
+        }
+      });
+    }
+  };
 
   return (
     <StyledDokiHomeBackground
@@ -56,13 +111,13 @@ const DokiView = () => {
           count={stepCount}
           goalCount={user && user.dailyStepGoal}
         />
-        <CountDisplay counterType={'carrot'} count={user && user.carrotCount} />
+        <CountDisplay counterType={'carrot'} count={curCarrotCount} />
       </StyledOuterCountersContainer>
       <StyledDokiContainer>
         {userDoki && <Doki userDoki={userDoki} />}
         <StyledDokiName>{userDokiData && userDokiData.user_doki.dokiName}</StyledDokiName>
       </StyledDokiContainer>
-      <Button onPress={() => console.log("om nom nom")} mode="contained">
+      <Button onPress={feedDoki} mode="contained">
         Feed Doki
       </Button>
     </StyledDokiHomeBackground>
