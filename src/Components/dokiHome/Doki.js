@@ -1,10 +1,21 @@
 import React from "react";
 import { View } from "react-native";
 import Sprite from "../Sprite";
+import styled from "styled-components";
+
+const StyledInnerDokiContainer = styled(View)`
+  display: flex;
+  padding-top: 0px;
+  width: 250px;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+`;
 
 const Doki = ({doki}) => {
   return(
-    <View>
+    <StyledInnerDokiContainer>
       {doki.type === "fox" &&
         <Sprite
           src={require('../../../assets/fox_crouch_strip8.png')}
@@ -32,7 +43,7 @@ const Doki = ({doki}) => {
           framesPerSprite={15}
         />
       }
-    </View>
+    </StyledInnerDokiContainer>
   );
 };
 

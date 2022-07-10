@@ -1,5 +1,6 @@
-import React from 'react'
+import React , { useState, useEffect} from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 import Home from './components/Home'
 import SetGoal from './components/signUp/SetGoal'
 import SelectEgg from './components/signUp/SelectEgg';
@@ -7,13 +8,27 @@ import SignUp from './components/signUp/SignUp';
 import SignIn from './components/signIn/SignIn';
 import LoginOptions from './components/LoginOptions';
 import DokiHome from './components/dokiHome/DokiHome';
+import { View } from 'react-native';
 
+import { useUserDokiData } from './hooks/useUserDokiData';
+import TabNavigator from './components/NavBar';
 const Stack = createNativeStackNavigator()
 
 export const LoginNavigator = ({navigation}) => {
+  const [doki, setUserDoki] = useState(null)
+  
+  const userDoki = useUserDokiData()
+  useEffect(() => {
+    console.log(userDoki, 'DOKIIII')
+    if (userDoki){
+      setUserDoki(userDoki)
+    }
+  }, [])
 
   return (
-    <Stack.Navigator headerMode="screen">
+    <NavigationContainer>
+    {doki ? <TabNavigator/> :
+    (<Stack.Navigator headerMode="screen">
       <Stack.Screen 
         name="LoginOptions" 
         component={LoginOptions} 
@@ -39,9 +54,11 @@ export const LoginNavigator = ({navigation}) => {
       />
        <Stack.Screen
         name="DokiHome"
-        options={{ headerShown: false}}
+        // options={{ headerShown: false}}
         component={DokiHome}
       />
-    </Stack.Navigator>
+    </Stack.Navigator>) 
+    }
+    </NavigationContainer>
   )
 }

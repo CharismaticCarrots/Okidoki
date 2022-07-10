@@ -9,13 +9,21 @@ import {
 } from 'react-native';
 import { ProgressBar, TextInput } from 'react-native-paper';
 
+// Color Palette
+const colorPalette = {
+  primary: '#ffefb4',
+  secondary: '#59b2ff',
+  tertiary: '#C7CDAB',
+};
 
 // General Styles
 const StyledLogoHeading = styled(Text)`
-  font-size: 50px;
+  font-size: 70px;
   font-weight: 500;
   text-align: center;
-  color: papayawhip;
+  color: ${colorPalette.primary};
+  font-family: 'singularity';
+  letter-spacing: 2px;
 `;
 
 const StyledHeading1 = styled(Text)`
@@ -52,32 +60,38 @@ const StyledFormContainer = styled(View)`
 const StyledFormBackground = styled(ImageBackground)`
   display: flex;
   flex: 1;
-  justify-content: center;
   align-items: center;
 `;
 
 const StyledFormContentContainer = styled(View)`
+  height: 100%;
+  justify-content: space-around;
   min-width: 300px;
   max-width: 80%;
   align-items: center;
 `;
 
+const StyledFormDescription = styled(Text)`
+  font-family: 'antipasto-bold';
+  letter-spacing: 1px;
+  font-size: 20px;
+  color: ${colorPalette.primary};
+  text-align: center;
+`;
+
 const StyledFormButton = styled(TouchableOpacity)`
-  align-items: center;
-  background-color: papayawhip;
-  padding: 15px 25px;
+  background-color: ${colorPalette.primary};
+  padding: 15px;
   border-radius: 50px;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  width: 200px;
+  width: 220px;
+  align-items: center;
 `;
 
 const StyledFormButtonText = styled(Text)`
-  font-size: 16px;
-  color: #777;
-  text-transform: uppercase;
-  font-weight: 500;
+  font-family: 'singularity';
+  font-size: 22px;
+  color: ${colorPalette.secondary};
+  letter-spacing: 0.5px;
 `;
 
 // Sprite Component
@@ -111,15 +125,16 @@ const StyledDokiHomeBackground = styled(ImageBackground)`
   height: 100%;
 `;
 
-const StyledDokiEggContainer = styled(View)`
+const StyledDokiContainer = styled(View)`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0px 50px;
-  margin-top: 150px;
-  margin-bottom: 50px;
-  width: 300px;
-  height: 300px;
+  margin: 50px;
+`;
+
+const StyledDokiEggContainer = styled(StyledDokiContainer)`
+  margin-top: 120px;
 `;
 
 // DokiView
@@ -129,6 +144,15 @@ const StyledOuterCountersContainer = styled(View)`
   flex-direction: row;
   justify-content: space-between;
   margin-top: 10px;
+`;
+
+const StyledDokiName = styled(Text)`
+  color: black;
+  font-size: 30px;
+  font-weight: 800;
+  text-align: center;
+  font-family: 'singularity';
+  margin-bottom: 20px;
 `;
 
 // DokiProgressBar Component
@@ -141,6 +165,7 @@ const StyledOuterProgressBarContainer = styled(View)`
 
 const StyledProgressBarContainer = styled(View)`
   width: 350px;
+  padding: 5px 0px;
 `;
 
 const StyledProgressBar = styled(ProgressBar)`
@@ -153,10 +178,10 @@ const StyledProgressBar = styled(ProgressBar)`
 
 const StyledProgressText = styled(Text)`
   align-self: flex-end;
-  font-size: 22px;
-  font-weight: bold;
   padding: 5px 0px;
-  font-family: 'antipasto';
+  font-size: 35px;
+  font-weight: 800;
+  font-family: 'singularity';
 `;
 
 // CountDisplay Component
@@ -165,15 +190,18 @@ const StyledCarrotCountContainer = styled(View)`
   flex-direction: row;
   align-items: center;
   width: 100px;
+  padding-left: 20px;
 `;
 
 const StyledStepCountContainer = styled(StyledCarrotCountContainer)`
   width: 200px;
+  padding-left: 0px;
 `;
 
 const StyledCounterText = styled(Text)`
-  font-size: 25px;
-  font-weight: 900;
+  font-size: 35px;
+  font-weight: 800;
+  font-family: 'singularity';
   margin: 10px;
 `;
 
@@ -207,13 +235,13 @@ const StyledInput = styled(TextInput)`
 `;
 
 const StyledHeader = styled(Text)`
-font-size: 40px;
-color: #fff;
-font-weight: 800;
-text-align: center;
-margin-bottom: 20px;
-font-family: 'antipasto-bold';
-`
+  font-size: 40px;
+  color: #fff;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'antipasto-bold';
+`;
 
 export {
   // General Styles
@@ -225,6 +253,7 @@ export {
   StyledFormContainer,
   StyledFormBackground,
   StyledFormContentContainer,
+  StyledFormDescription,
   StyledFormButton,
   StyledFormButtonText,
   // Sprite Component
@@ -233,12 +262,14 @@ export {
   StyledSpriteImage,
   // DokiHome Component
   StyledDokiHomeBackground,
+  StyledDokiContainer,
   StyledDokiEggContainer,
   StyledOuterProgressBarContainer,
   // DokiProgressBar Component
   StyledProgressBarContainer,
   StyledProgressBar,
   StyledProgressText,
+  StyledDokiName,
   // DokiView Component
   StyledOuterCountersContainer,
   // CountDisplay Component
@@ -251,5 +282,5 @@ export {
   StyledInternalContainer,
   // SelectEgg Component
   StyledInput,
-  StyledHeader
+  StyledHeader,
 };
