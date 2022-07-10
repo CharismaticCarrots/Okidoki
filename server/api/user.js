@@ -20,6 +20,7 @@ router.put('/', requireToken, async (req, res, next) => {
     next(err);
   }
 });
+
 router.post('/doki', requireToken, async (req, res, next) => {
   try {
     const user = req.user;

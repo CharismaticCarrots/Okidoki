@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
-  StyledDokiEggContainer,
+  StyledDokiContainer,
   StyledOuterProgressBarContainer,
   StyledOuterCountersContainer,
+  StyledDokiName,
 } from '../styles';
 import DokiProgressBar from './DokiProgressBar';
 import Doki from './Doki';
@@ -12,13 +13,15 @@ import CountDisplay from './CountDisplay';
 import { useDailyStepCount } from '../../Healthkit';
 import { useUserData } from '../../hooks/useUserData';
 
-const DokiView = () => {
+const DokiView = ({userDoki}) => {
   const [doki, setDoki] = useState({ type: 'bunny' });
 
   const randomDoki = ['fox', 'cat', 'bunny'][Math.floor(Math.random() * 3)];
 
   const stepCount = useDailyStepCount();
   const user = useUserData();
+
+  console.log("USER DOKI", userDoki)
 
   return (
     <StyledDokiHomeBackground
@@ -37,9 +40,10 @@ const DokiView = () => {
         />
         <CountDisplay counterType={'carrot'} count={user && user.carrotCount} />
       </StyledOuterCountersContainer>
-      <StyledDokiEggContainer>
+      <StyledDokiContainer>
         <Doki doki={doki} />
-      </StyledDokiEggContainer>
+        <StyledDokiName>{userDoki && userDoki.dokiName}</StyledDokiName>
+      </StyledDokiContainer>
       <Button onPress={() => setDoki({ type: randomDoki })} mode="contained">
         Change Doki
       </Button>
