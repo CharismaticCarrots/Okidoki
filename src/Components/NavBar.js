@@ -82,4 +82,4 @@ const Tabs = () => {
   );
 };
 
-export default Tabs;
+export default TabNavigator;

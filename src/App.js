@@ -18,10 +18,11 @@ import DokiView from './components/dokiHome/DokiView';
 import Links from './components/Links';
 import SelectEgg from './components/signUp/SelectEgg';
 import HealthStat from './components/HealthStat';
-import Tabs from './components/NavBar';
+import TabNavigator from './components/NavBar';
 import LoginOptions from './components/LoginOptions';
 import SignUp from './components/signUp/SignUp';
 import SignIn from './components/signIn/SignIn';
+// import { LoginNavigator } from './navigation';
 
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
@@ -44,6 +45,29 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <HealthKitProvider>
         <NavigationContainer>
+        <Stack.Navigator headerMode="screen" screenOptions={navigationProps}>
+      <Stack.Screen 
+        name="LoginOptions" 
+        component={LoginOptions} 
+      />
+      <Stack.Screen
+        name="Login"
+        component={SignIn}
+      />
+      <Stack.Screen
+        name="Registration"
+        component={SignUp}
+      />
+      <Stack.Screen 
+        name="SetGoal" 
+        component={SetGoal} 
+      />
+      <Stack.Screen 
+        name="SelectEgg" 
+        component={SelectEgg} 
+      />
+    </Stack.Navigator>
+          {/* <LoginNavigator /> */}
           {/* <Stack.Navigator initialRouteName="Links">
             <Stack.Screen
               name="Links"
@@ -61,7 +85,7 @@ export default function App() {
             <Stack.Screen name="SignUp" component={SignUp} />
            <Stack.Screen name="SignIn" component={SignIn} />
           </Stack.Navigator> */}
-          <Tabs/>
+          {/* <TabNavigator/> */}
         </NavigationContainer>
       </HealthKitProvider>
     </QueryClientProvider>
