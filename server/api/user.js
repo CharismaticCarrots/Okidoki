@@ -24,12 +24,8 @@ router.put('/', requireToken, async (req, res, next) => {
 router.get('/doki', requireToken, async (req, res, next) => {
   try {
     const user = req.user;
-    let userDoki = await User_Doki.findOne({
-      where: {
-        userId: user.id,
-      },
-    });
-    res.json(userDoki);
+    const userDoki = await user.getDokis();
+    res.json(userDoki[0]);
   } catch (err) {
     next(err);
   }
