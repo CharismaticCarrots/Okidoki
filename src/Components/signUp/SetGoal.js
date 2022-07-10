@@ -13,7 +13,11 @@ const SetGoal = ({ navigation }) => {
   const [dailyStepGoal, setDailyStepGoal] = useState('10000');
 
   const user = useUserData();
-  const token = user.token;
+  let token;
+  if (user) {
+    token = user.token;
+  }
+  console.log('User on SetGoal: ', user);
 
   const mutation = useMutation(
     (dailyStepGoal) => {
