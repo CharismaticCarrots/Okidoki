@@ -55,7 +55,7 @@ export const LoginNavigator = ({navigation}) => {
       />
        <Stack.Screen
         name="DokiHome"
-        // options={{ headerShown: false}}
+        options={{ headerShown: false}}
         component={DokiHome}
       />
     </Stack.Navigator>) 

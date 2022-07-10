@@ -20,7 +20,7 @@ const TabNavigator = () => {
         headerStyle: {
           backgroundColor: '#45A0DA',
         },
-        // headerShown: false,
+        headerShown: false,
         tabBarOptions: {
           style: {
               backgroundColor: '#000',
@@ -37,14 +37,14 @@ const TabNavigator = () => {
         ],
         tabBarIcon: () => {
           switch (route.name) {
-            case 'DOKI HOME':
+            case 'DokiHome':
               return (
                 <FontAwesome5 
                   name={'home'} 
                   style={{fontSize: 32}} 
                   color='#333'/>
               )
-            case 'BACKPACK':
+            case 'SignIn':
               return (
                 <FontAwesome5 
                   name={'shopping-bag'}   
@@ -60,7 +60,7 @@ const TabNavigator = () => {
                 color='#333'
               />
               )
-            case 'DOKI STORE':
+            case 'SetGoal':
               return (
                 <FontAwesome5 
                 name={'store'}   
@@ -74,10 +74,10 @@ const TabNavigator = () => {
         },
       })}
       >
-        <Tab.Screen name="DOKI HOME" component={DokiView}/>
-        <Tab.Screen name="BACKPACK" component={SignIn}/>
+        <Tab.Screen name="DokiHome" component={DokiView}/>
+        <Tab.Screen name="SignIn" component={SignIn}/>
         <Tab.Screen name="HEALTH DATA" component={HealthStat}/>
-        <Tab.Screen name="DOKI STORE" component={SetGoal}/>
+        <Tab.Screen name="SetGoal" component={SetGoal}/>
       </Tab.Navigator>
   );
 };
