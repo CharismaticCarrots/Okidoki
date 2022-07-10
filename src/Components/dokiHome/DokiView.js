@@ -68,8 +68,10 @@ const userMutation = useMutation(async (userUpdate) => {
 });
 
   const feedDoki = () => {
-    if (curFullnessLvl === 100) {
-      console.log("DOKI IS TOO FULL") // Temporary error message if user tries to feed doki when full
+    if (curCarrotCount === 0 || curFullnessLvl === 100) {
+      if (curCarrotCount === 0) console.log("UH OH, OUT OF CARROTS") // Temporary error message
+      if (curFullnessLvl === 100) console.log("DOKI IS TOO FULL RIGHT NOW") // Temporary error message
+
     } else {
       const userDokiUpdate = {
         lastFedAt: new Date(),
