@@ -1,8 +1,13 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { Animated, Easing } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
-import { StyledDokiHomeBackground, StyledInput, StyledHeader } from '../styles';
+import {
+  StyledDokiHomeBackground,
+  StyledHeading1,
+  StyledFormTextInput,
+  StyledFormButton,
+  StyledFormButtonText,
+} from '../styles';
 import { useMutation } from 'react-query';
 import { API_URL } from '../../../secrets.js';
 import { useUserData } from '../../hooks/useUserData';
@@ -40,69 +45,93 @@ const SelectEgg = ({ navigation }) => {
 
   const spinValue = new Animated.Value(0);
   Animated.loop(
-    Animated.timing(spinValue, {
-      toValue: 1,
-      duration: 2000,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    })
+    Animated.sequence([
+      Animated.timing(spinValue, {
+        toValue: 1,
+        duration: 500,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }),
+      Animated.timing(spinValue, {
+        toValue: 0,
+        duration: 500,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }),
+    ])
   ).start();
 
   const spin = spinValue.interpolate({
     inputRange: [0, 1],
-    outputRange: ['-10deg', '10deg'],
+    outputRange: ['-3deg', '3deg'],
   });
 
   return (
     <View>
       <StyledDokiHomeBackground
-        source={require('../../../assets/backgrounds/selectEgg.png')}
+        source={require('../../../assets/backgrounds/loginOptions.png')}
         resizeMode="cover"
       >
         <View style={styles.container}>
-          <StyledHeader>Select a Doki Egg</StyledHeader>
+          <StyledHeading1>Select a Doki</StyledHeading1>
 
-          <StyledInput placeholder="Doki Name" onChangeText={setDokiName} />
-          <View style={styles.eggs}>
-            <Animated.View
-              style={egg === 'egg1' ? { transform: [{ rotate: spin }] } : {}}
-            >
-              <TouchableOpacity onPress={(e) => setEgg('egg1')}>
-                <Image
-                  style={styles.image}
-                  source={require('../../../assets/eggs/egg1.png')}
-                />
-              </TouchableOpacity>
-            </Animated.View>
-            <Animated.View
-              style={egg === 'egg2' ? { transform: [{ rotate: spin }] } : {}}
-            >
-              <TouchableOpacity onPress={() => setEgg('egg2')}>
-                <Image
-                  style={styles.image}
-                  source={require('../../../assets/eggs/egg2.png')}
-                />
-              </TouchableOpacity>
-            </Animated.View>
-            <Animated.View
-              style={egg === 'egg3' ? { transform: [{ rotate: spin }] } : {}}
-            >
-              <TouchableOpacity onPress={() => setEgg('egg3')}>
-                <Image
-                  style={styles.image}
-                  source={require('../../../assets/eggs/egg3.png')}
-                />
-              </TouchableOpacity>
-            </Animated.View>
+          <View style={styles.eggSelection}>
+            <View style={styles.eggRow}>
+              <Animated.View
+                style={egg === 'egg1' ? { transform: [{ rotate: spin }] } : {}}
+              >
+                <TouchableOpacity onPress={(e) => setEgg('egg1')}>
+                  <Image
+                    style={styles.eggImg}
+                    source={require('../../../assets/eggs/egg1.png')}
+                  />
+                </TouchableOpacity>
+              </Animated.View>
+              <Animated.View
+                style={egg === 'egg2' ? { transform: [{ rotate: spin }] } : {}}
+              >
+                <TouchableOpacity onPress={() => setEgg('egg2')}>
+                  <Image
+                    style={styles.eggImg}
+                    source={require('../../../assets/eggs/egg2.png')}
+                  />
+                </TouchableOpacity>
+              </Animated.View>
+              <Animated.View
+                style={egg === 'egg3' ? { transform: [{ rotate: spin }] } : {}}
+              >
+                <TouchableOpacity onPress={() => setEgg('egg3')}>
+                  <Image
+                    style={styles.eggImg}
+                    source={require('../../../assets/eggs/egg3.png')}
+                  />
+                </TouchableOpacity>
+              </Animated.View>
+            </View>
+            <View style={styles.form}>
+              <StyledFormTextInput
+                placeholder="Name your Doki"
+                autoCapitalize="none"
+                autoCorrect={false}
+                autoComplete="off"
+                onChangeText={setDokiName}
+                style={{ minWidth: '100%' }}
+              />
+
+              <StyledFormButton
+                style={{
+                  marginTop: 5,
+                  marginBottom: 10,
+                  width: 160,
+                }}
+                onPress={() => {
+                  handleSubmit();
+                }}
+              >
+                <StyledFormButtonText>Submit</StyledFormButtonText>
+              </StyledFormButton>
+            </View>
           </View>
-          <Button
-            mode="contained"
-            onPress={() => {
-              handleSubmit();
-            }}
-          >
-            SUBMIT
-          </Button>
         </View>
       </StyledDokiHomeBackground>
     </View>
@@ -112,20 +141,25 @@ const SelectEgg = ({ navigation }) => {
 export default SelectEgg;
 
 const styles = StyleSheet.create({
-  eggs: {
-    flex: 0.35,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    marginTop: 140,
-  },
   container: {
-    flex: 2,
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
   },
-  image: {
-    height: 120,
-    width: 100,
+  eggSelection: {
+    alignItems: 'center',
+  },
+  eggRow: {
+    flexDirection: 'row',
+    marginBottom: 40,
+  },
+  eggImg: {
+    height: 125,
+    width: 105,
+  },
+  form: {
+    alignItems: 'center',
+    width: '60%',
+    minWidth: 180,
   },
 });
