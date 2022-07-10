@@ -45,17 +45,25 @@ const SelectEgg = ({ navigation }) => {
 
   const spinValue = new Animated.Value(0);
   Animated.loop(
-    Animated.timing(spinValue, {
-      toValue: 1,
-      duration: 2000,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    })
+    Animated.sequence([
+      Animated.timing(spinValue, {
+        toValue: 1,
+        duration: 500,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }),
+      Animated.timing(spinValue, {
+        toValue: 0,
+        duration: 500,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }),
+    ])
   ).start();
 
   const spin = spinValue.interpolate({
     inputRange: [0, 1],
-    outputRange: ['-10deg', '10deg'],
+    outputRange: ['-3deg', '3deg'],
   });
 
   return (
