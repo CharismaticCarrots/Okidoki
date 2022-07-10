@@ -155,7 +155,7 @@ export const useDistance = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [distance, setDistance] = useState(0);
   let options = {
-    // startDate: subDays(new Date(),2).toISOString(),
+    startDate: subDays(new Date(),7).toISOString(),
     unit: 'mile'
   }
   useEffect(() => {
@@ -173,22 +173,22 @@ export const useDistance = () => {
 }
 
 // get active energy burned  
-export const useActiveEnergy = () => {
-  const { isLoaded, AppleHealthKit } = useHealthkit();
-  const [activeCal, setActiveCal] = useState(0);
-  let options = {
-    startDate: subDays(new Date(),2).toISOString(),
-  }
-  useEffect(() => {
-    if (isLoaded) {
-      AppleHealthKit.getActiveEnergyBurned(options, (err, results) => {
-        if (err) {
-          return;
-        }
-        console.log('inside distance healthkit', results)
-        setActiveCal(results.value);
-      });
-    }
-  }, [isLoaded]);
-  return activeCal;
-}
+// export const useActiveEnergy = () => {
+//   const { isLoaded, AppleHealthKit } = useHealthkit();
+//   const [activeCal, setActiveCal] = useState(0);
+//   let options = {
+//     startDate: subDays(new Date(),2).toISOString(),
+//   }
+//   useEffect(() => {
+//     if (isLoaded) {
+//       AppleHealthKit.getActiveEnergyBurned(options, (err, results) => {
+//         if (err) {
+//           return;
+//         }
+//         console.log('inside distance healthkit', results)
+//         setActiveCal(results.value);
+//       });
+//     }
+//   }, [isLoaded]);
+//   return activeCal;
+// }

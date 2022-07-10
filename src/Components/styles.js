@@ -31,7 +31,7 @@ const StyledLogoHeading = styled(Text)`
 `;
 
 const StyledHeading1 = styled(Text)`
-  font-size: 30px;
+  font-size: 35px;
   color: ${colors.primary};
   font-weight: 500;
   text-align: center;
@@ -60,6 +60,8 @@ const StyledContainer = styled(View)`
 const StyledFormBackground = styled(ImageBackground)`
   display: flex;
   align-items: center;
+  width: 100%;
+  height: 100%;
 `;
 
 const StyledFormContainer = styled(View)`
@@ -75,7 +77,7 @@ const StyledFormTextInput = styled(TextInput)`
   background-color: white;
   border-radius: 50px;
   padding: 15px;
-  font-size: 22px;
+  font-size: 24px;
   margin-bottom: 4px;
   font-family: 'singularity';
   color: ${colors.text.dark};
@@ -91,7 +93,7 @@ const StyledFormButton = styled(TouchableOpacity)`
 
 const StyledFormButtonText = styled(Text)`
   font-family: 'singularity';
-  font-size: 22px;
+  font-size: 24px;
   color: ${colors.secondary};
   letter-spacing: 0.5px;
 `;
@@ -171,7 +173,6 @@ const StyledOuterCountersContainer = styled(View)`
   justify-content: space-between;
   margin-top: 10px;
   padding-right: 5px;
-
 `;
 
 const StyledDokiName = styled(Text)`
@@ -272,15 +273,6 @@ const StyledInput = styled(RNP_TextInput)`
   width: 200px;
 `;
 
-const StyledHeader = styled(Text)`
-  font-size: 40px;
-  color: #fff;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 20px;
-  font-family: 'antipasto-bold';
-`;
-
 export {
   // General Styles
   StyledLogoHeading,
@@ -325,5 +317,4 @@ export {
   StyledInternalContainer,
   // SelectEgg Component
   StyledInput,
-  StyledHeader,
 };
