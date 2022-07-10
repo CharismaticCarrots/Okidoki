@@ -14,6 +14,14 @@ const User_Doki = db.define('user_doki', {
   },
   lastPlayed: {
     type: Sequelize.DATE,
+  },
+  lastFedFullnessLevel: {
+    type: Sequelize.INTEGER,
+    defaultValue: 75
+  },
+  lastPlayedMoodLevel: {
+    type: Sequelize.INTEGER,
+    defaultValue: 75
   }
 });
 
