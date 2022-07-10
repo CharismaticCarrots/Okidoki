@@ -3,8 +3,6 @@ const Doki = require('./models/Doki');
 const User = require('./models/User');
 const User_Doki = require('./models/User_Doki');
 
-// Model Assocations
-
 User.belongsToMany(Doki, { through: User_Doki });
 Doki.belongsToMany(User, { through: User_Doki });
 

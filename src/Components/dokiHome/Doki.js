@@ -13,10 +13,10 @@ const StyledInnerDokiContainer = styled(View)`
   padding-bottom: 30px;
 `;
 
-const Doki = ({doki}) => {
+const Doki = ({userDoki}) => {
   return(
     <StyledInnerDokiContainer>
-      {doki.type === "fox" &&
+      {userDoki.type === "fox" &&
         <Sprite
           src={require('../../../assets/fox_crouch_strip8.png')}
           totalSprites={8}
@@ -25,7 +25,7 @@ const Doki = ({doki}) => {
           framesPerSprite={8}
         />
       }
-      {doki.type === "cat" &&
+      {userDoki.type === "cat" &&
         <Sprite
           src={require('../../../assets/catSprites/cat.png')}
           totalSprites={6}
@@ -34,7 +34,7 @@ const Doki = ({doki}) => {
           framesPerSprite={15}
         />
       }
-      {doki.type === "bunny" &&
+      {userDoki.type === "bunny" &&
         <Sprite
           src={require('../../../assets/bunny_liedown_strip12.png')}
           totalSprites={12}

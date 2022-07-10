@@ -1,11 +1,13 @@
 import React from "react";
 import { StyledProgressBarContainer, StyledProgressBar, StyledProgressText } from "../styles";
 
-const DokiProgressBar = ({name, progress}) => {
+const DokiProgressBar = ({name, level}) => {
+  const progress = level/100;
+
   return (
     <StyledProgressBarContainer>
       <StyledProgressText>{name}</StyledProgressText>
-      <StyledProgressBar progress={progress} color="#ddbb67"/>
+      <StyledProgressBar progress={level && progress} color="#ddbb67"/>
     </StyledProgressBarContainer>
   );
 };

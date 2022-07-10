@@ -17,11 +17,13 @@ const fetchUserDokiData = async () => {
 };
 
 export const useUserDokiData = () => {
-  const {isLoading, isError, error, isSuccess, data : userDoki } = useQuery(['userDoki'], fetchUserDokiData);
+  const {isLoading, isError, error, data : userDoki } = useQuery(['userDoki'], fetchUserDokiData);
 
-  if (!isLoading && isSuccess) {
-    return userDoki;
+  if (isLoading) {
+    console.log("LOADING")
+  } else if (isError) {
+    console.log("ERROR:", error);
   } else {
-    console.log(error);
+    return userDoki;
   }
 };

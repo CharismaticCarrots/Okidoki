@@ -27,6 +27,8 @@ const users = [
     password: 't',
     firstName: 'Angel',
     lastName: 'Y',
+    carrotCount: 80,
+    dailyStepGoal: 5050,
   },
   {
     email: 'hey@gmail.com',
