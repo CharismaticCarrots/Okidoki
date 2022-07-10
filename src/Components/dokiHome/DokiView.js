@@ -13,17 +13,25 @@ import CountDisplay from './CountDisplay';
 import { useDailyStepCount } from '../../Healthkit';
 import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
+import intervalToDuration from 'date-fns/intervalToDuration';
 
 const DokiView = () => {
   const [userDoki, setUserDoki] = useState();
+  const [curFullnessLvl, setCurFullnessLvl] = useState(0);
   const stepCount = useDailyStepCount();
   const user = useUserData();
   const userDokiData = useUserDokiData();
 
+  // curfullnessLevel = lastFedFullnessLevel - (lastFedAt - curDate) in hrs
   useEffect(()=> {
     if (userDokiData) {
       userDokiData.type = "fox" // Dummy data to view different sprites
       setUserDoki(userDokiData)
+
+      const { user_doki } = userDokiData;
+      const hrsSinceLastFed = Math.floor((new Date().getTime() - new Date(user_doki.lastFedAt).getTime())/(3600000))
+      // const curFullnessLvl = user_doki.lastFedFullnessLevel - hrsSinceLastFed;
+      setCurFullnessLvl(user_doki.lastFedFullnessLevel - hrsSinceLastFed);
     }
   }, [userDokiData]);
 
@@ -39,7 +47,7 @@ const DokiView = () => {
         />
         <DokiProgressBar
           name="Fullness"
-          level={userDoki && userDoki.user_doki.lastFedFullnessLevel} />
+          level={curFullnessLvl} />
       </StyledOuterProgressBarContainer>
       <StyledOuterCountersContainer>
         <CountDisplay
