@@ -142,7 +142,6 @@ export const useFlightsClimbed = () => {
         if (err) {
           return;
         }
-        console.log('inside healthkit', results,)
         setFlights(results.value);
       });
     }
@@ -156,7 +155,7 @@ export const useDistance = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [distance, setDistance] = useState(0);
   let options = {
-    startDate: subDays(new Date(),2).toISOString(),
+    // startDate: subDays(new Date(),2).toISOString(),
     unit: 'mile'
   }
   useEffect(() => {
@@ -166,9 +165,30 @@ export const useDistance = () => {
           return;
         }
         console.log('inside distance healthkit', results)
-        setDistance(results);
+        setDistance(results.value);
       });
     }
   }, [isLoaded]);
   return distance;
+}
+
+// get active energy burned  
+export const useActiveEnergy = () => {
+  const { isLoaded, AppleHealthKit } = useHealthkit();
+  const [activeCal, setActiveCal] = useState(0);
+  let options = {
+    startDate: subDays(new Date(),2).toISOString(),
+  }
+  useEffect(() => {
+    if (isLoaded) {
+      AppleHealthKit.getActiveEnergyBurned(options, (err, results) => {
+        if (err) {
+          return;
+        }
+        console.log('inside distance healthkit', results)
+        setActiveCal(results.value);
+      });
+    }
+  }, [isLoaded]);
+  return activeCal;
 }

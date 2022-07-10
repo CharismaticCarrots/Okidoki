@@ -12,7 +12,8 @@ import format from 'date-fns/format';
 import { BarChart } from 'react-native-chart-kit';
 import { StyledHeading2, StyledHeading1 } from './styles';
 import Steps from './Steps';
-import { useStepCountSamples } from '../Healthkit';
+import { useStepCountSamples, useFlightsClimbed, useDistance } from '../Healthkit';
+
 
 import {
   StyledHealthStatContainer,
@@ -22,7 +23,9 @@ import {
 
 const HealthStat = () => {
   const dailySteps = useStepCountSamples();
-
+  const flights = useFlightsClimbed()
+  const dailyDistance = useDistance()
+  console.log('distance', dailyDistance)
   if (!dailySteps) {
     return <ActivityIndicator size="large" />;
   }
@@ -68,7 +71,9 @@ const HealthStat = () => {
         </View>
       </View>
       <StyledHeading2>History</StyledHeading2>
-      <Text>More to come in Tier 2...</Text>
+      <Text>Walking / Running Distance: {dailyDistance} miles</Text>
+      <Text>Flights Climbed: {flights} floors</Text>
+ 
       {/* <ScrollView>
         {dailySteps.map((day) => {
           return (
