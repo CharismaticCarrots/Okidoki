@@ -17,6 +17,7 @@ const DokiEggView = ({ navigation, hatchProgressData }) => {
   const [refreshing, setRefreshing] = useState(false);
 
   const { hatchProgress, totalSteps, dailyStepGoal } = hatchProgressData;
+  const { totalSteps, dailyStepGoal } = hatchProgressData;
   const userDokiData = useUserDokiData();
 
   const onRefresh = useCallback(() => {
@@ -30,7 +31,11 @@ const DokiEggView = ({ navigation, hatchProgressData }) => {
       resizeMode="cover"
     >
       <StyledOuterProgressBarContainer>
-        <DokiProgressBar name="Hatch" progress={hatchProgress} />
+        <DokiProgressBar
+          name="Hatch"
+          level={totalSteps}
+          total={dailyStepGoal}
+        />
       </StyledOuterProgressBarContainer>
       <StyledOuterCountersContainer>
         <CountDisplay

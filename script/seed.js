@@ -1,4 +1,5 @@
 const { db, Doki, User } = require('../server/db/');
+const sub = require('date-fns/sub')
 
 const dokis = [
   {
@@ -44,10 +45,6 @@ const users = [
   },
 ];
 
-const curTime = new Date();
-const oneHrAgo = new Date(curTime.getTime() - (1000*60*60));
-const fiveHrsAgo = new Date(curTime.getTime() - (1000*60*60*5));
-
 const seed = async () => {
   try {
     await db.sync({ force: true });
@@ -63,21 +60,22 @@ const seed = async () => {
     );
     await catDoki.addUser(user1, { through: {
       dokiName: 'Conbot',
-      lastFedAt: curTime,
+      lastFedAt: new Date(),
     }});
 
     await catDoki.addUser(user2, { through: {
       dokiName: 'Snow Angel',
-      lastFedAt: oneHrAgo,
+      lastFedAt: sub(new Date(), { days: 2 }),
     }});
 
     await rabbitDoki.addUser(user3, { through: {
       dokiName: 'Kris Kross',
-      lastFedAt: fiveHrsAgo,
+      lastFedAt: sub(new Date(), { hours: 5 }),
     }});
 
     await foxDoki.addUser(user4, { through: {
-      dokiName: 'Ldyster'
+      dokiName: 'Ldyster',
+      lastFedAt: sub(new Date(), { hours: 1 }),
     }});
 
   } catch (error) {
