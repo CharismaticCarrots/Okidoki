@@ -21,6 +21,20 @@ router.put('/', requireToken, async (req, res, next) => {
   }
 });
 
+router.get('/doki', requireToken, async (req, res, next) => {
+  try {
+    const user = req.user;
+    let userDoki = await User_Doki.findOne({
+      where: {
+        userId: user.id,
+      },
+    });
+    res.json(userDoki);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post('/doki', requireToken, async (req, res, next) => {
   try {
     const user = req.user;
@@ -37,15 +51,16 @@ router.post('/doki', requireToken, async (req, res, next) => {
   }
 });
 
-router.get('/doki', requireToken, async (req, res, next) => {
+router.put('/doki', requireToken, async (req, res, next) => {
   try {
     const user = req.user;
-    let userDoki = await User_Doki.findOne({
+    const userDoki = await User_Doki.findOne({
       where: {
         userId: user.id,
       },
     });
-    res.json(userDoki);
+    await userDoki.set(req.body);
+    res.send(await userDoki.save());
   } catch (err) {
     next(err);
   }
