@@ -61,17 +61,17 @@ const seed = async () => {
     );
     await catDoki.addUser(user1, { through: {
       dokiName: 'Conbot',
-      lastFed: curTime,
+      lastFedAt: curTime,
     }});
 
     await catDoki.addUser(user2, { through: {
       dokiName: 'Snow Angel',
-      lastFed: oneHrAgo,
+      lastFedAt: oneHrAgo,
     }});
 
     await rabbitDoki.addUser(user3, { through: {
       dokiName: 'Kris Kross',
-      lastFed: fiveHrsAgo,
+      lastFedAt: fiveHrsAgo,
     }});
 
     await foxDoki.addUser(user4, { through: {

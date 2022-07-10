@@ -9,10 +9,10 @@ const User_Doki = db.define('user_doki', {
       notEmpty: true,
     },
   },
-  lastFed: {
+  lastFedAt: {
     type: Sequelize.DATE,
   },
-  lastPlayed: {
+  lastPlayedAt: {
     type: Sequelize.DATE,
   },
   lastFedFullnessLevel: {
