@@ -22,7 +22,6 @@ const DokiView = () => {
   const user = useUserData();
   const userDokiData = useUserDokiData();
 
-  // curfullnessLevel = lastFedFullnessLevel - (lastFedAt - curDate) in hrs
   useEffect(()=> {
     if (userDokiData) {
       userDokiData.type = "fox" // Dummy data to view different sprites
@@ -30,7 +29,6 @@ const DokiView = () => {
 
       const { user_doki } = userDokiData;
       const hrsSinceLastFed = Math.floor((new Date().getTime() - new Date(user_doki.lastFedAt).getTime())/(3600000))
-      // const curFullnessLvl = user_doki.lastFedFullnessLevel - hrsSinceLastFed;
       setCurFullnessLvl(user_doki.lastFedFullnessLevel - hrsSinceLastFed);
     }
   }, [userDokiData]);
@@ -44,10 +42,13 @@ const DokiView = () => {
         <DokiProgressBar
           name="Mood"
           level={userDoki && userDoki.user_doki.lastPlayedMoodLevel}
+          total={100}
         />
         <DokiProgressBar
           name="Fullness"
-          level={curFullnessLvl} />
+          level={curFullnessLvl}
+          total={100}
+        />
       </StyledOuterProgressBarContainer>
       <StyledOuterCountersContainer>
         <CountDisplay

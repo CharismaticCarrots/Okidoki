@@ -12,7 +12,7 @@ import CountDisplay from './CountDisplay';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
 
 const DokiEggView = ({ navigation, hatchProgressData }) => {
-  const { hatchProgress, totalSteps, dailyStepGoal } = hatchProgressData;
+  const { totalSteps, dailyStepGoal } = hatchProgressData;
   const userDokiData = useUserDokiData();
 
   return (
@@ -21,7 +21,11 @@ const DokiEggView = ({ navigation, hatchProgressData }) => {
       resizeMode="cover"
     >
       <StyledOuterProgressBarContainer>
-        <DokiProgressBar name="Hatch" progress={hatchProgress} />
+        <DokiProgressBar
+          name="Hatch"
+          level={totalSteps}
+          total={dailyStepGoal}
+        />
       </StyledOuterProgressBarContainer>
       <StyledOuterCountersContainer>
         <CountDisplay

@@ -1,14 +1,16 @@
 import React from "react";
 import { StyledProgressBarContainer, StyledProgressBar, StyledProgressTextContainer, StyledProgressText, StyledProgressTextSmall } from "../styles";
 
-const DokiProgressBar = ({name, level}) => {
-  const progress = level/100;
+const DokiProgressBar = ({name, level, total}) => {
+  const progress = level/total;
 
   return (
     <StyledProgressBarContainer>
       <StyledProgressTextContainer>
         <StyledProgressText>{name}</StyledProgressText>
-        <StyledProgressTextSmall>{`${level}/100`}</StyledProgressTextSmall>
+        <StyledProgressTextSmall>
+          {name === "Hatch" ? "" :`${level}/${total}`}
+          </StyledProgressTextSmall>
       </StyledProgressTextContainer>
       <StyledProgressBar progress={level && progress} color="#ddbb67"/>
     </StyledProgressBarContainer>
