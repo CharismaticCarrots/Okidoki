@@ -70,7 +70,7 @@ const SelectEgg = ({ navigation }) => {
               <TouchableOpacity onPress={(e) => setEgg('egg1')}>
                 <Image
                   style={styles.image}
-                  source={require('../../../assets/egg.png')}
+                  source={require('../../../assets/eggs/egg1.png')}
                 />
               </TouchableOpacity>
             </Animated.View>
@@ -80,7 +80,7 @@ const SelectEgg = ({ navigation }) => {
               <TouchableOpacity onPress={() => setEgg('egg2')}>
                 <Image
                   style={styles.image}
-                  source={require('../../../assets/egg.png')}
+                  source={require('../../../assets/eggs/egg2.png')}
                 />
               </TouchableOpacity>
             </Animated.View>
@@ -90,7 +90,7 @@ const SelectEgg = ({ navigation }) => {
               <TouchableOpacity onPress={() => setEgg('egg3')}>
                 <Image
                   style={styles.image}
-                  source={require('../../../assets/egg.png')}
+                  source={require('../../../assets/eggs/egg3.png')}
                 />
               </TouchableOpacity>
             </Animated.View>
