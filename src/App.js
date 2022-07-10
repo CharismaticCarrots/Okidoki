@@ -21,13 +21,6 @@ export default function App() {
   const [IsReady, SetIsReady] = useState(false);
   const [doki, setUserDoki] = useState(null)
   
-  // const userDoki = useUserDokiData()
-  // useEffect(() => {
- 
-  //   if (userDoki){
-  //     setUserDoki(userDoki)
-  //   }
-  // }, [])
 
   const LoadFonts = async () => {
     await useFonts();
