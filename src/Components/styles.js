@@ -11,11 +11,11 @@ import {
 import { ProgressBar, TextInput as RNP_TextInput } from 'react-native-paper';
 
 // Color Palette
-const colorPalette = {
+const colors = {
   primary: '#ffefb4',
   secondary: '#59b2ff',
   tertiary: '#C7CDAB',
-  font: {
+  text: {
     dark: '#333',
   },
 };
@@ -25,14 +25,14 @@ const StyledLogoHeading = styled(Text)`
   font-size: 70px;
   font-weight: 500;
   text-align: center;
-  color: ${colorPalette.primary};
+  color: ${colors.primary};
   font-family: 'singularity';
   letter-spacing: 2px;
 `;
 
 const StyledHeading1 = styled(Text)`
   font-size: 30px;
-  color: ${colorPalette.primary};
+  color: ${colors.primary};
   font-weight: 500;
   text-align: center;
   margin-bottom: 20px;
@@ -42,7 +42,7 @@ const StyledHeading1 = styled(Text)`
 
 const StyledHeading2 = styled(Text)`
   font-size: 20px;
-  color: #333;
+  color: ${colors.text.dark};
   font-weight: 500;
   text-align: center;
   margin-bottom: 10px;
@@ -59,7 +59,6 @@ const StyledContainer = styled(View)`
 // Forms — SignIn, SignUp, SetGoal
 const StyledFormBackground = styled(ImageBackground)`
   display: flex;
-  flex: 1;
   align-items: center;
 `;
 
@@ -68,20 +67,22 @@ const StyledFormContainer = styled(View)`
   width: 100%;
   height: 100%;
   justify-content: center;
+  align-items: center;
 `;
 
 const StyledFormTextInput = styled(TextInput)`
+  width: 100%;
   background-color: white;
   border-radius: 50px;
   padding: 15px;
-  font-size: 20px;
+  font-size: 22px;
   margin-bottom: 4px;
-  font-family: 'antipasto-bold';
-  color: #333;
+  font-family: 'singularity';
+  color: ${colors.text.dark};
 `;
 
 const StyledFormButton = styled(TouchableOpacity)`
-  background-color: ${colorPalette.primary};
+  background-color: ${colors.primary};
   padding: 15px;
   border-radius: 50px;
   width: 220px;
@@ -91,7 +92,7 @@ const StyledFormButton = styled(TouchableOpacity)`
 const StyledFormButtonText = styled(Text)`
   font-family: 'singularity';
   font-size: 22px;
-  color: ${colorPalette.secondary};
+  color: ${colors.secondary};
   letter-spacing: 0.5px;
 `;
 
@@ -108,7 +109,7 @@ const StyledLoginOptionsDescription = styled(Text)`
   font-family: 'antipasto-bold';
   letter-spacing: 1px;
   font-size: 20px;
-  color: ${colorPalette.primary};
+  color: ${colors.primary};
   text-align: center;
 `;
 

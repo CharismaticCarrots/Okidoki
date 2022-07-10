@@ -3,8 +3,8 @@ import { useMutation } from 'react-query';
 import axios from 'axios';
 import { API_URL } from '../../../secrets.js';
 import * as SecureStore from 'expo-secure-store';
-import { TextInput } from 'react-native';
 import { Button } from 'react-native-paper';
+import { StyleSheet, Text, TextInput } from 'react-native';
 import {
   StyledHeading1,
   StyledFormBackground,
@@ -95,7 +95,7 @@ const SignUp = ({ navigation }) => {
         />
 
         <StyledFormButton
-          style={{ marginBottom: 10, width: '100%' }}
+          style={{ marginTop: 20, marginBottom: 10, width: '80%' }}
           onPress={() => {
             handleSubmit();
           }}
@@ -103,24 +103,26 @@ const SignUp = ({ navigation }) => {
           <StyledFormButtonText>Sign Up</StyledFormButtonText>
         </StyledFormButton>
 
-        {/* <Button
-          mode="contained"
-          onPress={() => {
-            handleSubmit();
-          }}
-        >
-          Sign Up
-        </Button> */}
-        <Button
+        <Text
+          style={styles.prompt}
           onPress={() => {
             navigation.navigate('SignIn');
           }}
         >
           Already have an account? Sign in
-        </Button>
+        </Text>
       </StyledFormContainer>
     </StyledFormBackground>
   );
 };
+
+const styles = StyleSheet.create({
+  prompt: {
+    color: '#333',
+    fontFamily: 'singularity',
+    fontSize: 20,
+    textAlign: 'center',
+  },
+});
 
 export default SignUp;
