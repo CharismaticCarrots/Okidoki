@@ -13,7 +13,7 @@ import CountDisplay from './CountDisplay';
 import { useDailyStepCount } from '../../Healthkit';
 import { useUserData } from '../../hooks/useUserData';
 
-const DokiView = ({userDoki}) => {
+const DokiView = ({userDokiData}) => {
   const [doki, setDoki] = useState({ type: 'bunny' });
 
   const randomDoki = ['fox', 'cat', 'bunny'][Math.floor(Math.random() * 3)];
@@ -21,7 +21,7 @@ const DokiView = ({userDoki}) => {
   const stepCount = useDailyStepCount();
   const user = useUserData();
 
-  console.log("USER DOKI", userDoki)
+  console.log("DOKI VIEW", userDokiData)
 
   return (
     <StyledDokiHomeBackground
@@ -42,7 +42,7 @@ const DokiView = ({userDoki}) => {
       </StyledOuterCountersContainer>
       <StyledDokiContainer>
         <Doki doki={doki} />
-        <StyledDokiName>{userDoki && userDoki.dokiName}</StyledDokiName>
+        <StyledDokiName>{userDokiData && userDokiData.user_doki.dokiName}</StyledDokiName>
       </StyledDokiContainer>
       <Button onPress={() => setDoki({ type: randomDoki })} mode="contained">
         Change Doki

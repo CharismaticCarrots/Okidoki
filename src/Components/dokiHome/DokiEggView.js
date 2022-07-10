@@ -10,7 +10,7 @@ import DokiProgressBar from './DokiProgressBar';
 import DokiEgg from './DokiEgg';
 import CountDisplay from './CountDisplay';
 
-const DokiEggView = ({ navigation, hatchProgressData, userDoki }) => {
+const DokiEggView = ({ navigation, hatchProgressData, userDokiData }) => {
   const { hatchProgress, totalSteps, dailyStepGoal } = hatchProgressData;
 
   return (
@@ -30,7 +30,7 @@ const DokiEggView = ({ navigation, hatchProgressData, userDoki }) => {
       </StyledOuterCountersContainer>
       <StyledDokiEggContainer>
         <DokiEgg />
-        <StyledDokiName>{userDoki && userDoki.dokiName}</StyledDokiName>
+        <StyledDokiName>{userDokiData && userDokiData.user_doki.dokiName}</StyledDokiName>
       </StyledDokiEggContainer>
       <Button onPress={() => navigation.navigate('DokiView')} mode="contained">
         Hatch
