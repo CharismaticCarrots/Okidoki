@@ -8,7 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import { ProgressBar, TextInput as RNP_TextInput } from 'react-native-paper';
+import { ProgressBar } from 'react-native-paper';
 
 // Color Palette
 const colors = {
@@ -87,7 +87,6 @@ const StyledFormButton = styled(TouchableOpacity)`
   background-color: ${colors.primary};
   padding: 15px;
   border-radius: 50px;
-  width: 220px;
   align-items: center;
 `;
 
@@ -265,14 +264,6 @@ const StyledInternalContainer = styled(View)`
   padding: 10px;
 `;
 
-// SelectEgg Component
-
-const StyledInput = styled(RNP_TextInput)`
-  backgroundcolor: #fff;
-  height: 40px;
-  width: 200px;
-`;
-
 export {
   // General Styles
   StyledLogoHeading,
@@ -315,6 +306,4 @@ export {
   StyledHealthStatContainer,
   StyledDayContainer,
   StyledInternalContainer,
-  // SelectEgg Component
-  StyledInput,
 };

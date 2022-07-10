@@ -67,74 +67,68 @@ const SelectEgg = ({ navigation }) => {
   });
 
   return (
-    <View>
-      <StyledDokiHomeBackground
-        source={require('../../../assets/backgrounds/loginOptions.png')}
-        resizeMode="cover"
-      >
-        <View style={styles.container}>
-          <StyledHeading1>Select a Doki</StyledHeading1>
+    <StyledDokiHomeBackground
+      source={require('../../../assets/backgrounds/loginOptions.png')}
+      resizeMode="cover"
+    >
+      <View style={styles.container}>
+        <StyledHeading1>Select a Doki</StyledHeading1>
 
-          <View style={styles.eggSelection}>
-            <View style={styles.eggRow}>
-              <Animated.View
-                style={egg === 'egg1' ? { transform: [{ rotate: spin }] } : {}}
-              >
-                <TouchableOpacity onPress={(e) => setEgg('egg1')}>
-                  <Image
-                    style={styles.eggImg}
-                    source={require('../../../assets/eggs/egg1.png')}
-                  />
-                </TouchableOpacity>
-              </Animated.View>
-              <Animated.View
-                style={egg === 'egg2' ? { transform: [{ rotate: spin }] } : {}}
-              >
-                <TouchableOpacity onPress={() => setEgg('egg2')}>
-                  <Image
-                    style={styles.eggImg}
-                    source={require('../../../assets/eggs/egg2.png')}
-                  />
-                </TouchableOpacity>
-              </Animated.View>
-              <Animated.View
-                style={egg === 'egg3' ? { transform: [{ rotate: spin }] } : {}}
-              >
-                <TouchableOpacity onPress={() => setEgg('egg3')}>
-                  <Image
-                    style={styles.eggImg}
-                    source={require('../../../assets/eggs/egg3.png')}
-                  />
-                </TouchableOpacity>
-              </Animated.View>
-            </View>
-            <View style={styles.form}>
-              <StyledFormTextInput
-                placeholder="Name your Doki"
-                autoCapitalize="none"
-                autoCorrect={false}
-                autoComplete="off"
-                onChangeText={setDokiName}
-                style={{ minWidth: '100%' }}
-              />
+        <View style={styles.eggSelection}>
+          <View style={styles.eggRow}>
+            <Animated.View
+              style={egg === 'egg1' ? { transform: [{ rotate: spin }] } : {}}
+            >
+              <TouchableOpacity onPress={(e) => setEgg('egg1')}>
+                <Image
+                  style={styles.eggImg}
+                  source={require('../../../assets/eggs/egg1.png')}
+                />
+              </TouchableOpacity>
+            </Animated.View>
+            <Animated.View
+              style={egg === 'egg2' ? { transform: [{ rotate: spin }] } : {}}
+            >
+              <TouchableOpacity onPress={() => setEgg('egg2')}>
+                <Image
+                  style={styles.eggImg}
+                  source={require('../../../assets/eggs/egg2.png')}
+                />
+              </TouchableOpacity>
+            </Animated.View>
+            <Animated.View
+              style={egg === 'egg3' ? { transform: [{ rotate: spin }] } : {}}
+            >
+              <TouchableOpacity onPress={() => setEgg('egg3')}>
+                <Image
+                  style={styles.eggImg}
+                  source={require('../../../assets/eggs/egg3.png')}
+                />
+              </TouchableOpacity>
+            </Animated.View>
+          </View>
+          <View style={styles.form}>
+            <StyledFormTextInput
+              placeholder="Name your Doki"
+              autoCapitalize="none"
+              autoCorrect={false}
+              autoComplete="off"
+              onChangeText={setDokiName}
+              style={{ width: 240 }}
+            />
 
-              <StyledFormButton
-                style={{
-                  marginTop: 5,
-                  marginBottom: 10,
-                  width: 160,
-                }}
-                onPress={() => {
-                  handleSubmit();
-                }}
-              >
-                <StyledFormButtonText>Submit</StyledFormButtonText>
-              </StyledFormButton>
-            </View>
+            <StyledFormButton
+              onPress={() => {
+                handleSubmit();
+              }}
+              style={{ marginTop: 5, width: 150 }}
+            >
+              <StyledFormButtonText>Submit</StyledFormButtonText>
+            </StyledFormButton>
           </View>
         </View>
-      </StyledDokiHomeBackground>
-    </View>
+      </View>
+    </StyledDokiHomeBackground>
   );
 };
 
@@ -159,7 +153,5 @@ const styles = StyleSheet.create({
   },
   form: {
     alignItems: 'center',
-    width: '60%',
-    minWidth: 180,
   },
 });
