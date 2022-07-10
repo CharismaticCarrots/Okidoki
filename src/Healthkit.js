@@ -118,7 +118,7 @@ export const useTotalStepCount = (startDate, endDate) => {
         setStepSamples(results);
       });
     }
-  }, [isLoaded]);
+  }, [isLoaded, startDate, endDate]);
 
   useEffect(() => {
     const totalSteps = stepSamples.reduce((totalSteps, curSample) => totalSteps + curSample.value, 0);
