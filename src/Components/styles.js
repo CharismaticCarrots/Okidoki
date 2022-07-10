@@ -5,15 +5,19 @@ import {
   Image,
   ImageBackground,
   Text,
+  TextInput,
   TouchableOpacity,
 } from 'react-native';
-import { ProgressBar, TextInput } from 'react-native-paper';
+import { ProgressBar, TextInput as RNP_TextInput } from 'react-native-paper';
 
 // Color Palette
 const colorPalette = {
   primary: '#ffefb4',
   secondary: '#59b2ff',
   tertiary: '#C7CDAB',
+  font: {
+    dark: '#333',
+  },
 };
 
 // General Styles
@@ -28,11 +32,12 @@ const StyledLogoHeading = styled(Text)`
 
 const StyledHeading1 = styled(Text)`
   font-size: 30px;
-  color: #333;
+  color: ${colorPalette.primary};
   font-weight: 500;
   text-align: center;
   margin-bottom: 20px;
   font-family: 'antipasto-bold';
+  letter-spacing: 1px;
 `;
 
 const StyledHeading2 = styled(Text)`
@@ -52,31 +57,27 @@ const StyledContainer = styled(View)`
 `;
 
 // Forms — SignIn, SignUp, SetGoal
-const StyledFormContainer = styled(View)`
-  display: flex;
-  flex: 1;
-`;
-
 const StyledFormBackground = styled(ImageBackground)`
   display: flex;
   flex: 1;
   align-items: center;
 `;
 
-const StyledFormContentContainer = styled(View)`
+const StyledFormContainer = styled(View)`
+  max-width: 70%;
+  width: 100%;
   height: 100%;
-  justify-content: space-around;
-  min-width: 300px;
-  max-width: 80%;
-  align-items: center;
+  justify-content: center;
 `;
 
-const StyledFormDescription = styled(Text)`
-  font-family: 'antipasto-bold';
-  letter-spacing: 1px;
+const StyledFormTextInput = styled(TextInput)`
+  background-color: white;
+  border-radius: 50px;
+  padding: 15px;
   font-size: 20px;
-  color: ${colorPalette.primary};
-  text-align: center;
+  margin-bottom: 4px;
+  font-family: 'antipasto-bold';
+  color: #333;
 `;
 
 const StyledFormButton = styled(TouchableOpacity)`
@@ -92,6 +93,23 @@ const StyledFormButtonText = styled(Text)`
   font-size: 22px;
   color: ${colorPalette.secondary};
   letter-spacing: 0.5px;
+`;
+
+// LoginOptions Component
+const StyledLoginOptionsContainer = styled(View)`
+  height: 100%;
+  justify-content: space-around;
+  min-width: 300px;
+  max-width: 80%;
+  align-items: center;
+`;
+
+const StyledLoginOptionsDescription = styled(Text)`
+  font-family: 'antipasto-bold';
+  letter-spacing: 1px;
+  font-size: 20px;
+  color: ${colorPalette.primary};
+  text-align: center;
 `;
 
 // Sprite Component
@@ -214,7 +232,7 @@ const StyledInternalContainer = styled(View)`
 
 // SelectEgg Component
 
-const StyledInput = styled(TextInput)`
+const StyledInput = styled(RNP_TextInput)`
   backgroundcolor: #fff;
   height: 40px;
   width: 200px;
@@ -236,12 +254,14 @@ export {
   StyledHeading2,
   StyledContainer,
   // Form Styles
-  StyledFormContainer,
   StyledFormBackground,
-  StyledFormContentContainer,
-  StyledFormDescription,
+  StyledFormContainer,
+  StyledFormTextInput,
   StyledFormButton,
   StyledFormButtonText,
+  // LoginOptions Component
+  StyledLoginOptionsContainer,
+  StyledLoginOptionsDescription,
   // Sprite Component
   StyledSpriteContainer,
   StyledTileContainer,
