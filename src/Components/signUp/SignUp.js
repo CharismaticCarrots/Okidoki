@@ -22,8 +22,8 @@ const SignUp = ({ navigation }) => {
     password: '',
   });
 
-  const userObj = useUserData();
-  console.log('User on SignUp: ', userObj);
+  const { user } = useUserData();
+  console.log('User on SignUp: ', user);
 
   const mutation = useMutation(
     async (userInfo) => {
