@@ -13,6 +13,7 @@ import {
   StyledFormButton,
   StyledFormButtonText,
 } from '../styles';
+import { useUserData } from '../../hooks/useUserData';
 
 const SignUp = ({ navigation }) => {
   const [userData, setUserData] = useState({
@@ -22,13 +23,19 @@ const SignUp = ({ navigation }) => {
     password: '',
   });
 
+  const userObj = useUserData();
+  console.log('User on SignUp: ', userObj);
+
   const mutation = useMutation(
     async (userInfo) => {
       const { data: user } = await axios.post(
         `http://${API_URL}/auth/signup`,
         userInfo
       );
+      console.log('user returned from sign up', user);
       await SecureStore.setItemAsync('TOKEN', user.token);
+      console.log('secure store key');
+      console.log(await SecureStore.getItemAsync('TOKEN'));
     },
     {
       onSuccess: () => {
