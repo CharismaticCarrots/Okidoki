@@ -1,3 +1,6 @@
+import React, { useState, useCallback } from 'react';
+import { Button, ScrollView } from 'react-native-paper';
+
 import {
   StyledDokiHomeBackground,
   StyledDokiEggContainer,
@@ -5,9 +8,6 @@ import {
   StyledOuterCountersContainer,
   StyledDokiName,
 } from '../styles';
-import React, { useState, useCallback } from 'react';
-
-import { Button } from 'react-native-paper';
 import DokiProgressBar from './DokiProgressBar';
 import DokiEgg from './DokiEgg';
 import CountDisplay from './CountDisplay';
@@ -17,7 +17,7 @@ const DokiEggView = ({ navigation, hatchProgressData }) => {
   const [refreshing, setRefreshing] = useState(false);
 
   const { hatchProgress, totalSteps, dailyStepGoal } = hatchProgressData;
-  const { totalSteps, dailyStepGoal } = hatchProgressData;
+
   const userDokiData = useUserDokiData();
 
   const onRefresh = useCallback(() => {
@@ -26,34 +26,43 @@ const DokiEggView = ({ navigation, hatchProgressData }) => {
   }, []);
 
   return (
-    <StyledDokiHomeBackground
-      source={require('../../../assets/backgrounds/dokihome_background.png')}
-      resizeMode="cover"
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
     >
-      <StyledOuterProgressBarContainer>
-        <DokiProgressBar
-          name="Hatch"
-          level={totalSteps}
-          total={dailyStepGoal}
-        />
-      </StyledOuterProgressBarContainer>
-      <StyledOuterCountersContainer>
-        <CountDisplay
-          counterType={'step'}
-          count={totalSteps}
-          goalCount={dailyStepGoal}
-        />
-      </StyledOuterCountersContainer>
-      <StyledDokiEggContainer>
-        <DokiEgg />
-        <StyledDokiName>
-          {userDokiData && userDokiData.user_doki.dokiName}
-        </StyledDokiName>
-      </StyledDokiEggContainer>
-      <Button onPress={() => navigation.navigate('DokiView')} mode="contained">
-        Hatch
-      </Button>
-    </StyledDokiHomeBackground>
+      <StyledDokiHomeBackground
+        source={require('../../../assets/backgrounds/dokihome_background.png')}
+        resizeMode="cover"
+      >
+        <StyledOuterProgressBarContainer>
+          <DokiProgressBar
+            name="Hatch"
+            level={totalSteps}
+            total={dailyStepGoal}
+          />
+        </StyledOuterProgressBarContainer>
+        <StyledOuterCountersContainer>
+          <CountDisplay
+            counterType={'step'}
+            count={totalSteps}
+            goalCount={dailyStepGoal}
+          />
+        </StyledOuterCountersContainer>
+        <StyledDokiEggContainer>
+          <DokiEgg />
+          <StyledDokiName>
+            {userDokiData && userDokiData.user_doki.dokiName}
+          </StyledDokiName>
+        </StyledDokiEggContainer>
+        <Button
+          onPress={() => navigation.navigate('DokiView')}
+          mode="contained"
+        >
+          Hatch
+        </Button>
+      </StyledDokiHomeBackground>
+    </ScrollView>
   );
 };
 
