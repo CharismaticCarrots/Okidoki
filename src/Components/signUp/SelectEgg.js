@@ -13,7 +13,10 @@ const SelectEgg = ({ navigation }) => {
   const [dokiName, setDokiName] = useState(null);
 
   const user = useUserData();
-  const token = user.token;
+  let token;
+  if (user) {
+    token = user.token;
+  }
   console.log('User on SelectEgg: ', user);
 
   const mutation = useMutation(
