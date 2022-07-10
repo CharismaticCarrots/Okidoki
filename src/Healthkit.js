@@ -9,7 +9,7 @@ const permissions = {
   permissions: {
     read: [
       AppleHealthKit.Constants.Permissions.DistanceWalkingRunning,
-      AppleHealthKit.Constants.Permissions.SleepAnalysis,
+      AppleHealthKit.Constants.Permissions.ActiveEnergyBurned,
       AppleHealthKit.Constants.Permissions.FlightsClimbed,
       AppleHealthKit.Constants.Permissions.Steps,
     ]
@@ -133,9 +133,6 @@ export const useTotalStepCount = (startDate, endDate) => {
 export const useFlightsClimbed = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [flights, setFlights] = useState(0);
-  let options = {
-    startDate: subDays(new Date(),2).toISOString(),
-  };
   useEffect(() => {
     if (isLoaded) {
       AppleHealthKit.getFlightsClimbed(null, (err, results) => {
@@ -155,16 +152,14 @@ export const useDistance = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [distance, setDistance] = useState(0);
   let options = {
-    startDate: subDays(new Date(),7).toISOString(),
     unit: 'mile'
   }
   useEffect(() => {
     if (isLoaded) {
-      AppleHealthKit.getDailyDistanceWalkingRunningSamples(options, (err, results) => {
+      AppleHealthKit.getDistanceWalkingRunning(options, (err, results) => {
         if (err) {
           return;
         }
-        console.log('inside distance healthkit', results)
         setDistance(results.value);
       });
     }
@@ -172,23 +167,38 @@ export const useDistance = () => {
   return distance;
 }
 
-// get active energy burned  
-// export const useActiveEnergy = () => {
-//   const { isLoaded, AppleHealthKit } = useHealthkit();
-//   const [activeCal, setActiveCal] = useState(0);
-//   let options = {
-//     startDate: subDays(new Date(),2).toISOString(),
-//   }
-//   useEffect(() => {
-//     if (isLoaded) {
-//       AppleHealthKit.getActiveEnergyBurned(options, (err, results) => {
-//         if (err) {
-//           return;
-//         }
-//         console.log('inside distance healthkit', results)
-//         setActiveCal(results.value);
-//       });
-//     }
-//   }, [isLoaded]);
-//   return activeCal;
-// }
+//get active energy burned  
+export const useActiveEnergy = () => {
+  const { isLoaded, AppleHealthKit } = useHealthkit();
+  const [activeCal, setActiveCal] = useState(0);
+  let options = {
+    startDate: subDays(new Date(), 1).toISOString(),
+  }
+  useEffect(() => {
+    if (isLoaded) {
+      AppleHealthKit.getActiveEnergyBurned(options, (err, results) => {
+        if (err) {
+          return;
+        }
+        
+          const reformattedDailyEnergy = results.reduce((previous, day) => {
+          const onlyDate = day.startDate.slice(0, 10);
+          const findDate = previous.find(
+            (dayObject) => dayObject.day === onlyDate
+          );
+          if (!findDate) {
+            return [...previous, { day: onlyDate, value: day.value }];
+          } else {
+            findDate.value += day.value;
+
+            return previous;
+          }
+        }, []);
+        const currentEnergy = reformattedDailyEnergy[0]
+        setActiveCal(currentEnergy.value);
+      });
+    }
+  }, [isLoaded]);
+
+  return activeCal;
+}

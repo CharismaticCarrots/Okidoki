@@ -12,7 +12,7 @@ import format from 'date-fns/format';
 import { BarChart } from 'react-native-chart-kit';
 import { StyledHeading2, StyledHeading1 } from './styles';
 import Steps from './Steps';
-import { useStepCountSamples, useFlightsClimbed, useDistance } from '../Healthkit';
+import { useStepCountSamples, useFlightsClimbed, useDistance, useActiveEnergy } from '../Healthkit';
 
 
 import {
@@ -25,7 +25,8 @@ const HealthStat = () => {
   const dailySteps = useStepCountSamples();
   const flights = useFlightsClimbed()
   const dailyDistance = useDistance()
-  console.log('distance', dailyDistance)
+  const activeEnergy = useActiveEnergy()
+  console.log('distance', activeEnergy)
   if (!dailySteps) {
     return <ActivityIndicator size="large" />;
   }
