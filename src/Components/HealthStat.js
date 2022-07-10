@@ -10,7 +10,6 @@ import { Text, Surface } from 'react-native-paper';
 import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 import { BarChart } from 'react-native-chart-kit';
-
 import { StyledHeading2, StyledHeading1 } from './styles';
 import Steps from './Steps';
 import { useStepCountSamples } from '../Healthkit';

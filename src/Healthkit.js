@@ -47,6 +47,7 @@ export const useHealthkit = () => {
 export const useDailyStepCount = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [steps, setSteps] = useState(0);
+
   useEffect(() => {
     if (isLoaded) {
       AppleHealthKit.getStepCount(null, (err, results) => {
@@ -63,11 +64,9 @@ export const useDailyStepCount = () => {
 export const useStepCountSamples = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [weekSteps, setWeekSteps] = useState(null);
-
   let options = {
     startDate: subDays(new Date(), 7).toISOString(),
   };
-
   useEffect(() => {
     if (isLoaded) {
       AppleHealthKit.getDailyStepCountSamples(options, (err, results) => {
