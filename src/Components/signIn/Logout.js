@@ -11,7 +11,6 @@ const Logout = ({ navigation }) => {
   }
   return (
     <View>
-      <Text>Logout</Text>
       <Button
         title="logout"
         onPress={() => {
