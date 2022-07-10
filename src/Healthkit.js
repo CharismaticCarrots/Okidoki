@@ -127,3 +127,47 @@ export const useTotalStepCount = (startDate, endDate) => {
 
   return totalSteps;
 };
+
+//get flights climbed
+export const useFlightsClimbed = () => {
+  const { isLoaded, AppleHealthKit } = useHealthkit();
+  const [flights, setFlights] = useState(0);
+  let options = {
+    startDate: subDays(new Date(),2).toISOString(),
+  };
+  useEffect(() => {
+    if (isLoaded) {
+      AppleHealthKit.getDailyFlightsClimbedSamples(options, (err, results) => {
+        if (err) {
+          return;
+        }
+        console.log('inside healthkit', results, options.startDate)
+        setFlights(results);
+      });
+    }
+  }, [isLoaded]);
+  return flights;
+}
+
+
+//get walking and running distance 
+export const useDistance = () => {
+  const { isLoaded, AppleHealthKit } = useHealthkit();
+  const [distance, setDistance] = useState(0);
+  let options = {
+    startDate: subDays(new Date(),2).toISOString(),
+    unit: 'mile'
+  }
+  useEffect(() => {
+    if (isLoaded) {
+      AppleHealthKit.getDailyDistanceWalkingRunningSamples(options, (err, results) => {
+        if (err) {
+          return;
+        }
+        console.log('inside distance healthkit', results)
+        setDistance(results);
+      });
+    }
+  }, [isLoaded]);
+  return distance;
+}
