@@ -11,7 +11,7 @@ import DokiView from './dokiHome/DokiHome';
 
 const Tab = createBottomTabNavigator();
 
-const Tabs = () => {
+const TabNavigator = () => {
 
 
   return (
