@@ -3,15 +3,14 @@ import {
   StyledDokiEggContainer,
   StyledOuterProgressBarContainer,
   StyledOuterCountersContainer,
+  StyledDokiName,
 } from '../styles';
-
 import { Button } from 'react-native-paper';
 import DokiProgressBar from './DokiProgressBar';
 import DokiEgg from './DokiEgg';
 import CountDisplay from './CountDisplay';
-import { useHatchProgress } from '../../hooks/useHatchProgress';
 
-const DokiEggView = ({ navigation, hatchProgressData }) => {
+const DokiEggView = ({ navigation, hatchProgressData, userDoki }) => {
   const { hatchProgress, totalSteps, dailyStepGoal } = hatchProgressData;
 
   return (
@@ -31,6 +30,7 @@ const DokiEggView = ({ navigation, hatchProgressData }) => {
       </StyledOuterCountersContainer>
       <StyledDokiEggContainer>
         <DokiEgg />
+        <StyledDokiName>{userDoki && userDoki.dokiName}</StyledDokiName>
       </StyledDokiEggContainer>
       <Button onPress={() => navigation.navigate('DokiView')} mode="contained">
         Hatch
