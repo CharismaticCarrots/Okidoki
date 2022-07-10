@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
@@ -12,16 +12,20 @@ import Doki from './Doki';
 import CountDisplay from './CountDisplay';
 import { useDailyStepCount } from '../../Healthkit';
 import { useUserData } from '../../hooks/useUserData';
+import { useUserDokiData } from '../../hooks/useUserDokiData';
 
-const DokiView = ({userDokiData}) => {
-  const [doki, setDoki] = useState({ type: 'bunny' });
-
-  const randomDoki = ['fox', 'cat', 'bunny'][Math.floor(Math.random() * 3)];
-
+const DokiView = () => {
+  const [userDoki, setUserDoki] = useState();
   const stepCount = useDailyStepCount();
   const user = useUserData();
+  const userDokiData = useUserDokiData();
+  const randomDoki = ['fox', 'cat', 'bunny'][Math.floor(Math.random() * 3)];
 
-  console.log("DOKI VIEW", userDokiData)
+  useEffect(()=> {
+    if (userDokiData) {
+      setUserDoki(userDokiData)
+    }
+  }, [userDokiData]);
 
   return (
     <StyledDokiHomeBackground
@@ -29,8 +33,13 @@ const DokiView = ({userDokiData}) => {
       resizeMode="cover"
     >
       <StyledOuterProgressBarContainer>
-        <DokiProgressBar name="Mood" progress={0.75} />
-        <DokiProgressBar name="Hunger" progress={0.75} />
+        <DokiProgressBar
+          name="Mood"
+          level={userDoki && userDoki.user_doki.lastPlayedMoodLevel}
+        />
+        <DokiProgressBar
+          name="Fullness"
+          level={userDoki && userDoki.user_doki.lastFedFullnessLevel} />
       </StyledOuterProgressBarContainer>
       <StyledOuterCountersContainer>
         <CountDisplay
@@ -41,7 +50,7 @@ const DokiView = ({userDokiData}) => {
         <CountDisplay counterType={'carrot'} count={user && user.carrotCount} />
       </StyledOuterCountersContainer>
       <StyledDokiContainer>
-        <Doki doki={doki} />
+        {userDoki && <Doki userDoki={userDoki} />}
         <StyledDokiName>{userDokiData && userDokiData.user_doki.dokiName}</StyledDokiName>
       </StyledDokiContainer>
       <Button onPress={() => setDoki({ type: randomDoki })} mode="contained">

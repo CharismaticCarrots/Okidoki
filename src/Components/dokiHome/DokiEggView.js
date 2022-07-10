@@ -9,9 +9,11 @@ import { Button } from 'react-native-paper';
 import DokiProgressBar from './DokiProgressBar';
 import DokiEgg from './DokiEgg';
 import CountDisplay from './CountDisplay';
+import { useUserDokiData } from '../../hooks/useUserDokiData';
 
-const DokiEggView = ({ navigation, hatchProgressData, userDokiData }) => {
+const DokiEggView = ({ navigation, hatchProgressData }) => {
   const { hatchProgress, totalSteps, dailyStepGoal } = hatchProgressData;
+  const userDokiData = useUserDokiData();
 
   return (
     <StyledDokiHomeBackground
