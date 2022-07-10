@@ -96,6 +96,13 @@ const StyledFormButtonText = styled(Text)`
   letter-spacing: 0.5px;
 `;
 
+const StyledFormSuggest = styled(Text)`
+  color: #333;
+  font-family: 'singularity';
+  font-size: 20px;
+  text-align: center;
+`;
+
 // LoginOptions Component
 const StyledLoginOptionsContainer = styled(View)`
   height: 100%;
@@ -274,6 +281,7 @@ export {
   StyledFormTextInput,
   StyledFormButton,
   StyledFormButtonText,
+  StyledFormSuggest,
   // LoginOptions Component
   StyledLoginOptionsContainer,
   StyledLoginOptionsDescription,
