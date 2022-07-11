@@ -10,7 +10,7 @@ import {
 
 import DokiEggView from './DokiEggView';
 import DokiView from './DokiView';
-import { useHatchProgress } from '../../helpers/getHatchProgress';
+import { useHatchProgress } from '../../helpers/useHatchProgress';
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
