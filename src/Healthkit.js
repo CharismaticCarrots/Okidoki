@@ -50,8 +50,6 @@ export const useDailyStepCount = (startDate) => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [steps, setSteps] = useState(0);
 
-  // console.log({ steps, startDate });
-  console.log('i am logging daily step count');
   useEffect(() => {
     const options = {
       startDate: startDate,
@@ -71,8 +69,6 @@ export const useDailyStepCount = (startDate) => {
 export const useStepCountSamples = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [weekSteps, setWeekSteps] = useState(null);
-
-  console.log('week of steps');
 
   useEffect(() => {
     let options = {
@@ -182,8 +178,6 @@ export const useActiveEnergy = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [activeCal, setActiveCal] = useState(0);
   const today = startOfDay(new Date()).toISOString();
-
-  console.log('I am logging active energy');
 
   useEffect(() => {
     let options = {
