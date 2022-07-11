@@ -74,6 +74,9 @@ export const useStepCountSamples = () => {
   let options = {
     startDate: subDays(new Date(), 7).toISOString(),
   };
+
+  console.log('week of steps');
+
   useEffect(() => {
     if (isLoaded) {
       AppleHealthKit.getDailyStepCountSamples(options, (err, results) => {
@@ -177,10 +180,13 @@ export const useActiveEnergy = () => {
   const [activeCal, setActiveCal] = useState(0);
   const today = startOfDay(new Date()).toISOString();
 
-  let options = {
-    startDate: today,
-  };
+  console.log('I am logging active energy');
+
   useEffect(() => {
+    let options = {
+      startDate: today,
+    };
+
     if (isLoaded) {
       AppleHealthKit.getActiveEnergyBurned(options, (err, results) => {
         if (err) {

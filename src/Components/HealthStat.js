@@ -42,22 +42,23 @@ const HealthStat = () => {
   // }, []);
 
   const dailySteps = useStepCountSamples();
-  const flights = `${useFlightsClimbed()} floors`;
-  const dailyDistance = `${useDistance()} miles`;
-  const activeEnergy = `${useActiveEnergy()} cal`;
-  const steps = `${useDailyStepCount()} steps`;
+  const flights = useFlightsClimbed();
+  const dailyDistance = useDistance();
+  const activeEnergy = useActiveEnergy();
+  const steps = useDailyStepCount();
+
   if (!dailySteps) {
     return <ActivityIndicator size="large" />;
   }
 
-  let data = {
-    labels: dailySteps.map((day) => format(parseISO(day.day), 'eeeeee')),
-    datasets: [
-      {
-        data: dailySteps.map((day) => day.value),
-      },
-    ],
-  };
+  // let data = {
+  //   labels: dailySteps.map((day) => format(parseISO(day.day), 'eeeeee')),
+  //   datasets: [
+  //     {
+  //       data: dailySteps.map((day) => day.value),
+  //     },
+  //   ],
+  // };
 
   return (
     <StyledHealthStatContainer style={styles.background}>

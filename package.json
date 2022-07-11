@@ -28,6 +28,7 @@
     "bcrypt": "^5.0.1",
     "date-fns": "^2.28.0",
     "dotenv": "^16.0.1",
+    "eslint-plugin-react-hooks": "^4.7.0-next-dd2d65227-20220708",
     "expo": "~45.0.0",
     "expo-app-loading": "^2.0.0",
     "expo-font": "~10.1.0",
