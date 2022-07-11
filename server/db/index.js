@@ -7,6 +7,7 @@ const User_Item = require('./models/User_Item')
 
 User.belongsToMany(Doki, { through: User_Doki });
 Doki.belongsToMany(User, { through: User_Doki });
+
 User.belongsToMany(Item, { through: User_Item });
 Item.belongsToMany(User, { through: User_Item });
 
