@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useMutation } from 'react-query';
+import axios from 'axios';
+import { API_URL } from '../../../secrets';
+import * as SecureStore from 'expo-secure-store';
 import { Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
@@ -13,18 +17,20 @@ import CountDisplay from './CountDisplay';
 import { useDailyStepCount } from '../../Healthkit';
 import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
-import { useMutation } from 'react-query';
-import axios from 'axios';
-import { API_URL } from '../../../secrets';
-import * as SecureStore from 'expo-secure-store';
+import { getCarrotReward } from '../../helpers/getCarrotReward';
 
 const DokiView = () => {
   const [curCarrotCount, setCurCarrotCount] = useState(0);
   const [userDoki, setUserDoki] = useState();
   const [curFullnessLvl, setCurFullnessLvl] = useState(0);
+  const [carrotReward, setCarrotReward] = useState(null);
+  const [carrotsClaimed, setCarrotsClaimed] = useState(false);
+
   const stepCount = useDailyStepCount();
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
+  const carrotRewardData = getCarrotReward();
+  console.log("CARROTS REWARDED:", carrotReward)
 
   useEffect(() => {
     if (user) {
@@ -45,6 +51,12 @@ const DokiView = () => {
       setCurFullnessLvl(user_doki.lastFedFullnessLevel - hrsSinceLastFed);
     }
   }, [userDokiData]);
+
+  useEffect(() => {
+    if (carrotRewardData) {
+      setCarrotReward(carrotRewardData);
+    }
+  }, [carrotRewardData]);
 
   const userDokiMutation = useMutation(async (userDokiUpdate) => {
     const token = await SecureStore.getItemAsync('TOKEN');
@@ -103,6 +115,18 @@ const DokiView = () => {
     }
   };
 
+  const claimCarrots = () => {
+    userMutation.mutate(
+      {carrotCount: curCarrotCount + carrotReward},
+      {
+        onSuccess: ({ carrotCount }) => {
+          setCurCarrotCount(carrotCount);
+          setCarrotsClaimed(true);
+        },
+      }
+    );
+  };
+
   return (
     <StyledDokiHomeBackground
       source={require('../../../assets/backgrounds/dokihome_background.png')}
@@ -124,6 +148,10 @@ const DokiView = () => {
         />
         <CountDisplay counterType={'carrot'} count={curCarrotCount} />
       </StyledOuterCountersContainer>
+      {carrotReward && !carrotsClaimed &&
+        <Button mode="contained" onPress={claimCarrots}>
+            {`CLAIM ${carrotReward} CARROTS`}
+        </Button>}
       <StyledDokiContainer>
         {userDoki && <Doki userDoki={userDoki} />}
         <StyledDokiName>
