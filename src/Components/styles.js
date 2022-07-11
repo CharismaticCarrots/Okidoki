@@ -46,7 +46,7 @@ const StyledHeading2 = styled(Text)`
   font-weight: 500;
   text-align: center;
   margin-bottom: 10px;
-  font-family: 'antipasto';
+  font-family: 'singularity';
 `;
 
 const StyledContainer = styled(View)`
