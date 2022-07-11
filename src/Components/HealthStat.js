@@ -6,13 +6,15 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import { Text, Surface } from 'react-native-paper';
+import { Text, Surface, Card, Avatar } from 'react-native-paper';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 import { BarChart } from 'react-native-chart-kit';
 import { StyledHeading2, StyledHeading1 } from './styles';
 import Steps from './Steps';
-import { useStepCountSamples, useFlightsClimbed, useDistance, useActiveEnergy } from '../Healthkit';
+import { useStepCountSamples, useFlightsClimbed, useDistance, useActiveEnergy, useDailyStepCount } from '../Healthkit';
 
 
 import {
@@ -23,10 +25,10 @@ import {
 
 const HealthStat = () => {
   const dailySteps = useStepCountSamples();
-  const flights = useFlightsClimbed()
-  const dailyDistance = useDistance()
-  const activeEnergy = useActiveEnergy()
-  console.log('distance', activeEnergy)
+  const flights = `${useFlightsClimbed()} floors`
+  const dailyDistance = `${useDistance()} miles`
+  const activeEnergy = `${useActiveEnergy()} cal`
+  const steps = `${useDailyStepCount()} steps`
   if (!dailySteps) {
     return <ActivityIndicator size="large" />;
   }
@@ -45,7 +47,7 @@ const HealthStat = () => {
       <StyledHeading1>Health Stats</StyledHeading1>
       <View>
         <StyledHeading2>Steps: Last 7 Days</StyledHeading2>
-        <View>
+        <View >
           <BarChart
             data={data}
             width={Dimensions.get('screen').width}
@@ -64,17 +66,38 @@ const HealthStat = () => {
                 fontSize: '13',
                 fontWeight: 'bold',
               },
+              padding:30
             }}
             style={{
-              marginVertical: 8,
+                borderRadius: 16,
+                margin: 10,
+                padding:5
             }}
           />
         </View>
       </View>
-      <StyledHeading2>History</StyledHeading2>
-      <Text>Walking / Running Distance: {dailyDistance} miles</Text>
-      <Text>Flights Climbed: {flights} floors</Text>
- 
+      <StyledHeading2>Today's Activity</StyledHeading2>
+
+      <Card.Title
+        style={styles.card}
+        title={dailyDistance}
+        subtitle="Running / Walking Distance"
+        left={(props) =>  <FontAwesome5 name={'running'} style={styles.icons} />}
+      />
+      <Card.Title
+        style={styles.card}
+        title={flights}
+        subtitle="Flights Climbed"
+        left={(props) =>  <MaterialCommunityIcons name='stairs' style={styles.icons} />}
+      />
+      <Card.Title
+        style={styles.card}
+        title={activeEnergy}
+        subtitle="Active Calories Burned"
+        left={(props) =>  <MaterialCommunityIcons name='fire' style={styles.icons} />}
+      />
+      
+  
       {/* <ScrollView>
         {dailySteps.map((day) => {
           return (
@@ -107,6 +130,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#4FA4B8',
     height: '100%',
   },
+  chart:{
+    paddingRight:20,
+    paddingLeft: 30,
+    borderRadius: 16,
+  },
+  card: {
+    backgroundColor: '#ffefb4',
+    borderRadius: 10,
+    padding:5,
+    paddingLeft:20,
+    margin:10,
+    fontFamily:"singularity"
+  },
+  icons:{
+    padding: 5,
+    fontSize:29,
+    overflow:'hidden'
+  }
 });
 
 export default HealthStat;
