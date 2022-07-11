@@ -91,7 +91,7 @@ const HealthStat = () => {
         </View>
       </View>
 
-      <StyledHeading2>Today's Activity</StyledHeading2>
+      <StyledHeading2>Today&apos;s Activity</StyledHeading2>
       <ScrollView
         style={styles.scrollView}
         // refreshControl={
