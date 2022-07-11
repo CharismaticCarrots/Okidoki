@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // Fonts
 import * as SplashScreen from 'expo-splash-screen';
-import * as Font from 'expo-font';
+import { useFonts } from 'expo-font';
 // Components
 import Home from './components/Home';
 import SetGoal from './components/signUp/SetGoal';
@@ -19,39 +19,20 @@ import LoginOptions from './components/LoginOptions';
 import SignUp from './components/signUp/SignUp';
 import SignIn from './components/signIn/SignIn';
 import Logout from './components/signIn/Logout';
+import AppLoading from './components/AppLoading';
 
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [appIsReady, setAppIsReady] = useState(false);
+  let [fontsLoaded] = useFonts({
+    Singularity: require('../assets/fonts/Singularity.ttf'),
+    Antipasto: require('../assets/fonts/Antipasto.ttf'),
+    AntipastoBold: require('../assets/fonts/Antipasto-Bold.ttf'),
+  });
 
-  useEffect(() => {
-    async function prepare() {
-      try {
-        await SplashScreen.preventAutoHideAsync();
-        await Font.loadAsync({
-          Singularity: require('../assets/fonts/Singularity.ttf'),
-          Antipasto: require('../assets/fonts/Antipasto.ttf'),
-          AntipastoBold: require('../assets/fonts/Antipasto-Bold.ttf'),
-        });
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        setAppIsReady(true);
-      }
-    }
-    prepare();
-  }, []);
-
-  const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
-      await SplashScreen.hideAsync();
-    }
-  }, [appIsReady]);
-
-  if (!appIsReady) {
-    return null;
+  if (!fontsLoaded) {
+    return <AppLoading />;
   }
 
   return (
@@ -60,7 +41,6 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Links">
             <Stack.Screen
-              onLayout={onLayoutRootView}
               name="Links"
               component={Links}
               options={{ title: 'Links Page' }}
