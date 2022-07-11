@@ -1,15 +1,35 @@
 import * as React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { Card, Provider ,Appbar ,Title,Paragraph , BottomNavigation} from 'react-native-paper';
 import HealthStat from './HealthStat';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import SignIn from './signIn/SignIn';
 import SetGoal from './signUp/SetGoal';
 import DokiView from './dokiHome/DokiHome';
 import Logout from './signIn/Logout';
-import { LogOutNavigator } from '../navigation';
+import LoginOptions from './LoginOptions'
+
+
+const Stack = createNativeStackNavigator()
+
+export const LogOutNavigator = ({navigation}) => {
+  return (
+    <Stack.Navigator headerMode="screen" >
+      <Stack.Screen
+        name="Logout"
+        component={Logout}
+        options={{ tabBarLabel: 'Logout Screen' }}
+      />
+      <Stack.Screen
+        name="LoginOptions"
+        headerShown = 'false'
+        component={LoginOptions}
+      />
+    </Stack.Navigator>
+  )
+}
+
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
@@ -32,7 +52,6 @@ const TabNavigator = () => {
             display: "flex",
             paddingTop:13,
             backgroundColor: '#45A0DA',
-          
           },
           null
         ],
@@ -76,10 +95,7 @@ const TabNavigator = () => {
       })}
       >
         <Tab.Screen name="DokiHome" component={DokiView}/>
-        <Tab.Screen name="User Settings" 
-        component={LogOutNavigator}
-        options={{ tabBarLabel: 'Logout Screen' }}
-        />
+        <Tab.Screen name="User Settings" component={LogOutNavigator}/>
         <Tab.Screen name="HEALTH DATA" component={HealthStat}/>
         <Tab.Screen name="SetGoal" component={SetGoal}/>
       </Tab.Navigator>
