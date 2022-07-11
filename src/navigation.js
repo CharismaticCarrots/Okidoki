@@ -8,11 +8,28 @@ import SignUp from './components/signUp/SignUp';
 import SignIn from './components/signIn/SignIn';
 import LoginOptions from './components/LoginOptions';
 import DokiHome from './components/dokiHome/DokiHome';
+import Logout from './components/signIn/Logout';
 import { View } from 'react-native';
 
 import { useUserDokiData } from './hooks/useUserDokiData';
 import TabNavigator from './components/NavBar';
 const Stack = createNativeStackNavigator()
+
+export const LogOutNavigator = ({navigation}) => {
+  return (
+    <Stack.Navigator headerMode="screen">
+      <Stack.Screen
+        name="Logout"
+        component={Logout}
+        options={{ tabBarLabel: 'Logout' }}
+      />
+      <Stack.Screen
+        name="LoginOptions"
+        component={LoginOptions}
+      />
+    </Stack.Navigator>
+  )
+}
 
 export const LoginNavigator = ({navigation}) => {
   const [doki, setUserDoki] = useState(null)

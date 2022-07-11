@@ -22,8 +22,8 @@ const SignUp = ({ navigation }) => {
     password: '',
   });
 
-  const userObj = useUserData();
-  console.log('User on SignUp: ', userObj);
+  const { user } = useUserData();
+  console.log('User on SignUp: ', user);
 
   const mutation = useMutation(
     async (userInfo) => {
@@ -94,7 +94,7 @@ const SignUp = ({ navigation }) => {
         />
 
         <StyledFormButton
-          style={{ marginTop: 20, marginBottom: 10, width: '60%' }}
+          style={{ marginTop: 20, marginBottom: 10, width: 150 }}
           onPress={() => {
             handleSubmit();
           }}
