@@ -17,7 +17,7 @@ const SelectEgg = ({ navigation }) => {
   const [egg, setEgg] = useState('');
   const [dokiName, setDokiName] = useState(null);
 
-  const user = useUserData();
+  const { user } = useUserData();
   let token;
   if (user) {
     token = user.token;
