@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-native-paper';
+import { useMutation } from 'react-query';
 import axios from 'axios';
+import { API_URL } from '../../../secrets';
 import * as SecureStore from 'expo-secure-store';
-
+import { Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
   StyledDokiContainer,
@@ -10,34 +11,40 @@ import {
   StyledOuterCountersContainer,
   StyledDokiName,
 } from '../styles';
-
 import DokiProgressBar from './DokiProgressBar';
 import Doki from './Doki';
 import CountDisplay from './CountDisplay';
-
 import { useDailyStepCount } from '../../Healthkit';
 import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
-import { useMutation } from 'react-query';
-import { API_URL } from '../../../secrets';
+import { getCarrotReward } from '../../helpers/getCarrotReward';
 
 const DokiView = ({ now }) => {
   const [curCarrotCount, setCurCarrotCount] = useState(0);
   const [userDoki, setUserDoki] = useState();
   const [curFullnessLvl, setCurFullnessLvl] = useState(0);
+  const [carrotReward, setCarrotReward] = useState(null);
+  const [carrotsClaimed, setCarrotsClaimed] = useState(false);
+
   const stepCount = useDailyStepCount(now);
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
+  const carrotRewardData = getCarrotReward();
+  console.log("CARROTS REWARDED:", carrotReward) // Temp message to indicate carrots to reward
 
   useEffect(() => {
     if (user) {
       setCurCarrotCount(user.carrotCount);
+      const hrsSinceLastClaimed = (new Date() - new Date(user.lastCarrotsClaimedAt))/3600000;
+      console.log(`Can't claim carrots yet, last claimed ${hrsSinceLastClaimed} hours ago. Check again tomorrow!`) // Temporary Error Message
+      if (hrsSinceLastClaimed <= 24) setCarrotsClaimed(true);
+
     }
   }, [user]);
 
   useEffect(() => {
     if (userDokiData) {
-      userDokiData.type = 'fox'; // Dummy data to view different sprites
+      // userDokiData.type = 'fox'; // Dummy data to view different sprites
       setUserDoki(userDokiData);
 
       const { user_doki } = userDokiData;
@@ -48,6 +55,12 @@ const DokiView = ({ now }) => {
       setCurFullnessLvl(user_doki.lastFedFullnessLevel - hrsSinceLastFed);
     }
   }, [userDokiData]);
+
+  useEffect(() => {
+    if (carrotRewardData) {
+      setCarrotReward(carrotRewardData);
+    }
+  }, [carrotRewardData]);
 
   const userDokiMutation = useMutation(async (userDokiUpdate) => {
     const token = await SecureStore.getItemAsync('TOKEN');
@@ -106,6 +119,21 @@ const DokiView = ({ now }) => {
     }
   };
 
+  const claimCarrots = () => {
+    userMutation.mutate(
+      {
+        lastCarrotsClaimedAt: new Date(),
+        carrotCount: curCarrotCount + carrotReward,
+      },
+      {
+        onSuccess: ({ carrotCount }) => {
+          setCurCarrotCount(carrotCount);
+          setCarrotsClaimed(true);
+        },
+      }
+    );
+  };
+
   return (
     <StyledDokiHomeBackground
       source={require('../../../assets/backgrounds/dokihome_background.png')}
@@ -127,6 +155,10 @@ const DokiView = ({ now }) => {
         />
         <CountDisplay counterType={'carrot'} count={curCarrotCount} />
       </StyledOuterCountersContainer>
+      {carrotReward && !carrotsClaimed &&
+        <Button mode="contained" onPress={claimCarrots}>
+            {`CLAIM ${carrotReward} CARROTS`}
+        </Button>}
       <StyledDokiContainer>
         {userDoki && <Doki userDoki={userDoki} />}
         <StyledDokiName>
