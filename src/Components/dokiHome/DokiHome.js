@@ -4,8 +4,6 @@ import {
   ScrollView,
   RefreshControl,
   StyleSheet,
-  Dimensions,
-  SafeAreaView,
 } from 'react-native';
 
 import DokiEggView from './DokiEggView';
@@ -22,7 +20,8 @@ const DokiHome = ({ navigation }) => {
 
   const now = currentDate.toISOString();
   const hatchProgressData = getHatchProgress(now);
-  const isEgg = hatchProgressData.hatchProgress < 1;
+  // const isEgg = hatchProgressData.hatchProgress < 1;
+  const isEgg = false; // FOR TESTING: Uncomment this to see Doki instead of DokiEgg
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);

@@ -48,6 +48,10 @@ const User = db.define('user', {
       min: 0,
     },
   },
+  lastCarrotsClaimedAt: {
+    type: Sequelize.DATE,
+    defaultValue: new Date(),
+  },
   dailyStepGoal: {
     type: Sequelize.INTEGER,
     defaultValue: 1000,
@@ -96,6 +100,7 @@ User.prototype.toJSON = function () {
     lastName: this.lastName,
     carrotCount: this.carrotCount,
     dailyStepGoal: this.dailyStepGoal,
+    lastCarrotsClaimedAt: this.lastCarrotsClaimedAt,
   };
 };
 
