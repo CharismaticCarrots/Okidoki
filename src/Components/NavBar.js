@@ -26,6 +26,11 @@ export const LogOutNavigator = ({navigation}) => {
         headerShown = 'false'
         component={LoginOptions}
       />
+      <Stack.Screen
+        name="SignIn"
+        headerShown = 'false'
+        component={SignIn}
+      />
     </Stack.Navigator>
   )
 }
@@ -38,9 +43,6 @@ const TabNavigator = () => {
   return (
       <Tab.Navigator
       screenOptions={({ route }) => ({
-        headerStyle: {
-          backgroundColor: '#45A0DA',
-        },
         headerShown: false,
         tabBarOptions: {
           style: {
@@ -51,7 +53,7 @@ const TabNavigator = () => {
           {
             display: "flex",
             paddingTop:13,
-            backgroundColor: '#45A0DA',
+            backgroundColor: '#59b2ff',
           },
           null
         ],
