@@ -34,7 +34,7 @@ const SignIn = ({ navigation }) => {
     },
     {
       onSuccess: () => {
-        navigation.navigate('DokiHome');
+        navigation.navigate('DokiHome')
       },
     }
   );
