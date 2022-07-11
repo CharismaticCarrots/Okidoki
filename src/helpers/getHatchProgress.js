@@ -1,8 +1,8 @@
-import { useUserData } from "../hooks/useUserData";
-import { useTotalStepCount } from "../Healthkit";
-import { useUserDokiData } from "../hooks/useUserDokiData";
+import { useUserData } from '../hooks/useUserData';
+import { useTotalStepCount } from '../Healthkit';
+import { useUserDokiData } from '../hooks/useUserDokiData';
 
-export const getHatchProgress = () => {
+export const getHatchProgress = (now) => {
   const userDoki = useUserDokiData();
   const { user } = useUserData();
 
@@ -10,11 +10,10 @@ export const getHatchProgress = () => {
 
   if (userDoki) {
     dokiCreatedDate = userDoki.user_doki.createdAt;
-    console.log("DOKI CREATED DATE", dokiCreatedDate)
+    console.log('DOKI CREATED DATE', dokiCreatedDate);
   }
 
-  const totalSteps = useTotalStepCount(dokiCreatedDate);
-
+  const totalSteps = useTotalStepCount(dokiCreatedDate, now);
 
   if (userDoki && user) {
     const { dailyStepGoal } = user;
@@ -23,7 +22,7 @@ export const getHatchProgress = () => {
     return {
       hatchProgress,
       totalSteps,
-      dailyStepGoal
+      dailyStepGoal,
     };
   } else {
     return {};
