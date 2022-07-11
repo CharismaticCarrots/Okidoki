@@ -4,7 +4,7 @@ import { useUserDokiData } from "../hooks/useUserDokiData";
 
 export const getHatchProgress = () => {
   const userDoki = useUserDokiData();
-  const user = useUserData();
+  const { user } = useUserData();
 
   let dokiCreatedDate = null;
 
@@ -14,6 +14,7 @@ export const getHatchProgress = () => {
   }
 
   const totalSteps = useTotalStepCount(dokiCreatedDate);
+
 
   if (userDoki && user) {
     const { dailyStepGoal } = user;
