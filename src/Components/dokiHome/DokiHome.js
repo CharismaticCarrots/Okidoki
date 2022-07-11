@@ -1,10 +1,5 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import {
-  View,
-  ScrollView,
-  RefreshControl,
-  StyleSheet,
-} from 'react-native';
+import { useState, useCallback } from 'react';
+import { View, ScrollView, RefreshControl, StyleSheet } from 'react-native';
 
 import DokiEggView from './DokiEggView';
 import DokiView from './DokiView';

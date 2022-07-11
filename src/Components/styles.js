@@ -41,7 +41,7 @@ const StyledHeading1 = styled(Text)`
 `;
 
 const StyledHeading2 = styled(Text)`
-  font-size: 20px;
+  font-size: 25px;
   color: ${colors.text.dark};
   font-weight: 500;
   text-align: center;
@@ -190,7 +190,6 @@ const StyledOuterProgressBarContainer = styled(View)`
   flex-direction: column;
   justify-content: space-around;
   margin-top: 90px;
-
 `;
 
 const StyledProgressBarContainer = styled(View)`
@@ -251,7 +250,16 @@ const StyledHealthStatContainer = styled(View)`
   align-items: center;
   width: 100%;
   height: 100%;
-  padding-top:130px;
+  padding-top: 80px;
+`;
+
+const StyledHealthStatHeading = styled(Text)`
+  font-size: 35px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'AntipastoBold';
+  letter-spacing: 1px;
 `;
 
 const StyledDayContainer = styled(View)`
@@ -309,4 +317,5 @@ export {
   StyledHealthStatContainer,
   StyledDayContainer,
   StyledInternalContainer,
+  StyledHealthStatHeading,
 };
