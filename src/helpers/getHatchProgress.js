@@ -1,8 +1,8 @@
-import { useUserData } from "./useUserData";
+import { useUserData } from "../hooks/useUserData";
 import { useTotalStepCount } from "../Healthkit";
-import { useUserDokiData } from "./useUserDokiData";
+import { useUserDokiData } from "../hooks/useUserDokiData";
 
-export const useHatchProgress = () => {
+export const getHatchProgress = () => {
   const userDoki = useUserDokiData();
   const user = useUserData();
 
