@@ -14,7 +14,7 @@ import { BarChart } from 'react-native-chart-kit';
 
 import {
   StyledHeading2,
-  StyledHeading1,
+  StyledHealthStatHeading,
   StyledHealthStatContainer,
   StyledDokiHomeBackground,
 } from './styles';
@@ -64,7 +64,7 @@ const HealthStat = () => {
       resizeMode="cover"
     >
       <StyledHealthStatContainer style={styles.background}>
-        <StyledHeading1>Health Stats</StyledHeading1>
+        <StyledHealthStatHeading>Health Stats</StyledHealthStatHeading>
         <View>
           <StyledHeading2>Steps: Last 7 Days</StyledHeading2>
           <View>
@@ -150,10 +150,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 8,
   },
-  // background: {
-  //   backgroundColor: '#4FA4B8',
-  //   height: '100%',
-  // },
   chart: {
     paddingRight: 20,
     paddingLeft: 30,

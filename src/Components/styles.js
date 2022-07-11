@@ -41,7 +41,7 @@ const StyledHeading1 = styled(Text)`
 `;
 
 const StyledHeading2 = styled(Text)`
-  font-size: 20px;
+  font-size: 25px;
   color: ${colors.text.dark};
   font-weight: 500;
   text-align: center;
@@ -253,6 +253,15 @@ const StyledHealthStatContainer = styled(View)`
   padding-top: 80px;
 `;
 
+const StyledHealthStatHeading = styled(Text)`
+  font-size: 35px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'AntipastoBold';
+  letter-spacing: 1px;
+`;
+
 const StyledDayContainer = styled(View)`
   display: flex;
   align-items: stretch;
@@ -308,4 +317,5 @@ export {
   StyledHealthStatContainer,
   StyledDayContainer,
   StyledInternalContainer,
+  StyledHealthStatHeading,
 };
