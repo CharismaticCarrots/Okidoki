@@ -50,7 +50,8 @@ const HealthStat = () => {
         <View >
           <BarChart
             data={data}
-            width={Dimensions.get('screen').width}
+            width={350}
+            //{Dimensions.get('screen').width}
             height={250}
             fromZero={true}
             showValuesOnTopOfBars={true}
@@ -70,31 +71,36 @@ const HealthStat = () => {
             }}
             style={{
                 borderRadius: 16,
-                margin: 10,
+                margin: 5,
                 padding:5
             }}
           />
         </View>
       </View>
       <StyledHeading2>Today's Activity</StyledHeading2>
-
+      <Card.Title
+        style={styles.card}
+        title={steps}
+        subtitle="Step Count"
+        left={() =>  <FontAwesome5 name={'running'} style={styles.icons} />}
+      />
       <Card.Title
         style={styles.card}
         title={dailyDistance}
         subtitle="Running / Walking Distance"
-        left={(props) =>  <FontAwesome5 name={'running'} style={styles.icons} />}
+        left={() =>  <FontAwesome5 name={'running'} style={styles.icons} />}
       />
       <Card.Title
         style={styles.card}
         title={flights}
         subtitle="Flights Climbed"
-        left={(props) =>  <MaterialCommunityIcons name='stairs' style={styles.icons} />}
+        left={() =>  <MaterialCommunityIcons name='stairs' style={styles.icons} />}
       />
       <Card.Title
         style={styles.card}
         title={activeEnergy}
         subtitle="Active Calories Burned"
-        left={(props) =>  <MaterialCommunityIcons name='fire' style={styles.icons} />}
+        left={() =>  <MaterialCommunityIcons name='fire' style={styles.icons} />}
       />
       
   
@@ -138,9 +144,10 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#ffefb4',
     borderRadius: 10,
-    padding:5,
+    padding:3,
     paddingLeft:20,
-    margin:10,
+    marginVertical:10,
+    marginHorizontal:20,
     fontFamily:"singularity"
   },
   icons:{
