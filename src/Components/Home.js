@@ -8,7 +8,7 @@ const Home = () => {
       <Sprite
         src={require('../../assets/catSprites/cat.png')}
         totalSprites={6}
-        tile={{ width: 127, height: 90 }}
+        tile={{ width: 128, height: 90 }}
         scale={3}
         framesPerSprite={15}
       />
