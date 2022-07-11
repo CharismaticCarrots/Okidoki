@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
   ScrollView,
@@ -10,7 +10,7 @@ import {
 
 import DokiEggView from './DokiEggView';
 import DokiView from './DokiView';
-import { useHatchProgress } from '../../hooks/useHatchProgress';
+import { useHatchProgress } from '../../helpers/getHatchProgress';
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
