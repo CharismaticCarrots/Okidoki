@@ -171,6 +171,8 @@ export const useDistance = () => {
 export const useActiveEnergy = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [activeCal, setActiveCal] = useState(0);
+  const today = new Date()
+  
   let options = {
     startDate: subDays(new Date(), 1).toISOString(),
   }
@@ -180,7 +182,6 @@ export const useActiveEnergy = () => {
         if (err) {
           return;
         }
-        
           const reformattedDailyEnergy = results.reduce((previous, day) => {
           const onlyDate = day.startDate.slice(0, 10);
           const findDate = previous.find(
@@ -194,8 +195,8 @@ export const useActiveEnergy = () => {
             return previous;
           }
         }, []);
-        const currentEnergy = reformattedDailyEnergy[0]
-        setActiveCal(currentEnergy.value);
+        
+        if(reformattedDailyEnergy[0]){setActiveCal(reformattedDailyEnergy[0].value)}
       });
     }
   }, [isLoaded]);

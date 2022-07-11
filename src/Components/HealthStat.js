@@ -104,7 +104,7 @@ const HealthStat = () => {
         style={styles.card}
         title={steps}
         subtitle="Step Count"
-        left={() =>  <FontAwesome5 name={'running'} style={styles.icons} />}
+        left={() =>  <FontAwesome5 name={'shoe-prints'} style={styles.icons} />}
       />
       <Card.Title
         style={styles.card}
