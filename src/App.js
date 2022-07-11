@@ -2,7 +2,6 @@ import React from 'react';
 import { HealthKitProvider } from './Healthkit';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// Fonts
 import { useFonts } from 'expo-font';
 import AppLoading from './components/AppLoading';
 import { LoginNavigator } from './navigation';

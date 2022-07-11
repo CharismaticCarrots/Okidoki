@@ -62,15 +62,35 @@ router.put('/doki', requireToken, async (req, res, next) => {
   }
 });
 
-router.get('items', requireToken, async (req, res, next) => {
+router.get('/items', requireToken, async (req, res, next) => {
   try {
     const user = req.user;
-    const items = await User_Item.findAll({
-      where: {
-        userId: user.id
-      }
-    })
+    const items = await user.getItems()
     res.send(items)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.post('/items', requireToken, async (req, res, next) => {
+  try {
+    const user = req.user;
+    const item = req.body;
+    if (await user.hasItem(item)){
+      const userItem = await User_Item.findOne({
+        where: {
+          userId: user.id,
+          itemId: item.id
+        }
+      })
+      const itemQuantity = userItem.quantity + 1
+      await userItem.update({quantity: itemQuantity})
+      res.send(await userItem.save());
+    }
+    else {
+      user.addItem(item, { through: { quantity: 1 } } )
+      res.send()
+    }
   } catch (error) {
     next(error)
   }
