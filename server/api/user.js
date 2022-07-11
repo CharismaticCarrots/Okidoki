@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Doki, User_Doki } = require('../db');
+const { User, Doki, User_Doki, User_Item } = require('../db');
 const { requireToken } = require('./middleware.js');
 
 module.exports = router;
@@ -61,3 +61,37 @@ router.put('/doki', requireToken, async (req, res, next) => {
     next(err);
   }
 });
+
+router.get('/items', requireToken, async (req, res, next) => {
+  try {
+    const user = req.user;
+    const items = await user.getItems()
+    res.send(items)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.post('/items/:id', requireToken, async (req, res, next) => {
+  try {
+    const user = req.user;
+    const item = Number(req.params.id)
+    if (await user.hasItem(item)){
+      const userItem = await User_Item.findOne({
+        where: {
+          userId: user.id,
+          itemId: item
+        }
+      })
+      const itemQuantity = userItem.quantity + 1
+      await userItem.update({quantity: itemQuantity})
+      res.send(await userItem.save());
+    }
+    else {
+      user.addItem(item, { through: { quantity: 1 } } )
+      res.send()
+    }
+  } catch (error) {
+    next(error)
+  }
+})
