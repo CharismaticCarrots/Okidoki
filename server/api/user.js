@@ -72,15 +72,15 @@ router.get('/items', requireToken, async (req, res, next) => {
   }
 })
 
-router.post('/items', requireToken, async (req, res, next) => {
+router.post('/items/:id', requireToken, async (req, res, next) => {
   try {
     const user = req.user;
-    const item = req.body;
+    const item = Number(req.params.id)
     if (await user.hasItem(item)){
       const userItem = await User_Item.findOne({
         where: {
           userId: user.id,
-          itemId: item.id
+          itemId: item
         }
       })
       const itemQuantity = userItem.quantity + 1
