@@ -21,12 +21,13 @@ const DokiHome = ({ navigation }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const now = currentDate.toISOString();
-  const hatchProgressData = useHatchProgress();
+  const hatchProgressData = useHatchProgress(now);
   const isEgg = hatchProgressData.hatchProgress < 1;
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    // setCurrentDate(new Date());
+    setCurrentDate(new Date());
+    console.log(new Date());
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
