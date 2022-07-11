@@ -5,12 +5,11 @@ import { useUserData } from '../../hooks/useUserData';
 
 const Logout = ({ navigation }) => {
   const { user, logout } = useUserData();
-
   if (!user) {
     return <ActivityIndicator size="large" />;
   }
   return (
-    <View>
+    <View style={{margin:100}}>
       <Button
         title="logout"
         onPress={() => {
