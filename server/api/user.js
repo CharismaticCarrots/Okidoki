@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Doki, User_Doki } = require('../db');
+const { User, Doki, User_Doki, User_Item } = require('../db');
 const { requireToken } = require('./middleware.js');
 
 module.exports = router;
@@ -61,3 +61,17 @@ router.put('/doki', requireToken, async (req, res, next) => {
     next(err);
   }
 });
+
+router.get('items', requireToken, async (req, res, next) => {
+  try {
+    const user = req.user;
+    const items = await User_Item.findAll({
+      where: {
+        userId: user.id
+      }
+    })
+    res.send(items)
+  } catch (error) {
+    next(error)
+  }
+})

@@ -62,7 +62,7 @@ const seed = async () => {
       {
         itemName: 'Ball',
         price: 5,
-        imageUrl: '../../assets/items/ball.png'
+        imageUrl: '/assets/items/ball.png'
       })
     ball.addUser(user1, { through : {
       quantity: 1
