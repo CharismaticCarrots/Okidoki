@@ -16,6 +16,7 @@ import {
   StyledHeading2,
   StyledHeading1,
   StyledHealthStatContainer,
+  StyledDokiHomeBackground,
 } from './styles';
 
 import {
@@ -58,80 +59,85 @@ const HealthStat = () => {
   };
 
   return (
-    <StyledHealthStatContainer style={styles.background}>
-      <StyledHeading1>Health Stats</StyledHeading1>
-      <View>
-        <StyledHeading2>Steps: Last 7 Days</StyledHeading2>
+    <StyledDokiHomeBackground
+      source={require('../../assets/backgrounds/healthStats.png')}
+      resizeMode="cover"
+    >
+      <StyledHealthStatContainer style={styles.background}>
+        <StyledHeading1>Health Stats</StyledHeading1>
         <View>
-          <BarChart
-            data={data}
-            width={350}
-            height={250}
-            fromZero={true}
-            showValuesOnTopOfBars={true}
-            chartConfig={{
-              backgroundColor: '#4fa4b8',
-              backgroundGradientFrom: '#397887',
-              backgroundGradientTo: '#397887',
-              decimalPlaces: 0,
-              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-              labelColor: (opacity = 1) => `rgba(5, 5, 5, ${opacity})`,
-              barPercentage: 0.7,
-              propsForLabels: {
-                fontSize: '13',
-                fontWeight: 'bold',
-              },
-            }}
-            style={{
-              borderRadius: 16,
-              margin: 5,
-              padding: 5,
-            }}
-          />
+          <StyledHeading2>Steps: Last 7 Days</StyledHeading2>
+          <View>
+            <BarChart
+              data={data}
+              width={350}
+              height={250}
+              fromZero={true}
+              showValuesOnTopOfBars={true}
+              chartConfig={{
+                backgroundColor: '#4fa4b8',
+                backgroundGradientFrom: '#397887',
+                backgroundGradientTo: '#397887',
+                decimalPlaces: 0,
+                color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                labelColor: (opacity = 1) => `rgba(5, 5, 5, ${opacity})`,
+                barPercentage: 0.7,
+                propsForLabels: {
+                  fontSize: '13',
+                  fontWeight: 'bold',
+                },
+              }}
+              style={{
+                borderRadius: 16,
+                margin: 5,
+                padding: 5,
+              }}
+            />
+          </View>
         </View>
-      </View>
 
-      <StyledHeading2>Today&apos;s Activity</StyledHeading2>
-      <ScrollView
-        style={styles.scrollView}
-        // refreshControl={
-        //   <RefreshControl
-        //     refreshing={refreshing}
-        //     onRefresh={onRefresh}
-        //   />}
-      >
-        <Card.Title
-          style={styles.card}
-          title={steps}
-          subtitle="Step Count"
-          left={() => (
-            <FontAwesome5 name={'shoe-prints'} style={styles.icons} />
-          )}
-        />
-        <Card.Title
-          style={styles.card}
-          title={dailyDistance}
-          subtitle="Running / Walking Distance"
-          left={() => <FontAwesome5 name={'running'} style={styles.icons} />}
-        />
-        <Card.Title
-          style={styles.card}
-          title={flights}
-          subtitle="Flights Climbed"
-          left={() => (
-            <MaterialCommunityIcons name="stairs" style={styles.icons} />
-          )}
-        />
-        <Card.Title
-          style={styles.card}
-          title={activeEnergy}
-          subtitle="Active Calories Burned"
-          left={() => (
-            <MaterialCommunityIcons name="fire" style={styles.icons} />
-          )}
-        />
-      </ScrollView>
-    </StyledHealthStatContainer>
+        <StyledHeading2>Today&apos;s Activity</StyledHeading2>
+        <ScrollView
+          style={styles.scrollView}
+          // refreshControl={
+          //   <RefreshControl
+          //     refreshing={refreshing}
+          //     onRefresh={onRefresh}
+          //   />}
+        >
+          <Card.Title
+            style={styles.card}
+            title={steps}
+            subtitle="Step Count"
+            left={() => (
+              <FontAwesome5 name={'shoe-prints'} style={styles.icons} />
+            )}
+          />
+          <Card.Title
+            style={styles.card}
+            title={dailyDistance}
+            subtitle="Running / Walking Distance"
+            left={() => <FontAwesome5 name={'running'} style={styles.icons} />}
+          />
+          <Card.Title
+            style={styles.card}
+            title={flights}
+            subtitle="Flights Climbed"
+            left={() => (
+              <MaterialCommunityIcons name="stairs" style={styles.icons} />
+            )}
+          />
+          <Card.Title
+            style={styles.card}
+            title={activeEnergy}
+            subtitle="Active Calories Burned"
+            left={() => (
+              <MaterialCommunityIcons name="fire" style={styles.icons} />
+            )}
+          />
+        </ScrollView>
+      </StyledHealthStatContainer>
+    </StyledDokiHomeBackground>
   );
 };
 
@@ -144,10 +150,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 8,
   },
-  background: {
-    backgroundColor: '#4FA4B8',
-    height: '100%',
-  },
+  // background: {
+  //   backgroundColor: '#4FA4B8',
+  //   height: '100%',
+  // },
   chart: {
     paddingRight: 20,
     paddingLeft: 30,
