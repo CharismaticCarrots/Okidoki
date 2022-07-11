@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import axios from 'axios';
 import { API_URL } from '../../secrets.js';
 import * as SecureStore from 'expo-secure-store';
@@ -12,18 +12,24 @@ const fetchUserData = async () => {
         authorization: token,
       },
     });
+
     return data;
   }
 };
 
 export const useUserData = () => {
-  const {isLoading, isError, error, data : user } = useQuery(['user'], fetchUserData);
+  const {
+    isLoading,
+    isError,
+    error,
+    data: user,
+  } = useQuery('user', fetchUserData);
+  const queryClient = useQueryClient();
 
-  if (isLoading) {
-    console.log("LOADING")
-  } else if (isError) {
-    console.log("ERROR:", error);
-  } else {
-    return user;
-  }
+  const logout = () => {
+    queryClient.removeQueries('user');
+  };
+
+  //probably return an object, with functions like logout
+  return { user, logout, isError, isLoading, error };
 };
