@@ -1,15 +1,12 @@
+import React, { useCallback, useEffect, useState } from 'react';
 import { HealthKitProvider } from './Healthkit';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Provider as PaperProvider } from 'react-native-paper';
-
-import * as Font from 'expo-font';
+// Fonts
 import * as SplashScreen from 'expo-splash-screen';
-import React, { useState, useEffect, useCallback } from 'react';
-import useFonts from '../fonts';
-import AppLoading from 'expo-app-loading';
-
+import * as Font from 'expo-font';
+// Components
 import Home from './components/Home';
 import SetGoal from './components/signUp/SetGoal';
 import DokiHome from './components/dokiHome/DokiHome';
@@ -27,18 +24,34 @@ const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [IsReady, SetIsReady] = useState(false);
-  const LoadFonts = async () => {
-    await useFonts();
-  };
-  if (!IsReady) {
-    return (
-      <AppLoading
-        startAsync={LoadFonts}
-        onFinish={() => SetIsReady(true)}
-        onError={() => {}}
-      />
-    );
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+        await Font.loadAsync({
+          Singularity: require('../assets/fonts/Singularity.ttf'),
+          Antipasto: require('../assets/fonts/Antipasto.ttf'),
+          AntipastoBold: require('../assets/fonts/Antipasto-Bold.ttf'),
+        });
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
   }
 
   return (
@@ -47,6 +60,7 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Links">
             <Stack.Screen
+              onLayout={onLayoutRootView}
               name="Links"
               component={Links}
               options={{ title: 'Links Page' }}

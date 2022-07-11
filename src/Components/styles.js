@@ -26,7 +26,7 @@ const StyledLogoHeading = styled(Text)`
   font-weight: 500;
   text-align: center;
   color: ${colors.primary};
-  font-family: 'singularity';
+  font-family: 'Singularity';
   letter-spacing: 2px;
 `;
 
@@ -36,7 +36,7 @@ const StyledHeading1 = styled(Text)`
   font-weight: 500;
   text-align: center;
   margin-bottom: 20px;
-  font-family: 'antipasto-bold';
+  font-family: 'AntipastoBold';
   letter-spacing: 1px;
 `;
 
@@ -46,7 +46,7 @@ const StyledHeading2 = styled(Text)`
   font-weight: 500;
   text-align: center;
   margin-bottom: 10px;
-  font-family: 'singularity';
+  font-family: 'Singularity';
 `;
 
 const StyledContainer = styled(View)`
@@ -79,7 +79,7 @@ const StyledFormTextInput = styled(TextInput)`
   padding: 15px;
   font-size: 24px;
   margin-bottom: 4px;
-  font-family: 'singularity';
+  font-family: 'Singularity';
   color: ${colors.text.dark};
 `;
 
@@ -91,7 +91,7 @@ const StyledFormButton = styled(TouchableOpacity)`
 `;
 
 const StyledFormButtonText = styled(Text)`
-  font-family: 'singularity';
+  font-family: 'Singularity';
   font-size: 24px;
   color: ${colors.secondary};
   letter-spacing: 0.5px;
@@ -99,7 +99,7 @@ const StyledFormButtonText = styled(Text)`
 
 const StyledFormSuggest = styled(Text)`
   color: #333;
-  font-family: 'singularity';
+  font-family: 'Singularity';
   font-size: 20px;
   text-align: center;
 `;
@@ -114,7 +114,7 @@ const StyledLoginOptionsContainer = styled(View)`
 `;
 
 const StyledLoginOptionsDescription = styled(Text)`
-  font-family: 'antipasto-bold';
+  font-family: 'AntipastoBold';
   letter-spacing: 1px;
   font-size: 20px;
   color: ${colors.primary};
@@ -179,7 +179,7 @@ const StyledDokiName = styled(Text)`
   font-size: 30px;
   font-weight: 800;
   text-align: center;
-  font-family: 'singularity';
+  font-family: 'Singularity';
   margin-bottom: 20px;
 `;
 
@@ -215,7 +215,7 @@ const StyledProgressText = styled(Text)`
   padding: 5px 0px;
   font-size: 35px;
   font-weight: 800;
-  font-family: 'singularity';
+  font-family: 'Singularity';
 `;
 
 const StyledProgressTextSmall = styled(StyledProgressText)`
@@ -239,7 +239,7 @@ const StyledStepCountContainer = styled(StyledCarrotCountContainer)`
 const StyledCounterText = styled(Text)`
   font-size: 30px;
   font-weight: 800;
-  font-family: 'singularity';
+  font-family: 'Singularity';
   margin: 10px;
 `;
 
