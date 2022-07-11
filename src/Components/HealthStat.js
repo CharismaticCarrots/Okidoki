@@ -131,21 +131,6 @@ const HealthStat = () => {
           )}
         />
       </ScrollView>
-      {/* <ScrollView>
-        {dailySteps.map((day) => {
-          return (
-            <StyledDayContainer>
-              <Surface style={styles.surface} elevation={4}>
-                <StyledInternalContainer>
-                  <Text>{format(parseISO(day.startDate), 'eeee')}: </Text>
-
-                  <Text>{day.value} Steps</Text>
-                </StyledInternalContainer>
-              </Surface>
-            </StyledDayContainer>
-          );
-        })}
-      </ScrollView> */}
     </StyledHealthStatContainer>
   );
 };
