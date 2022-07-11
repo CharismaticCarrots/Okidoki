@@ -23,22 +23,25 @@ const DokiView = () => {
   const [userDoki, setUserDoki] = useState();
   const [curFullnessLvl, setCurFullnessLvl] = useState(0);
   const stepCount = useDailyStepCount();
-  const user = useUserData();
+  const { user } = useUserData();
   const userDokiData = useUserDokiData();
 
-  useEffect(()=> {
+  useEffect(() => {
     if (user) {
       setCurCarrotCount(user.carrotCount);
     }
   }, [user]);
 
-  useEffect(()=> {
+  useEffect(() => {
     if (userDokiData) {
-      userDokiData.type = "fox" // Dummy data to view different sprites
+      userDokiData.type = 'fox'; // Dummy data to view different sprites
       setUserDoki(userDokiData);
 
       const { user_doki } = userDokiData;
-      const hrsSinceLastFed = Math.floor((new Date().getTime() - new Date(user_doki.lastFedAt).getTime())/(3600000))
+      const hrsSinceLastFed = Math.floor(
+        (new Date().getTime() - new Date(user_doki.lastFedAt).getTime()) /
+          3600000
+      );
       setCurFullnessLvl(user_doki.lastFedFullnessLevel - hrsSinceLastFed);
     }
   }, [userDokiData]);
@@ -46,47 +49,57 @@ const DokiView = () => {
   const userDokiMutation = useMutation(async (userDokiUpdate) => {
     const token = await SecureStore.getItemAsync('TOKEN');
     if (token) {
-      const { data: updatedUserDoki } = await axios.put(`http://${API_URL}/api/user/doki`, userDokiUpdate, {
-        headers: {
-          authorization: token,
-        },
-      });
+      const { data: updatedUserDoki } = await axios.put(
+        `http://${API_URL}/api/user/doki`,
+        userDokiUpdate,
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
       return updatedUserDoki;
     }
   });
 
-const userMutation = useMutation(async (userUpdate) => {
-  const token = await SecureStore.getItemAsync('TOKEN');
-  if (token) {
-    const { data: updatedUserDoki } = await axios.put(`http://${API_URL}/api/user/`, userUpdate, {
-      headers: {
-        authorization: token,
-      },
-    });
-    return updatedUserDoki;
-  }
-});
+  const userMutation = useMutation(async (userUpdate) => {
+    const token = await SecureStore.getItemAsync('TOKEN');
+    if (token) {
+      const { data: updatedUserDoki } = await axios.put(
+        `http://${API_URL}/api/user/`,
+        userUpdate,
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+      return updatedUserDoki;
+    }
+  });
 
   const feedDoki = () => {
     if (curCarrotCount === 0 || curFullnessLvl === 100) {
-      if (curCarrotCount === 0) console.log("UH OH, OUT OF CARROTS") // Temporary error message
-      if (curFullnessLvl === 100) console.log("DOKI IS TOO FULL RIGHT NOW") // Temporary error message
-
+      if (curCarrotCount === 0) console.log('UH OH, OUT OF CARROTS'); // Temporary error message
+      if (curFullnessLvl === 100) console.log('DOKI IS TOO FULL RIGHT NOW'); // Temporary error message
     } else {
       const userDokiUpdate = {
         lastFedAt: new Date(),
         lastFedFullnessLevel: curFullnessLvl + 1,
       };
       userDokiMutation.mutate(userDokiUpdate, {
-        onSuccess: ({lastFedFullnessLevel}) => {
-          setCurFullnessLvl(lastFedFullnessLevel)
-        }
+        onSuccess: ({ lastFedFullnessLevel }) => {
+          setCurFullnessLvl(lastFedFullnessLevel);
+        },
       });
-      userMutation.mutate({carrotCount: curCarrotCount - 1}, {
-        onSuccess: ({carrotCount}) => {
-          setCurCarrotCount(carrotCount)
+      userMutation.mutate(
+        { carrotCount: curCarrotCount - 1 },
+        {
+          onSuccess: ({ carrotCount }) => {
+            setCurCarrotCount(carrotCount);
+          },
         }
-      });
+      );
     }
   };
 
@@ -101,11 +114,7 @@ const userMutation = useMutation(async (userUpdate) => {
           level={userDoki && userDoki.user_doki.lastPlayedMoodLevel}
           total={100}
         />
-        <DokiProgressBar
-          name="Fullness"
-          level={curFullnessLvl}
-          total={100}
-        />
+        <DokiProgressBar name="Fullness" level={curFullnessLvl} total={100} />
       </StyledOuterProgressBarContainer>
       <StyledOuterCountersContainer>
         <CountDisplay
@@ -117,7 +126,9 @@ const userMutation = useMutation(async (userUpdate) => {
       </StyledOuterCountersContainer>
       <StyledDokiContainer>
         {userDoki && <Doki userDoki={userDoki} />}
-        <StyledDokiName>{userDokiData && userDokiData.user_doki.dokiName}</StyledDokiName>
+        <StyledDokiName>
+          {userDokiData && userDokiData.user_doki.dokiName}
+        </StyledDokiName>
       </StyledDokiContainer>
       <Button onPress={feedDoki} mode="contained">
         Feed Doki

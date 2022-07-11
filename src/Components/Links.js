@@ -58,6 +58,12 @@ const Links = ({ navigation }) => {
             navigation.navigate('HealthStat');
           }}
         />
+        <Button
+          title="Logout"
+          onPress={() => {
+            navigation.navigate('Logout');
+          }}
+        />
       </View>
     </View>
   );
