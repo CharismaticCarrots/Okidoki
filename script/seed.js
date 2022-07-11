@@ -60,9 +60,9 @@ const seed = async () => {
     );
 
     const ball = await Item.create({
-      itemName: 'ball',
+      itemName: 'Ball',
       price: 5,
-      imageUrl: '../../assets/items/ball.png',
+      imageUrl: 'assets/items/ball.png',
     });
 
     ball.addUser(user1, {
