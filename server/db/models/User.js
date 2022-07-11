@@ -100,6 +100,7 @@ User.prototype.toJSON = function () {
     lastName: this.lastName,
     carrotCount: this.carrotCount,
     dailyStepGoal: this.dailyStepGoal,
+    lastCarrotsClaimedAt: this.lastCarrotsClaimedAt,
   };
 };
 
