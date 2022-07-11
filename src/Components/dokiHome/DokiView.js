@@ -3,7 +3,6 @@ import { useMutation } from 'react-query';
 import axios from 'axios';
 import { API_URL } from '../../../secrets';
 import * as SecureStore from 'expo-secure-store';
-import intervalToDuration from 'date-fns/intervalToDuration'
 import { Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
@@ -31,7 +30,7 @@ const DokiView = () => {
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
   const carrotRewardData = getCarrotReward();
-  console.log("CARROTS REWARDED:", carrotReward)
+  console.log("CARROTS REWARDED:", carrotReward) // Temp message to indicate carrots to reward
 
   useEffect(() => {
     if (user) {
