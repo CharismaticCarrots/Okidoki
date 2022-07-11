@@ -8,19 +8,47 @@ import SignUp from './components/signUp/SignUp';
 import SignIn from './components/signIn/SignIn';
 import LoginOptions from './components/LoginOptions';
 import DokiHome from './components/dokiHome/DokiHome';
+import Logout from './components/signIn/Logout';
 import { View } from 'react-native';
-
+import { useUserData } from './hooks/useUserData';
 import { useUserDokiData } from './hooks/useUserDokiData';
 import TabNavigator from './components/NavBar';
 const Stack = createNativeStackNavigator()
 
+export const LogOutNavigator = ({navigation}) => {
+  return (
+    <Stack.Navigator headerMode="screen" >
+      <Stack.Screen
+        name="Logout"
+        component={Logout}
+        options={{ tabBarLabel: 'Logout Screen' }}
+      />
+      <Stack.Screen
+        name="LoginOptions"
+        headerShown = 'false'
+        component={LoginOptions}
+      />
+    </Stack.Navigator>
+  )
+}
+
 export const LoginNavigator = ({navigation}) => {
   const [doki, setUserDoki] = useState(null)
-  
+  const [userToken, setUserToken] = useState(null)
   const userDoki = useUserDokiData()
-  // if (userDoki) {setUserDoki(userDoki)}
+  const { user } = useUserData();
+  if (user) {
+    token = user.token;
+  }
+
+  // useEffect(() => {
+    
+  //     setUserToken(token)
+    
+  // }, [])
+
+
   useEffect(() => {
-    console.log(userDoki, 'DOKIIII')
     if (userDoki){
       setUserDoki(userDoki)
     }

@@ -8,7 +8,8 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import SignIn from './signIn/SignIn';
 import SetGoal from './signUp/SetGoal';
 import DokiView from './dokiHome/DokiHome';
-
+import Logout from './signIn/Logout';
+import { LogOutNavigator } from '../navigation';
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
@@ -44,7 +45,7 @@ const TabNavigator = () => {
                   style={{fontSize: 32}} 
                   color='#333'/>
               )
-            case 'SignIn':
+            case 'User Settings':
               return (
                 <FontAwesome5 
                   name={'shopping-bag'}   
@@ -75,7 +76,10 @@ const TabNavigator = () => {
       })}
       >
         <Tab.Screen name="DokiHome" component={DokiView}/>
-        <Tab.Screen name="SignIn" component={SignIn}/>
+        <Tab.Screen name="User Settings" 
+        component={LogOutNavigator}
+        options={{ tabBarLabel: 'Logout Screen' }}
+        />
         <Tab.Screen name="HEALTH DATA" component={HealthStat}/>
         <Tab.Screen name="SetGoal" component={SetGoal}/>
       </Tab.Navigator>

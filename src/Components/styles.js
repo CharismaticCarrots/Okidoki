@@ -157,8 +157,7 @@ const StyledDokiContainer = styled(View)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 50px;
-  padding-top: 70;
+  margin: 30px;
 `;
 
 const StyledDokiEggContainer = styled(StyledDokiContainer)`
@@ -189,7 +188,8 @@ const StyledOuterProgressBarContainer = styled(View)`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin-top: 20px;
+  margin-top: 90px;
+
 `;
 
 const StyledProgressBarContainer = styled(View)`
@@ -250,7 +250,7 @@ const StyledHealthStatContainer = styled(View)`
   align-items: center;
   width: 100%;
   height: 100%;
-  padding-top:80;
+  padding-top:130px;
 `;
 
 const StyledDayContainer = styled(View)`
