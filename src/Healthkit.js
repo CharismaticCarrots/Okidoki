@@ -4,6 +4,7 @@ import compareAsc from 'date-fns/compareAsc';
 import parseISO from 'date-fns/parseISO';
 
 import React, { useEffect, useState, useContext } from 'react';
+import { startOfDay } from 'date-fns';
 
 const permissions = {
   permissions: {
@@ -173,10 +174,10 @@ export const useDistance = () => {
 export const useActiveEnergy = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [activeCal, setActiveCal] = useState(0);
-  const today = new Date();
+  const today = startOfDay(new Date()).toISOString()
 
   let options = {
-    startDate: subDays(new Date(), 1).toISOString(),
+    startDate: today
   };
   useEffect(() => {
     if (isLoaded) {
