@@ -28,6 +28,7 @@ const SignUp = ({ navigation }) => {
   const mutation = useMutation(
     async (userInfo) => {
       try {
+        console.log(API_URL);
         const { data: user } = await axios.post(
           `http://${API_URL}/auth/signup`,
           userInfo
