@@ -11,7 +11,7 @@ export const useHatchProgress = (now) => {
   console.log({ now });
   const totalSteps = useTotalStepCount(dokiCreatedDate, now);
 
-  const user = useUserData();
+  const { user } = useUserData();
 
   if (user) {
     const { dailyStepGoal } = user;
