@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-native-paper';
+import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
+
 import {
   StyledDokiHomeBackground,
   StyledDokiContainer,
@@ -7,16 +10,16 @@ import {
   StyledOuterCountersContainer,
   StyledDokiName,
 } from '../styles';
+
 import DokiProgressBar from './DokiProgressBar';
 import Doki from './Doki';
 import CountDisplay from './CountDisplay';
+
 import { useDailyStepCount } from '../../Healthkit';
 import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { useMutation } from 'react-query';
-import axios from 'axios';
 import { API_URL } from '../../../secrets';
-import * as SecureStore from 'expo-secure-store';
 
 const DokiView = ({ now }) => {
   const [curCarrotCount, setCurCarrotCount] = useState(0);
