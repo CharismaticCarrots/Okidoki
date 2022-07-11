@@ -45,7 +45,7 @@ const DokiHome = ({ navigation }) => {
             hatchProgressData={hatchProgressData}
           />
         ) : (
-          <DokiView />
+          <DokiView now={now} />
         )}
       </View>
     </ScrollView>

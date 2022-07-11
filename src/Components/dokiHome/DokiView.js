@@ -18,11 +18,11 @@ import axios from 'axios';
 import { API_URL } from '../../../secrets';
 import * as SecureStore from 'expo-secure-store';
 
-const DokiView = () => {
+const DokiView = ({ now }) => {
   const [curCarrotCount, setCurCarrotCount] = useState(0);
   const [userDoki, setUserDoki] = useState();
   const [curFullnessLvl, setCurFullnessLvl] = useState(0);
-  const stepCount = useDailyStepCount();
+  const stepCount = useDailyStepCount(now);
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
 
