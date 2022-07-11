@@ -48,6 +48,10 @@ const User = db.define('user', {
       min: 0,
     },
   },
+  lastCarrotsClaimedAt: {
+    type: Sequelize.DATE,
+    defaultValue: new Date(),
+  },
   dailyStepGoal: {
     type: Sequelize.INTEGER,
     defaultValue: 1000,
