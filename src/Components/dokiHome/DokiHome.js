@@ -20,8 +20,8 @@ const DokiHome = ({ navigation }) => {
 
   const now = currentDate.toISOString();
   const hatchProgressData = getHatchProgress(now);
-  const isEgg = hatchProgressData.hatchProgress < 1;
-  // const isEgg = false;
+  // const isEgg = hatchProgressData.hatchProgress < 1;
+  const isEgg = false; // FOR TESTING: Uncomment this to see Doki instead of DokiEgg
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
