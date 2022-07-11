@@ -38,9 +38,6 @@ const DokiEggView = ({ navigation, hatchProgressData }) => {
         <DokiEgg />
         <StyledDokiName>{userDokiData && userDokiData.user_doki.dokiName}</StyledDokiName>
       </StyledDokiEggContainer>
-      <Button onPress={() => navigation.navigate('DokiView')} mode="contained">
-        Hatch
-      </Button>
     </StyledDokiHomeBackground>
   );
 };
