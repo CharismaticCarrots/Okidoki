@@ -3,9 +3,10 @@ import { View } from 'react-native';
 import DokiEggView from './DokiEggView';
 import DokiView from './DokiView';
 import { useHatchProgress } from '../../hooks/useHatchProgress';
+import { getHatchProgress } from '../../helpers/getHatchProgress';
 
 const DokiHome = ({ navigation }) => {
-  const hatchProgressData = useHatchProgress();
+  const hatchProgressData = getHatchProgress();
   const isEgg = hatchProgressData.hatchProgress < 1;
 
   return (

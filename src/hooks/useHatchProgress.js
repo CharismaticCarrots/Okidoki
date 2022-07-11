@@ -1,23 +1,29 @@
 import { useUserData } from "./useUserData";
 import { useTotalStepCount } from "../Healthkit";
-import add from 'date-fns/add';
+import { useUserDokiData } from "./useUserDokiData";
 
 export const useHatchProgress = () => {
-  // Dummy data for query to GET /api/user/doki createdDate
-  const dokiCreatedDate = new Date().toISOString();;
-  const sevenDaysLater = add(new Date(), {
-    days: 7,
-  }).toISOString();
-
-  const totalSteps =  useTotalStepCount(dokiCreatedDate, sevenDaysLater);
-
+  const userDoki = useUserDokiData();
   const user = useUserData();
 
-  if (user) {
+  let dokiCreatedDate = null;
+
+  if (userDoki) {
+    dokiCreatedDate = userDoki.user_doki.createdAt;
+    console.log("DOKI CREATED DATE", dokiCreatedDate)
+  }
+
+  const totalSteps = useTotalStepCount(dokiCreatedDate);
+
+  if (userDoki && user) {
     const { dailyStepGoal } = user;
     const hatchProgress = totalSteps / dailyStepGoal;
 
-    return { hatchProgress, totalSteps, dailyStepGoal };
+    return {
+      hatchProgress,
+      totalSteps,
+      dailyStepGoal
+    };
   } else {
     return {};
   }
