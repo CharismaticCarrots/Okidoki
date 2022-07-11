@@ -7,7 +7,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useState, useEffect, useCallback } from 'react';
-import useFonts from '../fonts'
+import useFonts from '../fonts';
 import AppLoading from 'expo-app-loading';
 
 import Home from './components/Home';
@@ -21,6 +21,7 @@ import HealthStat from './components/HealthStat';
 import LoginOptions from './components/LoginOptions';
 import SignUp from './components/signUp/SignUp';
 import SignIn from './components/signIn/SignIn';
+import Logout from './components/signIn/Logout';
 
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
@@ -37,8 +38,9 @@ export default function App() {
         onFinish={() => SetIsReady(true)}
         onError={() => {}}
       />
-    )}
-    
+    );
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
       <HealthKitProvider>
@@ -59,6 +61,7 @@ export default function App() {
             <Stack.Screen name="LoginOptions" component={LoginOptions} />
             <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="SignIn" component={SignIn} />
+            <Stack.Screen name="Logout" component={Logout} />
           </Stack.Navigator>
         </NavigationContainer>
       </HealthKitProvider>

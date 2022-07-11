@@ -5,6 +5,7 @@ import {
   Dimensions,
   StyleSheet,
   ScrollView,
+  RefreshControl
 } from 'react-native';
 import { Text, Surface, Card, Avatar } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -23,7 +24,19 @@ import {
   StyledInternalContainer,
 } from './styles';
 
+// const wait = (timeout) => {
+//   return new Promise(resolve => setTimeout(resolve, timeout));
+// }
+
 const HealthStat = () => {
+  // const [refreshing, setRefreshing] = React.useState(false);
+
+  // const onRefresh = React.useCallback(() => {
+  //   setRefreshing(true);
+  //   wait(2000).then(() => setRefreshing(false));
+  // }, []);
+
+
   const dailySteps = useStepCountSamples();
   const flights = `${useFlightsClimbed()} floors`
   const dailyDistance = `${useDistance()} miles`
@@ -42,7 +55,16 @@ const HealthStat = () => {
     ],
   };
 
+  
+
   return (
+    <ScrollView 
+    // refreshControl={
+    //   <RefreshControl
+    //     refreshing={refreshing}
+    //     onRefresh={onRefresh}
+    //   />}
+    >
     <StyledHealthStatContainer style={styles.background}>
       <StyledHeading1>Health Stats</StyledHeading1>
       <View>
@@ -103,6 +125,8 @@ const HealthStat = () => {
         left={() =>  <MaterialCommunityIcons name='fire' style={styles.icons} />}
       />
       
+      
+      
   
       {/* <ScrollView>
         {dailySteps.map((day) => {
@@ -120,6 +144,7 @@ const HealthStat = () => {
         })}
       </ScrollView> */}
     </StyledHealthStatContainer>
+    </ScrollView>
   );
 };
 
