@@ -95,7 +95,7 @@ export const useStepCountSamples = () => {
         setWeekSteps(reformattedWeekSteps);
       });
     }
-  }, [isLoaded]);
+  }, [isLoaded, options.startDate]);
   return weekSteps;
 };
 

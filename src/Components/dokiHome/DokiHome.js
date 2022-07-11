@@ -5,7 +5,9 @@ import {
   RefreshControl,
   StyleSheet,
   Dimensions,
+  SafeAreaView,
 } from 'react-native';
+
 import DokiEggView from './DokiEggView';
 import DokiView from './DokiView';
 import { useHatchProgress } from '../../hooks/useHatchProgress';
@@ -15,18 +17,23 @@ const wait = (timeout) => {
 };
 
 const DokiHome = ({ navigation }) => {
+  const [refreshing, setRefreshing] = useState(false);
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const now = currentDate.toISOString();
   const hatchProgressData = useHatchProgress();
   const isEgg = hatchProgressData.hatchProgress < 1;
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-
+    // setCurrentDate(new Date());
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
   return (
     <SafeAreaView>
       <ScrollView
+        style={styles.scrollView}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }

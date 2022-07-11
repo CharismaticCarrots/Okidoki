@@ -22,8 +22,8 @@ const SignUp = ({ navigation }) => {
     password: '',
   });
 
-  const userObj = useUserData();
-  console.log('User on SignUp: ', userObj);
+  // const userObj = useUserData();
+  // console.log('User on SignUp: ', userObj);
 
   const mutation = useMutation(
     async (userInfo) => {
@@ -38,6 +38,7 @@ const SignUp = ({ navigation }) => {
     },
     {
       onSuccess: () => {
+        console.log('succes?');
         navigation.navigate('SetGoal');
       },
     }

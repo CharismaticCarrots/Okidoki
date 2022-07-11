@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Button } from 'react-native-paper';
 
 import {
@@ -15,8 +14,6 @@ import CountDisplay from './CountDisplay';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
 
 const DokiEggView = ({ navigation, hatchProgressData }) => {
-  const [refreshing, setRefreshing] = useState(false);
-
   const { hatchProgress, totalSteps, dailyStepGoal } = hatchProgressData;
 
   const userDokiData = useUserDokiData();
