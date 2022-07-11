@@ -5,7 +5,7 @@ import {
   Dimensions,
   StyleSheet,
   ScrollView,
-  RefreshControl
+  RefreshControl,
 } from 'react-native';
 import { Text, Surface, Card, Avatar } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -15,8 +15,13 @@ import format from 'date-fns/format';
 import { BarChart } from 'react-native-chart-kit';
 import { StyledHeading2, StyledHeading1 } from './styles';
 import Steps from './Steps';
-import { useStepCountSamples, useFlightsClimbed, useDistance, useActiveEnergy, useDailyStepCount } from '../Healthkit';
-
+import {
+  useStepCountSamples,
+  useFlightsClimbed,
+  useDistance,
+  useActiveEnergy,
+  useDailyStepCount,
+} from '../Healthkit';
 
 import {
   StyledHealthStatContainer,
@@ -36,12 +41,11 @@ const HealthStat = () => {
   //   wait(2000).then(() => setRefreshing(false));
   // }, []);
 
-
   const dailySteps = useStepCountSamples();
-  const flights = `${useFlightsClimbed()} floors`
-  const dailyDistance = `${useDistance()} miles`
-  const activeEnergy = `${useActiveEnergy()} cal`
-  const steps = `${useDailyStepCount()} steps`
+  const flights = `${useFlightsClimbed()} floors`;
+  const dailyDistance = `${useDistance()} miles`;
+  const activeEnergy = `${useActiveEnergy()} cal`;
+  const steps = `${useDailyStepCount()} steps`;
   if (!dailySteps) {
     return <ActivityIndicator size="large" />;
   }
@@ -55,21 +59,12 @@ const HealthStat = () => {
     ],
   };
 
-  
-
   return (
-    <ScrollView 
-    // refreshControl={
-    //   <RefreshControl
-    //     refreshing={refreshing}
-    //     onRefresh={onRefresh}
-    //   />}
-    >
     <StyledHealthStatContainer style={styles.background}>
       <StyledHeading1>Health Stats</StyledHeading1>
       <View>
         <StyledHeading2>Steps: Last 7 Days</StyledHeading2>
-        <View >
+        <View>
           <BarChart
             data={data}
             width={350}
@@ -90,39 +85,54 @@ const HealthStat = () => {
               },
             }}
             style={{
-                borderRadius: 16,
-                margin: 5,
-                padding:5
+              borderRadius: 16,
+              margin: 5,
+              padding: 5,
             }}
           />
         </View>
       </View>
+
       <StyledHeading2>Today's Activity</StyledHeading2>
-      <Card.Title
-        style={styles.card}
-        title={steps}
-        subtitle="Step Count"
-        left={() =>  <FontAwesome5 name={'shoe-prints'} style={styles.icons} />}
-      />
-      <Card.Title
-        style={styles.card}
-        title={dailyDistance}
-        subtitle="Running / Walking Distance"
-        left={() =>  <FontAwesome5 name={'running'} style={styles.icons} />}
-      />
-      <Card.Title
-        style={styles.card}
-        title={flights}
-        subtitle="Flights Climbed"
-        left={() =>  <MaterialCommunityIcons name='stairs' style={styles.icons} />}
-      />
-      <Card.Title
-        style={styles.card}
-        title={activeEnergy}
-        subtitle="Active Calories Burned"
-        left={() =>  <MaterialCommunityIcons name='fire' style={styles.icons} />}
-      />
-      
+      <ScrollView
+        style={styles.scrollView}
+        // refreshControl={
+        //   <RefreshControl
+        //     refreshing={refreshing}
+        //     onRefresh={onRefresh}
+        //   />}
+      >
+        <Card.Title
+          style={styles.card}
+          title={steps}
+          subtitle="Step Count"
+          left={() => (
+            <FontAwesome5 name={'shoe-prints'} style={styles.icons} />
+          )}
+        />
+        <Card.Title
+          style={styles.card}
+          title={dailyDistance}
+          subtitle="Running / Walking Distance"
+          left={() => <FontAwesome5 name={'running'} style={styles.icons} />}
+        />
+        <Card.Title
+          style={styles.card}
+          title={flights}
+          subtitle="Flights Climbed"
+          left={() => (
+            <MaterialCommunityIcons name="stairs" style={styles.icons} />
+          )}
+        />
+        <Card.Title
+          style={styles.card}
+          title={activeEnergy}
+          subtitle="Active Calories Burned"
+          left={() => (
+            <MaterialCommunityIcons name="fire" style={styles.icons} />
+          )}
+        />
+      </ScrollView>
       {/* <ScrollView>
         {dailySteps.map((day) => {
           return (
@@ -139,7 +149,6 @@ const HealthStat = () => {
         })}
       </ScrollView> */}
     </StyledHealthStatContainer>
-    </ScrollView>
   );
 };
 
@@ -156,25 +165,28 @@ const styles = StyleSheet.create({
     backgroundColor: '#4FA4B8',
     height: '100%',
   },
-  chart:{
-    paddingRight:20,
+  chart: {
+    paddingRight: 20,
     paddingLeft: 30,
     borderRadius: 16,
   },
   card: {
     backgroundColor: '#ffefb4',
     borderRadius: 10,
-    padding:3,
-    paddingLeft:20,
-    marginVertical:10,
-    marginHorizontal:20,
-    fontFamily:"singularity"
+    padding: 3,
+    paddingLeft: 20,
+    marginVertical: 10,
+    marginHorizontal: 20,
+    fontFamily: 'singularity',
   },
-  icons:{
+  icons: {
     padding: 5,
-    fontSize:29,
-    overflow:'hidden'
-  }
+    fontSize: 29,
+    overflow: 'hidden',
+  },
+  scrollView: {
+    width: '100%',
+  },
 });
 
 export default HealthStat;
