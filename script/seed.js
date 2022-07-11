@@ -1,4 +1,4 @@
-const { db, Doki, User } = require('../server/db/');
+const { db, Doki, User, Item } = require('../server/db/');
 const sub = require('date-fns/sub')
 
 const dokis = [
@@ -58,6 +58,16 @@ const seed = async () => {
         return User.create(user);
       })
     );
+    const ball = await Item.create(
+      {
+        itemName: 'Ball',
+        price: 5,
+        imageUrl: '../../assets/items/ball.png'
+      })
+    ball.addUser(user1, { through : {
+      quantity: 1
+    }})
+
     await catDoki.addUser(user1, { through: {
       dokiName: 'Conbot',
       lastFedAt: new Date(),
