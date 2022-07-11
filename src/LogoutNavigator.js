@@ -4,11 +4,11 @@ import LoginOptions from './components/LoginOptions';
 import Logout from './components/signIn/Logout';
 import SignIn from './components/signIn/SignIn';
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
-export const LogOutNavigator = ({navigation}) => {
+export const LogOutNavigator = ({ navigation }) => {
   return (
-    <Stack.Navigator headerMode="screen" >
+    <Stack.Navigator headerMode="screen">
       <Stack.Screen
         name="Logout"
         component={Logout}
@@ -16,14 +16,10 @@ export const LogOutNavigator = ({navigation}) => {
       />
       <Stack.Screen
         name="LoginOptions"
-        headerShown = 'false'
+        headerShown="false"
         component={LoginOptions}
       />
-      <Stack.Screen
-        name="SignIn"
-        headerShown = 'false'
-        component={SignIn}
-      />
+      <Stack.Screen name="SignIn" headerShown="false" component={SignIn} />
     </Stack.Navigator>
-  )
-}
+  );
+};

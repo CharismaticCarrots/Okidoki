@@ -7,72 +7,74 @@ import HealthStat from './HealthStat';
 import SignIn from './signIn/SignIn';
 import SetGoal from './signUp/SetGoal';
 import DokiView from './dokiHome/DokiHome';
-import { LogOutNavigator } from '../Logout Navigator';
+import { LogOutNavigator } from '../LogoutNavigator';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   return (
-      <Tab.Navigator
+    <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarOptions: {
           style: {
-              backgroundColor: '#000',
-          }},
+            backgroundColor: '#000',
+          },
+        },
         tabBarShowLabel: false,
         tabBarStyle: [
           {
-            display: "flex",
-            paddingTop:13,
+            display: 'flex',
+            paddingTop: 13,
             backgroundColor: '#59b2ff',
           },
-          null
+          null,
         ],
         tabBarIcon: () => {
           switch (route.name) {
             case 'DokiHome':
               return (
-                <FontAwesome5 
-                  name={'home'} 
-                  style={{fontSize: 32}} 
-                  color='#333'/>
-              )
+                <FontAwesome5
+                  name={'home'}
+                  style={{ fontSize: 32 }}
+                  color="#333"
+                />
+              );
             case 'User Settings':
               return (
-                <FontAwesome5 
-                  name={'shopping-bag'}   
-                  style={{fontSize: 30}}
-                  color='#333'
+                <FontAwesome5
+                  name={'shopping-bag'}
+                  style={{ fontSize: 30 }}
+                  color="#333"
                 />
-              )
+              );
             case 'HEALTH DATA':
               return (
-                <FontAwesome5 
-                name={'chart-bar'}   
-                style={{fontSize: 30}} 
-                color='#333'
-              />
-              )
+                <FontAwesome5
+                  name={'chart-bar'}
+                  style={{ fontSize: 30 }}
+                  color="#333"
+                />
+              );
             case 'SetGoal':
               return (
-                <FontAwesome5 
-                name={'store'}   
-                style={{fontSize: 30}} 
-                color='#333'
-              />
-              )
+                <FontAwesome5
+                  name={'store'}
+                  style={{ fontSize: 30 }}
+                  color="#333"
+                />
+              );
             default:
-              return <View />
+              return <View />;
           }
         },
       })}
-      >
-        <Tab.Screen name="DokiHome" component={DokiView}/>
-        <Tab.Screen name="User Settings" component={LogOutNavigator}/>
-        <Tab.Screen name="HEALTH DATA" component={HealthStat}/>
-        <Tab.Screen name="SetGoal" component={SetGoal}/>
-      </Tab.Navigator>
+    >
+      <Tab.Screen name="DokiHome" component={DokiView} />
+      <Tab.Screen name="User Settings" component={LogOutNavigator} />
+      <Tab.Screen name="HEALTH DATA" component={HealthStat} />
+      <Tab.Screen name="SetGoal" component={SetGoal} />
+    </Tab.Navigator>
   );
 };
 

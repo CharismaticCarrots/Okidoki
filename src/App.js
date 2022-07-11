@@ -1,14 +1,10 @@
 import React from 'react';
 import { HealthKitProvider } from './Healthkit';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// Fonts
 import { useFonts } from 'expo-font';
-import AppLoading from './components/AppLoading';
 import { LoginNavigator } from './navigation';
 
 const queryClient = new QueryClient();
-const Stack = createNativeStackNavigator();
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -17,9 +13,7 @@ export default function App() {
     AntipastoBold: require('../assets/fonts/Antipasto-Bold.ttf'),
   });
 
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
+  if (!fontsLoaded) return null;
 
   return (
     <QueryClientProvider client={queryClient}>

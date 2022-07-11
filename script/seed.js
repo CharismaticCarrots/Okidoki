@@ -1,5 +1,5 @@
-const { db, Doki, User } = require('../server/db/');
-const sub = require('date-fns/sub')
+const { db, Doki, User, Item } = require('../server/db/');
+const sub = require('date-fns/sub');
 
 const dokis = [
   {
@@ -58,26 +58,64 @@ const seed = async () => {
         return User.create(user);
       })
     );
-    await catDoki.addUser(user1, { through: {
-      dokiName: 'Conbot',
-      lastFedAt: new Date(),
-    }});
 
-    await catDoki.addUser(user2, { through: {
-      dokiName: 'Snow Angel',
-      lastFedAt: sub(new Date(), { days: 2 }),
-    }});
+    const ball = await Item.create({
+      itemName: 'Ball',
+      price: 5,
+      imageUrl: 'assets/items/ball.png',
+    });
 
-    await rabbitDoki.addUser(user3, { through: {
-      dokiName: 'Kris Kross',
-      lastFedAt: sub(new Date(), { hours: 5 }),
-    }});
+    ball.addUser(user1, {
+      through: {
+        quantity: 3,
+      },
+    });
 
-    await foxDoki.addUser(user4, { through: {
-      dokiName: 'Ldyster',
-      lastFedAt: sub(new Date(), { hours: 1 }),
-    }});
+    ball.addUser(user2, {
+      through: {
+        quantity: 2,
+      },
+    });
 
+    ball.addUser(user3, {
+      through: {
+        quantity: 2,
+      },
+    });
+
+    ball.addUser(user4, {
+      through: {
+        quantity: 3,
+      },
+    });
+
+    await catDoki.addUser(user1, {
+      through: {
+        dokiName: 'Conbot',
+        lastFedAt: new Date(),
+      },
+    });
+
+    await catDoki.addUser(user2, {
+      through: {
+        dokiName: 'Snow Angel',
+        lastFedAt: sub(new Date(), { days: 2 }),
+      },
+    });
+
+    await rabbitDoki.addUser(user3, {
+      through: {
+        dokiName: 'Kris Kross',
+        lastFedAt: sub(new Date(), { hours: 5 }),
+      },
+    });
+
+    await foxDoki.addUser(user4, {
+      through: {
+        dokiName: 'Ldyster',
+        lastFedAt: sub(new Date(), { hours: 1 }),
+      },
+    });
   } catch (error) {
     console.log(error);
   }
@@ -96,4 +134,4 @@ if (require.main === module) {
       console.error('Oh noes! Something went wrong!');
       console.error(err);
     });
-};
+}
