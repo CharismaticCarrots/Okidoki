@@ -25,6 +25,7 @@ export const LogOutNavigator = ({navigation}) => {
       />
       <Stack.Screen
         name="LoginOptions"
+        headerShown = 'false'
         component={LoginOptions}
       />
     </Stack.Navigator>
@@ -33,31 +34,29 @@ export const LogOutNavigator = ({navigation}) => {
 
 export const LoginNavigator = ({navigation}) => {
   const [doki, setUserDoki] = useState(null)
-  const [userToken, serUserToken] = useState(null)
+  const [userToken, setUserToken] = useState(null)
   const userDoki = useUserDokiData()
   const { user } = useUserData();
   if (user) {
     token = user.token;
   }
-  useEffect(() => {
-    if (user){
-      serUserToken(token)
-    }
-    else {
-      serUserToken(null)
-    }
-  }, [user])
+
+  // useEffect(() => {
+    
+  //     setUserToken(token)
+    
+  // }, [])
 
 
   useEffect(() => {
-    // if (userDoki){
+    if (userDoki){
       setUserDoki(userDoki)
-    // }
+    }
   }, [userDoki])
-  console.log(userToken, 'token')
+
   return (
     <NavigationContainer>
-    {doki && userToken ? <TabNavigator/> :
+    {doki ? <TabNavigator/> :
     (<Stack.Navigator headerMode="screen">
       <Stack.Screen 
         name="LoginOptions" 

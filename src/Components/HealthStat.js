@@ -73,7 +73,6 @@ const HealthStat = () => {
           <BarChart
             data={data}
             width={350}
-            //{Dimensions.get('screen').width}
             height={250}
             fromZero={true}
             showValuesOnTopOfBars={true}
@@ -89,7 +88,6 @@ const HealthStat = () => {
                 fontSize: '13',
                 fontWeight: 'bold',
               },
-              padding:30
             }}
             style={{
                 borderRadius: 16,
@@ -125,9 +123,6 @@ const HealthStat = () => {
         left={() =>  <MaterialCommunityIcons name='fire' style={styles.icons} />}
       />
       
-      
-      
-  
       {/* <ScrollView>
         {dailySteps.map((day) => {
           return (
