@@ -102,7 +102,6 @@ export const useStepCountSamples = () => {
 
 export const useTotalStepCount = (startDate, endDate) => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
-  const [stepSamples, setStepSamples] = useState([]);
   const [totalSteps, setTotalSteps] = useState(0);
 
   console.log({ endDate, totalSteps });
@@ -117,18 +116,15 @@ export const useTotalStepCount = (startDate, endDate) => {
         if (err) {
           return;
         }
-        setStepSamples(results);
+
+        const totalSteps = results.reduce(
+          (totalSteps, curSample) => totalSteps + curSample.value,
+          0
+        );
+        setTotalSteps(totalSteps);
       });
     }
   }, [isLoaded, startDate, endDate]);
-
-  useEffect(() => {
-    const totalSteps = stepSamples.reduce(
-      (totalSteps, curSample) => totalSteps + curSample.value,
-      0
-    );
-    setTotalSteps(totalSteps);
-  }, [stepSamples]);
 
   return totalSteps;
 };
