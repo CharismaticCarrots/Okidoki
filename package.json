@@ -60,6 +60,8 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@testing-library/react-native": "^10.1.1",
+    "eslint": "^8.19.0",
+    "eslint-plugin-react": "^7.30.1",
     "nodemon": "^2.0.19",
     "react-test-renderer": "^17.0.2"
   },

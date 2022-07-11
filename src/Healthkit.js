@@ -64,20 +64,21 @@ export const useDailyStepCount = (startDate) => {
         setSteps(results.value);
       });
     }
-  }, [isLoaded, startDate]);
+  }, [AppleHealthKit, isLoaded, startDate]);
   return steps;
 };
 
 export const useStepCountSamples = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [weekSteps, setWeekSteps] = useState(null);
-  let options = {
-    startDate: subDays(new Date(), 7).toISOString(),
-  };
 
   console.log('week of steps');
 
   useEffect(() => {
+    let options = {
+      startDate: subDays(new Date(), 7).toISOString(),
+    };
+
     if (isLoaded) {
       AppleHealthKit.getDailyStepCountSamples(options, (err, results) => {
         if (err) {
@@ -105,7 +106,7 @@ export const useStepCountSamples = () => {
         setWeekSteps(reformattedWeekSteps);
       });
     }
-  }, [isLoaded, options.startDate]);
+  }, [AppleHealthKit, isLoaded]);
   return weekSteps;
 };
 
@@ -132,7 +133,7 @@ export const useTotalStepCount = (startDate, endDate) => {
         setTotalSteps(totalSteps);
       });
     }
-  }, [isLoaded, startDate, endDate]);
+  }, [isLoaded, startDate, endDate, AppleHealthKit]);
 
   return totalSteps;
 };
@@ -150,7 +151,7 @@ export const useFlightsClimbed = () => {
         setFlights(results.value);
       });
     }
-  }, [isLoaded]);
+  }, [AppleHealthKit, isLoaded]);
   return flights;
 };
 
@@ -158,10 +159,12 @@ export const useFlightsClimbed = () => {
 export const useDistance = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [distance, setDistance] = useState(0);
-  let options = {
-    unit: 'mile',
-  };
+
   useEffect(() => {
+    let options = {
+      unit: 'mile',
+    };
+
     if (isLoaded) {
       AppleHealthKit.getDistanceWalkingRunning(options, (err, results) => {
         if (err) {
@@ -170,7 +173,7 @@ export const useDistance = () => {
         setDistance(results.value);
       });
     }
-  }, [isLoaded]);
+  }, [AppleHealthKit, isLoaded]);
   return distance;
 };
 
@@ -211,7 +214,7 @@ export const useActiveEnergy = () => {
         }
       });
     }
-  }, [isLoaded]);
+  }, [AppleHealthKit, isLoaded, today]);
 
   return activeCal;
 };
