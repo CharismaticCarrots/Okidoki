@@ -1,31 +1,24 @@
+import React from 'react';
 import { HealthKitProvider } from './Healthkit';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as Font from 'expo-font';
-import React, { useState } from 'react';
-import useFonts from '../fonts';
-import AppLoading from 'expo-app-loading';
-
+// Fonts
+import { useFonts } from 'expo-font';
+import AppLoading from './components/AppLoading';
 import { LoginNavigator } from './navigation';
 
 const queryClient = new QueryClient();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [IsReady, SetIsReady] = useState(false);
-  const [doki, setUserDoki] = useState(null);
+  let [fontsLoaded] = useFonts({
+    Singularity: require('../assets/fonts/singularity.ttf'),
+    Antipasto: require('../assets/fonts/Antipasto.ttf'),
+    AntipastoBold: require('../assets/fonts/Antipasto-Bold.ttf'),
+  });
 
-  const LoadFonts = async () => {
-    await useFonts();
-  };
-  if (!IsReady) {
-    return (
-      <AppLoading
-        startAsync={LoadFonts}
-        onFinish={() => SetIsReady(true)}
-        onError={() => {}}
-      />
-    );
+  if (!fontsLoaded) {
+    return <AppLoading />;
   }
 
   return (
