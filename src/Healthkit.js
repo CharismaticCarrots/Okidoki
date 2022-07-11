@@ -171,10 +171,11 @@ export const useDistance = () => {
 export const useActiveEnergy = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [activeCal, setActiveCal] = useState(0);
-  const today = new Date()
+  const today = new Date().toISOString().slice(0,11).concat('00:00:00.00Z')
+  // const newDate = today.slice(0,11).concat('00:00:00.00Z')
   
   let options = {
-    startDate: subDays(new Date(), 1).toISOString(),
+    startDate: today,
   }
   useEffect(() => {
     if (isLoaded) {
@@ -195,7 +196,7 @@ export const useActiveEnergy = () => {
             return previous;
           }
         }, []);
-        
+        console.log(today, options)
         if(reformattedDailyEnergy[0]){setActiveCal(reformattedDailyEnergy[0].value)}
       });
     }

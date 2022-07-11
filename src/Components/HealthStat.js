@@ -125,9 +125,6 @@ const HealthStat = () => {
         left={() =>  <MaterialCommunityIcons name='fire' style={styles.icons} />}
       />
       
-      
-      
-  
       {/* <ScrollView>
         {dailySteps.map((day) => {
           return (
