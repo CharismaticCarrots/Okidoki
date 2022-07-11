@@ -31,25 +31,23 @@ const DokiHome = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView>
-      <ScrollView
-        style={styles.scrollView}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        <View>
-          {isEgg ? (
-            <DokiEggView
-              navigation={navigation}
-              hatchProgressData={hatchProgressData}
-            />
-          ) : (
-            <DokiView />
-          )}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView
+      style={styles.scrollView}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
+      <View>
+        {isEgg ? (
+          <DokiEggView
+            navigation={navigation}
+            hatchProgressData={hatchProgressData}
+          />
+        ) : (
+          <DokiView />
+        )}
+      </View>
+    </ScrollView>
   );
 };
 
@@ -59,7 +57,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    heigth: Dimensions.get('screen').height,
     backgroundColor: '#4fa4b8',
   },
 });
