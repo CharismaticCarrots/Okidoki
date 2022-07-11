@@ -10,18 +10,18 @@ import LoginOptions from './components/LoginOptions';
 import DokiHome from './components/dokiHome/DokiHome';
 import Logout from './components/signIn/Logout';
 import { View } from 'react-native';
-
+import { useUserData } from './hooks/useUserData';
 import { useUserDokiData } from './hooks/useUserDokiData';
 import TabNavigator from './components/NavBar';
 const Stack = createNativeStackNavigator()
 
 export const LogOutNavigator = ({navigation}) => {
   return (
-    <Stack.Navigator headerMode="screen">
+    <Stack.Navigator headerMode="screen" >
       <Stack.Screen
         name="Logout"
         component={Logout}
-        options={{ tabBarLabel: 'Logout' }}
+        options={{ tabBarLabel: 'Logout Screen' }}
       />
       <Stack.Screen
         name="LoginOptions"
@@ -33,19 +33,31 @@ export const LogOutNavigator = ({navigation}) => {
 
 export const LoginNavigator = ({navigation}) => {
   const [doki, setUserDoki] = useState(null)
-  
+  const [userToken, serUserToken] = useState(null)
   const userDoki = useUserDokiData()
-  // if (userDoki) {setUserDoki(userDoki)}
+  const { user } = useUserData();
+  if (user) {
+    token = user.token;
+  }
   useEffect(() => {
-    console.log(userDoki, 'DOKIIII')
-    if (userDoki){
-      setUserDoki(userDoki)
+    if (user){
+      serUserToken(token)
     }
-  }, [userDoki])
+    else {
+      serUserToken(null)
+    }
+  }, [user])
 
+
+  useEffect(() => {
+    // if (userDoki){
+      setUserDoki(userDoki)
+    // }
+  }, [userDoki])
+  console.log(userToken, 'token')
   return (
     <NavigationContainer>
-    {doki ? <TabNavigator/> :
+    {doki && userToken ? <TabNavigator/> :
     (<Stack.Navigator headerMode="screen">
       <Stack.Screen 
         name="LoginOptions" 

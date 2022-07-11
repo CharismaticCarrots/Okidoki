@@ -45,7 +45,7 @@ const TabNavigator = () => {
                   style={{fontSize: 32}} 
                   color='#333'/>
               )
-            case 'Logout':
+            case 'User Settings':
               return (
                 <FontAwesome5 
                   name={'shopping-bag'}   
@@ -76,12 +76,9 @@ const TabNavigator = () => {
       })}
       >
         <Tab.Screen name="DokiHome" component={DokiView}/>
-        <Tab.Screen name="Logout" 
-        //  children={() => {
-        //   <LogOutNavigator/>
-        // }}
+        <Tab.Screen name="User Settings" 
         component={LogOutNavigator}
-        options={{ tabBarLabel: 'Logout' }}
+        options={{ tabBarLabel: 'Logout Screen' }}
         />
         <Tab.Screen name="HEALTH DATA" component={HealthStat}/>
         <Tab.Screen name="SetGoal" component={SetGoal}/>
