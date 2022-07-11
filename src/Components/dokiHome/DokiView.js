@@ -19,14 +19,14 @@ import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { getCarrotReward } from '../../helpers/getCarrotReward';
 
-const DokiView = () => {
+const DokiView = ({ now }) => {
   const [curCarrotCount, setCurCarrotCount] = useState(0);
   const [userDoki, setUserDoki] = useState();
   const [curFullnessLvl, setCurFullnessLvl] = useState(0);
   const [carrotReward, setCarrotReward] = useState(null);
   const [carrotsClaimed, setCarrotsClaimed] = useState(false);
 
-  const stepCount = useDailyStepCount();
+  const stepCount = useDailyStepCount(now);
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
   const carrotRewardData = getCarrotReward();

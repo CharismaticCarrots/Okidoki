@@ -1,26 +1,64 @@
-import React from 'react';
-import { View } from 'react-native';
-import { Button } from 'react-native-paper';
+import React, { useState, useCallback, useEffect } from 'react';
+import {
+  View,
+  ScrollView,
+  RefreshControl,
+  StyleSheet,
+} from 'react-native';
+
 import DokiEggView from './DokiEggView';
 import DokiView from './DokiView';
 import { getHatchProgress } from '../../helpers/getHatchProgress';
 
+const wait = (timeout) => {
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+};
+
 const DokiHome = ({ navigation }) => {
-  const hatchProgressData = getHatchProgress();
+  const [refreshing, setRefreshing] = useState(false);
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const now = currentDate.toISOString();
+  const hatchProgressData = getHatchProgress(now);
   const isEgg = hatchProgressData.hatchProgress < 1;
   // const isEgg = false;
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setCurrentDate(new Date());
+    console.log(new Date());
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
   return (
-    <View>
-      {isEgg ?
-      <DokiEggView
-        navigation={navigation}
-        hatchProgressData={hatchProgressData}
-      /> :
-      <DokiView
-      />}
-    </View>
+    <ScrollView
+      style={styles.scrollView}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
+      <View>
+        {isEgg ? (
+          <DokiEggView
+            navigation={navigation}
+            hatchProgressData={hatchProgressData}
+          />
+        ) : (
+          <DokiView now={now} />
+        )}
+      </View>
+    </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  scrollView: {
+    flex: 1,
+    backgroundColor: '#4fa4b8',
+  },
+});
 
 export default DokiHome;

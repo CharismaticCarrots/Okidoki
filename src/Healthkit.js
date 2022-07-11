@@ -12,7 +12,7 @@ const permissions = {
       AppleHealthKit.Constants.Permissions.ActiveEnergyBurned,
       AppleHealthKit.Constants.Permissions.FlightsClimbed,
       AppleHealthKit.Constants.Permissions.Steps,
-    ]
+    ],
   },
 };
 
@@ -45,17 +45,15 @@ export const useHealthkit = () => {
   return useContext(HealthkitContext);
 };
 
-const today = new Date().toISOString();
-
-export const useDailyStepCount = (date = today) => {
+export const useDailyStepCount = (startDate) => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [steps, setSteps] = useState(0);
 
-  const options = {
-    date: date
-  };
-
+  console.log({ steps, startDate });
   useEffect(() => {
+    const options = {
+      startDate: startDate,
+    };
     if (isLoaded) {
       AppleHealthKit.getStepCount(options, (err, results) => {
         if (err) {
@@ -64,7 +62,7 @@ export const useDailyStepCount = (date = today) => {
         setSteps(results.value);
       });
     }
-  }, [isLoaded]);
+  }, [isLoaded, startDate]);
   return steps;
 };
 
@@ -102,34 +100,34 @@ export const useStepCountSamples = () => {
         setWeekSteps(reformattedWeekSteps);
       });
     }
-  }, [isLoaded]);
+  }, [isLoaded, options.startDate]);
   return weekSteps;
 };
 
-export const useTotalStepCount = (startDate) => {
+export const useTotalStepCount = (startDate, endDate) => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
-  const [stepSamples, setStepSamples] = useState([]);
   const [totalSteps, setTotalSteps] = useState(0);
 
-  const options = {
-    startDate: startDate
-  };
-
   useEffect(() => {
+    const options = {
+      startDate: startDate,
+      endDate: endDate,
+    };
+
     if (isLoaded) {
       AppleHealthKit.getDailyStepCountSamples(options, (err, results) => {
         if (err) {
           return;
         }
-        setStepSamples(results);
+
+        const totalSteps = results.reduce(
+          (totalSteps, curSample) => totalSteps + curSample.value,
+          0
+        );
+        setTotalSteps(totalSteps);
       });
     }
-  }, [isLoaded, startDate]);
-
-  useEffect(() => {
-    const totalSteps = stepSamples.reduce((totalSteps, curSample) => totalSteps + curSample.value, 0);
-    setTotalSteps(totalSteps);
-  }, [stepSamples])
+  }, [isLoaded, startDate, endDate]);
 
   return totalSteps;
 };
@@ -149,16 +147,15 @@ export const useFlightsClimbed = () => {
     }
   }, [isLoaded]);
   return flights;
-}
+};
 
-
-//get walking and running distance 
+//get walking and running distance
 export const useDistance = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [distance, setDistance] = useState(0);
   let options = {
-    unit: 'mile'
-  }
+    unit: 'mile',
+  };
   useEffect(() => {
     if (isLoaded) {
       AppleHealthKit.getDistanceWalkingRunning(options, (err, results) => {
@@ -170,24 +167,24 @@ export const useDistance = () => {
     }
   }, [isLoaded]);
   return distance;
-}
+};
 
-//get active energy burned  
+//get active energy burned
 export const useActiveEnergy = () => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [activeCal, setActiveCal] = useState(0);
-  const today = new Date()
-  
+  const today = new Date();
+
   let options = {
     startDate: subDays(new Date(), 1).toISOString(),
-  }
+  };
   useEffect(() => {
     if (isLoaded) {
       AppleHealthKit.getActiveEnergyBurned(options, (err, results) => {
         if (err) {
           return;
         }
-          const reformattedDailyEnergy = results.reduce((previous, day) => {
+        const reformattedDailyEnergy = results.reduce((previous, day) => {
           const onlyDate = day.startDate.slice(0, 10);
           const findDate = previous.find(
             (dayObject) => dayObject.day === onlyDate
@@ -200,11 +197,13 @@ export const useActiveEnergy = () => {
             return previous;
           }
         }, []);
-        
-        if(reformattedDailyEnergy[0]){setActiveCal(reformattedDailyEnergy[0].value)}
+
+        if (reformattedDailyEnergy[0]) {
+          setActiveCal(reformattedDailyEnergy[0].value);
+        }
       });
     }
   }, [isLoaded]);
 
   return activeCal;
-}
+};
