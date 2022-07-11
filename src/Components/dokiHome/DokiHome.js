@@ -10,7 +10,7 @@ import {
 
 import DokiEggView from './DokiEggView';
 import DokiView from './DokiView';
-import { useHatchProgress } from '../../helpers/useHatchProgress';
+import { getHatchProgress } from '../../helpers/getHatchProgress';
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -21,7 +21,7 @@ const DokiHome = ({ navigation }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const now = currentDate.toISOString();
-  const hatchProgressData = useHatchProgress(now);
+  const hatchProgressData = getHatchProgress(now);
   const isEgg = hatchProgressData.hatchProgress < 1;
 
   const onRefresh = useCallback(() => {
