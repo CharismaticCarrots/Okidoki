@@ -27,14 +27,20 @@ const SignUp = ({ navigation }) => {
 
   const mutation = useMutation(
     async (userInfo) => {
-      const { data: user } = await axios.post(
-        `http://${API_URL}/auth/signup`,
-        userInfo
-      );
-      console.log('user returned from sign up', user);
-      await SecureStore.setItemAsync('TOKEN', user.token);
-      console.log('secure store key');
-      console.log(await SecureStore.getItemAsync('TOKEN'));
+      try {
+        console.log(API_URL);
+        const { data: user } = await axios.post(
+          `http://${API_URL}/auth/signup`,
+          userInfo
+        );
+        console.log('user returned from sign up', user);
+        await SecureStore.setItemAsync('TOKEN', user.token);
+        console.log('secure store key');
+        console.log(await SecureStore.getItemAsync('TOKEN'));
+        return user;
+      } catch (err) {
+        console.log({ err });
+      }
     },
     {
       onSuccess: () => {
