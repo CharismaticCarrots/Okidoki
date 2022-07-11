@@ -1,20 +1,23 @@
-import React from 'react';
 import {
   View,
   ActivityIndicator,
   Dimensions,
   StyleSheet,
   ScrollView,
-  RefreshControl,
 } from 'react-native';
-import { Text, Surface, Card, Avatar } from 'react-native-paper';
+import { Card } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 import { BarChart } from 'react-native-chart-kit';
-import { StyledHeading2, StyledHeading1 } from './styles';
-import Steps from './Steps';
+
+import {
+  StyledHeading2,
+  StyledHeading1,
+  StyledHealthStatContainer,
+} from './styles';
+
 import {
   useStepCountSamples,
   useFlightsClimbed,
@@ -22,12 +25,6 @@ import {
   useActiveEnergy,
   useDailyStepCount,
 } from '../Healthkit';
-
-import {
-  StyledHealthStatContainer,
-  StyledDayContainer,
-  StyledInternalContainer,
-} from './styles';
 
 // const wait = (timeout) => {
 //   return new Promise(resolve => setTimeout(resolve, timeout));
