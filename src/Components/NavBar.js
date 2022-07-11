@@ -7,39 +7,11 @@ import HealthStat from './HealthStat';
 import SignIn from './signIn/SignIn';
 import SetGoal from './signUp/SetGoal';
 import DokiView from './dokiHome/DokiHome';
-import Logout from './signIn/Logout';
-import LoginOptions from './LoginOptions'
-
-
-const Stack = createNativeStackNavigator()
-
-export const LogOutNavigator = ({navigation}) => {
-  return (
-    <Stack.Navigator headerMode="screen" >
-      <Stack.Screen
-        name="Logout"
-        component={Logout}
-        options={{ tabBarLabel: 'Logout Screen' }}
-      />
-      <Stack.Screen
-        name="LoginOptions"
-        headerShown = 'false'
-        component={LoginOptions}
-      />
-      <Stack.Screen
-        name="SignIn"
-        headerShown = 'false'
-        component={SignIn}
-      />
-    </Stack.Navigator>
-  )
-}
+import { LogOutNavigator } from '../Logout Navigator';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
-
-
   return (
       <Tab.Navigator
       screenOptions={({ route }) => ({
