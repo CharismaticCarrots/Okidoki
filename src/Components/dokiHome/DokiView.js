@@ -3,6 +3,7 @@ import { useMutation } from 'react-query';
 import axios from 'axios';
 import { API_URL } from '../../../secrets';
 import * as SecureStore from 'expo-secure-store';
+import intervalToDuration from 'date-fns/intervalToDuration'
 import { Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
@@ -35,12 +36,16 @@ const DokiView = () => {
   useEffect(() => {
     if (user) {
       setCurCarrotCount(user.carrotCount);
+      const hrsSinceLastClaimed = (new Date() - new Date(user.lastCarrotsClaimedAt))/3600000;
+      console.log(`Can't claim carrots yet, last claimed ${hrsSinceLastClaimed} hours ago. Check again tomorrow!`) // Temporary Error Message
+      if (hrsSinceLastClaimed <= 24) setCarrotsClaimed(true);
+
     }
   }, [user]);
 
   useEffect(() => {
     if (userDokiData) {
-      userDokiData.type = 'fox'; // Dummy data to view different sprites
+      // userDokiData.type = 'fox'; // Dummy data to view different sprites
       setUserDoki(userDokiData);
 
       const { user_doki } = userDokiData;
@@ -117,7 +122,10 @@ const DokiView = () => {
 
   const claimCarrots = () => {
     userMutation.mutate(
-      {carrotCount: curCarrotCount + carrotReward},
+      {
+        lastCarrotsClaimedAt: new Date(),
+        carrotCount: curCarrotCount + carrotReward,
+      },
       {
         onSuccess: ({ carrotCount }) => {
           setCurCarrotCount(carrotCount);
