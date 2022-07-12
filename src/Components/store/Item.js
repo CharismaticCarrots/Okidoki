@@ -2,8 +2,8 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 // import { StyledHeading1 } from '../styles';
 
 const imageNames = {
-  Ball: require('../../../assets/items/ball.png'),
-  'Teddy bear': require('../../../assets/items/teddybear.png'),
+  ball: require('../../../assets/items/ball.png'),
+  'teddy bear': require('../../../assets/items/teddybear.png'),
 };
 
 const Item = (props) => {

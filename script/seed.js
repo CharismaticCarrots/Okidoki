@@ -46,8 +46,8 @@ const users = [
 ];
 
 const items = [
-  { name: 'Ball', price: 5, imageUrl: 'assets/items/ball.png' },
-  { name: 'Teddy bear', price: 5, imageUrl: 'assets/items/teddybear.png' },
+  { name: 'ball', price: 5, imageUrl: 'assets/items/ball.png' },
+  { name: 'teddy bear', price: 5, imageUrl: 'assets/items/teddybear.png' },
 ];
 
 const seed = async () => {

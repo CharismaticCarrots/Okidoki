@@ -47,17 +47,7 @@ const Store = () => {
       <View style={styles.container}>
         <StyledHeading1>Store</StyledHeading1>
 
-        <View style={styles.items}>
-          {itemsList}
-          {/* {storeItems.map((item) => {
-            <Item name="ball" price={5} />;
-          })} */}
-          {/* <Item name="ball" price={5} />
-          <Item name="ball" price={5} />
-          <Item name="teddy bear" price={5} />
-          <Item name="teddy bear" price={5} />
-          <Item name="teddy bear" price={5} /> */}
-        </View>
+        <View style={styles.items}>{itemsList}</View>
       </View>
     </StyledDokiHomeBackground>
   );
