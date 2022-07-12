@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Doki, User_Doki, User_Item } = require('../db');
+const { User, Doki, User_Doki, User_Item, Item } = require('../db');
 const { requireToken } = require('./middleware.js');
 
 module.exports = router;
@@ -75,22 +75,47 @@ router.get('/items', requireToken, async (req, res, next) => {
 router.post('/items/:id', requireToken, async (req, res, next) => {
   try {
     const user = req.user;
-    const item = Number(req.params.id)
-    if (await user.hasItem(item)){
-      const userItem = await User_Item.findOne({
-        where: {
-          userId: user.id,
-          itemId: item
-        }
-      })
-      const itemQuantity = userItem.quantity + 1
-      await userItem.update({quantity: itemQuantity})
-      res.send(await userItem.save());
-    }
-    else {
+    const item = await Item.findByPk(Number(req.params.id))
+    if (!await user.hasItem(item)){
       user.addItem(item, { through: { quantity: 1 } } )
       res.send()
     }
+    else {
+      res.send()
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
+
+router.put('/items/:id', requireToken, async (req, res, next) => {
+  try {
+    const user = req.user;
+    const item = await Item.findByPk(Number(req.params.id))
+    const quantity = req.body.quantity
+    const userItem = await User_Item.findOne({
+      where: {
+        userId: user.id,
+        itemId: item.id
+      }
+    }) 
+    const newQuantity = userItem.quantity + quantity
+    if (quantity > 0){
+      await userItem.update({quantity: newQuantity})
+      res.send(await userItem.save());
+    }
+    else if (userItem.quantity === 1){
+      user.removeItem(item)
+      res.send()
+    }
+    else{
+      await userItem.update({
+        quantity: newQuantity
+      })
+      res.send(await userItem.save())
+    }
+
   } catch (error) {
     next(error)
   }
