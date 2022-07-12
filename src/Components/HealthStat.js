@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   },
   icons: {
     padding: 5,
-    fontSize: 29,
+    fontSize: 27,
     overflow: 'hidden',
   },
   scrollView: {
