@@ -1,4 +1,5 @@
 import { StyleSheet, View, Text, Image } from 'react-native';
+import { Button } from 'react-native-paper';
 // import { StyledHeading1 } from '../styles';
 
 const imageNames = {
@@ -14,6 +15,7 @@ const Item = (props) => {
       <Image style={styles.itemImg} source={imageNames[props.name]} />
       <Text style={styles.itemName}>{props.name}</Text>
       <Text style={styles.itemPrice}>{props.price}</Text>
+      <Button mode='contained'>BUY</Button>
     </View>
   );
 };

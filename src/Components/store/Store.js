@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text, Image } from 'react-native';
 import { StyledDokiHomeBackground, StyledHeading1 } from '../styles';
 import Item from './Item';
-
+import CountDisplay from '../dokiHome/CountDisplay';
 import axios from 'axios';
 import { API_URL } from '../../../secrets.js';
 import { useQuery } from 'react-query';
@@ -47,6 +47,9 @@ const Store = () => {
       <View style={styles.container}>
         <StyledHeading1>Doki Mart</StyledHeading1>
         <View style={styles.items}>{itemsList}</View>
+        <CountDisplay
+          counterType={'carrot'}
+        />
       </View>
     </StyledDokiHomeBackground>
   );
