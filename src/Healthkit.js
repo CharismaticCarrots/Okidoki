@@ -46,13 +46,13 @@ export const useHealthkit = () => {
   return useContext(HealthkitContext);
 };
 
-export const useDailyStepCount = (startDate) => {
+export const useDailyStepCount = (date) => {
   const { isLoaded, AppleHealthKit } = useHealthkit();
   const [steps, setSteps] = useState(0);
 
   useEffect(() => {
     const options = {
-      startDate: startDate,
+      date: date,
     };
     if (isLoaded) {
       AppleHealthKit.getStepCount(options, (err, results) => {
@@ -62,7 +62,7 @@ export const useDailyStepCount = (startDate) => {
         setSteps(results.value);
       });
     }
-  }, [AppleHealthKit, isLoaded, startDate]);
+  }, [AppleHealthKit, isLoaded, date]);
   return steps;
 };
 
