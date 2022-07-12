@@ -18,18 +18,18 @@ const fetchUserData = async () => {
   }
 };
 
-export const useUserData = (now) => {
-  const [ userData, setUserData ] = useState({});
-  const queryClient = useQueryClient();
-  const logout = () => {
-    queryClient.removeQueries('user');
-  };
+export const useUserData = () => {
   const {
     isLoading,
     isError,
     error,
     data: user,
   } = useQuery('user', fetchUserData);
+  const queryClient = useQueryClient();
+
+  const logout = () => {
+    queryClient.removeQueries('user');
+  };
 
   if (isLoading) {
     console.log("LOADING");
@@ -39,10 +39,5 @@ export const useUserData = (now) => {
     console.log ("ERROR:", error);
   }
 
-  useEffect(() => {
-    setUserData({user, logout});
-  }, [user, now]);
-
-  // return { user, logout };
-  return userData;
+  return { user, logout };
 };

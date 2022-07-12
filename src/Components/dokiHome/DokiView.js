@@ -31,7 +31,6 @@ const DokiView = ({ now }) => {
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
   const carrotReward = useCarrotReward(now);
-  console.log("CARROT REWARD:", carrotReward)
   const userDokiMutation = useUpdateUserDoki();
   const userMutation = useUpdateUser();
   const { ref, hide, show } = usePopable();
