@@ -1,8 +1,15 @@
-import { useState } from 'react';
-import { useMutation } from 'react-query';
 import axios from 'axios';
 import { API_URL } from '../../../secrets.js';
 import * as SecureStore from 'expo-secure-store';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+
+import { API_URL } from '../../../secrets.js';
+import { useState } from 'react';
+import { useMutation } from 'react-query';
+import { useUserData } from '../../hooks/useUserData';
 
 import {
   StyledHeading1,
@@ -13,7 +20,6 @@ import {
   StyledFormButtonText,
   StyledFormSuggest,
 } from '../styles';
-import { useUserData } from '../../hooks/useUserData';
 
 const SignIn = ({ navigation }) => {
   const [userData, setUserData] = useState({
@@ -34,7 +40,7 @@ const SignIn = ({ navigation }) => {
     },
     {
       onSuccess: () => {
-        navigation.navigate('DokiHome')
+        navigation.navigate('DokiHome');
       },
     }
   );
