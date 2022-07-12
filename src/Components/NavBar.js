@@ -1,4 +1,5 @@
-import { View } from 'react-native';
+import * as React from 'react';
+import { View, Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import DokiView from './dokiHome/DokiHome';
@@ -19,9 +20,10 @@ const TabNavigator = () => {
           },
         },
         tabBarShowLabel: false,
+        tabBarBackground: () => (<Image source={require('../../assets/backgrounds/navbar_background.png')}/>),
         tabBarStyle: [
           {
-            display: 'flex',
+            display: "flex",
             paddingTop: 13,
             backgroundColor: '#59b2ff',
           },
@@ -33,34 +35,33 @@ const TabNavigator = () => {
               return (
                 <FontAwesome5
                   name={'home'}
-                  style={{ fontSize: 32 }}
-                  color="#333"
-                />
-              );
+                  style={{fontSize: 32}}
+                  color='#333'/>
+              )
             case 'User Settings':
               return (
                 <FontAwesome5
                   name={'shopping-bag'}
-                  style={{ fontSize: 30 }}
-                  color="#333"
+                  style={{fontSize: 30}}
+                  color='#333'
                 />
               );
             case 'Health Data':
               return (
                 <FontAwesome5
-                  name={'chart-bar'}
-                  style={{ fontSize: 30 }}
-                  color="#333"
-                />
-              );
+                name={'chart-bar'}
+                style={{fontSize: 30}}
+                color='#333'
+              />
+              )
             case 'Store':
               return (
                 <FontAwesome5
-                  name={'store'}
-                  style={{ fontSize: 30 }}
-                  color="#333"
-                />
-              );
+                name={'store'}
+                style={{fontSize: 30}}
+                color='#333'
+              />
+              )
             default:
               return <View />;
           }
