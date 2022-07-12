@@ -41,12 +41,11 @@ const Store = () => {
 
   return (
     <StyledDokiHomeBackground
-      source={require('../../../assets/backgrounds/loginOptions.png')}
+      source={require('../../../assets/backgrounds/store.png')}
       resizeMode="cover"
     >
       <View style={styles.container}>
-        <StyledHeading1>Store</StyledHeading1>
-
+        <StyledHeading1>Doki Mart</StyledHeading1>
         <View style={styles.items}>{itemsList}</View>
       </View>
     </StyledDokiHomeBackground>
@@ -57,11 +56,16 @@ export default Store;
 
 const styles = StyleSheet.create({
   container: {
-    // alignItems: 'center',
-    // justifyContent: 'space-around',
+    alignItems: 'center',
     marginTop: 80,
+    width: '80%',
+    height: '100%',
   },
   items: {
+    // height: '100%',
+    marginTop: 60,
     flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
   },
 });
