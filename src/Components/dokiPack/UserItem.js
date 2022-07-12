@@ -1,14 +1,19 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 import React from 'react'
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { Card, Title, Paragraph } from 'react-native-paper';
+
+const imageNames = {
+  ball: require('../../../assets/items/ball.png'),
+  'teddy bear': require('../../../assets/items/teddybear.png'),
+};
+
 
 const UserItem = (props) => {
-  console.log(props.name, 'inside pack')
+  
   return (
     <View>
-      <Text>{props.quantity}</Text>
-      <Card style={{backgroundColor:"#ffefb4"}}>
-        <Card.Cover source={require('../../../assets/items/ball.png')} resizeMode='contain' style={{backgroundColor:"#ffefb4", margin:25}}/>
+      <Card style={styles.card}>
+        <Image source={imageNames[props.name]} style={styles.image}/> 
         <Card.Content>
           <Title>
           {props.name}
@@ -24,4 +29,19 @@ const UserItem = (props) => {
 
 export default UserItem
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  card: {
+    height: 130,
+    width:130,
+    backgroundColor:"#ffefb4",
+    margin:2,
+    padding:8,
+    justifyContent:'center'
+  },
+  image: {
+    marginLeft:'auto',
+    marginRight: 'auto',
+    height: 40,
+    width: 40
+  }
+})
