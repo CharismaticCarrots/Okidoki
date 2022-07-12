@@ -1,78 +1,77 @@
-import * as React from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import HealthStat from './HealthStat';
-import SignIn from './signIn/SignIn';
-import SetGoal from './signUp/SetGoal';
 import DokiView from './dokiHome/DokiHome';
-import { LogOutNavigator } from '../Logout Navigator';
+import HealthStat from './HealthStat';
+import Store from './store/Store';
+import { LogOutNavigator } from '../LogoutNavigator';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   return (
-      <Tab.Navigator
+    <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarOptions: {
           style: {
-              backgroundColor: '#000',
-          }},
+            backgroundColor: '#000',
+          },
+        },
         tabBarShowLabel: false,
         tabBarStyle: [
           {
-            display: "flex",
-            paddingTop:13,
+            display: 'flex',
+            paddingTop: 13,
             backgroundColor: '#59b2ff',
           },
-          null
+          null,
         ],
         tabBarIcon: () => {
           switch (route.name) {
             case 'DokiHome':
               return (
-                <FontAwesome5 
-                  name={'home'} 
-                  style={{fontSize: 32}} 
-                  color='#333'/>
-              )
+                <FontAwesome5
+                  name={'home'}
+                  style={{ fontSize: 32 }}
+                  color="#333"
+                />
+              );
             case 'User Settings':
               return (
-                <FontAwesome5 
-                  name={'shopping-bag'}   
-                  style={{fontSize: 30}}
-                  color='#333'
+                <FontAwesome5
+                  name={'shopping-bag'}
+                  style={{ fontSize: 30 }}
+                  color="#333"
                 />
-              )
-            case 'HEALTH DATA':
+              );
+            case 'Health Data':
               return (
-                <FontAwesome5 
-                name={'chart-bar'}   
-                style={{fontSize: 30}} 
-                color='#333'
-              />
-              )
-            case 'SetGoal':
+                <FontAwesome5
+                  name={'chart-bar'}
+                  style={{ fontSize: 30 }}
+                  color="#333"
+                />
+              );
+            case 'Store':
               return (
-                <FontAwesome5 
-                name={'store'}   
-                style={{fontSize: 30}} 
-                color='#333'
-              />
-              )
+                <FontAwesome5
+                  name={'store'}
+                  style={{ fontSize: 30 }}
+                  color="#333"
+                />
+              );
             default:
-              return <View />
+              return <View />;
           }
         },
       })}
-      >
-        <Tab.Screen name="DokiHome" component={DokiView}/>
-        <Tab.Screen name="User Settings" component={LogOutNavigator}/>
-        <Tab.Screen name="HEALTH DATA" component={HealthStat}/>
-        <Tab.Screen name="SetGoal" component={SetGoal}/>
-      </Tab.Navigator>
+    >
+      <Tab.Screen name="DokiHome" component={DokiView} />
+      <Tab.Screen name="User Settings" component={LogOutNavigator} />
+      <Tab.Screen name="Health Data" component={HealthStat} />
+      <Tab.Screen name="Store" component={Store} />
+    </Tab.Navigator>
   );
 };
 
