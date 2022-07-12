@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useMutation } from 'react-query';
-import axios from 'axios';
-import { API_URL } from '../../../secrets';
-import * as SecureStore from 'expo-secure-store';
 import { Popable, usePopable } from 'react-native-popable';
 import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
@@ -20,6 +16,7 @@ import { useDailyStepCount } from '../../Healthkit';
 import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
+import { useUpdateUser } from '../../hooks/useUpdateUser';
 import { getCarrotReward } from '../../helpers/getCarrotReward';
 
 
@@ -36,6 +33,7 @@ const DokiView = ({ now }) => {
   const userDokiData = useUserDokiData();
   const carrotRewardData = getCarrotReward();
   const userDokiMutation = useUpdateUserDoki();
+  const userMutation = useUpdateUser();
   const { ref, hide, show } = usePopable();
 
   useEffect(() => {
@@ -71,43 +69,9 @@ const DokiView = ({ now }) => {
     }
   }, [carrotRewardData]);
 
-  // const userDokiMutation = useMutation(async (userDokiUpdate) => {
-  //   const token = await SecureStore.getItemAsync('TOKEN');
-  //   if (token) {
-  //     const { data: updatedUserDoki } = await axios.put(
-  //       `http://${API_URL}/api/user/doki`,
-  //       userDokiUpdate,
-  //       {
-  //         headers: {
-  //           authorization: token,
-  //         },
-  //       }
-  //     );
-  //     return updatedUserDoki;
-  //   }
-  // });
-
-
-  const userMutation = useMutation(async (userUpdate) => {
-    const token = await SecureStore.getItemAsync('TOKEN');
-    if (token) {
-      const { data: updatedUserDoki } = await axios.put(
-        `http://${API_URL}/api/user/`,
-        userUpdate,
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
-      return updatedUserDoki;
-    }
-  });
-
   const feedDoki = () => {
     if (curCarrotCount === 0 || curFullnessLvl === 100) {
       if (curCarrotCount === 0) {
-        console.log('UH OH, OUT OF CARROTS'); // Temporary error message
         show();
         setTimeout(() => hide(), 1000);
         setMsgContent('UH OH, YOU\'RE OUT OF CARROTS!');

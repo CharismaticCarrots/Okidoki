@@ -20,5 +20,5 @@ const updateUserDoki = async (userDokiUpdate) => {
 };
 
 export const useUpdateUserDoki = () => {
-  return useMutation(updateUserDoki)
+  return useMutation(updateUserDoki);
 };

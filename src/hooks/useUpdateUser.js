@@ -20,5 +20,5 @@ const updateUser = async (userUpdate) => {
 };
 
 export const useUpdateUser = () => {
-  return useMutation(updateUser)
+  return useMutation(updateUser);
 };
