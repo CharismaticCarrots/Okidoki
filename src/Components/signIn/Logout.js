@@ -2,12 +2,10 @@ import { Text, View, Button, ActivityIndicator } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 
 import { useUserData } from '../../hooks/useUserData';
-import { useUserItemData } from '../../hooks/useUserItemData';
 
 const Logout = ({ navigation }) => {
   const { user, logout } = useUserData();
-  const userItem = useUserItemData()
-   console.log('ITEMS', userItem)
+ 
   if (!user) {
     return <ActivityIndicator size="large" />;
   }
