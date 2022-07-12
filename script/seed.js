@@ -46,7 +46,9 @@ const users = [
 ];
 
 const items = [
-  { name: 'ball', price: 5, imageUrl: 'assets/items/ball.png' },
+  { name: 'slime', price: 2, imageUrl: 'assets/items/slime.png' },
+  { name: 'video game', price: 5, imageUrl: 'assets/items/videogame.png' },
+  { name: 'ball', price: 4, imageUrl: 'assets/items/ball.png' },
   { name: 'teddy bear', price: 5, imageUrl: 'assets/items/teddybear.png' },
 ];
 
@@ -65,31 +67,31 @@ const seed = async () => {
       })
     );
 
-    const [ball, teddyBear] = await Promise.all(
+    const [slime, videogame, ball, teddybear] = await Promise.all(
       items.map((item) => {
         return Item.create(item);
       })
     );
 
-    ball.addUser(user1, {
+    teddybear.addUser(user1, {
       through: {
         quantity: 3,
       },
     });
 
-    ball.addUser(user2, {
+    slime.addUser(user2, {
       through: {
         quantity: 2,
       },
     });
 
-    teddyBear.addUser(user3, {
+    videogame.addUser(user3, {
       through: {
         quantity: 2,
       },
     });
 
-    teddyBear.addUser(user4, {
+    ball.addUser(user4, {
       through: {
         quantity: 3,
       },
