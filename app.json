@@ -9,43 +9,42 @@
     "splash": {
       "image": "./assets/okidoki_splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff",
-      "android": {
-        "googleServicesFile": "./google-services.json"
-      },
-      "ios": {
-        "googleServicesFile": "./GoogleService-Info.plist"
-      },
-      "plugins": ["@react-native-google-signin/google-signin"]
-    }
+      "backgroundColor": "#ffffff"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true,
+      "googleServicesFile": "./GoogleService-Info.plist",
       "bundleIdentifier": "io.expo.client"
+    }
+  },
+  "updates": {
+    "fallbackToCacheTimeout": 0
+  },
+  "assetBundlePatterns": [
+    "**/*"
+  ],
+  "ios": {
+    "supportsTablet": true,
+    "bundleIdentifier": "io.expo.client"
+  },
+  "android": {
+    "adaptiveIcon": {
+      "foregroundImage": "./assets/adaptive-icon.png",
+      "backgroundColor": "#FFFFFF"
     },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      },
-      "package": "io.expo.client"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      [
-        "react-native-health",
-        {
-          "isClinicalDataEnabled": true,
-          "healthSharePermission": "Custom health share permission",
-          "healthUpdatePermission": "Custom health update permission"
-        }
-      ]
-    ]
-  }
+    "package": "io.expo.client"
+  },
+  "web": {
+    "favicon": "./assets/favicon.png"
+  },
+  "plugins": [
+    [
+      "react-native-health",
+      {
+        "isClinicalDataEnabled": true,
+        "healthSharePermission": "Custom health share permission",
+        "healthUpdatePermission": "Custom health update permission"
+      }
+    ],
+    "@react-native-google-signin/google-signin"
+  ]
 }
