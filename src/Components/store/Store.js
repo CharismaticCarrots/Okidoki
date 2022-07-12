@@ -45,7 +45,7 @@ const Store = () => {
       resizeMode="cover"
     >
       <View style={styles.container}>
-        <StyledHeading1>Doki Plaza</StyledHeading1>
+        <StyledHeading1>Doki Mart</StyledHeading1>
         <View style={styles.items}>{itemsList}</View>
       </View>
     </StyledDokiHomeBackground>
@@ -59,11 +59,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 80,
     width: '80%',
+    height: '100%',
   },
   items: {
-    display: 'flex',
+    // height: '100%',
+    marginTop: 60,
     flexDirection: 'row',
-    gap: 10,
-    // flex: 1,
+    flexWrap: 'wrap',
+    alignItems: 'center',
   },
 });

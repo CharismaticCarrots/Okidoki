@@ -22,11 +22,12 @@ export default Item;
 
 const styles = StyleSheet.create({
   item: {
-    width: 100,
-    height: 100,
+    width: 110,
+    height: 110,
     backgroundColor: '#ffefb4',
     borderRadius: 10,
     alignItems: 'center',
+    margin: 10,
     padding: 10,
   },
   itemImg: {
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Singularity',
     fontSize: 18,
     color: '#59b2ff',
+    marginBottom: 2,
   },
   itemPrice: {
     fontFamily: 'Singularity',
