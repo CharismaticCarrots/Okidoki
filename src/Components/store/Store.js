@@ -32,6 +32,13 @@ const Store = () => {
   const storeItems = useItemsData();
   console.log('store Items:', storeItems);
 
+  let itemsList;
+  if (storeItems) {
+    itemsList = storeItems.map((item) => {
+      return <Item key={item.id} name={item.name} price={item.price} />;
+    });
+  }
+
   return (
     <StyledDokiHomeBackground
       source={require('../../../assets/backgrounds/loginOptions.png')}
@@ -41,11 +48,15 @@ const Store = () => {
         <StyledHeading1>Store</StyledHeading1>
 
         <View style={styles.items}>
+          {itemsList}
+          {/* {storeItems.map((item) => {
+            <Item name="ball" price={5} />;
+          })} */}
+          {/* <Item name="ball" price={5} />
           <Item name="ball" price={5} />
-          <Item name="ball" price={5} />
           <Item name="teddy bear" price={5} />
           <Item name="teddy bear" price={5} />
-          <Item name="teddy bear" price={5} />
+          <Item name="teddy bear" price={5} /> */}
         </View>
       </View>
     </StyledDokiHomeBackground>
