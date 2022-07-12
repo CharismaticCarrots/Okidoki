@@ -4,6 +4,12 @@ const Links = ({ navigation }) => {
   return (
     <View>
       <View>
+      <Button
+          title="Doki Pack"
+          onPress={() => {
+            navigation.navigate('DokiPack');
+          }}
+        />
         <Button
           title="Home"
           onPress={() => {
