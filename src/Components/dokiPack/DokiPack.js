@@ -5,11 +5,10 @@ import { StyledContainer, StyledHeading1, StyledDokiHomeBackground, StyledItemVi
 import UserItem from './UserItem'
 
 const DokiPack = () => {
-  const userItem = useUserItemData()
-  console.log('USER ITEMS', userItem)
+  const userItems = useUserItemData()
   let userItemList
-  if (userItem){
-    userItemList = userItem.map(item => {
+  if (userItems){
+    userItemList = userItems.map(item => {
       return <UserItem key={item.id} name={item.name} quantity={item.user_item.quantity}/>
     })
   }

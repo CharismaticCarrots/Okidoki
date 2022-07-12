@@ -16,10 +16,10 @@ const UserItem = (props) => {
       <StyledItemCard>
         <StyleItemImage source={imageNames[props.name]}/>
         <Card.Content>
-          <Title>
+          <Title style={{fontFamily:'AntipastoBold'}}>
           {props.name}
           </Title>
-          <Paragraph>
+          <Paragraph style={{fontFamily:'Singularity', fontSize:17}}>
             Quantity: {props.quantity}
           </Paragraph>
         </Card.Content>

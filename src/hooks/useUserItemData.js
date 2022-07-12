@@ -17,13 +17,13 @@ const fetchUserItemData = async () => {
 };
 
 export const useUserItemData = () => {
-  const {isLoading, isError, error, data : userItem } = useQuery(['userItem'], fetchUserItemData)
+  const {isLoading, isError, error, data : userItems } = useQuery(['userItem'], fetchUserItemData)
 
   if (isLoading) {
     console.log("ITEMS LOADING")
   } else if (isError) {
     console.log("ITEM ERROR:", error);
   } else {
-    return userItem;
+    return userItems;
   }
 }
