@@ -43,9 +43,9 @@ const Store = () => {
         <View style={styles.items}>
           <Item name="ball" price={5} />
           <Item name="ball" price={5} />
-          <Item name="ball" price={5} />
-          <Item name="ball" price={5} />
-          <Item name="ball" price={5} />
+          <Item name="teddy bear" price={5} />
+          <Item name="teddy bear" price={5} />
+          <Item name="teddy bear" price={5} />
         </View>
       </View>
     </StyledDokiHomeBackground>

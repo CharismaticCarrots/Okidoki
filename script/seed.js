@@ -45,6 +45,11 @@ const users = [
   },
 ];
 
+const items = [
+  { itemName: 'Ball', price: 5, imageUrl: 'assets/items/ball.png' },
+  { itemName: 'Teddy bear', price: 5, imageUrl: 'assets/items/teddybear.png' },
+];
+
 const seed = async () => {
   try {
     await db.sync({ force: true });
@@ -53,17 +58,18 @@ const seed = async () => {
         return Doki.create(doki);
       })
     );
+
     const [user1, user2, user3, user4] = await Promise.all(
       users.map((user) => {
         return User.create(user);
       })
     );
 
-    const ball = await Item.create({
-      itemName: 'Ball',
-      price: 5,
-      imageUrl: 'assets/items/ball.png',
-    });
+    const [ball, teddyBear] = await Promise.all(
+      items.map((item) => {
+        return Item.create(item);
+      })
+    );
 
     ball.addUser(user1, {
       through: {
@@ -77,13 +83,13 @@ const seed = async () => {
       },
     });
 
-    ball.addUser(user3, {
+    teddyBear.addUser(user3, {
       through: {
         quantity: 2,
       },
     });
 
-    ball.addUser(user4, {
+    teddyBear.addUser(user4, {
       through: {
         quantity: 3,
       },
@@ -128,6 +134,7 @@ if (require.main === module) {
     .then(() => {
       console.log(`seeded ${users.length} users`);
       console.log(`seeded ${dokis.length} dokis`);
+      console.log(`seeded ${items.length} items`);
       console.log('Seeding success!');
     })
     .catch((err) => {

@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 
 const imageNames = {
   ball: require('../../../assets/items/ball.png'),
+  'teddy bear': require('../../../assets/items/teddybear.png'),
 };
 
 const Item = (props) => {
@@ -18,8 +19,8 @@ export default Item;
 
 const styles = StyleSheet.create({
   item: {
-    height: 40,
-    width: 40,
+    height: 60,
+    width: 60,
   },
   itemImg: {
     height: '100%',
