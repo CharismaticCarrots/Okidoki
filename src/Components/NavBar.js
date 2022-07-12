@@ -54,7 +54,7 @@ const TabNavigator = () => {
                 color='#333'
               />
               )
-            case 'SetGoal':
+            case 'Store':
               return (
                 <FontAwesome5
                 name={'store'}
