@@ -4,6 +4,7 @@ import axios from 'axios';
 import { API_URL } from '../../../secrets';
 import * as SecureStore from 'expo-secure-store';
 import { Popable, usePopable } from 'react-native-popable';
+import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
@@ -18,9 +19,9 @@ import CountDisplay from './CountDisplay';
 import { useDailyStepCount } from '../../Healthkit';
 import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
+import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 import { getCarrotReward } from '../../helpers/getCarrotReward';
 
-import { StyleSheet } from 'react-native';
 
 const DokiView = ({ now }) => {
   const [curCarrotCount, setCurCarrotCount] = useState(0);
@@ -34,9 +35,8 @@ const DokiView = ({ now }) => {
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
   const carrotRewardData = getCarrotReward();
+  const userDokiMutation = useUpdateUserDoki();
   const { ref, hide, show } = usePopable();
-
-  console.log("CARROTS REWARDED:", carrotReward) // Temp message to indicate carrots to reward
 
   useEffect(() => {
     if (user) {
@@ -46,7 +46,6 @@ const DokiView = ({ now }) => {
         setCarrotsClaimed(true);
         console.log(`Can't claim carrots yet, last claimed ${hrsSinceLastClaimed} hours ago. Check again tomorrow!`) // Temporary Error Message
       }
-
     }
   }, [user]);
 
@@ -70,21 +69,22 @@ const DokiView = ({ now }) => {
     }
   }, [carrotRewardData]);
 
-  const userDokiMutation = useMutation(async (userDokiUpdate) => {
-    const token = await SecureStore.getItemAsync('TOKEN');
-    if (token) {
-      const { data: updatedUserDoki } = await axios.put(
-        `http://${API_URL}/api/user/doki`,
-        userDokiUpdate,
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
-      return updatedUserDoki;
-    }
-  });
+  // const userDokiMutation = useMutation(async (userDokiUpdate) => {
+  //   const token = await SecureStore.getItemAsync('TOKEN');
+  //   if (token) {
+  //     const { data: updatedUserDoki } = await axios.put(
+  //       `http://${API_URL}/api/user/doki`,
+  //       userDokiUpdate,
+  //       {
+  //         headers: {
+  //           authorization: token,
+  //         },
+  //       }
+  //     );
+  //     return updatedUserDoki;
+  //   }
+  // });
+
 
   const userMutation = useMutation(async (userUpdate) => {
     const token = await SecureStore.getItemAsync('TOKEN');
