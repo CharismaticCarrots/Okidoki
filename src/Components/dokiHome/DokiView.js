@@ -18,7 +18,6 @@ import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
 import { useCarrotReward } from '../../hooks/useCarrotReward';
-import { useQueryClient } from 'react-query';
 
 
 const DokiView = ({ now }) => {
@@ -37,7 +36,6 @@ const DokiView = ({ now }) => {
   const userDokiMutation = useUpdateUserDoki();
   const userMutation = useUpdateUser();
   const { ref, hide, show } = usePopable();
-  const queryClient = useQueryClient();
 
   // setsCarrotsClaimedStatus
   useEffect(() => {
@@ -55,7 +53,6 @@ const DokiView = ({ now }) => {
     }
   }, [user, carrotReward, now]);
 
-  // Sets currentFullnessLevel based on lastFedDate
   useEffect(() => {
     if (userDokiData) {
       // userDokiData.type = 'fox'; // Dummy data to view different sprites
@@ -72,13 +69,14 @@ const DokiView = ({ now }) => {
 
 
   const feedDoki = () => {
-    if (curCarrotCount === 0 || curFullnessLvl === 100) {
-      if (curCarrotCount === 0) {
+    if (curCarrotCount <= 0 || curFullnessLvl >= 100) {
+      if (curCarrotCount <= 0) {
         show();
         setTimeout(() => hide(), 1000);
         setMsgContent('UH OH, YOU\'RE OUT OF CARROTS!');
       }
-      if (curFullnessLvl > 100) {
+      if (curFullnessLvl >= 100) {
+        console.log("CUR FULLNESS LEVEL", curFullnessLvl)
         show();
         setTimeout(() => hide(), 1000);
         setMsgContent('DOKI IS TOO FULL RIGHT NOW!');
@@ -108,7 +106,6 @@ const DokiView = ({ now }) => {
   };
 
   const claimCarrots = () => {
-    debugger
     userMutation.mutate(
       {
         lastCarrotsClaimedAt: new Date(),
@@ -116,7 +113,6 @@ const DokiView = ({ now }) => {
       },
       {
         onSuccess: ({ carrotCount }) => {
-          debugger
           setCurCarrotCount(carrotCount);
           setCarrotsClaimed(true);
         },
