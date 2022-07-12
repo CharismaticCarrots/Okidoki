@@ -18,6 +18,7 @@ import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
 import { useCarrotReward } from '../../hooks/useCarrotReward';
+import { useQueryClient } from 'react-query';
 
 
 const DokiView = ({ now }) => {
@@ -36,6 +37,7 @@ const DokiView = ({ now }) => {
   const userDokiMutation = useUpdateUserDoki();
   const userMutation = useUpdateUser();
   const { ref, hide, show } = usePopable();
+  const queryClient = useQueryClient();
 
   // setsCarrotsClaimedStatus
   useEffect(() => {

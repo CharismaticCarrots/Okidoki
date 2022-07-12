@@ -4,9 +4,8 @@ import { API_URL } from '../../secrets.js';
 import * as SecureStore from 'expo-secure-store';
 
 const fetchUserData = async () => {
-  console.log("ARE WE FETCHING")
   const token = await SecureStore.getItemAsync('TOKEN');
-
+  debugger
   if (token) {
     const { data } = await axios.get(`http://${API_URL}/api/user`, {
       headers: {
@@ -19,6 +18,7 @@ const fetchUserData = async () => {
 };
 
 export const useUserData = () => {
+  debugger
   const {
     isLoading,
     isError,
@@ -27,11 +27,10 @@ export const useUserData = () => {
   } = useQuery(['user'], fetchUserData);
 
   const queryClient = useQueryClient();
-
-  const logout = () => {
-    queryClient.removeQueries('user');
-  };
-  console.log("useUserData GOT HIT", user)
-
-  return { user, logout, isError, isLoading, error };
+  // const logout = () => {
+  //   queryClient.removeQueries('user');
+  // };
+  // console.log("useUserData GOT HIT", user)
+  // return { user, logout, isError, isLoading, error };
+  return { user }
 };
