@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Doki, User_Doki, User_Item } = require('../db');
+const { User, Doki, User_Doki, User_Item, Item } = require('../db');
 const { requireToken } = require('./middleware.js');
 
 module.exports = router;
@@ -91,6 +91,33 @@ router.post('/items/:id', requireToken, async (req, res, next) => {
       user.addItem(item, { through: { quantity: 1 } } )
       res.send()
     }
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/items/:id', requireToken, async (req, res, next) => {
+  try {
+    const user = req.user;
+    const item = await Item.findByPk(Number(req.params.id))
+    const userItem = await User_Item.findOne({
+      where: {
+        userId: user.id,
+        itemId: item.id
+      }
+    })
+    if (userItem.quantity === 1){
+      user.removeItem(item)
+      res.send()
+    }
+    else{
+      const newQuantity = userItem.quantity -1
+      await userItem.update({
+        quantity: newQuantity
+      })
+      res.send(await userItem.save())
+    }
+
   } catch (error) {
     next(error)
   }
