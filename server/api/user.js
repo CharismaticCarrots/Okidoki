@@ -77,7 +77,7 @@ router.post('/items/:id', requireToken, async (req, res, next) => {
     const user = req.user;
     const item = await Item.findByPk(Number(req.params.id))
     if (!await user.hasItem(item)){
-      user.addItem(item, { through: { quantity: 1 } } )
+      user.addItem(item )
       res.send()
     }
     else {
