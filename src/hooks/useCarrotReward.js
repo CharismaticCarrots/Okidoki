@@ -8,6 +8,7 @@ export const useCarrotReward = (now) => {
   const { user } = useUserData();
   const prevDay = subDays(new Date(now), 1).toISOString();
   const prevDaySteps = useDailyStepCount(prevDay);
+  console.log("YESTERDAY YOU WALKED:", prevDaySteps, "STEPS") // Temporary console log to check previous day's steps
 
   useEffect(() => {
     if (user && prevDaySteps >= 0) {

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import axios from 'axios';
 import { API_URL } from '../../secrets.js';
@@ -17,14 +18,18 @@ const fetchUserData = async () => {
   }
 };
 
-export const useUserData = () => {
+export const useUserData = (now) => {
+  const [ userData, setUserData ] = useState({});
+  const queryClient = useQueryClient();
+  const logout = () => {
+    queryClient.removeQueries('user');
+  };
   const {
     isLoading,
     isError,
     error,
     data: user,
   } = useQuery('user', fetchUserData);
-  const queryClient = useQueryClient();
 
   if (isLoading) {
     console.log("LOADING");
@@ -34,9 +39,10 @@ export const useUserData = () => {
     console.log ("ERROR:", error);
   }
 
-  const logout = () => {
-    queryClient.removeQueries('user');
-  };
+  useEffect(() => {
+    setUserData({user, logout});
+  }, [user, now]);
 
-  return { user, logout };
+  // return { user, logout };
+  return userData;
 };

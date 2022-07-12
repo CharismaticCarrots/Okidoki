@@ -28,31 +28,31 @@ const DokiView = ({ now }) => {
   const [msgContent, setMsgContent] = useState(null);
 
   const stepCount = useDailyStepCount(now);
-  console.log("TODAY'S STEP COUNT", stepCount)
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
   const carrotReward = useCarrotReward(now);
-  console.log("CARROT REWARD", carrotReward)
+  console.log("CARROT REWARD:", carrotReward)
   const userDokiMutation = useUpdateUserDoki();
   const userMutation = useUpdateUser();
   const { ref, hide, show } = usePopable();
 
-  // setsCarrotsClaimedStatus
+  // sets carrotsClaimed status
   useEffect(() => {
     if (user) {
       setCurCarrotCount(user.carrotCount);
-      const hrsSinceLastClaimed = (new Date() - new Date(user.lastCarrotsClaimedAt))/3600000;
       console.log("USER TOKEN:", user.token) // Temporary console log to view token
+      const claimedToday = new Date(now).toDateString() === new Date(user.lastCarrotsClaimedAt).toDateString();
 
-      console.log("LAST CLAIM DATE", user.lastCarrotsClaimedAt)
-
-      if (hrsSinceLastClaimed <= 24) {
+      if (claimedToday) {
         setCarrotsClaimed(true);
-        console.log(`Can't claim carrots yet, last claimed ${hrsSinceLastClaimed} hours ago. Check again tomorrow!`) // Temporary Error Message
+        console.log(`Can't claim carrots yet, last claimed at ${new Date(user.lastCarrotsClaimedAt).toLocaleString('en-US', { timeZone: 'UTC' })}. Check again tomorrow!`) // Temporary Error Message
+      } else {
+        console.log(`LAST CLAIMED CARROTS AT: ${new Date(user.lastCarrotsClaimedAt).toLocaleString('en-US', { timeZone: 'UTC' })}`) // Temporary Console log to test
       }
     }
   }, [user, carrotReward, now]);
 
+  // sets new fullnesslevel based on lastfedAt date
   useEffect(() => {
     if (userDokiData) {
       // userDokiData.type = 'fox'; // Dummy data to view different sprites
