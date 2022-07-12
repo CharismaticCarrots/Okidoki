@@ -7,7 +7,7 @@ import SignUp from './components/signUp/SignUp';
 import SignIn from './components/signIn/SignIn';
 import LoginOptions from './components/LoginOptions';
 import DokiHome from './components/dokiHome/DokiHome';
-import Store from './components/Store';
+import Store from './components/store/Store';
 import TabNavigator from './components/NavBar';
 
 import { useUserData } from './hooks/useUserData';
