@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 
@@ -6,9 +6,9 @@ const UserItem = (props) => {
   console.log(props.name, 'inside pack')
   return (
     <View>
-      
-      <Card>
-        <Card.Cover source={require('../../../assets/items/ball.png')}/>
+      <Text>{props.quantity}</Text>
+      <Card style={{backgroundColor:"#ffefb4"}}>
+        <Card.Cover source={require('../../../assets/items/ball.png')} resizeMode='contain' style={{backgroundColor:"#ffefb4", margin:25}}/>
         <Card.Content>
           <Title>
           {props.name}

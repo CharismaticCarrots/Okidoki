@@ -10,7 +10,7 @@ const DokiPack = () => {
   let userItemList
   if (userItem){
     userItemList = userItem.map(item => {
-      return <UserItem key={item.id} name={item.itemName} quantity={item.user_item.quantity}/>
+      return <UserItem key={item.id} name={item.name} quantity={item.user_item.quantity}/>
     })
   }
   

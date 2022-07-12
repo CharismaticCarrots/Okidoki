@@ -170,9 +170,9 @@ const StyledOuterCountersContainer = styled(View)`
   display: flex;
   width: 350px;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 10px;
-  padding-right: 5px;
 `;
 
 const StyledDokiName = styled(Text)`
@@ -224,17 +224,19 @@ const StyledProgressTextSmall = styled(StyledProgressText)`
 `;
 
 // CountDisplay Component
+const StyledCountDisplayContainer = styled(View)`
+  display: flex;
+`;
+
 const StyledCarrotCountContainer = styled(View)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100px;
-  padding-left: 20px;
+  justify-content: flex-end;
 `;
 
 const StyledStepCountContainer = styled(StyledCarrotCountContainer)`
-  width: 200px;
-  padding-left: 0px;
+  justify-content: flex-start;
 `;
 
 const StyledCounterText = styled(Text)`
@@ -310,6 +312,7 @@ export {
   StyledOuterCountersContainer,
   StyledDokiName,
   // CountDisplay Component
+  StyledCountDisplayContainer,
   StyledCarrotCountContainer,
   StyledStepCountContainer,
   StyledCounterText,

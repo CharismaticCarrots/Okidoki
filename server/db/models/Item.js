@@ -2,12 +2,12 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 
 const Item = db.define('item', {
-  itemName: {
+  name: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
     validate: {
-      notEmpty: true
+      notEmpty: true,
     },
   },
   price: {
@@ -19,8 +19,8 @@ const Item = db.define('item', {
     },
   },
   imageUrl: {
-    type: Sequelize.STRING
-}
+    type: Sequelize.STRING,
+  },
 });
 
 module.exports = Item;
