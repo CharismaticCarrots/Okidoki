@@ -3,6 +3,7 @@ import { useMutation } from 'react-query';
 import axios from 'axios';
 import { API_URL } from '../../../secrets';
 import * as SecureStore from 'expo-secure-store';
+import { Popable, usePopable } from 'react-native-popable';
 import { Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
@@ -19,25 +20,32 @@ import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { getCarrotReward } from '../../helpers/getCarrotReward';
 
+import { StyleSheet } from 'react-native';
+
 const DokiView = ({ now }) => {
   const [curCarrotCount, setCurCarrotCount] = useState(0);
   const [userDoki, setUserDoki] = useState();
   const [curFullnessLvl, setCurFullnessLvl] = useState(0);
   const [carrotReward, setCarrotReward] = useState(null);
   const [carrotsClaimed, setCarrotsClaimed] = useState(false);
+  const [msgContent, setMsgContent] = useState(null);
 
   const stepCount = useDailyStepCount(now);
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
   const carrotRewardData = getCarrotReward();
+  const { ref, hide, show } = usePopable();
+
   console.log("CARROTS REWARDED:", carrotReward) // Temp message to indicate carrots to reward
 
   useEffect(() => {
     if (user) {
       setCurCarrotCount(user.carrotCount);
       const hrsSinceLastClaimed = (new Date() - new Date(user.lastCarrotsClaimedAt))/3600000;
-      console.log(`Can't claim carrots yet, last claimed ${hrsSinceLastClaimed} hours ago. Check again tomorrow!`) // Temporary Error Message
-      if (hrsSinceLastClaimed <= 24) setCarrotsClaimed(true);
+      if (hrsSinceLastClaimed <= 24) {
+        setCarrotsClaimed(true);
+        console.log(`Can't claim carrots yet, last claimed ${hrsSinceLastClaimed} hours ago. Check again tomorrow!`) // Temporary Error Message
+      }
 
     }
   }, [user]);
@@ -96,8 +104,17 @@ const DokiView = ({ now }) => {
 
   const feedDoki = () => {
     if (curCarrotCount === 0 || curFullnessLvl === 100) {
-      if (curCarrotCount === 0) console.log('UH OH, OUT OF CARROTS'); // Temporary error message
-      if (curFullnessLvl === 100) console.log('DOKI IS TOO FULL RIGHT NOW'); // Temporary error message
+      if (curCarrotCount === 0) {
+        console.log('UH OH, OUT OF CARROTS'); // Temporary error message
+        show();
+        setTimeout(() => hide(), 1000);
+        setMsgContent('UH OH, YOU\'RE OUT OF CARROTS!');
+      }
+      if (curFullnessLvl === 100) {
+        show();
+        setTimeout(() => hide(), 1000);
+        setMsgContent('DOKI IS TOO FULL RIGHT NOW!');
+      }
     } else {
       const userDokiUpdate = {
         lastFedAt: new Date(),
@@ -116,6 +133,9 @@ const DokiView = ({ now }) => {
           },
         }
       );
+      show();
+      setTimeout(() => hide(), 1000);
+      setMsgContent('OM NOM NOM');
     }
   };
 
@@ -160,7 +180,14 @@ const DokiView = ({ now }) => {
             {`CLAIM ${carrotReward} CARROTS`}
         </Button>}
       <StyledDokiContainer>
-        {userDoki && <Doki userDoki={userDoki} />}
+        <Popable
+          ref={ref}
+          content={msgContent}
+          style={popoverStyles}
+          animationType="spring"
+        >
+          {userDoki && <Doki userDoki={userDoki} />}
+        </Popable>
         <StyledDokiName>
           {userDokiData && userDokiData.user_doki.dokiName}
         </StyledDokiName>
@@ -173,3 +200,11 @@ const DokiView = ({ now }) => {
 };
 
 export default DokiView;
+
+
+const popoverStyles = StyleSheet.create({
+  alignSelf: "center",
+  marginTop: 350,
+  width: 200,
+});
+

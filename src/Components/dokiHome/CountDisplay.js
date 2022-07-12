@@ -1,11 +1,11 @@
 import React from "react";
 import { View } from "react-native";
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { StyledCarrotCountContainer, StyledStepCountContainer, StyledCounterText } from "../styles";
+import { StyledCountDisplayContainer, StyledCarrotCountContainer, StyledStepCountContainer, StyledCounterText } from "../styles";
 
 const CountDisplay = ({counterType, count, goalCount}) => {
   return(
-    <View>
+    <StyledCountDisplayContainer>
       {counterType === "carrot" &&
         <StyledCarrotCountContainer>
         <StyledCounterText>{count}</StyledCounterText>
@@ -18,7 +18,7 @@ const CountDisplay = ({counterType, count, goalCount}) => {
           <StyledCounterText>{count} / {goalCount}</StyledCounterText>
         </StyledStepCountContainer>
       }
-    </View>
+    </StyledCountDisplayContainer>
   );
 };
 
