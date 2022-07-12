@@ -21,7 +21,7 @@ const DokiPack = () => {
         >
           <View style={styles.container}>
         <StyledHeading1>Doki Backpack</StyledHeading1>
-        <View>
+        <View style={styles.itemList}>
           {userItemList}
         </View>
         </View>
@@ -35,5 +35,9 @@ export default DokiPack
 const styles = StyleSheet.create({
   container: {
     marginTop: 80
+  },
+  itemList: {
+    display:'flex',
+    flexDirection:'row',
   }
 })

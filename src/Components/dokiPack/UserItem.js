@@ -32,10 +32,10 @@ export default UserItem
 const styles = StyleSheet.create({
   card: {
     height: 130,
-    width:130,
+    width:150,
     backgroundColor:"#ffefb4",
-    margin:2,
-    padding:8,
+    margin:10,
+    paddingTop:15,
     justifyContent:'center'
   },
   image: {
