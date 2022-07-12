@@ -101,21 +101,14 @@ router.put('/items/:id', requireToken, async (req, res, next) => {
       }
     }) 
     const newQuantity = userItem.quantity + quantity
-    if (quantity > 0){
+    if (newQuantity > 0){
       await userItem.update({quantity: newQuantity})
       res.send(await userItem.save());
     }
-    else if (userItem.quantity === 1){
+    else {
       user.removeItem(item)
       res.send()
     }
-    else{
-      await userItem.update({
-        quantity: newQuantity
-      })
-      res.send(await userItem.save())
-    }
-
   } catch (error) {
     next(error)
   }
