@@ -19,6 +19,6 @@ const updateUser = async (userUpdate) => {
   }
 };
 
-export const useUpdateUser = (userUpdate) => {
-  return useMutation(updateUser(userUpdate))
+export const useUpdateUser = () => {
+  return useMutation(updateUser)
 };
