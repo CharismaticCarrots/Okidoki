@@ -4,6 +4,7 @@ import { API_URL } from '../../secrets.js';
 import * as SecureStore from 'expo-secure-store';
 
 const fetchUserData = async () => {
+  console.log("ARE WE FETCHING")
   const token = await SecureStore.getItemAsync('TOKEN');
 
   if (token) {
@@ -23,13 +24,14 @@ export const useUserData = () => {
     isError,
     error,
     data: user,
-  } = useQuery('user', fetchUserData);
+  } = useQuery(['user'], fetchUserData);
+
   const queryClient = useQueryClient();
 
   const logout = () => {
     queryClient.removeQueries('user');
   };
+  console.log("useUserData GOT HIT", user)
 
-  //probably return an object, with functions like logout
   return { user, logout, isError, isLoading, error };
 };

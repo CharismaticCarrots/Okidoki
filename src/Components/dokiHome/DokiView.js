@@ -44,12 +44,14 @@ const DokiView = ({ now }) => {
       const hrsSinceLastClaimed = (new Date() - new Date(user.lastCarrotsClaimedAt))/3600000;
       console.log("USER TOKEN:", user.token) // Temporary console log to view token
 
+      console.log("LAST CLAIM DATE", user.lastCarrotsClaimedAt)
+
       if (hrsSinceLastClaimed <= 24) {
         setCarrotsClaimed(true);
         console.log(`Can't claim carrots yet, last claimed ${hrsSinceLastClaimed} hours ago. Check again tomorrow!`) // Temporary Error Message
       }
     }
-  }, [user]);
+  }, [user, carrotReward, now]);
 
   // Sets currentFullnessLevel based on lastFedDate
   useEffect(() => {
@@ -74,7 +76,7 @@ const DokiView = ({ now }) => {
         setTimeout(() => hide(), 1000);
         setMsgContent('UH OH, YOU\'RE OUT OF CARROTS!');
       }
-      if (curFullnessLvl === 100) {
+      if (curFullnessLvl > 100) {
         show();
         setTimeout(() => hide(), 1000);
         setMsgContent('DOKI IS TOO FULL RIGHT NOW!');
@@ -104,6 +106,7 @@ const DokiView = ({ now }) => {
   };
 
   const claimCarrots = () => {
+    debugger
     userMutation.mutate(
       {
         lastCarrotsClaimedAt: new Date(),
@@ -111,6 +114,7 @@ const DokiView = ({ now }) => {
       },
       {
         onSuccess: ({ carrotCount }) => {
+          debugger
           setCurCarrotCount(carrotCount);
           setCarrotsClaimed(true);
         },

@@ -4,6 +4,7 @@ import * as SecureStore from 'expo-secure-store';
 import { useMutation } from 'react-query';
 
 const updateUser = async (userUpdate) => {
+  debugger
   const token = await SecureStore.getItemAsync('TOKEN');
   if (token) {
     const { data: updatedUserDoki } = await axios.put(
@@ -20,5 +21,6 @@ const updateUser = async (userUpdate) => {
 };
 
 export const useUpdateUser = () => {
+  debugger
   return useMutation(updateUser);
 };
