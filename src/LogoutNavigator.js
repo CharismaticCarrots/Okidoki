@@ -12,9 +12,6 @@ export const LogOutNavigator = ({navigation}) => {
   return (
     <Stack.Navigator 
     headerMode="screen"   
-    // screenOptions={{
-    //   headerShown: false
-    // }} 
     >
       <Stack.Screen
         name="Links"

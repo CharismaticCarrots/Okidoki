@@ -5,7 +5,6 @@ import { useUserData } from '../../hooks/useUserData';
 
 const Logout = ({ navigation }) => {
   const { user, logout } = useUserData();
- 
   if (!user) {
     return <ActivityIndicator size="large" />;
   }
