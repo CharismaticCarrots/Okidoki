@@ -5,7 +5,7 @@ import * as SecureStore from 'expo-secure-store';
 
 const fetchUserData = async () => {
   const token = await SecureStore.getItemAsync('TOKEN');
-  debugger
+  console.log()
   if (token) {
     const { data } = await axios.get(`http://${API_URL}/api/user`, {
       headers: {
@@ -17,20 +17,24 @@ const fetchUserData = async () => {
   }
 };
 
-export const useUserData = () => {
-  debugger
+export const useUserData = async () => {
   const {
     isLoading,
     isError,
     error,
+    isStale,
+    isFetching,
+    refetch,
     data: user,
-  } = useQuery(['user'], fetchUserData);
+  } = useQuery('user', fetchUserData, { staleTime: Infinity });
 
-  const queryClient = useQueryClient();
-  // const logout = () => {
-  //   queryClient.removeQueries('user');
-  // };
-  // console.log("useUserData GOT HIT", user)
-  // return { user, logout, isError, isLoading, error };
-  return { user }
+  const logout = () => {
+    queryClient.removeQueries('user');
+  };
+
+  console.log("IS STALE", isStale)
+  console.log("useUserData GOT HIT", user)
+
+
+  return { user, logout, isError, isLoading, error };
 };
