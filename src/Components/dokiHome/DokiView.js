@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import { API_URL } from '../../../secrets';
 import * as SecureStore from 'expo-secure-store';
 import { Popable, usePopable } from 'react-native-popable';
-import { Button } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
+import RBSheet from "react-native-raw-bottom-sheet";
 import {
   StyledDokiHomeBackground,
   StyledDokiContainer,
@@ -23,6 +24,8 @@ import { getCarrotReward } from '../../helpers/getCarrotReward';
 import { StyleSheet } from 'react-native';
 
 const DokiView = ({ now }) => {
+  const refRBSheet = useRef();
+
   const [curCarrotCount, setCurCarrotCount] = useState(0);
   const [userDoki, setUserDoki] = useState();
   const [curFullnessLvl, setCurFullnessLvl] = useState(0);
@@ -195,6 +198,22 @@ const DokiView = ({ now }) => {
       <Button onPress={feedDoki} mode="contained">
         Feed Doki
       </Button>
+      <Button mode="contained" onPress={() => refRBSheet.current.open()} > OPEN PACK </Button>
+      <RBSheet
+        ref={refRBSheet}
+        closeOnDragDown={true}
+        closeOnPressMask={false}
+        customStyles={{
+          wrapper: {
+            backgroundColor: "transparent"
+          },
+          draggableIcon: {
+            backgroundColor: "#000"
+          }
+        }}
+      >
+        <Text>Hello</Text>
+      </RBSheet>
     </StyledDokiHomeBackground>
   );
 };
