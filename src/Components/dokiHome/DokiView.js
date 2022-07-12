@@ -17,25 +17,27 @@ import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
-import { getCarrotReward } from '../../helpers/getCarrotReward';
+import { useCarrotReward } from '../../hooks/useCarrotReward';
 
 
 const DokiView = ({ now }) => {
   const [curCarrotCount, setCurCarrotCount] = useState(0);
   const [userDoki, setUserDoki] = useState();
   const [curFullnessLvl, setCurFullnessLvl] = useState(0);
-  const [carrotReward, setCarrotReward] = useState(null);
   const [carrotsClaimed, setCarrotsClaimed] = useState(false);
   const [msgContent, setMsgContent] = useState(null);
 
   const stepCount = useDailyStepCount(now);
+  console.log("TODAY'S STEP COUNT", stepCount)
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
-  const carrotRewardData = getCarrotReward();
+  const carrotReward = useCarrotReward(now);
+  console.log("CARROT REWARD", carrotReward)
   const userDokiMutation = useUpdateUserDoki();
   const userMutation = useUpdateUser();
   const { ref, hide, show } = usePopable();
 
+  // setsCarrotsClaimedStatus
   useEffect(() => {
     if (user) {
       setCurCarrotCount(user.carrotCount);
@@ -49,6 +51,7 @@ const DokiView = ({ now }) => {
     }
   }, [user]);
 
+  // Sets currentFullnessLevel based on lastFedDate
   useEffect(() => {
     if (userDokiData) {
       // userDokiData.type = 'fox'; // Dummy data to view different sprites
@@ -63,11 +66,6 @@ const DokiView = ({ now }) => {
     }
   }, [userDokiData]);
 
-  useEffect(() => {
-    if (carrotRewardData) {
-      setCarrotReward(carrotRewardData);
-    }
-  }, [carrotRewardData]);
 
   const feedDoki = () => {
     if (curCarrotCount === 0 || curFullnessLvl === 100) {
@@ -141,7 +139,7 @@ const DokiView = ({ now }) => {
         />
         <CountDisplay counterType={'carrot'} count={curCarrotCount} />
       </StyledOuterCountersContainer>
-      {carrotReward && !carrotsClaimed &&
+      {Boolean(carrotReward) && !carrotsClaimed &&
         <Button mode="contained" onPress={claimCarrots}>
             {`CLAIM ${carrotReward} CARROTS`}
         </Button>}
