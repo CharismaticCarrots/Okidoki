@@ -8,7 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import { ProgressBar } from 'react-native-paper';
+import { ProgressBar, Card } from 'react-native-paper';
 
 // Color Palette
 const colors = {
@@ -277,6 +277,29 @@ const StyledInternalContainer = styled(View)`
   padding: 10px;
 `;
 
+//UserItem
+
+const StyledItemCard = styled(Card)`
+  height: 130px;
+  width: 150px;
+  background-color:${colors.primary};
+  margin: 10px;
+  paddingTop: 15px;
+  justifyContent:space-evenly;
+`
+
+const StyleItemImage = styled(Image)`
+  marginLeft: auto;
+  marginRight: auto;
+  height: 40px;
+  width: 40px;
+`
+
+const StyledItemView = styled(View)`
+  display:flex;
+  flexDirection:row;
+`
+
 export {
   // General Styles
   StyledLogoHeading,
@@ -321,4 +344,8 @@ export {
   StyledDayContainer,
   StyledInternalContainer,
   StyledHealthStatHeading,
+  //UserItem Component
+  StyledItemCard,
+  StyleItemImage,
+  StyledItemView
 };

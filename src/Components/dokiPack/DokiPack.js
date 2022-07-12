@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { useUserItemData } from '../../hooks/useUserItemData'
-import { StyledContainer, StyledHeading1, StyledDokiHomeBackground } from '../styles'
+import { StyledContainer, StyledHeading1, StyledDokiHomeBackground, StyledItemView } from '../styles'
 import UserItem from './UserItem'
 
 const DokiPack = () => {
@@ -20,11 +20,11 @@ const DokiPack = () => {
           resizeMode='cover'
         >
           <View style={styles.container}>
-        <StyledHeading1>Doki Backpack</StyledHeading1>
-        <View style={styles.itemList}>
-          {userItemList}
-        </View>
-        </View>
+          <StyledHeading1>Doki Backpack</StyledHeading1>
+          <StyledItemView>
+            {userItemList}
+          </StyledItemView>
+          </View>
       </StyledDokiHomeBackground>
 
   )
@@ -35,9 +35,5 @@ export default DokiPack
 const styles = StyleSheet.create({
   container: {
     marginTop: 80
-  },
-  itemList: {
-    display:'flex',
-    flexDirection:'row',
   }
 })
