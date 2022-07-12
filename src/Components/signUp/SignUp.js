@@ -1,8 +1,14 @@
+import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
+import * as Google from 'expo-auth-session/providers/google';
+import { Button } from 'react-native';
+import { useEffect } from 'react';
+
+import { API_URL, GOOGLECLIENTID } from '../../../secrets.js';
+
 import { useState } from 'react';
 import { useMutation } from 'react-query';
-import axios from 'axios';
-import { API_URL } from '../../../secrets.js';
-import * as SecureStore from 'expo-secure-store';
+
 import {
   StyledHeading1,
   StyledFormBackground,
@@ -21,6 +27,12 @@ const SignUp = ({ navigation }) => {
     email: '',
     password: '',
   });
+
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    iosClientId: GOOGLECLIENTID,
+  });
+
+  useEffect;
 
   const { user } = useUserData();
   console.log('User on SignUp: ', user);
@@ -52,6 +64,8 @@ const SignUp = ({ navigation }) => {
   const handleSubmit = () => {
     mutation.mutate(userData);
   };
+
+  console.log(response);
 
   return (
     <StyledFormBackground
@@ -115,6 +129,12 @@ const SignUp = ({ navigation }) => {
         >
           Already have an account? Sign in
         </StyledFormSuggest>
+        <Button
+          title="Login with Google"
+          onPress={() => {
+            promptAsync();
+          }}
+        />
       </StyledFormContainer>
     </StyledFormBackground>
   );
