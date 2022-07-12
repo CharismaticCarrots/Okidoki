@@ -42,6 +42,8 @@ const DokiView = ({ now }) => {
     if (user) {
       setCurCarrotCount(user.carrotCount);
       const hrsSinceLastClaimed = (new Date() - new Date(user.lastCarrotsClaimedAt))/3600000;
+      console.log("USER TOKEN:", user.token) // Temporary console log to view token
+
       if (hrsSinceLastClaimed <= 24) {
         setCarrotsClaimed(true);
         console.log(`Can't claim carrots yet, last claimed ${hrsSinceLastClaimed} hours ago. Check again tomorrow!`) // Temporary Error Message
@@ -118,7 +120,7 @@ const DokiView = ({ now }) => {
     } else {
       const userDokiUpdate = {
         lastFedAt: new Date(),
-        lastFedFullnessLevel: curFullnessLvl + 1,
+        lastFedFullnessLevel: curFullnessLvl + 5, // Carrot-FullnessLevel Exchange Rate
       };
       userDokiMutation.mutate(userDokiUpdate, {
         onSuccess: ({ lastFedFullnessLevel }) => {

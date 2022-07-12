@@ -9,7 +9,7 @@ export const getCarrotReward = () => {
 
   if (user) {
     const { dailyStepGoal } = user;
-    const carrotReward = Math.floor(prevDaySteps/dailyStepGoal*10);
+    const carrotReward = Math.floor(prevDaySteps/dailyStepGoal*10); // Carrot-StepCount Exchange Rate
     return carrotReward;
   }
 };
