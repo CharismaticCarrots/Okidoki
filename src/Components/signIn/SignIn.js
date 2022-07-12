@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { API_URL } from '../../../secrets.js';
 import * as SecureStore from 'expo-secure-store';
 import {
   GoogleSignin,
   statusCodes,
+  GoogleSigninButton,
 } from '@react-native-google-signin/google-signin';
 
 import { API_URL } from '../../../secrets.js';
@@ -82,7 +82,6 @@ const SignIn = ({ navigation }) => {
             setUserData((prevState) => ({ ...prevState, password: e }))
           }
         />
-
         <StyledFormButton
           style={{ marginTop: 20, marginBottom: 10, width: 150 }}
           onPress={() => {
@@ -91,13 +90,19 @@ const SignIn = ({ navigation }) => {
         >
           <StyledFormButtonText>Sign In</StyledFormButtonText>
         </StyledFormButton>
-
+        <GoogleSigninButton
+          style={{ width: 192, height: 48, borderRadius: 25 }}
+          size={GoogleSigninButton.Size.Wide}
+          color={GoogleSigninButton.Color.Light}
+          // onPress={this._signIn}
+          // disabled={this.state.isSigninInProgress}
+        />
         <StyledFormSuggest
           onPress={() => {
             navigation.navigate('SignUp');
           }}
         >
-          Don't have an account? Sign up
+          Don`&apos;t have an account? Sign up
         </StyledFormSuggest>
       </StyledFormContainer>
     </StyledFormBackground>
