@@ -60,12 +60,12 @@ const DokiView = ({ now }) => {
 
       const { user_doki } = userDokiData;
       const hrsSinceLastFed = Math.floor(
-        (new Date().getTime() - new Date(user_doki.lastFedAt).getTime()) /
-          3600000
+        (new Date(now).getTime() - new Date(user_doki.lastFedAt).getTime()) / 3600000
       );
+      console.log("HOURS SINCE LAST FED", hrsSinceLastFed)
       setCurFullnessLvl(user_doki.lastFedFullnessLevel - hrsSinceLastFed);
     }
-  }, [userDokiData]);
+  }, [userDokiData, now]);
 
 
   const feedDoki = () => {
