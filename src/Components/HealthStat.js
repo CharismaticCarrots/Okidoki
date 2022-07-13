@@ -90,9 +90,7 @@ const HealthStat = () => {
         </View>
 
         <StyledHeading2>Today&apos;s Activity</StyledHeading2>
-        <ScrollView
-          style={styles.scrollView}
-        >
+        <ScrollView style={styles.scrollView}>
           <Card.Title
             style={styles.card}
             title={steps}
@@ -124,11 +122,11 @@ const HealthStat = () => {
             )}
           />
           <Button
-          onPress={() => {
-            logout();
-            SecureStore.deleteItemAsync('TOKEN');
-            // navigation.navigate('LoginOptions');
-          }}
+            onPress={() => {
+              logout();
+              SecureStore.deleteItemAsync('TOKEN');
+              // navigation.navigate('LoginOptions');
+            }}
           >
             LOGOUT
           </Button>
@@ -158,7 +156,7 @@ const styles = StyleSheet.create({
     padding: 3,
     paddingLeft: 20,
     marginVertical: 10,
-    marginHorizontal: 20,
+    marginHorizontal: 40,
     fontFamily: 'singularity',
   },
   icons: {
