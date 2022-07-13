@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { Popable, usePopable } from 'react-native-popable';
-import { StyledDokiHomeBackground, StyledHeading1 } from '../styles';
-import Item from './Item';
-import CountDisplay from '../dokiHome/CountDisplay';
 import axios from 'axios';
 import { API_URL } from '../../../secrets.js';
 import { useQuery } from 'react-query';
 import { useUserData } from '../../hooks/useUserData';
 import { useMutation } from 'react-query';
+import { StyledDokiHomeBackground, StyledHeading1 } from '../styles';
+import Item from './Item';
+import CountDisplay from '../dokiHome/CountDisplay';
 
 const fetchItemsData = async () => {
   const { data } = await axios.get(`http://${API_URL}/api/items`);
@@ -34,13 +34,12 @@ export const useItemsData = () => {
 };
 
 const Store = () => {
-  
+  const { ref, hide, show } = usePopable();
+  const [msgContent, setMsgContent] = useState(null);
+
   const { user } = useUserData();
   const storeItems = useItemsData();
   const [curCarrotCount, setCurCarrotCount] = useState(0);
-
-  const { ref, hide, show } = usePopable();
-  const [msgContent, setMsgContent] = useState(null);
 
   useEffect(() => {
     if (user) {
@@ -80,8 +79,6 @@ const Store = () => {
     }
   })
 
-  console.log('CARROTCOUNT',curCarrotCount)
-
   const purchaseItem = (itemId, price) => {
     if (curCarrotCount >= price) {
       const updatedCarrotCount = {
@@ -104,9 +101,9 @@ const Store = () => {
       )
     }
     else {
-      console.log('NO CARROTS')
       show();
       setTimeout(() => hide(), 1300);
+      
       setMsgContent('UH OH, YOU\'RE DON\'T HAVE ENOUGH CARROTS!');
     }
   }
@@ -133,6 +130,10 @@ const Store = () => {
     >
       <View style={styles.container}>
         <StyledHeading1>Doki Mart</StyledHeading1>
+        <CountDisplay
+          counterType={'carrot'}
+          count={curCarrotCount}
+        />
         <View style={styles.items}>{itemsList}</View>
         <Popable
           ref={ref}
@@ -143,11 +144,6 @@ const Store = () => {
           backgroundColor='#59b2ff'
         >
         </Popable>
-        <CountDisplay
-          style={{ marginTop: 400}}
-          counterType={'carrot'}
-          count={curCarrotCount}
-        />
       </View>
     </StyledDokiHomeBackground>
   );
@@ -163,8 +159,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   items: {
-    // height: '100%',
-    marginTop: 60,
+    marginTop: 10,
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
