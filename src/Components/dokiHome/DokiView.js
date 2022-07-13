@@ -218,7 +218,7 @@ const DokiView = ({ now }) => {
         height={150}
         closeOnPressMask={true}
       >
-        <DokiDrawer carrotCount={curCarrotCount}/>
+        <DokiDrawer carrotCount={curCarrotCount} feedDoki={feedDoki}/>
       </RBSheet>
     </StyledDokiHomeBackground>
   );

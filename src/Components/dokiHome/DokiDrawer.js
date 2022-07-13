@@ -4,9 +4,12 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import CountDisplay from './CountDisplay'
 
 const DokiDrawer = (props) => {
+  const feedDoki = props.feedDoki
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={feedDoki}
+      >
       <View style={styles.box}>
       <FontAwesome5 name={'carrot'} style={{fontSize: 50, color:'orange'}} />
       <Text style={styles.text}>{props.carrotCount}</Text>
