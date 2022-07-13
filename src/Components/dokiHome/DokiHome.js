@@ -15,8 +15,8 @@ const DokiHome = ({ navigation }) => {
 
   const now = currentDate.toISOString();
   const hatchProgressData = getHatchProgress(now);
-  const isEgg = hatchProgressData.hatchProgress < 1;
-  // const isEgg = false; // FOR TESTING: Uncomment this to see Doki instead of DokiEgg
+  // const isEgg = hatchProgressData.hatchProgress < 1;
+  const isEgg = false; // FOR TESTING: Uncomment this to see Doki instead of DokiEgg
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    backgroundColor: '#4fa4b8',
+    backgroundColor: '#134845',
   },
 });
 

@@ -81,6 +81,7 @@ const StyledFormTextInput = styled(TextInput)`
   margin-bottom: 4px;
   font-family: 'Singularity';
   color: ${colors.text.dark};
+  border: solid grey 3px;
 `;
 
 const StyledFormButton = styled(TouchableOpacity)`
@@ -150,7 +151,7 @@ const StyledDokiHomeBackground = styled(ImageBackground)`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  margin-bottom: 80px;
+  margin-bottom: 85px;
 `;
 
 const StyledDokiContainer = styled(View)`
@@ -189,7 +190,7 @@ const StyledOuterProgressBarContainer = styled(View)`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin-top: 90px;
+  margin-top: 60px;
 `;
 
 const StyledProgressBarContainer = styled(View)`
@@ -217,6 +218,7 @@ const StyledProgressText = styled(Text)`
   font-size: 35px;
   font-weight: 800;
   font-family: 'Singularity';
+  color: #f3ce72;
 `;
 
 const StyledProgressTextSmall = styled(StyledProgressText)`
@@ -244,6 +246,7 @@ const StyledCounterText = styled(Text)`
   font-weight: 800;
   font-family: 'Singularity';
   margin: 10px;
+  color: #f3ce72;
 `;
 
 // Health Stats Component
@@ -282,26 +285,26 @@ const StyledInternalContainer = styled(View)`
 const StyledItemCard = styled(Card)`
   height: 130px;
   width: 150px;
-  background-color:${colors.primary};
+  background-color: ${colors.primary};
   margin: 10px;
-  paddingTop: 15px;
-  justifyContent:space-evenly;
-`
+  paddingtop: 15px;
+  justifycontent: space-evenly;
+`;
 
 const StyleItemImage = styled(Image)`
-  marginLeft: auto;
-  marginRight: auto;
+  marginleft: auto;
+  marginright: auto;
   height: 40px;
   width: 40px;
-`
+`;
 
 const StyledItemView = styled(View)`
-  display:flex;
-  flexDirection:row;
-  flexWrap: wrap;
-  alignItems: center;
-  margin:40px
-`
+  display: flex;
+  flexdirection: row;
+  flexwrap: wrap;
+  alignitems: center;
+  margin: 40px;
+`;
 
 export {
   // General Styles
@@ -350,5 +353,5 @@ export {
   //UserItem Component
   StyledItemCard,
   StyleItemImage,
-  StyledItemView
+  StyledItemView,
 };
