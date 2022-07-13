@@ -15,6 +15,7 @@ import {
 } from '../styles';
 import DokiProgressBar from './DokiProgressBar';
 import Doki from './Doki';
+import DokiDrawer from './DokiDrawer';
 import CountDisplay from './CountDisplay';
 import { useDailyStepCount } from '../../Healthkit';
 import { useUserData } from '../../hooks/useUserData';
@@ -208,11 +209,16 @@ const DokiView = ({ now }) => {
             backgroundColor: "transparent"
           },
           draggableIcon: {
-            backgroundColor: "#000"
+            backgroundColor: "#ffefb4"
+          },
+          container:{
+            backgroundColor:'#59b2ff'
           }
         }}
+        height={150}
+        closeOnPressMask={true}
       >
-        <Text>Hello</Text>
+        <DokiDrawer carrotCount={curCarrotCount}/>
       </RBSheet>
     </StyledDokiHomeBackground>
   );
