@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { Popable, usePopable } from 'react-native-popable';
 import axios from 'axios';
@@ -69,7 +69,7 @@ const Store = () => {
       const { data: updatedUserItem } = await axios.put(
         `http://${API_URL}/api/user/items/${itemId}`,
         {
-          quantity: 1
+          quantity: 1,
         },
         {
           headers: {
@@ -79,45 +79,48 @@ const Store = () => {
       );
       return updatedUserItem;
     }
-  })
+  });
 
   const purchaseItem = (itemId, price) => {
     if (curCarrotCount >= price) {
       const updatedCarrotCount = {
-        carrotCount: curCarrotCount - price
-      }
-      userMutation.mutate(updatedCarrotCount,
-        {
-          onSuccess: ({carrotCount}) => {
-            setCurCarrotCount(carrotCount)
-          }
-        })
-      userItemMutation.mutate(itemId,
-      {
+        carrotCount: curCarrotCount - price,
+      };
+      userMutation.mutate(updatedCarrotCount, {
+        onSuccess: ({ carrotCount }) => {
+          setCurCarrotCount(carrotCount);
+        },
+      });
+      userItemMutation.mutate(itemId, {
         onSuccess: () => {
-        show()
-      setTimeout(() => hide(), 1000);
-      setMsgContent(`ITEM PURCHASED`)
-        }
-      }
-      )
-    }
-    else {
+          show();
+          setTimeout(() => hide(), 1000);
+          setMsgContent('ITEM PURCHASED');
+        },
+      });
+    } else {
       show();
       setTimeout(() => hide(), 1300);
-      
-      setMsgContent('UH OH, YOU DON\'T HAVE ENOUGH CARROTS!');
+
+      setMsgContent("UH OH, YOU DON'T HAVE ENOUGH CARROTS!");
     }
-  }
+  };
 
   let itemsList;
   if (storeItems) {
     itemsList = storeItems.map((item) => {
-      return <Item key={item.id} name={item.name} price={item.price} id={item.id} carrotCount={curCarrotCount} purchaseItem={purchaseItem}/>;
+      return (
+        <Item
+          key={item.id}
+          name={item.name}
+          price={item.price}
+          id={item.id}
+          carrotCount={curCarrotCount}
+          purchaseItem={purchaseItem}
+        />
+      );
     });
   }
-
-  
 
   useEffect(() => {
     if (user) {
@@ -131,11 +134,10 @@ const Store = () => {
       resizeMode="cover"
     >
       <View style={styles.container}>
-        <StyledHeading1>Doki Mart</StyledHeading1>
-        <CountDisplay
-          counterType={'carrot'}
-          count={curCarrotCount}
-        />
+        <StyledHeading1 style={{ marginBottom: 2 }}>Doki Mart</StyledHeading1>
+        <View style={styles.countDisplay}>
+          <CountDisplay counterType={'carrot'} count={curCarrotCount} />
+        </View>
         <View style={styles.items}>{itemsList}</View>
         <Popable
           ref={ref}
@@ -143,9 +145,8 @@ const Store = () => {
           style={styles.popoverStyles}
           animationType="spring"
           caret={false}
-          backgroundColor='#59b2ff'
-        >
-        </Popable>
+          backgroundColor="#59b2ff"
+        ></Popable>
       </View>
     </StyledDokiHomeBackground>
   );
@@ -155,20 +156,21 @@ export default Store;
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     marginTop: 80,
-    width: '80%',
-    height: '100%',
+    alignItems: 'center',
+  },
+  countDisplay: {
+    marginBottom: 40,
   },
   items: {
-    marginTop: 10,
+    marginHorizontal: 10,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
   popoverStyles: {
-    alignSelf: "center",
+    alignSelf: 'center',
     marginTop: 450,
     width: 200,
-  }
+  },
 });

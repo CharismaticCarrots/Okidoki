@@ -104,35 +104,4 @@ router.put('/items/:id', requireToken, async (req, res, next) => {
   } catch (error) {
     next(error)
   }
-<<<<<<< HEAD
 })
-
-router.put('/items/:id', requireToken, async (req, res, next) => {
-  try {
-    const user = req.user;
-    const item = await Item.findByPk(Number(req.params.id))
-    const userItem = await User_Item.findOne({
-      where: {
-        userId: user.id,
-        itemId: item.id
-      }
-    })
-    if (userItem.quantity === 1){
-      user.removeItem(item)
-      res.send()
-    }
-    else{
-      const newQuantity = userItem.quantity -1
-      await userItem.update({
-        quantity: newQuantity
-      })
-      res.send(await userItem.save())
-    }
-
-  } catch (error) {
-    next(error)
-  }
-})
-=======
-})
->>>>>>> main

@@ -3,13 +3,21 @@ import React from 'react'
 import { Card, Title, Paragraph } from 'react-native-paper';
 import { StyledItemCard, StyleItemImage } from '../styles';
 
+// const imageNames = {
+//   'video game': require('../../../assets/items/videogame.png'),
+//   slime: require('../../../assets/items/slime.png'),
+//   ball: require('../../../assets/items/ball.png'),
+//   'teddy bear': require('../../../assets/items/teddybear.png'),
+// };
+
 const imageNames = {
   'video game': require('../../../assets/items/videogame.png'),
   slime: require('../../../assets/items/slime.png'),
   ball: require('../../../assets/items/ball.png'),
   'teddy bear': require('../../../assets/items/teddybear.png'),
+  leaf: require('../../../assets/items/leaf.png'),
+  paintbrush: require('../../../assets/items/paintbrush.png'),
 };
-
 
 const UserItem = (props) => {
   
