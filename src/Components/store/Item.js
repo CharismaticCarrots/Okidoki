@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image , TouchableOpacity} from 'react-native';
 
 const imageNames = {
