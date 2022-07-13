@@ -171,6 +171,7 @@ const DokiView = ({ now }) => {
       <Button mode="contained" onPress={() => refRBSheet.current.open()} > OPEN PACK </Button>
       <RBSheet
         ref={refRBSheet}
+        closeOnSwipeDown={false}
         closeOnDragDown={true}
         closeOnPressMask={false}
         customStyles={{
