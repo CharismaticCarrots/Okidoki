@@ -40,7 +40,10 @@ router.post('/doki', requireToken, async (req, res, next) => {
         type: randomDoki,
       },
     });
-    await user.addDoki(doki, { through: { dokiName: req.body.dokiName } });
+    await user.addDoki(doki, { through: { 
+      dokiName: req.body.dokiName, 
+      eggColor: req.body.eggColor
+    } });
     res.send();
   } catch (err) {
     next(err);

@@ -1,20 +1,16 @@
 import React, { useRef } from 'react';
 import { Image, Animated, Easing } from 'react-native';
+import { useUserDokiData } from '../../hooks/useUserDokiData';
+
+const eggImages = {
+  "red": require('../../../assets/eggs/egg1.png'),
+  "blue": require('../../../assets/eggs/egg3.png'),
+  "green": require('../../../assets/eggs/egg2.png'),
+};
 
 const DokiEgg = () => {
   const spinValue = useRef(new Animated.Value(0)).current;
-
-  // Animated.loop(
-  //   Animated.timing(
-  //     rotateAnim,
-  //     {
-  //       toValue: 1,
-  //       duration: 3000,
-  //       easing: Easing.linear,
-  //       useNativeDriver: true
-  //     }
-  //   )
-  // ).start();
+  const UserDoki = useUserDokiData()
 
   Animated.loop(
     Animated.sequence([
@@ -42,7 +38,7 @@ const DokiEgg = () => {
     <Animated.View style={{ transform: [{ rotate: spin }], marginTop: 100 }}>
       <Image
         style={{ height: 200, width: 200 }}
-        source={require('../../../assets/egg.png')}
+        source={eggImages[UserDoki.user_doki.eggColor]}
       />
     </Animated.View>
   );
