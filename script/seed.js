@@ -105,6 +105,7 @@ const seed = async () => {
     await catDoki.addUser(user1, {
       through: {
         dokiName: 'Conbot',
+        eggColor: 'red',
         lastFedAt: new Date(),
       },
     });
@@ -112,6 +113,7 @@ const seed = async () => {
     await catDoki.addUser(user2, {
       through: {
         dokiName: 'Snow Angel',
+        eggColor: 'green',
         lastFedAt: sub(new Date(), { days: 2 }),
       },
     });
@@ -119,6 +121,7 @@ const seed = async () => {
     await rabbitDoki.addUser(user3, {
       through: {
         dokiName: 'Kris Kross',
+        eggColor: 'red',
         lastFedAt: sub(new Date(), { hours: 5 }),
       },
     });
@@ -126,6 +129,7 @@ const seed = async () => {
     await foxDoki.addUser(user4, {
       through: {
         dokiName: 'Ldyster',
+        eggColor: 'blule',
         lastFedAt: sub(new Date(), { hours: 1 }),
       },
     });

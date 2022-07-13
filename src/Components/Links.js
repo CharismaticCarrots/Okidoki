@@ -2,20 +2,27 @@ import { View, Button } from 'react-native';
 
 const Links = ({ navigation }) => {
   return (
-    <View style={{ marginTop: 200 }}>
+    <View>
+    
       <Button
-        title="Home"
-        onPress={() => {
-          navigation.navigate('Home');
-        }}
-      />
-      <Button
-        title="LoginOptions"
-        onPress={() => {
-          navigation.navigate('LoginOptions');
-        }}
-      />
-      {/* <Button
+          title="Doki Pack"
+          onPress={() => {
+            navigation.navigate('DokiPack');
+          }}
+        />
+        <Button
+          title="Home"
+          onPress={() => {
+            navigation.navigate('Home');
+          }}
+        />
+        <Button
+          title="LoginOptions"
+          onPress={() => {
+            navigation.navigate('LoginOptions');
+          }}
+        />
+        {/* <Button
           title="Sign Up"
           onPress={() => {
             navigation.navigate('SignUp');

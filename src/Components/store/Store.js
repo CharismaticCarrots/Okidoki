@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { Popable, usePopable } from 'react-native-popable';
 import axios from 'axios';
@@ -66,9 +66,11 @@ const Store = () => {
   const userItemMutation = useMutation(async (itemId) => {
     const token = await SecureStore.getItemAsync('TOKEN');
     if (token) {
-      const { data: updatedUserItem } = await axios.post(
+      const { data: updatedUserItem } = await axios.put(
         `http://${API_URL}/api/user/items/${itemId}`,
-        {},
+        {
+          quantity: 1,
+        },
         {
           headers: {
             authorization: token,

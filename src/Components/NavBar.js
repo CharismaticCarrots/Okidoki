@@ -6,6 +6,7 @@ import DokiView from './dokiHome/DokiHome';
 import HealthStat from './HealthStat';
 import Store from './store/Store';
 import { LogOutNavigator } from '../LogoutNavigator';
+import DokiPack from './dokiPack/DokiPack';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,7 +39,7 @@ const TabNavigator = () => {
                   style={{fontSize: 32}}
                   color='#333'/>
               )
-            case 'User Settings':
+            case 'DokiPack':
               return (
                 <FontAwesome5
                   name={'shopping-bag'}
@@ -69,7 +70,7 @@ const TabNavigator = () => {
       })}
     >
       <Tab.Screen name="DokiHome" component={DokiView} />
-      <Tab.Screen name="User Settings" component={LogOutNavigator} />
+      <Tab.Screen name="DokiPack" component={DokiPack} />
       <Tab.Screen name="Health Data" component={HealthStat} />
       <Tab.Screen name="Store" component={Store} />
     </Tab.Navigator>
