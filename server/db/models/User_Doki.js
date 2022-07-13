@@ -9,6 +9,13 @@ const User_Doki = db.define('user_doki', {
       notEmpty: true,
     },
   },
+  eggColor: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
   lastFedAt: {
     type: Sequelize.DATE,
     defaultValue: new Date(),
