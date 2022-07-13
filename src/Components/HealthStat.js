@@ -90,9 +90,13 @@ const HealthStat = () => {
         </View>
 
         <StyledHeading2>Today&apos;s Activity</StyledHeading2>
+<<<<<<< HEAD
         <ScrollView
           style={styles.scrollView}
         >
+=======
+        <ScrollView style={styles.scrollView}>
+>>>>>>> 768a8f51fae832f59d34e14faeee70e8545169f6
           <Card.Title
             style={styles.card}
             title={steps}
@@ -124,11 +128,19 @@ const HealthStat = () => {
             )}
           />
           <Button
+<<<<<<< HEAD
           onPress={() => {
             logout();
             SecureStore.deleteItemAsync('TOKEN');
             // navigation.navigate('LoginOptions');
           }}
+=======
+            onPress={() => {
+              logout();
+              SecureStore.deleteItemAsync('TOKEN');
+              // navigation.navigate('LoginOptions');
+            }}
+>>>>>>> 768a8f51fae832f59d34e14faeee70e8545169f6
           >
             LOGOUT
           </Button>
@@ -158,7 +170,7 @@ const styles = StyleSheet.create({
     padding: 3,
     paddingLeft: 20,
     marginVertical: 10,
-    marginHorizontal: 20,
+    marginHorizontal: 40,
     fontFamily: 'singularity',
   },
   icons: {

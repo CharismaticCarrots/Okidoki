@@ -25,22 +25,23 @@ const SelectEgg = ({ navigation }) => {
   console.log('User on SelectEgg: ', user);
 
   const mutation = useMutation(
-    (dokiName) => {
-      return axios.post(
-        `http://${API_URL}/api/user/doki`,
-        {
-           dokiName: dokiName,
-            eggColor: egg
-          },
-        { headers: { authorization: token } }
-      );
+    async (dokiName) => {
+      try {
+         await axios.post(
+          `http://${API_URL}/api/user/doki`,
+          {
+             dokiName: dokiName,
+              eggColor: egg
+            },
+          { headers: { authorization: token } }
+        );
+        return navigation.navigate('DokiHome');
+      } catch (error) {
+        console.log({error})
+      }
     },
-    {
-      onSuccess: () => {
-        navigation.navigate('DokiHome');
-      },
-    }
   );
+
 
   const handleSubmit = async () => {
     mutation.mutate(dokiName);

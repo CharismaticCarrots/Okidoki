@@ -22,13 +22,14 @@ const users = [
     password: 't',
     firstName: 'Con',
     lastName: 'Man',
+    carrotCount: 100,
   },
   {
     email: 'bye@gmail.com',
     password: 't',
     firstName: 'Angel',
     lastName: 'Y',
-    carrotCount: 80,
+    carrotCount: 100,
     dailyStepGoal: 5050,
   },
   {
@@ -36,12 +37,14 @@ const users = [
     password: 't',
     firstName: 'Kris',
     lastName: 'Tin',
+    carrotCount: 100,
   },
   {
     email: 'test@gmail.com',
     password: 't',
     firstName: 'Ly',
     lastName: 'Diaaa',
+    carrotCount: 100,
   },
 ];
 
@@ -50,6 +53,8 @@ const items = [
   { name: 'video game', price: 5, imageUrl: 'assets/items/videogame.png' },
   { name: 'ball', price: 4, imageUrl: 'assets/items/ball.png' },
   { name: 'teddy bear', price: 5, imageUrl: 'assets/items/teddybear.png' },
+  { name: 'leaf', price: 5, imageUrl: 'assets/items/leaf.png' },
+  { name: 'paintbrush', price: 10, imageUrl: 'assets/items/paintbrush.png' },
 ];
 
 const seed = async () => {
@@ -67,7 +72,7 @@ const seed = async () => {
       })
     );
 
-    const [slime, videogame, ball, teddybear] = await Promise.all(
+    const [slime, videogame, ball, teddybear, leaf] = await Promise.all(
       items.map((item) => {
         return Item.create(item);
       })
