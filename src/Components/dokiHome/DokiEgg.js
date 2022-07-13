@@ -11,8 +11,6 @@ const eggImages = {
 const DokiEgg = () => {
   const spinValue = useRef(new Animated.Value(0)).current;
   const UserDoki = useUserDokiData()
-  console.log('DOKI', UserDoki.user_doki.eggColor)
-
 
   Animated.loop(
     Animated.sequence([
