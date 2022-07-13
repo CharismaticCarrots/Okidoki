@@ -93,14 +93,14 @@ const Store = () => {
         onSuccess: () => {
           show();
           setTimeout(() => hide(), 1000);
-          setMsgContent(`ITEM PURCHASED`);
+          setMsgContent('ITEM PURCHASED');
         },
       });
     } else {
       show();
       setTimeout(() => hide(), 1300);
 
-      setMsgContent("UH OH, YOU'RE DON'T HAVE ENOUGH CARROTS!");
+      setMsgContent("UH OH, YOU DON'T HAVE ENOUGH CARROTS!");
     }
   };
 
