@@ -28,7 +28,10 @@ const SelectEgg = ({ navigation }) => {
     (dokiName) => {
       return axios.post(
         `http://${API_URL}/api/user/doki`,
-        { dokiName },
+        {
+           dokiName: dokiName,
+            eggColor: egg
+          },
         { headers: { authorization: token } }
       );
     },
@@ -77,9 +80,9 @@ const SelectEgg = ({ navigation }) => {
         <View style={styles.eggSelection}>
           <View style={styles.eggRow}>
             <Animated.View
-              style={egg === 'egg1' ? { transform: [{ rotate: spin }] } : {}}
+              style={egg === 'red' ? { transform: [{ rotate: spin }] } : {}}
             >
-              <TouchableOpacity onPress={(e) => setEgg('egg1')}>
+              <TouchableOpacity onPress={(e) => setEgg('red')}>
                 <Image
                   style={styles.eggImg}
                   source={require('../../../assets/eggs/egg1.png')}
@@ -87,9 +90,9 @@ const SelectEgg = ({ navigation }) => {
               </TouchableOpacity>
             </Animated.View>
             <Animated.View
-              style={egg === 'egg2' ? { transform: [{ rotate: spin }] } : {}}
+              style={egg === 'green' ? { transform: [{ rotate: spin }] } : {}}
             >
-              <TouchableOpacity onPress={() => setEgg('egg2')}>
+              <TouchableOpacity onPress={() => setEgg('green')}>
                 <Image
                   style={styles.eggImg}
                   source={require('../../../assets/eggs/egg2.png')}
@@ -97,9 +100,9 @@ const SelectEgg = ({ navigation }) => {
               </TouchableOpacity>
             </Animated.View>
             <Animated.View
-              style={egg === 'egg3' ? { transform: [{ rotate: spin }] } : {}}
+              style={egg === 'blue' ? { transform: [{ rotate: spin }] } : {}}
             >
-              <TouchableOpacity onPress={() => setEgg('egg3')}>
+              <TouchableOpacity onPress={() => setEgg('blue')}>
                 <Image
                   style={styles.eggImg}
                   source={require('../../../assets/eggs/egg3.png')}

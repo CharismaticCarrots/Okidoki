@@ -66,9 +66,11 @@ const Store = () => {
   const userItemMutation = useMutation(async (itemId) => {
     const token = await SecureStore.getItemAsync('TOKEN');
     if (token) {
-      const { data: updatedUserItem } = await axios.post(
+      const { data: updatedUserItem } = await axios.put(
         `http://${API_URL}/api/user/items/${itemId}`,
-        {},
+        {
+          quantity: 1
+        },
         {
           headers: {
             authorization: token,
@@ -104,7 +106,7 @@ const Store = () => {
       show();
       setTimeout(() => hide(), 1300);
       
-      setMsgContent('UH OH, YOU\'RE DON\'T HAVE ENOUGH CARROTS!');
+      setMsgContent('UH OH, YOU DON\'T HAVE ENOUGH CARROTS!');
     }
   }
 
