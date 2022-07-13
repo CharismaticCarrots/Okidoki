@@ -92,15 +92,14 @@ router.post('/items/:id', requireToken, async (req, res, next) => {
 router.put('/items/:id', requireToken, async (req, res, next) => {
   try {
     const user = req.user;
-    const item = await Item.findByPk(Number(req.params.id))
-    const quantity = req.body.quantity
+    const item = await Item.findByPk(parseInt(req.params.id))
     const userItem = await User_Item.findOne({
       where: {
-        userId: user.id,
-        itemId: item.id
+        itemId: item.id,
+        userId: user.id
       }
     }) 
-    const newQuantity = userItem.quantity + quantity
+    const newQuantity = userItem.quantity + req.body.quantity
     if (newQuantity > 0){
       await userItem.update({quantity: newQuantity})
       res.send(await userItem.save());
