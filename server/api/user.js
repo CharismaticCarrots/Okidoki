@@ -40,7 +40,10 @@ router.post('/doki', requireToken, async (req, res, next) => {
         type: randomDoki,
       },
     });
-    await user.addDoki(doki, { through: { dokiName: req.body.dokiName } });
+    await user.addDoki(doki, { through: { 
+      dokiName: req.body.dokiName, 
+      eggColor: req.body.eggColor
+    } });
     res.send();
   } catch (err) {
     next(err);
@@ -72,28 +75,36 @@ router.get('/items', requireToken, async (req, res, next) => {
   }
 })
 
-router.post('/items/:id', requireToken, async (req, res, next) => {
+
+router.put('/items/:id', requireToken, async (req, res, next) => {
   try {
     const user = req.user;
-    const item = Number(req.params.id)
+    const item = await Item.findByPk(parseInt(req.params.id))
     if (await user.hasItem(item)){
       const userItem = await User_Item.findOne({
         where: {
           userId: user.id,
-          itemId: item
+          itemId: item.id
         }
       })
-      const itemQuantity = userItem.quantity + 1
-      await userItem.update({quantity: itemQuantity})
-      res.send(await userItem.save());
+      const newQuantity = userItem.quantity + req.body.quantity
+      if (newQuantity > 0){
+        await userItem.update({quantity: newQuantity})
+        res.send(await userItem.save());
+      }
+      else if (newQuantity <= 0){
+        user.removeItem(item)
+        res.send()
+      }
     }
     else {
-      user.addItem(item, { through: { quantity: 1 } } )
+      user.addItem(item, { through: { quantity: req.body.quantity } } )
       res.send()
     }
   } catch (error) {
     next(error)
   }
+<<<<<<< HEAD
 })
 
 router.put('/items/:id', requireToken, async (req, res, next) => {
@@ -122,3 +133,6 @@ router.put('/items/:id', requireToken, async (req, res, next) => {
     next(error)
   }
 })
+=======
+})
+>>>>>>> main

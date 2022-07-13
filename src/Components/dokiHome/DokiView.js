@@ -83,15 +83,15 @@ const DokiView = ({ now }) => {
         setMsgContent('UH OH, YOU\'RE OUT OF CARROTS!');
       }
       if (curFullnessLvl >= 100) {
-        console.log("CUR FULLNESS LEVEL", curFullnessLvl)
         show();
         setTimeout(() => hide(), 1000);
         setMsgContent('DOKI IS TOO FULL RIGHT NOW!');
       }
     } else {
+      const newFullnessLevel = curFullnessLvl + 5;
       const userDokiUpdate = {
         lastFedAt: new Date(),
-        lastFedFullnessLevel: curFullnessLvl + 5, // Carrot-FullnessLevel Exchange Rate
+        lastFedFullnessLevel: curFullnessLvl + (newFullnessLevel > 100 ? 100 - curFullnessLvl : 5), // Carrot-FullnessLevel Exchange Rate
       };
       userDokiMutation.mutate(userDokiUpdate, {
         onSuccess: ({ lastFedFullnessLevel }) => {
