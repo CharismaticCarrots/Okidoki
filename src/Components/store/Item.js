@@ -1,5 +1,4 @@
-import { StyleSheet, View, Text, Image } from 'react-native';
-// import { StyledHeading1 } from '../styles';
+import { StyleSheet, View, Text, Image , TouchableOpacity} from 'react-native';
 
 const imageNames = {
   'video game': require('../../../assets/items/videogame.png'),
@@ -8,13 +7,20 @@ const imageNames = {
   'teddy bear': require('../../../assets/items/teddybear.png'),
 };
 
+
 const Item = (props) => {
+  const purchaseItem = props.purchaseItem
+  
   return (
+    <TouchableOpacity
+      onPress={() => purchaseItem(props.id, props.price)}
+    >
     <View style={styles.item}>
       <Image style={styles.itemImg} source={imageNames[props.name]} />
       <Text style={styles.itemName}>{props.name}</Text>
       <Text style={styles.itemPrice}>{props.price}</Text>
     </View>
+    </TouchableOpacity>
   );
 };
 
@@ -45,5 +51,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Singularity',
     fontSize: 22,
     color: '#59b2ff',
-  },
+  }
 });
+
