@@ -25,19 +25,23 @@ const SelectEgg = ({ navigation }) => {
   console.log('User on SelectEgg: ', user);
 
   const mutation = useMutation(
-    (dokiName) => {
-      return axios.post(
-        `http://${API_URL}/api/user/doki`,
-        { dokiName },
-        { headers: { authorization: token } }
-      );
+    async (dokiName) => {
+      try {
+         await axios.post(
+          `http://${API_URL}/api/user/doki`,
+          {
+             dokiName: dokiName,
+              eggColor: egg
+            },
+          { headers: { authorization: token } }
+        );
+        return navigation.navigate('DokiHome');
+      } catch (error) {
+        console.log({error})
+      }
     },
-    {
-      onSuccess: () => {
-        navigation.navigate('DokiHome');
-      },
-    }
   );
+
 
   const handleSubmit = async () => {
     mutation.mutate(dokiName);
@@ -77,9 +81,9 @@ const SelectEgg = ({ navigation }) => {
         <View style={styles.eggSelection}>
           <View style={styles.eggRow}>
             <Animated.View
-              style={egg === 'egg1' ? { transform: [{ rotate: spin }] } : {}}
+              style={egg === 'red' ? { transform: [{ rotate: spin }] } : {}}
             >
-              <TouchableOpacity onPress={(e) => setEgg('egg1')}>
+              <TouchableOpacity onPress={(e) => setEgg('red')}>
                 <Image
                   style={styles.eggImg}
                   source={require('../../../assets/eggs/egg1.png')}
@@ -87,9 +91,9 @@ const SelectEgg = ({ navigation }) => {
               </TouchableOpacity>
             </Animated.View>
             <Animated.View
-              style={egg === 'egg2' ? { transform: [{ rotate: spin }] } : {}}
+              style={egg === 'green' ? { transform: [{ rotate: spin }] } : {}}
             >
-              <TouchableOpacity onPress={() => setEgg('egg2')}>
+              <TouchableOpacity onPress={() => setEgg('green')}>
                 <Image
                   style={styles.eggImg}
                   source={require('../../../assets/eggs/egg2.png')}
@@ -97,9 +101,9 @@ const SelectEgg = ({ navigation }) => {
               </TouchableOpacity>
             </Animated.View>
             <Animated.View
-              style={egg === 'egg3' ? { transform: [{ rotate: spin }] } : {}}
+              style={egg === 'blue' ? { transform: [{ rotate: spin }] } : {}}
             >
-              <TouchableOpacity onPress={() => setEgg('egg3')}>
+              <TouchableOpacity onPress={() => setEgg('blue')}>
                 <Image
                   style={styles.eggImg}
                   source={require('../../../assets/eggs/egg3.png')}

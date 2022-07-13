@@ -14,7 +14,7 @@ import { useUserData } from '../../hooks/useUserData';
 import { API_URL } from '../../../secrets.js';
 
 const SetGoal = ({ navigation }) => {
-  const [dailyStepGoal, setDailyStepGoal] = useState('10000');
+  const [dailyStepGoal, setDailyStepGoal] = useState('0');
 
   const { user } = useUserData();
   let token;
@@ -24,20 +24,20 @@ const SetGoal = ({ navigation }) => {
   console.log('User on SetGoal: ', user);
 
   const mutation = useMutation(
-    (dailyStepGoal) => {
-      return axios.put(
-        `http://${API_URL}/api/user`,
-        { dailyStepGoal },
-        {
-          headers: { authorization: token },
-        }
-      );
+    async (dailyStepGoal) => {
+      try {
+         await axios.put(
+          `http://${API_URL}/api/user`,
+          { dailyStepGoal },
+          {
+            headers: { authorization: token },
+          }
+        );
+        return navigation.navigate('SelectEgg');
+      } catch (error) {
+        console.log({error})
+      }
     },
-    {
-      onSuccess: () => {
-        navigation.navigate('SelectEgg');
-      },
-    }
   );
 
   const handleSubmit = async () => {
@@ -51,13 +51,6 @@ const SetGoal = ({ navigation }) => {
     >
       <StyledFormContainer>
         <StyledHeading1>Set Your Daily Step Goal</StyledHeading1>
-
-        {/*
-        <TextInput
-          left={<TextInput.Icon name={'shoe-print'} />}
-          placeholder="Example: 10,000"
-          onChangeText={setDailyStepGoal}
-        /> */}
 
         <StyledFormTextInput
           placeholder="Example: 10,000"
