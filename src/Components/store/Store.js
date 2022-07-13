@@ -66,15 +66,6 @@ const Store = () => {
   const userItemMutation = useMutation(async (itemId) => {
     const token = await SecureStore.getItemAsync('TOKEN');
     if (token) {
-      const { data } = await axios.post(
-        `http://${API_URL}/api/user/items/${itemId}`,
-        {},
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
       const { data: updatedUserItem } = await axios.put(
         `http://${API_URL}/api/user/items/${itemId}`,
         {

@@ -72,22 +72,6 @@ router.get('/items', requireToken, async (req, res, next) => {
   }
 })
 
-router.post('/items/:id', requireToken, async (req, res, next) => {
-  try {
-    const user = req.user;
-    const item = await Item.findByPk(Number(req.params.id))
-    if (!await user.hasItem(item)){
-      user.addItem(item )
-      res.send()
-    }
-    else {
-      res.send()
-    }
-  } catch (error) {
-    next(error)
-  }
-})
-
 
 router.put('/items/:id', requireToken, async (req, res, next) => {
   try {
