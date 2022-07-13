@@ -81,6 +81,7 @@ const StyledFormTextInput = styled(TextInput)`
   margin-bottom: 4px;
   font-family: 'Singularity';
   color: ${colors.text.dark};
+  border: solid grey 3px;
 `;
 
 const StyledFormButton = styled(TouchableOpacity)`
