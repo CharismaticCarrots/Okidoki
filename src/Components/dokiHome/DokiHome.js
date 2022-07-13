@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    backgroundColor: '#4fa4b8',
+    backgroundColor: '#134845',
   },
 });
 
