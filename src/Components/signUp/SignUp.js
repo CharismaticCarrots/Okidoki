@@ -38,12 +38,10 @@ const SignUp = ({ navigation }) => {
         const { data } = await axios.get(
           `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.authentication.accessToken}`
         );
-
-        console.log(data);
       };
       fetchUserData();
     }
-  }, [response]);
+  }, [mutation, response, userData]);
 
   const { user } = useUserData();
   console.log('User on SignUp: ', user);
