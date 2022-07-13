@@ -4,6 +4,8 @@ import { Card, Title, Paragraph } from 'react-native-paper';
 import { StyledItemCard, StyleItemImage } from '../styles';
 
 const imageNames = {
+  'video game': require('../../../assets/items/videogame.png'),
+  slime: require('../../../assets/items/slime.png'),
   ball: require('../../../assets/items/ball.png'),
   'teddy bear': require('../../../assets/items/teddybear.png'),
 };

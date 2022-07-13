@@ -298,6 +298,9 @@ const StyleItemImage = styled(Image)`
 const StyledItemView = styled(View)`
   display:flex;
   flexDirection:row;
+  flexWrap: wrap;
+  alignItems: center;
+  margin:40px
 `
 
 export {
