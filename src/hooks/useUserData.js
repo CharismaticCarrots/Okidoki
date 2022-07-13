@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import axios from 'axios';
 import { API_URL } from '../../secrets.js';
@@ -30,6 +31,13 @@ export const useUserData = () => {
     queryClient.removeQueries('user');
   };
 
-  //probably return an object, with functions like logout
-  return { user, logout, isError, isLoading, error };
+  if (isLoading) {
+    console.log("LOADING");
+  }
+
+  if (isError) {
+    console.log ("ERROR:", error);
+  }
+
+  return { user, logout };
 };

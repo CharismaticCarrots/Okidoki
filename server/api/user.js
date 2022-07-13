@@ -93,19 +93,25 @@ router.put('/items/:id', requireToken, async (req, res, next) => {
   try {
     const user = req.user;
     const item = await Item.findByPk(parseInt(req.params.id))
-    const userItem = await User_Item.findOne({
-      where: {
-        itemId: item.id,
-        userId: user.id
+    if (await user.hasItem(item)){
+      const userItem = await User_Item.findOne({
+        where: {
+          userId: user.id,
+          itemId: item.id
+        }
+      })
+      const newQuantity = userItem.quantity + req.body.quantity
+      if (newQuantity > 0){
+        await userItem.update({quantity: newQuantity})
+        res.send(await userItem.save());
       }
-    }) 
-    const newQuantity = userItem.quantity + req.body.quantity
-    if (newQuantity > 0){
-      await userItem.update({quantity: newQuantity})
-      res.send(await userItem.save());
+      else if (newQuantity <= 0){
+        user.removeItem(item)
+        res.send()
+      }
     }
     else {
-      user.removeItem(item)
+      user.addItem(item, { through: { quantity: req.body.quantity } } )
       res.send()
     }
   } catch (error) {
