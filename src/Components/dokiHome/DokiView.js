@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { StyleSheet } from 'react-native';
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import { API_URL } from '../../../secrets';
@@ -20,9 +21,10 @@ import CountDisplay from './CountDisplay';
 import { useDailyStepCount } from '../../Healthkit';
 import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
-import { getCarrotReward } from '../../helpers/getCarrotReward';
+import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
+import { useUpdateUser } from '../../hooks/useUpdateUser';
+import { useCarrotReward } from '../../hooks/useCarrotReward';
 
-import { StyleSheet } from 'react-native';
 
 const DokiView = ({ now }) => {
   const refRBSheet = useRef();
@@ -30,30 +32,34 @@ const DokiView = ({ now }) => {
   const [curCarrotCount, setCurCarrotCount] = useState(0);
   const [userDoki, setUserDoki] = useState();
   const [curFullnessLvl, setCurFullnessLvl] = useState(0);
-  const [carrotReward, setCarrotReward] = useState(null);
   const [carrotsClaimed, setCarrotsClaimed] = useState(false);
   const [msgContent, setMsgContent] = useState(null);
 
   const stepCount = useDailyStepCount(now);
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
-  const carrotRewardData = getCarrotReward();
+  const carrotReward = useCarrotReward(now);
+  const userDokiMutation = useUpdateUserDoki();
+  const userMutation = useUpdateUser();
   const { ref, hide, show } = usePopable();
 
-  console.log("CARROTS REWARDED:", carrotReward) // Temp message to indicate carrots to reward
-
+  // sets carrotsClaimed status
   useEffect(() => {
     if (user) {
       setCurCarrotCount(user.carrotCount);
-      const hrsSinceLastClaimed = (new Date() - new Date(user.lastCarrotsClaimedAt))/3600000;
-      if (hrsSinceLastClaimed <= 24) {
+      console.log("USER TOKEN:", user.token) // Temporary console log to view token
+      const claimedToday = new Date(now).toDateString() === new Date(user.lastCarrotsClaimedAt).toDateString();
+
+      if (claimedToday) {
         setCarrotsClaimed(true);
-        console.log(`Can't claim carrots yet, last claimed ${hrsSinceLastClaimed} hours ago. Check again tomorrow!`) // Temporary Error Message
+        console.log(`Can't claim carrots yet, last claimed at ${new Date(user.lastCarrotsClaimedAt).toLocaleString('en-US', { timeZone: 'UTC' })}. Check again tomorrow!`) // Temporary Error Message
+      } else {
+        console.log(`LAST CLAIMED CARROTS AT: ${new Date(user.lastCarrotsClaimedAt).toLocaleString('en-US', { timeZone: 'UTC' })}`) // Temporary Console log to test
       }
-
     }
-  }, [user]);
+  }, [user, carrotReward, now]);
 
+  // sets new fullnesslevel based on lastfedAt date
   useEffect(() => {
     if (userDokiData) {
       // userDokiData.type = 'fox'; // Dummy data to view different sprites
@@ -61,60 +67,23 @@ const DokiView = ({ now }) => {
 
       const { user_doki } = userDokiData;
       const hrsSinceLastFed = Math.floor(
-        (new Date().getTime() - new Date(user_doki.lastFedAt).getTime()) /
-          3600000
+        (new Date(now).getTime() - new Date(user_doki.lastFedAt).getTime()) / 3600000
       );
+      console.log("HOURS SINCE LAST FED", hrsSinceLastFed)
       setCurFullnessLvl(user_doki.lastFedFullnessLevel - hrsSinceLastFed);
     }
-  }, [userDokiData]);
+  }, [userDokiData, now]);
 
-  useEffect(() => {
-    if (carrotRewardData) {
-      setCarrotReward(carrotRewardData);
-    }
-  }, [carrotRewardData]);
-
-  const userDokiMutation = useMutation(async (userDokiUpdate) => {
-    const token = await SecureStore.getItemAsync('TOKEN');
-    if (token) {
-      const { data: updatedUserDoki } = await axios.put(
-        `http://${API_URL}/api/user/doki`,
-        userDokiUpdate,
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
-      return updatedUserDoki;
-    }
-  });
-
-  const userMutation = useMutation(async (userUpdate) => {
-    const token = await SecureStore.getItemAsync('TOKEN');
-    if (token) {
-      const { data: updatedUserDoki } = await axios.put(
-        `http://${API_URL}/api/user/`,
-        userUpdate,
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
-      return updatedUserDoki;
-    }
-  });
 
   const feedDoki = () => {
-    if (curCarrotCount === 0 || curFullnessLvl === 100) {
-      if (curCarrotCount === 0) {
-        console.log('UH OH, OUT OF CARROTS'); // Temporary error message
+    if (curCarrotCount <= 0 || curFullnessLvl >= 100) {
+      if (curCarrotCount <= 0) {
         show();
         setTimeout(() => hide(), 1000);
         setMsgContent('UH OH, YOU\'RE OUT OF CARROTS!');
       }
-      if (curFullnessLvl === 100) {
+      if (curFullnessLvl >= 100) {
+        console.log("CUR FULLNESS LEVEL", curFullnessLvl)
         show();
         setTimeout(() => hide(), 1000);
         setMsgContent('DOKI IS TOO FULL RIGHT NOW!');
@@ -122,7 +91,7 @@ const DokiView = ({ now }) => {
     } else {
       const userDokiUpdate = {
         lastFedAt: new Date(),
-        lastFedFullnessLevel: curFullnessLvl + 1,
+        lastFedFullnessLevel: curFullnessLvl + 5, // Carrot-FullnessLevel Exchange Rate
       };
       userDokiMutation.mutate(userDokiUpdate, {
         onSuccess: ({ lastFedFullnessLevel }) => {
@@ -179,7 +148,7 @@ const DokiView = ({ now }) => {
         />
         <CountDisplay counterType={'carrot'} count={curCarrotCount} />
       </StyledOuterCountersContainer>
-      {carrotReward && !carrotsClaimed &&
+      {Boolean(carrotReward) && !carrotsClaimed &&
         <Button mode="contained" onPress={claimCarrots}>
             {`CLAIM ${carrotReward} CARROTS`}
         </Button>}
