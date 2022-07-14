@@ -47,7 +47,7 @@ const SignUp = ({ navigation }) => {
             email: email,
             firstName: given_name,
             lastName: family_name,
-            password: 'google',
+            externalType: 'google',
           });
         } catch (err) {
           console.log(err);

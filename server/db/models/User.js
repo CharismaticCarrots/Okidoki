@@ -17,9 +17,12 @@ const User = db.define('user', {
   },
   password: {
     type: STRING,
-    allowNull: false,
     validate: {
-      notEmpty: true,
+      customValidator() {
+        if (this.externalType === 'postgres' && this.password === null) {
+          throw new Error('Password cannot be blank');
+        }
+      },
     },
   },
   token: {
@@ -88,9 +91,14 @@ User.authenticate = async ({ email, password }) => {
     },
   });
   if (user) {
-    const isValid = await bcrypt.compare(password, user.password);
-    if (isValid) {
+    if (user.externalType === 'google') {
       return user;
+    }
+    if (user.password) {
+      const isValid = await bcrypt.compare(password, user.password);
+      if (isValid) {
+        return user;
+      }
     }
   }
   const error = Error('bad credentials');
@@ -112,9 +120,11 @@ User.prototype.toJSON = function () {
 };
 
 User.beforeCreate(async (user) => {
-  const SALT_COUNT = 5;
-  const hashedPw = await bcrypt.hash(user.password, SALT_COUNT);
-  user.password = hashedPw;
+  if (this.password !== null) {
+    const SALT_COUNT = 5;
+    const hashedPw = await bcrypt.hash(user.password, SALT_COUNT);
+    user.password = hashedPw;
+  }
 });
 
 module.exports = User;
