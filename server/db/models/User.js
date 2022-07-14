@@ -3,9 +3,11 @@ const db = require('../db');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
+const { STRING, VIRTUAL, INTEGER, DATE, ENUM } = Sequelize;
+
 const User = db.define('user', {
   email: {
-    type: Sequelize.STRING,
+    type: STRING,
     unique: true,
     allowNull: false,
     validate: {
@@ -14,50 +16,58 @@ const User = db.define('user', {
     },
   },
   password: {
-    type: Sequelize.STRING,
+    type: STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
   token: {
-    type: Sequelize.VIRTUAL,
+    type: VIRTUAL,
     get() {
       const token = jwt.sign({ userId: this.id }, process.env.JWT);
       return token;
     },
   },
   firstName: {
-    type: Sequelize.STRING,
+    type: STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
   lastName: {
-    type: Sequelize.STRING,
+    type: STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
   carrotCount: {
-    type: Sequelize.INTEGER,
+    type: INTEGER,
     defaultValue: 0,
     validate: {
       min: 0,
     },
   },
   lastCarrotsClaimedAt: {
-    type: Sequelize.DATE,
+    type: DATE,
     defaultValue: new Date(),
   },
   dailyStepGoal: {
-    type: Sequelize.INTEGER,
+    type: INTEGER,
     defaultValue: 1000,
     validate: {
       min: 1000,
     },
+  },
+  externalType: {
+    type: ENUM,
+    values: ['google', 'facebook', 'postgres'],
+    defaultValue: 'postgres',
+  },
+  externalId: {
+    type: STRING,
   },
 });
 
