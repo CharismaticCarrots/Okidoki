@@ -50,20 +50,26 @@ const SignIn = ({ navigation }) => {
       };
       fetchUserData();
     }
-  }, []);
+  }, [mutation, response]);
 
-  const mutation = useMutation(async (userInfo) => {
-    try {
-      const { data: user } = await axios.post(
-        `http://${API_URL}/auth/signin`,
-        userInfo
-      );
-      await SecureStore.setItemAsync('TOKEN', user.token);
-      navigation.navigate('DokiHome');
-    } catch (err) {
-      console.log(err);
+  const mutation = useMutation(
+    async (userInfo) => {
+      try {
+        const { data: user } = await axios.post(
+          `http://${API_URL}/auth/signin`,
+          userInfo
+        );
+        await SecureStore.setItemAsync('TOKEN', user.token);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    {
+      onSuccess: () => {
+        navigation.navigate('DokiHome');
+      },
     }
-  });
+  );
 
   if (isLoading) {
     console.log('loading');
