@@ -5,12 +5,6 @@
       location = "group:/Users/angelyang/Downloads/Logo.png">
    </FileRef>
    <FileRef
-      location = "group:/Users/angelyang/Documents/Okidoki/ios/Storyboard.storyboard">
-   </FileRef>
-   <FileRef
-      location = "absolute:/Users/angelyang/Documents/Okidoki/ios/Storyboard.storyboard">
-   </FileRef>
-   <FileRef
       location = "group:Okidoki.xcodeproj">
    </FileRef>
    <FileRef
