@@ -123,6 +123,25 @@ const DokiView = ({ now }) => {
     }
   };
 
+  const playWithDoki = () => {
+    if (curMoodLvl >= 100) {
+      setMsgContent("I'M ALL PLAYED OUT!");
+    } else {
+      const newMoodLevel = curMoodLvl + 5;
+      const userDokiUpdate = {
+        lastPlayedAt: new Date(),
+        lastPlayedMoodLevel:
+          curMoodLvl + (newMoodLevel > 100 ? 100 - curMoodLvl : 5), // Mood Increase Rate
+      };
+      userDokiMutation.mutate(userDokiUpdate, {
+        onSuccess: ({ lastPlayedMoodLevel }) => {
+          setCurMoodLvl(lastPlayedMoodLevel);
+        },
+      });
+      setMsgContent('THIS IS SO MUCH FUN!');
+    }
+  };
+
   const claimCarrots = () => {
     userMutation.mutate(
       {
@@ -170,8 +189,7 @@ const DokiView = ({ now }) => {
         Feed Doki
       </Button> */}
       <Button mode="contained" onPress={() => refRBSheet.current.open()}>
-        {' '}
-        DOKI PACK{' '}
+        DOKI PACK
       </Button>
       <RBSheet
         ref={refRBSheet}
@@ -195,6 +213,7 @@ const DokiView = ({ now }) => {
         <DokiDrawer
           carrotCount={curCarrotCount}
           feedDoki={feedDoki}
+          playWithDoki={playWithDoki}
           msgContent={msgContent}
         />
       </RBSheet>

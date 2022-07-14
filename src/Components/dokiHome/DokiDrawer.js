@@ -12,12 +12,26 @@ import { Popable, usePopable } from 'react-native-popable';
 
 const DokiDrawer = (props) => {
   const { ref, hide, show } = usePopable();
+
+  const handleFeed = () => {
+    props.feedDoki();
+    show();
+    setTimeout(() => hide(), 1000);
+  };
+
+  const handlePlay = () => {
+    props.playWithDoki();
+    show();
+    setTimeout(() => hide(), 1000);
+  };
+
   const userItems = useUserItemData();
   let userItemList;
   if (userItems) {
     userItemList = userItems.map((item) => {
       return (
         <UserItem
+          handlePlay={handlePlay}
           key={item.id}
           name={item.name}
           quantity={item.user_item.quantity}
@@ -25,12 +39,7 @@ const DokiDrawer = (props) => {
       );
     });
   }
-  console.log('propss', props);
-  const handleFeed = () => {
-    props.feedDoki();
-    show();
-    setTimeout(() => hide(), 1000);
-  };
+  console.log('PROPS INSIDE DOKI DRAWER', props);
 
   return (
     <View style={styles.container}>
