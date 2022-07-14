@@ -4,7 +4,6 @@ import { useMutation } from 'react-query';
 import axios from 'axios';
 import { API_URL } from '../../../secrets';
 import * as SecureStore from 'expo-secure-store';
-import { Popable, usePopable } from 'react-native-popable';
 import { Button, Text } from 'react-native-paper';
 import RBSheet from "react-native-raw-bottom-sheet";
 import {
@@ -41,8 +40,7 @@ const DokiView = ({ now }) => {
   const carrotReward = useCarrotReward(now);
   const userDokiMutation = useUpdateUserDoki();
   const userMutation = useUpdateUser();
-  const { ref, hide, show } = usePopable();
- 
+
   useEffect(() => {
     if (curCarrotCount <= 0) { setMsgContent('UH OH, YOU\'RE OUT OF CARROTS!')}
     else if (curFullnessLvl >= 100) {setMsgContent('DOKI IS TOO FULL RIGHT NOW!')}
@@ -82,14 +80,10 @@ const DokiView = ({ now }) => {
   const feedDoki = () => {
     if (curCarrotCount <= 0 || curFullnessLvl >= 100) {
       if (curCarrotCount <= 0) {
-        show();
-        setTimeout(() => hide(), 1000);
-        setMsgContent('UH OH, YOU\'RE OUT OF CARROTS!');
+        return 
       }
       if (curFullnessLvl >= 100) {
-        show();
-        setTimeout(() => hide(), 1000);
-        setMsgContent('DOKI IS TOO FULL RIGHT NOW!');
+        return
       }
     } else {
       const newFullnessLevel = curFullnessLvl + 5;
@@ -110,9 +104,6 @@ const DokiView = ({ now }) => {
           },
         }
       );
-      show();
-      setTimeout(() => hide(), 1000);
-      setMsgContent('OM NOM NOM');
     }
   };
 
@@ -157,22 +148,15 @@ const DokiView = ({ now }) => {
             {`CLAIM ${carrotReward} CARROTS`}
         </Button>}
       <StyledDokiContainer>
-        <Popable
-          ref={ref}
-          content={msgContent}
-          style={popoverStyles}
-          animationType="spring"
-        >
           {userDoki && <Doki userDoki={userDoki} />}
-        </Popable>
         <StyledDokiName>
           {userDokiData && userDokiData.user_doki.dokiName}
         </StyledDokiName>
       </StyledDokiContainer>
-      <Button onPress={feedDoki} mode="contained">
+      {/* <Button onPress={feedDoki} mode="contained">
         Feed Doki
-      </Button>
-      <Button mode="contained" onPress={() => refRBSheet.current.open()} > OPEN PACK </Button>
+      </Button> */}
+      <Button mode="contained" onPress={() => refRBSheet.current.open()} > DOKI PACK </Button>
       <RBSheet
         ref={refRBSheet}
         closeOnSwipeDown={false}
@@ -201,9 +185,4 @@ const DokiView = ({ now }) => {
 export default DokiView;
 
 
-const popoverStyles = StyleSheet.create({
-  alignSelf: "center",
-  marginTop: 350,
-  width: 200,
-});
 
