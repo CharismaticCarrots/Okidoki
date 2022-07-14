@@ -4,8 +4,11 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { useUserItemData } from '../../hooks/useUserItemData'
 import CountDisplay from './CountDisplay'
 import UserItem from '../dokiPack/UserItem'
+import { Popable, usePopable } from 'react-native-popable';
+
 
 const DokiDrawer = (props) => {
+  const { ref, hide, show } = usePopable();
   const userItems = useUserItemData()
   let userItemList
   if (userItems){
@@ -13,7 +16,13 @@ const DokiDrawer = (props) => {
       return <UserItem key={item.id} name={item.name} quantity={item.user_item.quantity}/>
     })
   }
-  const feedDoki = props.feedDoki
+  // const feedDoki = props.feedDoki
+  const handleFeed = () => {
+    props.feedDoki
+    show();
+    setTimeout(() => hide(), 1000);
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -24,7 +33,7 @@ const DokiDrawer = (props) => {
         
       >
       <TouchableOpacity
-        onPress={feedDoki}
+        onPress={handleFeed}
       >
       <View style={styles.box}>
       <FontAwesome5 name={'carrot'} style={{fontSize: 50, color:'orange'}} />
@@ -33,6 +42,13 @@ const DokiDrawer = (props) => {
       </TouchableOpacity>
       {userItemList}
       </ScrollView>
+      <Popable
+          ref={ref}
+          content={props.msgContent}
+          style={styles.popable}
+          animationType="spring"
+        >
+        </Popable>
     </View>
   )
 }
@@ -51,7 +67,6 @@ const styles = StyleSheet.create({
     width:85,
     justifyContent: 'center',
     backgroundColor:'#ffefb4',
-    borderColor:'##fff',
     padding:15,
     paddingLeft:20,
     borderRadius:10,
@@ -62,5 +77,10 @@ const styles = StyleSheet.create({
     fontFamily:'Singularity',
     fontSize:20,
     marginLeft:'auto'
+  },
+  popable:{
+    alignSelf: "center",
+    marginTop: 350,
+    width: 200,
   }
 })

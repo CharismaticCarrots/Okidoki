@@ -64,7 +64,6 @@ const DokiView = ({ now }) => {
     if (userDokiData) {
       // userDokiData.type = 'fox'; // Dummy data to view different sprites
       setUserDoki(userDokiData);
-
       const { user_doki } = userDokiData;
       const hrsSinceLastFed = Math.floor(
         (new Date(now).getTime() - new Date(user_doki.lastFedAt).getTime()) / 3600000
@@ -188,7 +187,7 @@ const DokiView = ({ now }) => {
         height={170}
         closeOnPressMask={true}
       >
-        <DokiDrawer carrotCount={curCarrotCount} feedDoki={feedDoki}/>
+        <DokiDrawer carrotCount={curCarrotCount} feedDoki={feedDoki} msgContent={msgContent}/>
       </RBSheet>
     </StyledDokiHomeBackground>
   );
@@ -198,8 +197,8 @@ export default DokiView;
 
 
 const popoverStyles = StyleSheet.create({
-  alignSelf: "center",
-  marginTop: 350,
-  width: 200,
+  // alignSelf: "center",
+  // marginTop: 350,
+  // width: 200,
 });
 
