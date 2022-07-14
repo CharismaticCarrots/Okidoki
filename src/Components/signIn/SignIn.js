@@ -40,9 +40,9 @@ const SignIn = ({ navigation }) => {
             `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.authentication.accessToken}`
           );
           const { email } = data;
-          mutation.mutate({
-            email: email,
-            externalType: 'google',
+
+          googleMutation.mutate({
+            idToken: response.authentication.idToken,
           });
         } catch (err) {
           console.log(err);
@@ -50,7 +50,26 @@ const SignIn = ({ navigation }) => {
       };
       fetchUserData();
     }
-  }, [mutation, response]);
+  }, [googleMutation, response]);
+
+  const googleMutation = useMutation(
+    async (userInfo) => {
+      try {
+        const { data: user } = await axios.post(
+          `http://${API_URL}/auth/googleauthroute`,
+          userInfo
+        );
+        await SecureStore.setItemAsync('TOKEN', user.token);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    {
+      onSuccess: () => {
+        navigation.navigate('DokiHome');
+      },
+    }
+  );
 
   const mutation = useMutation(
     async (userInfo) => {

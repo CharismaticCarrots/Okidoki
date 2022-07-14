@@ -1,25 +1,37 @@
 const router = require('express').Router();
 const { User } = require('../db');
+const { OAuth2Client } = require('google-auth-library');
+
+const client = new OAuth2Client(process.env.GOOGLECLIENTID);
 
 module.exports = router;
 
 // POST /auth/signin
 router.post('/signin', async (req, res, next) => {
   try {
-    if (req.body.externalType === 'postgres') {
-      const user = await User.authenticate(req.body);
-      res.json(user);
-    } else if (req.body.externalType === 'google') {
-      const user = await User.findOne({
-        where: {
-          email: req.body.email,
-          externalType: req.body.externalType,
-        },
-      });
-      res.json(user);
-    }
+    const user = await User.authenticate(req.body);
+    res.json(user);
   } catch (err) {
     res.send('Invalid username or password');
+  }
+});
+
+router.post('/googleauthroute', async (req, res, next) => {
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: req.body.idToken,
+      audience: process.env.GOOGLECLIENTID,
+    });
+    const payload = ticket.getPayload();
+
+    const user = await User.findOne({
+      where: {
+        email: payload.email,
+      },
+    });
+    res.json(user);
+  } catch (err) {
+    next(err);
   }
 });
 
