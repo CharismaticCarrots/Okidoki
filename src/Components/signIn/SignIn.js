@@ -1,8 +1,13 @@
 import { useState } from 'react';
+import { StyleSheet } from 'react-native';
 import { useMutation } from 'react-query';
 import axios from 'axios';
-import { API_URL } from '../../../secrets.js';
 import * as SecureStore from 'expo-secure-store';
+import * as Google from 'expo-auth-session/providers/google';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
+import { API_URL, GOOGLECLIENTID } from '../../../secrets.js';
+import { useUserData } from '../../hooks/useUserData';
 
 import {
   StyledHeading1,
@@ -13,12 +18,15 @@ import {
   StyledFormButtonText,
   StyledFormSuggest,
 } from '../styles';
-import { useUserData } from '../../hooks/useUserData';
 
 const SignIn = ({ navigation }) => {
   const [userData, setUserData] = useState({
     email: '',
     password: '',
+  });
+
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    iosClientId: GOOGLECLIENTID,
   });
 
   const { user, isLoading, isError } = useUserData();
@@ -92,9 +100,35 @@ const SignIn = ({ navigation }) => {
         >
           Don't have an account? Sign up
         </StyledFormSuggest>
+        <StyledFormButton
+          style={{
+            marginTop: 20,
+            marginBottom: 10,
+            width: '95%',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+          }}
+          onPress={() => {
+            promptAsync();
+          }}
+        >
+          <FontAwesome5 name={'google'} style={styles.icons} />
+          <StyledFormButtonText style={{ textAlign: 'center' }}>
+            Sign in with Google
+          </StyledFormButtonText>
+        </StyledFormButton>
       </StyledFormContainer>
     </StyledFormBackground>
   );
 };
+
+const styles = StyleSheet.create({
+  icons: {
+    fontSize: 27,
+    overflow: 'hidden',
+    color: '#59b2ff',
+  },
+});
 
 export default SignIn;
