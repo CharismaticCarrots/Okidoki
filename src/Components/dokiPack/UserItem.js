@@ -51,30 +51,17 @@ const styles = StyleSheet.create({
   text: {
     fontFamily:'Singularity',
     fontSize:23,
-    marginLeft:'auto',
+    // marginLeft:'auto',
   },
   quantity: {
-    // height:23,
-    // width:23,
-    // justifyContent: 'center',
-    // alignItems:'center',
-    // backgroundColor:'#C7CDAB',
-    // borderRadius:100,
-    // paddingTop:2,
-    // marginLeft:'auto',
+    height:23,
+    width:23,
+    justifyContent: 'center',
+    alignItems:'center',
+    backgroundColor:'#C7CDAB',
+    borderRadius:100,
+    paddingTop:2,
+    marginLeft:'auto',
   }
 })
 
-{/* <View>
-<StyledItemCard>
-  <StyleItemImage source={imageNames[props.name]}/>
-  <Card.Content>
-    <Title style={{fontFamily:'AntipastoBold'}}>
-    {props.name}
-    </Title>
-    <Paragraph style={{fontFamily:'Singularity', fontSize:17}}>
-      Quantity: {props.quantity}
-    </Paragraph>
-  </Card.Content>
-  </StyledItemCard>
-</View> */}

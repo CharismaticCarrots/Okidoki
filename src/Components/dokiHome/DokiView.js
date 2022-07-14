@@ -41,11 +41,6 @@ const DokiView = ({ now }) => {
   const userDokiMutation = useUpdateUserDoki();
   const userMutation = useUpdateUser();
 
-  useEffect(() => {
-    if (curCarrotCount <= 0) { setMsgContent('UH OH, YOU\'RE OUT OF CARROTS!')}
-    else if (curFullnessLvl >= 100) {setMsgContent('DOKI IS TOO FULL RIGHT NOW!')}
-    else {setMsgContent('OM NOM NOM');}
-  }, [curFullnessLvl, curCarrotCount])
 
   useEffect(() => {
     if (user) {
@@ -63,7 +58,7 @@ const DokiView = ({ now }) => {
   }, [user, carrotReward, now]);
 
   // sets new fullnesslevel based on lastfedAt date
-  useEffect(() => {
+   useEffect(() => {
     if (userDokiData) {
       // userDokiData.type = 'fox'; // Dummy data to view different sprites
       setUserDoki(userDokiData);
@@ -80,10 +75,10 @@ const DokiView = ({ now }) => {
   const feedDoki = () => {
     if (curCarrotCount <= 0 || curFullnessLvl >= 100) {
       if (curCarrotCount <= 0) {
-        return 
+        setMsgContent('UH OH, YOU\'RE OUT OF CARROTS!') 
       }
       if (curFullnessLvl >= 100) {
-        return
+        setMsgContent('DOKI IS TOO FULL RIGHT NOW!')
       }
     } else {
       const newFullnessLevel = curFullnessLvl + 5;
@@ -104,6 +99,7 @@ const DokiView = ({ now }) => {
           },
         }
       );
+      setMsgContent('OM NOM NOM')
     }
   };
 
