@@ -64,7 +64,6 @@ const User = db.define('user', {
   externalType: {
     type: ENUM,
     values: ['google', 'facebook', 'postgres'],
-    defaultValue: 'postgres',
   },
   externalId: {
     type: STRING,
