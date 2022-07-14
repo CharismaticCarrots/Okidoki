@@ -1,8 +1,9 @@
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import * as Google from 'expo-auth-session/providers/google';
-import { Button } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useEffect } from 'react';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import { API_URL, GOOGLECLIENTID } from '../../../secrets.js';
 
@@ -46,21 +47,19 @@ const SignUp = ({ navigation }) => {
   const { user } = useUserData();
   console.log('User on SignUp: ', user);
 
-  const mutation = useMutation(
-    async (userInfo) => {
-      try {
-        const { data: user } = await axios.post(
-          `http://${API_URL}/auth/signup`,
-          userInfo
-        );
-        await SecureStore.setItemAsync('TOKEN', user.token);
-        navigation.navigate('SetGoal');
-        return user;
-      } catch (err) {
-        console.log({ err });
-      }
-    },
-  );
+  const mutation = useMutation(async (userInfo) => {
+    try {
+      const { data: user } = await axios.post(
+        `http://${API_URL}/auth/signup`,
+        userInfo
+      );
+      await SecureStore.setItemAsync('TOKEN', user.token);
+      navigation.navigate('SetGoal');
+      return user;
+    } catch (err) {
+      console.log({ err });
+    }
+  });
 
   const handleSubmit = () => {
     mutation.mutate(userData);
@@ -130,15 +129,37 @@ const SignUp = ({ navigation }) => {
         >
           Already have an account? Sign in
         </StyledFormSuggest>
-        <Button
-          title="Login with Google"
+        <StyledFormButton
+          style={{
+            marginTop: 20,
+            marginBottom: 10,
+            width: '95%',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+          }}
           onPress={() => {
             promptAsync();
           }}
-        />
+        >
+          <FontAwesome5 name={'google'} style={styles.icons} />
+          <StyledFormButtonText style={{ textAlign: 'center' }}>
+            Sign up with Google
+          </StyledFormButtonText>
+        </StyledFormButton>
       </StyledFormContainer>
     </StyledFormBackground>
   );
 };
+
+// left={() => <FontAwesome5 name={'google'} style={styles.icons} />}
+
+const styles = StyleSheet.create({
+  icons: {
+    fontSize: 27,
+    overflow: 'hidden',
+    color: '#59b2ff',
+  },
+});
 
 export default SignUp;
