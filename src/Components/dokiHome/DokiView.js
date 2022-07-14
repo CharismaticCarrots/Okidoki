@@ -5,7 +5,7 @@ import axios from 'axios';
 import { API_URL } from '../../../secrets';
 import * as SecureStore from 'expo-secure-store';
 import { Button, Text } from 'react-native-paper';
-import RBSheet from "react-native-raw-bottom-sheet";
+import RBSheet from 'react-native-raw-bottom-sheet';
 import {
   StyledDokiHomeBackground,
   StyledDokiContainer,
@@ -24,14 +24,14 @@ import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
 import { useCarrotReward } from '../../hooks/useCarrotReward';
 
-
 const DokiView = ({ now }) => {
   const refRBSheet = useRef();
-
-  const [curCarrotCount, setCurCarrotCount] = useState(0);
   const [userDoki, setUserDoki] = useState();
+  const [curCarrotCount, setCurCarrotCount] = useState(0);
   const [curFullnessLvl, setCurFullnessLvl] = useState(0);
   const [carrotsClaimed, setCarrotsClaimed] = useState(false);
+  const [curMoodLvl, setCurMoodLvl] = useState(0);
+
   const [msgContent, setMsgContent] = useState(null);
 
   const stepCount = useDailyStepCount(now);
@@ -41,50 +41,70 @@ const DokiView = ({ now }) => {
   const userDokiMutation = useUpdateUserDoki();
   const userMutation = useUpdateUser();
 
-
   useEffect(() => {
     if (user) {
       setCurCarrotCount(user.carrotCount);
-      console.log("USER TOKEN:", user.token) // Temporary console log to view token
-      const claimedToday = new Date(now).toDateString() === new Date(user.lastCarrotsClaimedAt).toDateString();
+      console.log('USER TOKEN:', user.token); // Temporary console log to view token
+      const claimedToday =
+        new Date(now).toDateString() ===
+        new Date(user.lastCarrotsClaimedAt).toDateString();
 
       if (claimedToday) {
         setCarrotsClaimed(true);
-        console.log(`Can't claim carrots yet, last claimed at ${new Date(user.lastCarrotsClaimedAt).toLocaleString('en-US', { timeZone: 'UTC' })}. Check again tomorrow!`) // Temporary Error Message
+        console.log(
+          `Can't claim carrots yet, last claimed at ${new Date(
+            user.lastCarrotsClaimedAt
+          ).toLocaleString('en-US', {
+            timeZone: 'UTC',
+          })}. Check again tomorrow!`
+        ); // Temporary Error Message
       } else {
-        console.log(`LAST CLAIMED CARROTS AT: ${new Date(user.lastCarrotsClaimedAt).toLocaleString('en-US', { timeZone: 'UTC' })}`) // Temporary Console log to test
+        console.log(
+          `LAST CLAIMED CARROTS AT: ${new Date(
+            user.lastCarrotsClaimedAt
+          ).toLocaleString('en-US', { timeZone: 'UTC' })}`
+        ); // Temporary Console log to test
       }
     }
   }, [user, carrotReward, now]);
 
-  // sets new fullnesslevel based on lastfedAt date
-   useEffect(() => {
+  useEffect(() => {
     if (userDokiData) {
+      // sets new fullnesslevel based on lastfedAt date
       // userDokiData.type = 'fox'; // Dummy data to view different sprites
       setUserDoki(userDokiData);
       const { user_doki } = userDokiData;
       const hrsSinceLastFed = Math.floor(
-        (new Date(now).getTime() - new Date(user_doki.lastFedAt).getTime()) / 3600000
+        (new Date(now).getTime() - new Date(user_doki.lastFedAt).getTime()) /
+          3600000
       );
-      console.log("HOURS SINCE LAST FED", hrsSinceLastFed)
+      console.log('HOURS SINCE LAST FED', hrsSinceLastFed);
       setCurFullnessLvl(user_doki.lastFedFullnessLevel - hrsSinceLastFed);
+
+      // sets new moodlevel based on lastPlayedAt date
+      const hrsSinceLastPlayed = Math.floor(
+        (new Date(now).getTime() - new Date(user_doki.lastPlayedAt).getTime()) /
+          3600000
+      );
+      console.log('HOURS SINCE LAST PLAYED WITH', hrsSinceLastPlayed);
+      setCurMoodLvl(user_doki.lastPlayedMoodLevel - hrsSinceLastPlayed);
     }
   }, [userDokiData, now]);
-
 
   const feedDoki = () => {
     if (curCarrotCount <= 0 || curFullnessLvl >= 100) {
       if (curCarrotCount <= 0) {
-        setMsgContent('UH OH, YOU\'RE OUT OF CARROTS!') 
+        setMsgContent("UH OH, YOU'RE OUT OF CARROTS!");
       }
       if (curFullnessLvl >= 100) {
-        setMsgContent('DOKI IS TOO FULL RIGHT NOW!')
+        setMsgContent("I'M TOO FULL RIGHT NOW!");
       }
     } else {
       const newFullnessLevel = curFullnessLvl + 5;
       const userDokiUpdate = {
         lastFedAt: new Date(),
-        lastFedFullnessLevel: curFullnessLvl + (newFullnessLevel > 100 ? 100 - curFullnessLvl : 5), // Carrot-FullnessLevel Exchange Rate
+        lastFedFullnessLevel:
+          curFullnessLvl + (newFullnessLevel > 100 ? 100 - curFullnessLvl : 5), // Carrot-FullnessLevel Exchange Rate
       };
       userDokiMutation.mutate(userDokiUpdate, {
         onSuccess: ({ lastFedFullnessLevel }) => {
@@ -99,7 +119,7 @@ const DokiView = ({ now }) => {
           },
         }
       );
-      setMsgContent('OM NOM NOM')
+      setMsgContent('OM NOM NOM');
     }
   };
 
@@ -124,11 +144,7 @@ const DokiView = ({ now }) => {
       resizeMode="cover"
     >
       <StyledOuterProgressBarContainer>
-        <DokiProgressBar
-          name="Mood"
-          level={userDoki && userDoki.user_doki.lastPlayedMoodLevel}
-          total={100}
-        />
+        <DokiProgressBar name="Mood" level={curMoodLvl} total={100} />
         <DokiProgressBar name="Fullness" level={curFullnessLvl} total={100} />
       </StyledOuterProgressBarContainer>
       <StyledOuterCountersContainer>
@@ -139,12 +155,13 @@ const DokiView = ({ now }) => {
         />
         <CountDisplay counterType={'carrot'} count={curCarrotCount} />
       </StyledOuterCountersContainer>
-      {Boolean(carrotReward) && !carrotsClaimed &&
+      {Boolean(carrotReward) && !carrotsClaimed && (
         <Button mode="contained" onPress={claimCarrots}>
-            {`CLAIM ${carrotReward} CARROTS`}
-        </Button>}
+          {`CLAIM ${carrotReward} CARROTS`}
+        </Button>
+      )}
       <StyledDokiContainer>
-          {userDoki && <Doki userDoki={userDoki} />}
+        {userDoki && <Doki userDoki={userDoki} />}
         <StyledDokiName>
           {userDokiData && userDokiData.user_doki.dokiName}
         </StyledDokiName>
@@ -152,7 +169,10 @@ const DokiView = ({ now }) => {
       {/* <Button onPress={feedDoki} mode="contained">
         Feed Doki
       </Button> */}
-      <Button mode="contained" onPress={() => refRBSheet.current.open()} > DOKI PACK </Button>
+      <Button mode="contained" onPress={() => refRBSheet.current.open()}>
+        {' '}
+        DOKI PACK{' '}
+      </Button>
       <RBSheet
         ref={refRBSheet}
         closeOnSwipeDown={false}
@@ -160,25 +180,26 @@ const DokiView = ({ now }) => {
         closeOnPressMask={false}
         customStyles={{
           wrapper: {
-            backgroundColor: "transparent"
+            backgroundColor: 'transparent',
           },
           draggableIcon: {
-            backgroundColor: "#134845"
+            backgroundColor: '#134845',
           },
-          container:{
-            backgroundColor:'#59b2ff'
-          }
+          container: {
+            backgroundColor: '#59b2ff',
+          },
         }}
         height={170}
         closeOnPressMask={true}
       >
-        <DokiDrawer carrotCount={curCarrotCount} feedDoki={feedDoki} msgContent={msgContent}/>
+        <DokiDrawer
+          carrotCount={curCarrotCount}
+          feedDoki={feedDoki}
+          msgContent={msgContent}
+        />
       </RBSheet>
     </StyledDokiHomeBackground>
   );
 };
 
 export default DokiView;
-
-
-
