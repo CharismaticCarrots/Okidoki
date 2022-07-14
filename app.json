@@ -4,6 +4,7 @@
     "slug": "Okidoki",
     "version": "1.0.0",
     "orientation": "portrait",
+    "scheme": "mycoolredirect",
     "icon": "./assets/okidoki_icon.png",
     "userInterfaceStyle": "light",
     "splash": {

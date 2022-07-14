@@ -34,7 +34,7 @@ const SignIn = ({ navigation }) => {
     },
     {
       onSuccess: () => {
-        navigation.navigate('DokiHome')
+        navigation.navigate('DokiHome');
       },
     }
   );
@@ -85,7 +85,6 @@ const SignIn = ({ navigation }) => {
         >
           <StyledFormButtonText>Sign In</StyledFormButtonText>
         </StyledFormButton>
-
         <StyledFormSuggest
           onPress={() => {
             navigation.navigate('SignUp');

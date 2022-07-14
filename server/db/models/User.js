@@ -3,9 +3,11 @@ const db = require('../db');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
+const { STRING, VIRTUAL, INTEGER, DATE, ENUM } = Sequelize;
+
 const User = db.define('user', {
   email: {
-    type: Sequelize.STRING,
+    type: STRING,
     unique: true,
     allowNull: false,
     validate: {
@@ -14,50 +16,56 @@ const User = db.define('user', {
     },
   },
   password: {
-    type: Sequelize.STRING,
-    allowNull: false,
+    type: STRING,
     validate: {
-      notEmpty: true,
+      customValidator(value) {
+        if (this.externalType === 'postgres' && !value) {
+          throw new Error('Password cannot be blank');
+        }
+      },
     },
   },
   token: {
-    type: Sequelize.VIRTUAL,
+    type: VIRTUAL,
     get() {
       const token = jwt.sign({ userId: this.id }, process.env.JWT);
       return token;
     },
   },
   firstName: {
-    type: Sequelize.STRING,
+    type: STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
   lastName: {
-    type: Sequelize.STRING,
+    type: STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
   carrotCount: {
-    type: Sequelize.INTEGER,
+    type: INTEGER,
     defaultValue: 0,
     validate: {
       min: 0,
     },
   },
   lastCarrotsClaimedAt: {
-    type: Sequelize.DATE,
+    type: DATE,
     defaultValue: new Date(),
   },
   dailyStepGoal: {
-    type: Sequelize.INTEGER,
+    type: INTEGER,
     defaultValue: 1000,
     validate: {
       min: 1000,
     },
+  },
+  externalType: {
+    type: ENUM('google', 'facebook', 'postgres'),
   },
 });
 
@@ -101,13 +109,16 @@ User.prototype.toJSON = function () {
     carrotCount: this.carrotCount,
     dailyStepGoal: this.dailyStepGoal,
     lastCarrotsClaimedAt: this.lastCarrotsClaimedAt,
+    externalType: this.externalType,
   };
 };
 
 User.beforeCreate(async (user) => {
-  const SALT_COUNT = 5;
-  const hashedPw = await bcrypt.hash(user.password, SALT_COUNT);
-  user.password = hashedPw;
+  if (user.password) {
+    const SALT_COUNT = 5;
+    const hashedPw = await bcrypt.hash(user.password, SALT_COUNT);
+    user.password = hashedPw;
+  }
 });
 
 module.exports = User;
