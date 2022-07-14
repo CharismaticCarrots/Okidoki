@@ -39,7 +39,6 @@ const SignIn = ({ navigation }) => {
           const { data } = await axios.get(
             `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.authentication.accessToken}`
           );
-          const { email } = data;
 
           googleMutation.mutate({
             idToken: response.authentication.idToken,
