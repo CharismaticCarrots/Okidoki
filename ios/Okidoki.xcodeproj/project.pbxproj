@@ -10,7 +10,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		55BA967A287FBC5B00A939E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55BA9678287FB37000A939E2 /* LaunchScreen.storyboard */; };
+		550F20A02880A0A300B60F9E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55BA9678287FB37000A939E2 /* LaunchScreen.storyboard */; };
 		55F485E7287780BD002E04FC /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 55F485D7287780BD002E04FC /* Fontisto.ttf */; };
 		55F485E8287780BD002E04FC /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 55F485D8287780BD002E04FC /* Octicons.ttf */; };
 		55F485E9287780BD002E04FC /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 55F485D9287780BD002E04FC /* Feather.ttf */; };
@@ -90,8 +90,8 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				55BA9678287FB37000A939E2 /* LaunchScreen.storyboard */,
 				4584105D92C3466FA5C8F227 /* noop-file.swift */,
+				55BA9678287FB37000A939E2 /* LaunchScreen.storyboard */,
 			);
 			name = Okidoki;
 			sourceTree = "<group>";
@@ -259,7 +259,7 @@
 				55F485EF287780BD002E04FC /* Ionicons.ttf in Resources */,
 				55F485F6287780BD002E04FC /* MaterialIcons.ttf in Resources */,
 				55F485F0287780BD002E04FC /* FontAwesome5_Solid.ttf in Resources */,
-				55BA967A287FBC5B00A939E2 /* LaunchScreen.storyboard in Resources */,
+				550F20A02880A0A300B60F9E /* LaunchScreen.storyboard in Resources */,
 				55F485F5287780BD002E04FC /* SimpleLineIcons.ttf in Resources */,
 				55F485EA287780BD002E04FC /* Entypo.ttf in Resources */,
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
