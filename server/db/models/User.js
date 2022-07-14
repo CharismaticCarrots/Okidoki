@@ -110,6 +110,7 @@ User.prototype.toJSON = function () {
     carrotCount: this.carrotCount,
     dailyStepGoal: this.dailyStepGoal,
     lastCarrotsClaimedAt: this.lastCarrotsClaimedAt,
+    externalType: this.externalType,
   };
 };
 
