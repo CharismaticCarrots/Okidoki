@@ -10,7 +10,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
+		55BA967A287FBC5B00A939E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55BA9678287FB37000A939E2 /* LaunchScreen.storyboard */; };
 		55F485E7287780BD002E04FC /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 55F485D7287780BD002E04FC /* Fontisto.ttf */; };
 		55F485E8287780BD002E04FC /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 55F485D8287780BD002E04FC /* Octicons.ttf */; };
 		55F485E9287780BD002E04FC /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 55F485D9287780BD002E04FC /* Feather.ttf */; };
@@ -42,6 +42,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Okidoki/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Okidoki/main.m; sourceTree = "<group>"; };
 		4584105D92C3466FA5C8F227 /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "Okidoki/noop-file.swift"; sourceTree = "<group>"; };
+		55BA9678287FB37000A939E2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = /Users/angelyang/Documents/Okidoki/ios/LaunchScreen.storyboard; sourceTree = "<absolute>"; };
 		55F485D7287780BD002E04FC /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
 		55F485D8287780BD002E04FC /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		55F485D9287780BD002E04FC /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
@@ -61,7 +62,6 @@
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-Okidoki.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Okidoki.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-Okidoki.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Okidoki.debug.xcconfig"; path = "Target Support Files/Pods-Okidoki/Pods-Okidoki.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-Okidoki.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Okidoki.release.xcconfig"; path = "Target Support Files/Pods-Okidoki/Pods-Okidoki.release.xcconfig"; sourceTree = "<group>"; };
-		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = Okidoki/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Okidoki/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
+				55BA9678287FB37000A939E2 /* LaunchScreen.storyboard */,
 				4584105D92C3466FA5C8F227 /* noop-file.swift */,
 			);
 			name = Okidoki;
@@ -259,6 +259,7 @@
 				55F485EF287780BD002E04FC /* Ionicons.ttf in Resources */,
 				55F485F6287780BD002E04FC /* MaterialIcons.ttf in Resources */,
 				55F485F0287780BD002E04FC /* FontAwesome5_Solid.ttf in Resources */,
+				55BA967A287FBC5B00A939E2 /* LaunchScreen.storyboard in Resources */,
 				55F485F5287780BD002E04FC /* SimpleLineIcons.ttf in Resources */,
 				55F485EA287780BD002E04FC /* Entypo.ttf in Resources */,
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
@@ -271,7 +272,6 @@
 				55F485F2287780BD002E04FC /* FontAwesome.ttf in Resources */,
 				55F485E7287780BD002E04FC /* Fontisto.ttf in Resources */,
 				55F485EC287780BD002E04FC /* MaterialCommunityIcons.ttf in Resources */,
-				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
