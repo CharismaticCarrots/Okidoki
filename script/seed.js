@@ -129,7 +129,7 @@ const seed = async () => {
     await foxDoki.addUser(user4, {
       through: {
         dokiName: 'Ldyster',
-        eggColor: 'blule',
+        eggColor: 'blue',
         lastFedAt: sub(new Date(), { hours: 1 }),
       },
     });

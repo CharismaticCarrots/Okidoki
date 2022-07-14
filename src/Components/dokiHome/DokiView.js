@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Popable, usePopable } from 'react-native-popable';
+import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
+import { useMutation } from 'react-query';
+import axios from 'axios';
+import { API_URL } from '../../../secrets';
+import * as SecureStore from 'expo-secure-store';
+import { Button, Text } from 'react-native-paper';
+import RBSheet from "react-native-raw-bottom-sheet";
 import {
   StyledDokiHomeBackground,
   StyledDokiContainer,
@@ -11,6 +15,7 @@ import {
 } from '../styles';
 import DokiProgressBar from './DokiProgressBar';
 import Doki from './Doki';
+import DokiDrawer from './DokiDrawer';
 import CountDisplay from './CountDisplay';
 import { useDailyStepCount } from '../../Healthkit';
 import { useUserData } from '../../hooks/useUserData';
@@ -21,6 +26,8 @@ import { useCarrotReward } from '../../hooks/useCarrotReward';
 
 
 const DokiView = ({ now }) => {
+  const refRBSheet = useRef();
+
   const [curCarrotCount, setCurCarrotCount] = useState(0);
   const [userDoki, setUserDoki] = useState();
   const [curFullnessLvl, setCurFullnessLvl] = useState(0);
@@ -33,9 +40,8 @@ const DokiView = ({ now }) => {
   const carrotReward = useCarrotReward(now);
   const userDokiMutation = useUpdateUserDoki();
   const userMutation = useUpdateUser();
-  const { ref, hide, show } = usePopable();
 
-  // sets carrotsClaimed status
+
   useEffect(() => {
     if (user) {
       setCurCarrotCount(user.carrotCount);
@@ -52,11 +58,10 @@ const DokiView = ({ now }) => {
   }, [user, carrotReward, now]);
 
   // sets new fullnesslevel based on lastfedAt date
-  useEffect(() => {
+   useEffect(() => {
     if (userDokiData) {
       // userDokiData.type = 'fox'; // Dummy data to view different sprites
       setUserDoki(userDokiData);
-
       const { user_doki } = userDokiData;
       const hrsSinceLastFed = Math.floor(
         (new Date(now).getTime() - new Date(user_doki.lastFedAt).getTime()) / 3600000
@@ -70,14 +75,10 @@ const DokiView = ({ now }) => {
   const feedDoki = () => {
     if (curCarrotCount <= 0 || curFullnessLvl >= 100) {
       if (curCarrotCount <= 0) {
-        show();
-        setTimeout(() => hide(), 1000);
-        setMsgContent('UH OH, YOU\'RE OUT OF CARROTS!');
+        setMsgContent('UH OH, YOU\'RE OUT OF CARROTS!') 
       }
       if (curFullnessLvl >= 100) {
-        show();
-        setTimeout(() => hide(), 1000);
-        setMsgContent('DOKI IS TOO FULL RIGHT NOW!');
+        setMsgContent('DOKI IS TOO FULL RIGHT NOW!')
       }
     } else {
       const newFullnessLevel = curFullnessLvl + 5;
@@ -98,9 +99,7 @@ const DokiView = ({ now }) => {
           },
         }
       );
-      show();
-      setTimeout(() => hide(), 1000);
-      setMsgContent('OM NOM NOM');
+      setMsgContent('OM NOM NOM')
     }
   };
 
@@ -145,21 +144,36 @@ const DokiView = ({ now }) => {
             {`CLAIM ${carrotReward} CARROTS`}
         </Button>}
       <StyledDokiContainer>
-        <Popable
-          ref={ref}
-          content={msgContent}
-          style={popoverStyles}
-          animationType="spring"
-        >
           {userDoki && <Doki userDoki={userDoki} />}
-        </Popable>
         <StyledDokiName>
           {userDokiData && userDokiData.user_doki.dokiName}
         </StyledDokiName>
       </StyledDokiContainer>
-      <Button onPress={feedDoki} mode="contained">
+      {/* <Button onPress={feedDoki} mode="contained">
         Feed Doki
-      </Button>
+      </Button> */}
+      <Button mode="contained" onPress={() => refRBSheet.current.open()} > DOKI PACK </Button>
+      <RBSheet
+        ref={refRBSheet}
+        closeOnSwipeDown={false}
+        closeOnDragDown={true}
+        closeOnPressMask={false}
+        customStyles={{
+          wrapper: {
+            backgroundColor: "transparent"
+          },
+          draggableIcon: {
+            backgroundColor: "#134845"
+          },
+          container:{
+            backgroundColor:'#59b2ff'
+          }
+        }}
+        height={170}
+        closeOnPressMask={true}
+      >
+        <DokiDrawer carrotCount={curCarrotCount} feedDoki={feedDoki} msgContent={msgContent}/>
+      </RBSheet>
     </StyledDokiHomeBackground>
   );
 };
@@ -167,9 +181,4 @@ const DokiView = ({ now }) => {
 export default DokiView;
 
 
-const popoverStyles = StyleSheet.create({
-  alignSelf: "center",
-  marginTop: 350,
-  width: 200,
-});
 
