@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useMutation } from 'react-query';
 import axios from 'axios';
@@ -32,20 +32,38 @@ const SignIn = ({ navigation }) => {
   const { user, isLoading, isError } = useUserData();
   console.log('User on SignIn: ', user);
 
-  const mutation = useMutation(
-    async (userInfo) => {
+  useEffect(() => {
+    if (response?.type === 'success') {
+      const fetchUserData = async () => {
+        try {
+          const { data } = await axios.get(
+            `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.authentication.accessToken}`
+          );
+          const { email } = data;
+          mutation.mutate({
+            email: email,
+            externalType: 'google',
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      fetchUserData();
+    }
+  }, []);
+
+  const mutation = useMutation(async (userInfo) => {
+    try {
       const { data: user } = await axios.post(
         `http://${API_URL}/auth/signin`,
         userInfo
       );
       await SecureStore.setItemAsync('TOKEN', user.token);
-    },
-    {
-      onSuccess: () => {
-        navigation.navigate('DokiHome');
-      },
+      navigation.navigate('DokiHome');
+    } catch (err) {
+      console.log(err);
     }
-  );
+  });
 
   if (isLoading) {
     console.log('loading');
@@ -55,7 +73,7 @@ const SignIn = ({ navigation }) => {
   }
 
   const handleSubmit = () => {
-    mutation.mutate(userData);
+    mutation.mutate({ ...userData, externalType: 'postgres' });
   };
 
   return (
