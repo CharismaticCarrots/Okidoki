@@ -18,8 +18,8 @@ const User = db.define('user', {
   password: {
     type: STRING,
     validate: {
-      customValidator() {
-        if (this.externalType === 'postgres' && this.password === null) {
+      customValidator(value) {
+        if (this.externalType === 'postgres' && !value) {
           throw new Error('Password cannot be blank');
         }
       },
