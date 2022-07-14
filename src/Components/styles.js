@@ -301,9 +301,8 @@ const StyleItemImage = styled(Image)`
 const StyledItemView = styled(View)`
   display: flex;
   flexdirection: row;
-  flexwrap: wrap;
-  alignitems: center;
-  margin: 40px;
+  // alignitems: center;
+  margin: 30px;
 `;
 
 export {
