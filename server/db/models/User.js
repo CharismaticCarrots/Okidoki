@@ -90,14 +90,9 @@ User.authenticate = async ({ email, password }) => {
     },
   });
   if (user) {
-    if (user.externalType === 'google') {
+    const isValid = await bcrypt.compare(password, user.password);
+    if (isValid) {
       return user;
-    }
-    if (user.password) {
-      const isValid = await bcrypt.compare(password, user.password);
-      if (isValid) {
-        return user;
-      }
     }
   }
   const error = Error('bad credentials');
