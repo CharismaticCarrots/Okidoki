@@ -5,7 +5,7 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import { Card } from 'react-native-paper';
+import { Button, Card } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import parseISO from 'date-fns/parseISO';
@@ -27,18 +27,11 @@ import {
   useDailyStepCount,
 } from '../Healthkit';
 
-// const wait = (timeout) => {
-//   return new Promise(resolve => setTimeout(resolve, timeout));
-// }
+import * as SecureStore from 'expo-secure-store';
+import { useUserData } from '../hooks/useUserData';
 
 const HealthStat = () => {
-  // const [refreshing, setRefreshing] = React.useState(false);
-
-  // const onRefresh = React.useCallback(() => {
-  //   setRefreshing(true);
-  //   wait(2000).then(() => setRefreshing(false));
-  // }, []);
-
+  const { user, logout } = useUserData();
   const dailySteps = useStepCountSamples();
   const flights = useFlightsClimbed();
   const dailyDistance = useDistance();
@@ -97,14 +90,7 @@ const HealthStat = () => {
         </View>
 
         <StyledHeading2>Today&apos;s Activity</StyledHeading2>
-        <ScrollView
-          style={styles.scrollView}
-          // refreshControl={
-          //   <RefreshControl
-          //     refreshing={refreshing}
-          //     onRefresh={onRefresh}
-          //   />}
-        >
+        <ScrollView style={styles.scrollView}>
           <Card.Title
             style={styles.card}
             title={steps}
@@ -135,6 +121,15 @@ const HealthStat = () => {
               <MaterialCommunityIcons name="fire" style={styles.icons} />
             )}
           />
+          <Button
+            onPress={() => {
+              logout();
+              SecureStore.deleteItemAsync('TOKEN');
+              // navigation.navigate('LoginOptions');
+            }}
+          >
+            LOGOUT
+          </Button>
         </ScrollView>
       </StyledHealthStatContainer>
     </StyledDokiHomeBackground>
@@ -161,12 +156,12 @@ const styles = StyleSheet.create({
     padding: 3,
     paddingLeft: 20,
     marginVertical: 10,
-    marginHorizontal: 20,
+    marginHorizontal: 40,
     fontFamily: 'singularity',
   },
   icons: {
     padding: 5,
-    fontSize: 29,
+    fontSize: 27,
     overflow: 'hidden',
   },
   scrollView: {
