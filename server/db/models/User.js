@@ -65,8 +65,7 @@ const User = db.define('user', {
     },
   },
   externalType: {
-    type: ENUM,
-    values: ['google', 'facebook', 'postgres'],
+    type: ENUM('google', 'facebook', 'postgres'),
   },
 });
 
@@ -120,7 +119,7 @@ User.prototype.toJSON = function () {
 };
 
 User.beforeCreate(async (user) => {
-  if (this.password !== null) {
+  if (user.password) {
     const SALT_COUNT = 5;
     const hashedPw = await bcrypt.hash(user.password, SALT_COUNT);
     user.password = hashedPw;

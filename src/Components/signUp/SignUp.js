@@ -27,7 +27,6 @@ const SignUp = ({ navigation }) => {
     lastName: '',
     email: '',
     password: '',
-    externalType: 'postgres',
   });
 
   const [request, response, promptAsync] = Google.useAuthRequest({
@@ -76,7 +75,7 @@ const SignUp = ({ navigation }) => {
   });
 
   const handleSubmit = () => {
-    mutation.mutate(userData);
+    mutation.mutate({ ...userData, externalType: 'postgres' });
   };
 
   console.log(response);
