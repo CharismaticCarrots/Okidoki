@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
+import notifee from '@notifee/react-native';
 import { Button } from 'react-native-paper';
 import RBSheet from "react-native-raw-bottom-sheet";
-import notifee from '@notifee/react-native';
 import {
   StyledDokiHomeBackground,
   StyledDokiContainer,
