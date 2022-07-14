@@ -65,9 +65,6 @@ const User = db.define('user', {
     type: ENUM,
     values: ['google', 'facebook', 'postgres'],
   },
-  externalId: {
-    type: STRING,
-  },
 });
 
 User.byToken = async (token) => {

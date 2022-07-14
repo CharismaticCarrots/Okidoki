@@ -27,6 +27,7 @@ const SignUp = ({ navigation }) => {
     lastName: '',
     email: '',
     password: '',
+    externalType: 'postgres',
   });
 
   const [request, response, promptAsync] = Google.useAuthRequest({
@@ -46,7 +47,7 @@ const SignUp = ({ navigation }) => {
             email: email,
             firstName: given_name,
             lastName: family_name,
-            password: 'test123',
+            password: 'google',
           });
         } catch (err) {
           console.log(err);
