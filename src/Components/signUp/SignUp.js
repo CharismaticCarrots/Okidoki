@@ -36,16 +36,29 @@ const SignUp = ({ navigation }) => {
   useEffect(() => {
     if (response?.type === 'success') {
       const fetchUserData = async () => {
-        const { data } = await axios.get(
-          `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.authentication.accessToken}`
-        );
+        try {
+          const { data } = await axios.get(
+            `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${response.authentication.accessToken}`
+          );
+          const { email, family_name, given_name } = data;
+
+          mutation.mutate({
+            email: email,
+            firstName: given_name,
+            lastName: family_name,
+            password: 'test123',
+          });
+        } catch (err) {
+          console.log(err);
+        }
       };
       fetchUserData();
     }
-  }, [mutation, response, userData]);
+  }, [mutation, response]);
 
-  const { user } = useUserData();
-  console.log('User on SignUp: ', user);
+  // const { user } = useUserData();
+  // console.log('User on SignUp: ', user);
+  console.log({ userData });
 
   const mutation = useMutation(async (userInfo) => {
     try {
