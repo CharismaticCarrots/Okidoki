@@ -179,13 +179,13 @@ const DokiView = ({ now }) => {
             backgroundColor: "transparent"
           },
           draggableIcon: {
-            backgroundColor: "#ffefb4"
+            backgroundColor: "#134845"
           },
           container:{
             backgroundColor:'#59b2ff'
           }
         }}
-        height={150}
+        height={170}
         closeOnPressMask={true}
       >
         <DokiDrawer carrotCount={curCarrotCount} feedDoki={feedDoki}/>

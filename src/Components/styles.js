@@ -294,16 +294,15 @@ const StyledItemCard = styled(Card)`
 const StyleItemImage = styled(Image)`
   margin-left: auto;
   margin-right: auto;
-  height: 40px;
-  width: 40px;
+  height: 53px;
+  width: 53px;
 `;
 
 const StyledItemView = styled(View)`
   display: flex;
   flexdirection: row;
-  flexwrap: wrap;
-  alignitems: center;
-  margin: 40px;
+  // alignitems: center;
+  margin: 30px;
 `;
 
 export {

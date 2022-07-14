@@ -51,10 +51,11 @@ const styles = StyleSheet.create({
     width:85,
     justifyContent: 'center',
     backgroundColor:'#ffefb4',
+    borderColor:'##fff',
     padding:15,
     paddingLeft:20,
     borderRadius:10,
-    margin:20,
+    margin:15,
 
   },
   text: {

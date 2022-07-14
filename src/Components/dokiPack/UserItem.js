@@ -18,9 +18,11 @@ const UserItem = (props) => {
     <TouchableOpacity>
     <View style={styles.box}>
         <StyleItemImage source={imageNames[props.name]}/>
-          <Text style={{fontFamily:'Singularity', fontSize:17}}>
+          <View style={styles.quantity}>
+          <Text style={styles.text}>
              {props.quantity}
           </Text>
+          </View>
     </View>
     </TouchableOpacity>
   )
@@ -31,22 +33,35 @@ export default UserItem
 const styles = StyleSheet.create({
   container: {
    marginLeft:30,
+   display: 'flex',
+  flexDirection: 'row',
+  flex:1
   },
   box:{
     height:85,
     width:85,
     justifyContent: 'center',
+    alignContent:'center',
     backgroundColor:'#ffefb4',
     padding:15,
-    paddingLeft:20,
+    paddingTop:13,
     borderRadius:10,
-    margin:20,
-    flex:1
+    margin:15,
   },
   text: {
     fontFamily:'Singularity',
-    fontSize:20,
-    marginRight:'auto'
+    fontSize:23,
+    marginLeft:'auto',
+  },
+  quantity: {
+    // height:23,
+    // width:23,
+    // justifyContent: 'center',
+    // alignItems:'center',
+    // backgroundColor:'#C7CDAB',
+    // borderRadius:100,
+    // paddingTop:2,
+    // marginLeft:'auto',
   }
 })
 
