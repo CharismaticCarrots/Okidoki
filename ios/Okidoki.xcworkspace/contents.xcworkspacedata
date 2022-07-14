@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/angelyang/Downloads/Logo.png">
+   </FileRef>
+   <FileRef
       location = "group:Okidoki.xcodeproj">
    </FileRef>
    <FileRef

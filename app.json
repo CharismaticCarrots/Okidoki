@@ -4,11 +4,12 @@
     "slug": "Okidoki",
     "version": "1.0.0",
     "orientation": "portrait",
+    "scheme": "mycoolredirect",
     "icon": "./assets/okidoki_icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/okidoki_splash.png",
-      "resizeMode": "contain",
+      "image": "./assets/splash_screen.png",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
