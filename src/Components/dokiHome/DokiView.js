@@ -180,9 +180,9 @@ const DokiView = ({ now }) => {
       </StyledOuterCountersContainer>
       {Boolean(carrotReward) && !carrotsClaimed && (
         <Button mode="contained" onPress={claimCarrots}>
-          {`CLAIM ${carrotReward} CARROTS`}
-        </Button>
-      )}
+            {`CLAIM ${carrotReward} CARROTS`}
+        </Button>)}
+      <Button mode="contained" onPress={() => onDisplayNotification()}>GET NOTIFICATION</Button>
       <StyledDokiContainer>
         {userDoki && <Doki userDoki={userDoki} />}
         <StyledDokiName>
