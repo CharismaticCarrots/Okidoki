@@ -294,8 +294,8 @@ const StyledItemCard = styled(Card)`
 const StyleItemImage = styled(Image)`
   margin-left: auto;
   margin-right: auto;
-  height: 53px;
-  width: 53px;
+  height: 40px;
+  width: 40px;
 `;
 
 const StyledItemView = styled(View)`
