@@ -1,11 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { StyleSheet } from 'react-native';
-import { useMutation } from 'react-query';
-import axios from 'axios';
-import { API_URL } from '../../../secrets';
-import * as SecureStore from 'expo-secure-store';
-import { Button, Text } from 'react-native-paper';
-import RBSheet from 'react-native-raw-bottom-sheet';
+import notifee from '@notifee/react-native';
+import RBSheet from "react-native-raw-bottom-sheet";
+import { Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
   StyledDokiContainer,
@@ -157,6 +153,14 @@ const DokiView = ({ now }) => {
     );
   };
 
+  const onDisplayNotification = async () => {
+    await notifee.requestPermission();
+    await notifee.displayNotification({
+      title: "HELLO",
+      body: "HELLO HELLO FROM TEAM CARROT"
+    });
+  };
+
   return (
     <StyledDokiHomeBackground
       source={require('../../../assets/backgrounds/dokihome_background.png')}
@@ -176,9 +180,9 @@ const DokiView = ({ now }) => {
       </StyledOuterCountersContainer>
       {Boolean(carrotReward) && !carrotsClaimed && (
         <Button mode="contained" onPress={claimCarrots}>
-          {`CLAIM ${carrotReward} CARROTS`}
-        </Button>
-      )}
+            {`CLAIM ${carrotReward} CARROTS`}
+        </Button>)}
+      <Button mode="contained" onPress={() => onDisplayNotification()}>GET NOTIFICATION</Button>
       <StyledDokiContainer>
         {userDoki && <Doki userDoki={userDoki} />}
         <StyledDokiName>
@@ -208,7 +212,6 @@ const DokiView = ({ now }) => {
           },
         }}
         height={170}
-        closeOnPressMask={true}
       >
         <DokiDrawer
           carrotCount={curCarrotCount}
