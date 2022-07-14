@@ -42,8 +42,13 @@ const DokiView = ({ now }) => {
   const userDokiMutation = useUpdateUserDoki();
   const userMutation = useUpdateUser();
   const { ref, hide, show } = usePopable();
+ 
+  useEffect(() => {
+    if (curCarrotCount <= 0) { setMsgContent('UH OH, YOU\'RE OUT OF CARROTS!')}
+    else if (curFullnessLvl >= 100) {setMsgContent('DOKI IS TOO FULL RIGHT NOW!')}
+    else {setMsgContent('OM NOM NOM');}
+  }, [curFullnessLvl, curCarrotCount])
 
-  // sets carrotsClaimed status
   useEffect(() => {
     if (user) {
       setCurCarrotCount(user.carrotCount);
@@ -197,8 +202,8 @@ export default DokiView;
 
 
 const popoverStyles = StyleSheet.create({
-  // alignSelf: "center",
-  // marginTop: 350,
-  // width: 200,
+  alignSelf: "center",
+  marginTop: 350,
+  width: 200,
 });
 

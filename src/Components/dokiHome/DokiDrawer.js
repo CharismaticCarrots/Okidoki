@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Pressable } from 'react-native'
-import React from 'react'
+import React, {useState} from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { useUserItemData } from '../../hooks/useUserItemData'
 import CountDisplay from './CountDisplay'
@@ -9,6 +9,7 @@ import { Popable, usePopable } from 'react-native-popable';
 
 const DokiDrawer = (props) => {
   const { ref, hide, show } = usePopable();
+  const [msgContent, setMsgContent] = useState(null);
   const userItems = useUserItemData()
   let userItemList
   if (userItems){
@@ -16,9 +17,9 @@ const DokiDrawer = (props) => {
       return <UserItem key={item.id} name={item.name} quantity={item.user_item.quantity}/>
     })
   }
-  // const feedDoki = props.feedDoki
+  console.log('propss',props)
   const handleFeed = () => {
-    props.feedDoki
+    props.feedDoki()
     show();
     setTimeout(() => hide(), 1000);
   }
