@@ -51,24 +51,18 @@ const SignIn = ({ navigation }) => {
     }
   }, [googleMutation, response]);
 
-  const googleMutation = useMutation(
-    async (userInfo) => {
-      try {
-        const { data: user } = await axios.post(
-          `http://${API_URL}/auth/googleauthroute`,
-          userInfo
-        );
-        await SecureStore.setItemAsync('TOKEN', user.token);
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    {
-      onSuccess: () => {
-        navigation.navigate('DokiHome');
-      },
+  const googleMutation = useMutation(async (userInfo) => {
+    try {
+      const { data: user } = await axios.post(
+        `http://${API_URL}/auth/googleauthroute`,
+        userInfo
+      );
+      await SecureStore.setItemAsync('TOKEN', user.token);
+      navigation.navigate('DokiHome');
+    } catch (err) {
+      console.log(err);
     }
-  );
+  });
 
   const mutation = useMutation(
     async (userInfo) => {
