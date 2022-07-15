@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import RBSheet from "react-native-raw-bottom-sheet";
+import RBSheet from 'react-native-raw-bottom-sheet';
 import { Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
@@ -20,7 +20,6 @@ import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
 import { useCarrotReward } from '../../hooks/useCarrotReward';
 import { createTriggerNotification } from '../../helpers/createTriggerNotification';
-
 
 const DokiView = ({ now }) => {
   const refRBSheet = useRef();
@@ -97,14 +96,14 @@ const DokiView = ({ now }) => {
       };
       userDokiMutation.mutate(userDokiUpdate, {
         onSuccess: () => {
-          queryClient.invalidateQueries(['userDoki'])
+          queryClient.invalidateQueries(['userDoki']);
         },
       });
       userMutation.mutate(
         { carrotCount: curCarrotCount - 1 },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(['user'])
+            queryClient.invalidateQueries(['user']);
           },
         }
       );
@@ -125,7 +124,7 @@ const DokiView = ({ now }) => {
       };
       userDokiMutation.mutate(userDokiUpdate, {
         onSuccess: () => {
-          queryClient.invalidateQueries(['userDoki'])
+          queryClient.invalidateQueries(['userDoki']);
         },
       });
       setMsgContent('THIS IS SO MUCH FUN!');
@@ -148,17 +147,6 @@ const DokiView = ({ now }) => {
     );
   };
 
-<<<<<<< HEAD
-  const onDisplayNotification = async () => {
-    await notifee.requestPermission();
-    await notifee.displayNotification({
-      title: 'HELLO',
-      body: 'HELLO HELLO FROM TEAM CARROT',
-    });
-  };
-
-=======
->>>>>>> main
   return (
     <StyledDokiHomeBackground
       source={require('../../../assets/backgrounds/dokihome_background.png')}
@@ -178,8 +166,9 @@ const DokiView = ({ now }) => {
       </StyledOuterCountersContainer>
       {Boolean(carrotReward) && !carrotsClaimed && (
         <Button mode="contained" onPress={claimCarrots}>
-            {`CLAIM ${carrotReward} CARROTS`}
-        </Button>)}
+          {`CLAIM ${carrotReward} CARROTS`}
+        </Button>
+      )}
       <StyledDokiContainer>
         {userDoki && <Doki userDoki={userDoki} />}
         <StyledDokiName>
