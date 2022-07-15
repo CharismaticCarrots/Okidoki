@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import SetGoal from './components/signUp/SetGoal';
@@ -9,6 +9,7 @@ import LoginOptions from './components/LoginOptions';
 import DokiHome from './components/dokiHome/DokiHome';
 import Store from './components/store/Store';
 import TabNavigator from './components/NavBar';
+import { AuthContext } from './AuthLoading'
 
 import { useUserData } from './hooks/useUserData';
 import { useUserDokiData } from './hooks/useUserDokiData';
@@ -21,9 +22,12 @@ export const LoginNavigator = ({ navigation }) => {
   const userDoki = useUserDokiData();
   const { user } = useUserData();
 
-  if (user) {
-    token = user.token;
-  }
+  useEffect(() => {
+    if (user) {
+      setUserToken(user.token)
+    }
+  },[user])
+ 
 
   useEffect(() => {
     if (userDoki) {
@@ -31,12 +35,28 @@ export const LoginNavigator = ({ navigation }) => {
     }
   }, [userDoki]);
 
+  const context = useMemo(() => {
+    return {
+      signOut: () => {
+        setUserToken(null)
+        setUserDoki(null)
+      }
+    }
+  })
+
   return (
+    <AuthContext.Provider value={context}>
     <NavigationContainer>
-      {doki ? (
+      {doki && userToken ? (
         <TabNavigator />
       ) : (
-        <Stack.Navigator headerMode="screen">
+        <Stack.Navigator headerMode="screen" 
+      //     screenOptions={({route})=> ({
+      //       presentation: "transparentModal",
+      //   })
+      // }
+        
+        >
           <Stack.Screen
             name="LoginOptions"
             component={LoginOptions}
@@ -75,5 +95,6 @@ export const LoginNavigator = ({ navigation }) => {
         </Stack.Navigator>
       )}
     </NavigationContainer>
+    </AuthContext.Provider>
   );
 };
