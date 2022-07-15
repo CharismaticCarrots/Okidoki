@@ -3,7 +3,7 @@ import { View, ScrollView, RefreshControl, StyleSheet } from 'react-native';
 
 import DokiEggView from './DokiEggView';
 import DokiView from './DokiView';
-import { getHatchProgress } from '../../helpers/getHatchProgress';
+import { useHatchProgress } from '../../helpers/getHatchProgress';
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -14,7 +14,7 @@ const DokiHome = ({ navigation }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const now = currentDate.toISOString();
-  const hatchProgressData = getHatchProgress(now);
+  const hatchProgressData = useHatchProgress(now);
   const isEgg = hatchProgressData.hatchProgress < 1;
   // const isEgg = false; // FOR TESTING: Uncomment this to see Doki instead of DokiEgg
 

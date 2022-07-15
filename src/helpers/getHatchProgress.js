@@ -2,7 +2,7 @@ import { useUserData } from '../hooks/useUserData';
 import { useTotalStepCount } from '../Healthkit';
 import { useUserDokiData } from '../hooks/useUserDokiData';
 
-export const getHatchProgress = (now) => {
+export const useHatchProgress = (now) => {
   const userDoki = useUserDokiData();
   const { user } = useUserData();
 
