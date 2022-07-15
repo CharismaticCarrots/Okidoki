@@ -48,6 +48,8 @@ const UserItem = ({name, quantity, curMoodLvl}) => {
   function playWithDoki () {
     if (curMoodLvl >= 100) {
       setMsgContent("I'M ALL PLAYED OUT!");
+      show();
+      setTimeout(() => hide(), 1000);
     } else {
       const newMoodLevel = curMoodLvl + 5;
       const userDokiUpdate = {
