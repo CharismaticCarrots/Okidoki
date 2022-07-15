@@ -1,10 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-<<<<<<< HEAD
-import notifee from '@notifee/react-native';
-import RBSheet from 'react-native-raw-bottom-sheet';
-=======
 import RBSheet from "react-native-raw-bottom-sheet";
->>>>>>> main
 import { Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
