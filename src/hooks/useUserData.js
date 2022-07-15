@@ -28,7 +28,8 @@ export const useUserData = () => {
   const queryClient = useQueryClient();
 
   const logout = () => {
-    queryClient.removeQueries('user');
+    queryClient.removeQueries(['user']);
+    queryClient.removeQueries(['userDoki']);
   };
 
   if (isLoading) {
