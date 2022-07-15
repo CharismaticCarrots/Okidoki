@@ -72,14 +72,10 @@ const SignIn = ({ navigation }) => {
           userInfo
         );
         await SecureStore.setItemAsync('TOKEN', user.token);
+        return navigation.navigate('DokiHome');
       } catch (err) {
         console.log(err);
       }
-    },
-    {
-      onSuccess: () => {
-        navigation.navigate('DokiHome');
-      },
     }
   );
 
