@@ -39,6 +39,7 @@ export const LoginNavigator = ({ navigation }) => {
     return {
       signOut: () => {
         setUserToken(null)
+        setUserDoki(null)
       }
     }
   })
@@ -49,7 +50,13 @@ export const LoginNavigator = ({ navigation }) => {
       {doki && userToken ? (
         <TabNavigator />
       ) : (
-        <Stack.Navigator headerMode="screen">
+        <Stack.Navigator headerMode="screen" 
+      //     screenOptions={({route})=> ({
+      //       presentation: "transparentModal",
+      //   })
+      // }
+        
+        >
           <Stack.Screen
             name="LoginOptions"
             component={LoginOptions}
