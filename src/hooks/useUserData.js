@@ -24,7 +24,7 @@ export const useUserData = () => {
     isError,
     error,
     data: user,
-  } = useQuery('user', fetchUserData);
+  } = useQuery(['user'], fetchUserData);
   const queryClient = useQueryClient();
 
   const logout = () => {
