@@ -13,7 +13,7 @@ const imageNames = {
 };
 
 const UserItem = (props) => {
-  console.log('PROPS INSIDE USER ITEM', props);
+  // console.log('PROPS INSIDE USER ITEM', props);
 
   return (
     <TouchableOpacity onPress={props.handlePlay}>

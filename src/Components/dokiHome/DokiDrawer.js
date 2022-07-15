@@ -39,7 +39,7 @@ const DokiDrawer = (props) => {
       );
     });
   }
-  console.log('PROPS INSIDE DOKI DRAWER', props);
+  // console.log('PROPS INSIDE DOKI DRAWER', props);
 
   return (
     <View style={styles.container}>
