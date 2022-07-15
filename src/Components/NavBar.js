@@ -59,7 +59,7 @@ const TabNavigator = () => {
               case 'UserSettings':
                 return (
                   <Ionicons
-                    name={'md-settings-sharp'}
+                    name={'ios-settings-sharp'}
                     style={{fontSize: 36}}
                     color='#333'
                   />
