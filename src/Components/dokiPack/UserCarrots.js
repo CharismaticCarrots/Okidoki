@@ -1,6 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet,Text, View, TouchableOpacity } from 'react-native';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  StyledItemContainer,
+  StyledItemImage,
+  StyledItemQuantity,
+  StyledItemQuantityText,
+} from '../styles';
 import { Popable, usePopable } from 'react-native-popable';
 import { useQueryClient } from 'react-query';
 import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
@@ -16,13 +21,16 @@ const UserCarrots = ({curCarrotCount, curFullnessLvl}) => {
 
   return (
     <TouchableOpacity onPress={feedDoki}>
-      <View style={styles.box}>
-        <FontAwesome5
-          name={'carrot'}
-          style={{ fontSize: 50, color: 'orange' }}
+      <StyledItemContainer>
+        <StyledItemImage
+          source={require('../../../assets/items/carrot.png')}
         />
-        <Text style={styles.text}>{curCarrotCount}</Text>
-      </View>
+        <StyledItemQuantity>
+          <StyledItemQuantityText>
+            {curCarrotCount}
+          </StyledItemQuantityText>
+        </StyledItemQuantity>
+      </StyledItemContainer>
       <Popable
         ref={ref}
         content={msgContent}
@@ -72,27 +80,6 @@ const UserCarrots = ({curCarrotCount, curFullnessLvl}) => {
 export default UserCarrots;
 
 const styles = StyleSheet.create({
-  container: {
-    marginLeft: 30,
-    display: 'flex',
-    flexDirection: 'row',
-    flex: 1,
-  },
-  box: {
-    height: 85,
-    width: 85,
-    justifyContent: 'center',
-    backgroundColor: '#ffefb4',
-    padding: 15,
-    paddingLeft: 20,
-    borderRadius: 10,
-    margin: 15,
-  },
-  text: {
-    fontFamily: 'Singularity',
-    fontSize: 20,
-    marginLeft: 'auto',
-  },
   popable: {
     alignSelf: 'center',
     marginTop: 330,
