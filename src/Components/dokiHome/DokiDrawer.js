@@ -1,47 +1,10 @@
-import UserItem from '../dokiPack/UserItem';
-import { StyleSheet, View, TouchableOpacity, ScrollView } from 'react-native';
-import {
-  StyledItemContainer,
-  StyledItemImage,
-  StyledItemQuantity,
-  StyledItemQuantityText,
-} from '../styles';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { useUserItemData } from '../../hooks/useUserItemData';
+import UserItem from '../dokiPack/UserItem';
+import UserCarrots from '../dokiPack/UserCarrots';
 
-import { Popable, usePopable } from 'react-native-popable';
-
-const DokiDrawer = (props) => {
-  const { ref, hide, show } = usePopable();
-
-  console.log('PROPS INSIDE DOKI DRAWER', props);
-
-  const handleFeed = () => {
-    props.feedDoki();
-    show();
-    setTimeout(() => hide(), 700);
-  };
-
-  const handlePlay = () => {
-    props.playWithDoki();
-    show();
-    setTimeout(() => hide(), 700);
-  };
-
+const DokiDrawer = ({curCarrotCount, curFullnessLvl, curMoodLvl}) => {
   const userItems = useUserItemData();
-  let userItemList;
-  if (userItems) {
-    userItemList = userItems.map((item) => {
-      return (
-        <UserItem
-          handlePlay={handlePlay}
-          key={item.id}
-          name={item.name}
-          quantity={item.user_item.quantity}
-        />
-      );
-    });
-  }
-  // console.log('PROPS INSIDE DOKI DRAWER', props);
 
   return (
     <View style={styles.container}>
@@ -51,29 +14,18 @@ const DokiDrawer = (props) => {
         bounces={false}
         nestedScrollEnabled={true}
       >
-        {/* Carrot */}
-        <TouchableOpacity onPress={handleFeed}>
-          <StyledItemContainer>
-            <StyledItemImage
-              source={require('../../../assets/items/carrot.png')}
-            />
-
-            <StyledItemQuantity>
-              <StyledItemQuantityText>
-                {props.carrotCount}
-              </StyledItemQuantityText>
-            </StyledItemQuantity>
-          </StyledItemContainer>
-        </TouchableOpacity>
-        {/* All Items */}
-        {userItemList}
+      <UserCarrots
+        curCarrotCount={curCarrotCount}
+        curFullnessLvl={curFullnessLvl}
+      />
+      {userItems && userItems.map(item => (
+        <UserItem
+          key={item.id}
+          name={item.name}
+          quantity={item.user_item.quantity}
+          curMoodLvl={curMoodLvl}
+        />))}
       </ScrollView>
-      <Popable
-        ref={ref}
-        content={props.msgContent}
-        style={styles.popable}
-        animationType="spring"
-      ></Popable>
     </View>
   );
 };
