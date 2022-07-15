@@ -72,7 +72,7 @@ const DokiView = ({ now }) => {
       setCurFullnessLvl(user_doki.lastFedFullnessLevel - hrsSinceLastFed);
 
       const hrsSinceLastPlayed = Math.floor(
-        (new Date(now).getTime() - new Date(user_doki.lastPlayedAt).getTime()) /
+        (new Date().getTime() - new Date(user_doki.lastPlayedAt).getTime()) /
           3600000
       );
       setCurMoodLvl(user_doki.lastPlayedMoodLevel - hrsSinceLastPlayed);
