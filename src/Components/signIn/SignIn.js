@@ -22,7 +22,7 @@ const SignIn = ({ navigation }) => {
   });
 
   const { user, isLoading, isError } = useUserData();
-  console.log('User on SignIn: ', user);
+  // console.log('User on SignIn: ', user);
 
   const mutation = useMutation(
     async (userInfo) => {

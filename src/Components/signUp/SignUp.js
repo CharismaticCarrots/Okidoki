@@ -58,7 +58,7 @@ const SignUp = ({ navigation }) => {
 
   // const { user } = useUserData();
   // console.log('User on SignUp: ', user);
-  console.log({ userData });
+  // console.log({ userData });
 
   const mutation = useMutation(async (userInfo) => {
     try {
