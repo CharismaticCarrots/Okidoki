@@ -20,7 +20,9 @@ import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
 import { useCarrotReward } from '../../hooks/useCarrotReward';
 
-const DokiView = ({ now }) => {
+const DokiView = ({now}) => {
+  // console.log('INSIDE VIEW',  props)
+  // const now = props.now
   const refRBSheet = useRef();
   const [userDoki, setUserDoki] = useState();
   const [curCarrotCount, setCurCarrotCount] = useState(0);
