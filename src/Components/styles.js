@@ -282,13 +282,12 @@ const StyledInternalContainer = styled(View)`
 
 // DokiDrawer and UserItem
 const StyledItemContainer = styled(View)`
-  height: 85px;
-  width: 85px;
+  height: 80px;
+  width: 80px;
   justify-content: center;
   align-content: center;
   background-color: #ffefb4;
-  padding: 15px;
-  padding-top: 13px;
+  padding: 8px;
   border-radius: 10px;
   margin: 15px;
 `;
@@ -296,24 +295,27 @@ const StyledItemContainer = styled(View)`
 const StyledItemImage = styled(Image)`
   margin-left: auto;
   margin-right: auto;
-  height: 40px;
-  width: 40px;
+  height: 90%;
+  width: 90%;
 `;
 
 const StyledItemQuantity = styled(View)`
-  height: 23px;
-  width: 23px;
+  height: 30px;
+  width: 30px;
   justify-content: center;
   align-items: center;
   background-color: #c7cdab;
   border-radius: 100px;
-  padding-top: 2px;
-  margin-left: auto;
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  z-index: 2;
 `;
 
 const StyledItemQuantityText = styled(Text)`
   font-family: 'Singularity';
   font-size: 23px;
+  padding: 6px;
 `;
 
 const StyledItemCard = styled(Card)`
@@ -321,8 +323,8 @@ const StyledItemCard = styled(Card)`
   width: 150px;
   background-color: ${colors.primary};
   margin: 10px;
-  paddingtop: 15px;
-  justifycontent: space-evenly;
+  padding-top: 15px;
+  justify-content: space-evenly;
 `;
 
 const StyledItemView = styled(View)`

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import notifee from '@notifee/react-native';
-import RBSheet from "react-native-raw-bottom-sheet";
+import RBSheet from 'react-native-raw-bottom-sheet';
 import { Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
@@ -156,8 +156,8 @@ const DokiView = ({ now }) => {
   const onDisplayNotification = async () => {
     await notifee.requestPermission();
     await notifee.displayNotification({
-      title: "HELLO",
-      body: "HELLO HELLO FROM TEAM CARROT"
+      title: 'HELLO',
+      body: 'HELLO HELLO FROM TEAM CARROT',
     });
   };
 
@@ -180,9 +180,12 @@ const DokiView = ({ now }) => {
       </StyledOuterCountersContainer>
       {Boolean(carrotReward) && !carrotsClaimed && (
         <Button mode="contained" onPress={claimCarrots}>
-            {`CLAIM ${carrotReward} CARROTS`}
-        </Button>)}
-      <Button mode="contained" onPress={() => onDisplayNotification()}>GET NOTIFICATION</Button>
+          {`CLAIM ${carrotReward} CARROTS`}
+        </Button>
+      )}
+      <Button mode="contained" onPress={() => onDisplayNotification()}>
+        GET NOTIFICATION
+      </Button>
       <StyledDokiContainer>
         {userDoki && <Doki userDoki={userDoki} />}
         <StyledDokiName>
@@ -199,7 +202,7 @@ const DokiView = ({ now }) => {
         ref={refRBSheet}
         closeOnSwipeDown={false}
         closeOnDragDown={true}
-        closeOnPressMask={false}
+        closeOnPressMask={true}
         customStyles={{
           wrapper: {
             backgroundColor: 'transparent',
@@ -208,7 +211,7 @@ const DokiView = ({ now }) => {
             backgroundColor: '#134845',
           },
           container: {
-            backgroundColor: '#59b2ff',
+            backgroundColor: '#7FAA7B',
           },
         }}
         height={170}
