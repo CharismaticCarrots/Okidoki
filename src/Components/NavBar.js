@@ -5,7 +5,6 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import DokiView from './dokiHome/DokiHome';
 import HealthStat from './HealthStat';
 import Store from './store/Store';
-import { LogOutNavigator } from '../LogoutNavigator';
 import DokiPack from './dokiPack/DokiPack';
 
 const Tab = createBottomTabNavigator();
@@ -15,6 +14,7 @@ const TabNavigator = () => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
+        lazy: false,
         tabBarOptions: {
           style: {
             backgroundColor: '#000',
