@@ -280,7 +280,41 @@ const StyledInternalContainer = styled(View)`
   padding: 10px;
 `;
 
-//UserItem
+// DokiDrawer and UserItem
+const StyledItemContainer = styled(View)`
+  height: 85px;
+  width: 85px;
+  justify-content: center;
+  align-content: center;
+  background-color: #ffefb4;
+  padding: 15px;
+  padding-top: 13px;
+  border-radius: 10px;
+  margin: 15px;
+`;
+
+const StyledItemImage = styled(Image)`
+  margin-left: auto;
+  margin-right: auto;
+  height: 40px;
+  width: 40px;
+`;
+
+const StyledItemQuantity = styled(View)`
+  height: 23px;
+  width: 23px;
+  justify-content: center;
+  align-items: center;
+  background-color: #c7cdab;
+  border-radius: 100px;
+  padding-top: 2px;
+  margin-left: auto;
+`;
+
+const StyledItemQuantityText = styled(Text)`
+  font-family: 'Singularity';
+  font-size: 23px;
+`;
 
 const StyledItemCard = styled(Card)`
   height: 130px;
@@ -289,13 +323,6 @@ const StyledItemCard = styled(Card)`
   margin: 10px;
   paddingtop: 15px;
   justifycontent: space-evenly;
-`;
-
-const StyleItemImage = styled(Image)`
-  margin-left: auto;
-  margin-right: auto;
-  height: 40px;
-  width: 40px;
 `;
 
 const StyledItemView = styled(View)`
@@ -349,8 +376,11 @@ export {
   StyledDayContainer,
   StyledInternalContainer,
   StyledHealthStatHeading,
-  //UserItem Component
+  // UserItem Component
+  StyledItemContainer,
+  StyledItemImage,
+  StyledItemQuantity,
+  StyledItemQuantityText,
   StyledItemCard,
-  StyleItemImage,
   StyledItemView,
 };

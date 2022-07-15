@@ -94,15 +94,15 @@ const Store = () => {
       userItemMutation.mutate(itemId, {
         onSuccess: () => {
           show();
-          setTimeout(() => hide(), 1000);
+          setTimeout(() => hide(), 700);
           setMsgContent('ITEM PURCHASED');
         },
       });
     } else {
       show();
-      setTimeout(() => hide(), 1300);
+      setTimeout(() => hide(), 700);
 
-      setMsgContent("UH OH, YOU DON'T HAVE ENOUGH CARROTS!");
+      setMsgContent('NOT ENOUGH CARROTS!');
     }
   };
 
