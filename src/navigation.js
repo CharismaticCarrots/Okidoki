@@ -25,7 +25,6 @@ export const LoginNavigator = ({ navigation }) => {
   useEffect(() => {
     if (user) {
       setUserToken(user.token)
-      console.log('INSIDE NAV', user)
     }
   },[user])
  
