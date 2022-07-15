@@ -14,6 +14,7 @@ const TabNavigator = () => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
+        lazy: false,
         tabBarOptions: {
           style: {
             backgroundColor: '#000',
