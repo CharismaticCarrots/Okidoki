@@ -1,20 +1,21 @@
 import { useState, useCallback } from 'react';
 import { View, ScrollView, RefreshControl, StyleSheet } from 'react-native';
-
 import DokiEggView from './DokiEggView';
 import DokiView from './DokiView';
-import { getHatchProgress } from '../../helpers/getHatchProgress';
+import { useUserData } from '../../hooks/useUserData';
+import { useUserDokiData } from '../../hooks/useUserDokiData';
+import { useTotalStepCount } from '../../Healthkit';
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
 };
 
-const DokiHome = ({ navigation }) => {
+const DokiHome = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
-
   const now = currentDate.toISOString();
-  const hatchProgressData = getHatchProgress(now);
+  const hatchProgressData = getHatchProgress();
+
   // const isEgg = hatchProgressData.hatchProgress < 1;
   const isEgg = false;
   // const isEgg = hatchProgressData.hatchProgress < 1;// FOR TESTING: Uncomment this to see Doki instead of DokiEgg
@@ -36,7 +37,7 @@ const DokiHome = ({ navigation }) => {
       <View>
         {isEgg ? (
           <DokiEggView
-            navigation={navigation}
+            now={now}
             hatchProgressData={hatchProgressData}
           />
         ) : (
@@ -45,6 +46,33 @@ const DokiHome = ({ navigation }) => {
       </View>
     </ScrollView>
   );
+
+  function getHatchProgress() {
+    const userDoki = useUserDokiData();
+    const { user } = useUserData();
+
+    let dokiCreatedDate = null;
+
+    if (userDoki) {
+      dokiCreatedDate = userDoki.user_doki.createdAt;
+      // console.log('DOKI CREATED DATE:', new Date(dokiCreatedDate).toLocaleString('en-US'));
+    }
+
+    const totalSteps = useTotalStepCount(dokiCreatedDate, now);
+
+    if (userDoki && user) {
+      const { dailyStepGoal } = user;
+      const hatchProgress = totalSteps / dailyStepGoal;
+
+      return {
+        hatchProgress,
+        totalSteps,
+        dailyStepGoal,
+      };
+    } else {
+      return {};
+    }
+  };
 };
 
 const styles = StyleSheet.create({
