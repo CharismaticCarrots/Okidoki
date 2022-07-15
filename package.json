@@ -20,6 +20,7 @@
     ]
   },
   "dependencies": {
+    "@notifee/react-native": "^5.4.1",
     "@react-navigation/bottom-tabs": "^6.3.2",
     "@react-navigation/material-bottom-tabs": "^6.2.2",
     "@react-navigation/native": "^6.0.11",

@@ -38,6 +38,9 @@
           "healthSharePermission": "Custom health share permission",
           "healthUpdatePermission": "Custom health update permission"
         }
+      ],
+      [
+        "@notifee/react-native"
       ]
     ]
   }

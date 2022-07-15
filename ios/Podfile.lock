@@ -319,6 +319,11 @@ PODS:
     - React-perflogger (= 0.68.2)
   - RNAppleHealthKit (1.7.0):
     - React
+  - RNNotifee (5.4.1):
+    - React-Core
+    - RNNotifee/NotifeeCore (= 5.4.1)
+  - RNNotifee/NotifeeCore (5.4.1):
+    - React-Core
   - RNScreens (3.11.1):
     - React-Core
     - React-RCTImage
@@ -374,6 +379,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - RNAppleHealthKit (from `../node_modules/react-native-health`)
+  - "RNNotifee (from `../node_modules/@notifee/react-native`)"
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -473,6 +479,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNAppleHealthKit:
     :path: "../node_modules/react-native-health"
+  RNNotifee:
+    :path: "../node_modules/@notifee/react-native"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNSVG:
@@ -527,6 +535,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: b960b687d2dfef0d3761fbb187e01812ebab8b23
   ReactCommon: 095366164a276d91ea704ce53cb03825c487a3f2
   RNAppleHealthKit: 60a6beefdd89a75811e9a8873a5e24f351dee681
+  RNNotifee: 8987e7408112281695a32c81b5d15c48e9540745
   RNScreens: 4d83613b50b74ed277026375dc0810893b0c347f
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   Yoga: 99652481fcd320aefa4a7ef90095b95acd181952
