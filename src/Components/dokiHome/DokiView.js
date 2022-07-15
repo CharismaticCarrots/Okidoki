@@ -211,7 +211,10 @@ const DokiView = ({ now }) => {
             backgroundColor: '#134845',
           },
           container: {
-            backgroundColor: '#7FAA7B',
+            backgroundColor: '#6B4B3E',
+            // 6B4B3E — darker brown
+            // 725E54 — medium brown
+            // A57548 — lighter brown
           },
         }}
         height={170}
