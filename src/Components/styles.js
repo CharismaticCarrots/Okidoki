@@ -101,7 +101,7 @@ const StyledFormButtonText = styled(Text)`
 const StyledFormSuggest = styled(Text)`
   color: #333;
   font-family: 'Singularity';
-  font-size: 20px;
+  font-size: 25px;
   text-align: center;
 `;
 
