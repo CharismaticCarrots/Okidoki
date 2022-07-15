@@ -58,7 +58,6 @@ const SignIn = ({ navigation }) => {
           `http://${API_URL}/auth/googleauthroute`,
           userInfo
         );
-        console.log(user);
         await SecureStore.setItemAsync('TOKEN', user.token);
       } catch (err) {
         console.log(err);
