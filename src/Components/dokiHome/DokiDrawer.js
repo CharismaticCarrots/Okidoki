@@ -1,28 +1,30 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { useUserItemData } from '../../hooks/useUserItemData';
 import UserItem from '../dokiPack/UserItem';
+import { StyleSheet, View, TouchableOpacity, ScrollView } from 'react-native';
+import {
+  StyledItemContainer,
+  StyledItemImage,
+  StyledItemQuantity,
+  StyledItemQuantityText,
+} from '../styles';
+import { useUserItemData } from '../../hooks/useUserItemData';
+
 import { Popable, usePopable } from 'react-native-popable';
 
 const DokiDrawer = (props) => {
   const { ref, hide, show } = usePopable();
 
+  console.log('PROPS INSIDE DOKI DRAWER', props);
+
   const handleFeed = () => {
     props.feedDoki();
     show();
-    setTimeout(() => hide(), 1000);
+    setTimeout(() => hide(), 700);
   };
 
   const handlePlay = () => {
     props.playWithDoki();
     show();
-    setTimeout(() => hide(), 1000);
+    setTimeout(() => hide(), 700);
   };
 
   const userItems = useUserItemData();
@@ -49,15 +51,21 @@ const DokiDrawer = (props) => {
         bounces={false}
         nestedScrollEnabled={true}
       >
+        {/* Carrot */}
         <TouchableOpacity onPress={handleFeed}>
-          <View style={styles.box}>
-            <FontAwesome5
-              name={'carrot'}
-              style={{ fontSize: 50, color: 'orange' }}
+          <StyledItemContainer>
+            <StyledItemImage
+              source={require('../../../assets/items/carrot.png')}
             />
-            <Text style={styles.text}>{props.carrotCount}</Text>
-          </View>
+
+            <StyledItemQuantity>
+              <StyledItemQuantityText>
+                {props.carrotCount}
+              </StyledItemQuantityText>
+            </StyledItemQuantity>
+          </StyledItemContainer>
         </TouchableOpacity>
+        {/* All Items */}
         {userItemList}
       </ScrollView>
       <Popable
@@ -78,21 +86,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flex: 1,
-  },
-  box: {
-    height: 85,
-    width: 85,
-    justifyContent: 'center',
-    backgroundColor: '#ffefb4',
-    padding: 15,
-    paddingLeft: 20,
-    borderRadius: 10,
-    margin: 15,
-  },
-  text: {
-    fontFamily: 'Singularity',
-    fontSize: 20,
-    marginLeft: 'auto',
   },
   popable: {
     alignSelf: 'center',

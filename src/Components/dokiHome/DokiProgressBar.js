@@ -18,7 +18,7 @@ const DokiProgressBar = ({ name, level, total }) => {
           {name === 'Hatch' ? '' : `${level}/${total}`}
         </StyledProgressTextSmall>
       </StyledProgressTextContainer>
-      <StyledProgressBar progress={level && progress} color="#ccd5ae" />
+      <StyledProgressBar progress={level && progress} color="#C6D593" />
     </StyledProgressBarContainer>
   );
 };
