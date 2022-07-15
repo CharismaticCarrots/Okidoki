@@ -1,5 +1,8 @@
 const router = require('express').Router();
 const { User } = require('../db');
+const { OAuth2Client } = require('google-auth-library');
+
+const client = new OAuth2Client(process.env.GOOGLECLIENTID);
 
 module.exports = router;
 
@@ -10,6 +13,25 @@ router.post('/signin', async (req, res, next) => {
     res.json(user);
   } catch (err) {
     res.send('Invalid username or password');
+  }
+});
+
+router.post('/googleauthroute', async (req, res, next) => {
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: req.body.idToken,
+      audience: process.env.GOOGLECLIENTID,
+    });
+    const payload = ticket.getPayload();
+
+    const user = await User.findOne({
+      where: {
+        email: payload.email,
+      },
+    });
+    res.json(user);
+  } catch (err) {
+    next(err);
   }
 });
 
