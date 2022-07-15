@@ -45,9 +45,13 @@ const UserCarrots = ({curCarrotCount, curFullnessLvl}) => {
     if (curCarrotCount <= 0 || curFullnessLvl >= 100) {
       if (curCarrotCount <= 0) {
         setMsgContent("UH OH, YOU'RE OUT OF CARROTS!");
+        show();
+        setTimeout(() => hide(), 1000);
       }
       if (curFullnessLvl >= 100) {
         setMsgContent("I'M TOO FULL RIGHT NOW!");
+        show();
+        setTimeout(() => hide(), 1000);
       }
     } else {
       const newFullnessLevel = curFullnessLvl + 5;
