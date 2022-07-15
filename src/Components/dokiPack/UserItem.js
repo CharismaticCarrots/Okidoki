@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { StyleItemImage } from '../styles';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Popable, usePopable } from 'react-native-popable';
 import { useQueryClient } from 'react-query';
 import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
 import { createTriggerNotification } from "../../helpers/createTriggerNotification";
+import {
+  StyledItemContainer,
+  StyledItemImage,
+  StyledItemQuantity,
+  StyledItemQuantityText,
+} from '../styles';
 
 const imageNames = {
   'video game': require('../../../assets/items/videogame.png'),
@@ -25,12 +30,12 @@ const UserItem = ({name, quantity, curMoodLvl}) => {
 
   return (
     <TouchableOpacity onPress={playWithDoki}>
-      <View style={styles.box}>
-        <StyleItemImage source={imageNames[name]} />
-        <View style={styles.quantity}>
-          <Text style={styles.text}>{quantity}</Text>
-        </View>
-      </View>
+      <StyledItemContainer>
+        <StyledItemImage source={imageNames[name]} />
+        <StyledItemQuantity>
+          <StyledItemQuantityText>{quantity}</StyledItemQuantityText>
+        </StyledItemQuantity>
+      </StyledItemContainer>
       <Popable
         ref={ref}
         content={msgContent}
@@ -66,38 +71,6 @@ const UserItem = ({name, quantity, curMoodLvl}) => {
 export default UserItem;
 
 const styles = StyleSheet.create({
-  container: {
-    marginLeft: 30,
-    display: 'flex',
-    flexDirection: 'row',
-    flex: 1,
-  },
-  box: {
-    height: 85,
-    width: 85,
-    justifyContent: 'center',
-    alignContent: 'center',
-    backgroundColor: '#ffefb4',
-    padding: 15,
-    paddingTop: 13,
-    borderRadius: 10,
-    margin: 15,
-  },
-  text: {
-    fontFamily: 'Singularity',
-    fontSize: 23,
-    // marginLeft:'auto',
-  },
-  quantity: {
-    height: 23,
-    width: 23,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#C7CDAB',
-    borderRadius: 100,
-    paddingTop: 2,
-    marginLeft: 'auto',
-  },
   popable: {
     alignSelf: 'center',
     marginTop: 330,

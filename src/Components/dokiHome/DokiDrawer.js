@@ -39,21 +39,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
   },
-  box: {
-    height: 85,
-    width: 85,
-    justifyContent: 'center',
-    backgroundColor: '#ffefb4',
-    padding: 15,
-    paddingLeft: 20,
-    borderRadius: 10,
-    margin: 15,
-  },
-  text: {
-    fontFamily: 'Singularity',
-    fontSize: 20,
-    marginLeft: 'auto',
-  },
   popable: {
     alignSelf: 'center',
     marginTop: 350,
