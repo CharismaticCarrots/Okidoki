@@ -6,6 +6,7 @@ import axios from 'axios';
 import { API_URL } from '../../../secrets.js';
 import { useQuery } from 'react-query';
 import { useUserData } from '../../hooks/useUserData';
+import { useUpdateUser } from '../../hooks/useUpdateUser.js';
 import { useMutation } from 'react-query';
 import { StyledDokiHomeBackground, StyledHeading1 } from '../styles';
 import Item from './Item';
@@ -34,6 +35,7 @@ export const useItemsData = () => {
 };
 
 const Store = () => {
+  const userMutation = useUpdateUser();
   const { ref, hide, show } = usePopable();
   const [msgContent, setMsgContent] = useState(null);
 
@@ -46,22 +48,6 @@ const Store = () => {
       setCurCarrotCount(user.carrotCount);
     }
   }, [user]);
-
-  const userMutation = useMutation(async (userUpdate) => {
-    const token = await SecureStore.getItemAsync('TOKEN');
-    if (token) {
-      const { data: updatedUser } = await axios.put(
-        `http://${API_URL}/api/user/`,
-        userUpdate,
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
-      return updatedUser;
-    }
-  });
 
   const userItemMutation = useMutation(async (itemId) => {
     const token = await SecureStore.getItemAsync('TOKEN');
@@ -94,15 +80,15 @@ const Store = () => {
       userItemMutation.mutate(itemId, {
         onSuccess: () => {
           show();
-          setTimeout(() => hide(), 1000);
+          setTimeout(() => hide(), 700);
           setMsgContent('ITEM PURCHASED');
         },
       });
     } else {
       show();
-      setTimeout(() => hide(), 1300);
+      setTimeout(() => hide(), 700);
 
-      setMsgContent("UH OH, YOU DON'T HAVE ENOUGH CARROTS!");
+      setMsgContent('NOT ENOUGH CARROTS!');
     }
   };
 

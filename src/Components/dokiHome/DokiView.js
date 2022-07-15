@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import RBSheet from "react-native-raw-bottom-sheet";
+import RBSheet from 'react-native-raw-bottom-sheet';
 import { Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
@@ -20,7 +20,6 @@ import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
 import { useCarrotReward } from '../../hooks/useCarrotReward';
 import { createTriggerNotification } from '../../helpers/createTriggerNotification';
-
 
 const DokiView = ({ now }) => {
   const refRBSheet = useRef();
@@ -73,7 +72,7 @@ const DokiView = ({ now }) => {
       setCurFullnessLvl(user_doki.lastFedFullnessLevel - hrsSinceLastFed);
 
       const hrsSinceLastPlayed = Math.floor(
-        (new Date(now).getTime() - new Date(user_doki.lastPlayedAt).getTime()) /
+        (new Date().getTime() - new Date(user_doki.lastPlayedAt).getTime()) /
           3600000
       );
       setCurMoodLvl(user_doki.lastPlayedMoodLevel - hrsSinceLastPlayed);
@@ -97,14 +96,14 @@ const DokiView = ({ now }) => {
       };
       userDokiMutation.mutate(userDokiUpdate, {
         onSuccess: () => {
-          queryClient.invalidateQueries(['userDoki'])
+          queryClient.invalidateQueries(['userDoki']);
         },
       });
       userMutation.mutate(
         { carrotCount: curCarrotCount - 1 },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(['user'])
+            queryClient.invalidateQueries(['user']);
           },
         }
       );
@@ -125,7 +124,7 @@ const DokiView = ({ now }) => {
       };
       userDokiMutation.mutate(userDokiUpdate, {
         onSuccess: () => {
-          queryClient.invalidateQueries(['userDoki'])
+          queryClient.invalidateQueries(['userDoki']);
         },
       });
       setMsgContent('THIS IS SO MUCH FUN!');
@@ -167,8 +166,9 @@ const DokiView = ({ now }) => {
       </StyledOuterCountersContainer>
       {Boolean(carrotReward) && !carrotsClaimed && (
         <Button mode="contained" onPress={claimCarrots}>
-            {`CLAIM ${carrotReward} CARROTS`}
-        </Button>)}
+          {`CLAIM ${carrotReward} CARROTS`}
+        </Button>
+      )}
       <StyledDokiContainer>
         {userDoki && <Doki userDoki={userDoki} />}
         <StyledDokiName>
@@ -185,7 +185,7 @@ const DokiView = ({ now }) => {
         ref={refRBSheet}
         closeOnSwipeDown={false}
         closeOnDragDown={true}
-        closeOnPressMask={false}
+        closeOnPressMask={true}
         customStyles={{
           wrapper: {
             backgroundColor: 'transparent',
@@ -194,7 +194,10 @@ const DokiView = ({ now }) => {
             backgroundColor: '#134845',
           },
           container: {
-            backgroundColor: '#59b2ff',
+            backgroundColor: '#6B4B3E',
+            // 6B4B3E — darker brown
+            // 725E54 — medium brown
+            // A57548 — lighter brown
           },
         }}
         height={170}
