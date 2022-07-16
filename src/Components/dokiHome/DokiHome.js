@@ -13,12 +13,11 @@ const wait = (timeout) => {
 const DokiHome = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const hatchProgressData = getHatchProgress(now);
+  const now = currentDate.toISOString();
+  const hatchProgressData = getHatchProgress();
 
-  // const hatchProgressData = getHatchProgress(now);
   const isEgg = hatchProgressData.hatchProgress < 1;
   // const isEgg = false; // FOR TESTING: Uncomment this to see Doki instead of DokiEgg
-  const now = currentDate.toISOString();
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -47,7 +46,7 @@ const DokiHome = () => {
     </ScrollView>
   );
 
-  function getHatchProgress(now) {
+  function getHatchProgress() {
     const userDoki = useUserDokiData();
     const { user } = useUserData();
 
