@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import notifee from '@notifee/react-native';
 import RBSheet from "react-native-raw-bottom-sheet";
 import { Button } from 'react-native-paper';
 import {
@@ -13,12 +12,16 @@ import DokiProgressBar from './DokiProgressBar';
 import Doki from './Doki';
 import DokiDrawer from './DokiDrawer';
 import CountDisplay from './CountDisplay';
+import { useQueryClient } from 'react-query';
 import { useDailyStepCount } from '../../Healthkit';
 import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
 import { useCarrotReward } from '../../hooks/useCarrotReward';
+import { createTriggerNotification } from '../../helpers/createTriggerNotification';
+import { lastDayOfYear } from 'date-fns';
+
 
 const DokiView = ({ now }) => {
   const refRBSheet = useRef();
@@ -36,6 +39,7 @@ const DokiView = ({ now }) => {
   const carrotReward = useCarrotReward(now);
   const userDokiMutation = useUpdateUserDoki();
   const userMutation = useUpdateUser();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (user) {
@@ -66,23 +70,22 @@ const DokiView = ({ now }) => {
 
   useEffect(() => {
     if (userDokiData) {
-      // sets new fullnesslevel based on lastfedAt date
       // userDokiData.type = 'fox'; // Dummy data to view different sprites
       setUserDoki(userDokiData);
       const { user_doki } = userDokiData;
+
       const hrsSinceLastFed = Math.floor(
-        (new Date(now).getTime() - new Date(user_doki.lastFedAt).getTime()) /
+        (new Date().getTime() - new Date(user_doki.lastFedAt).getTime()) /
           3600000
       );
-      console.log('HOURS SINCE LAST FED', hrsSinceLastFed);
+      console.log("NEW FULLNESS", user_doki.lastFedFullnessLevel - hrsSinceLastFed, hrsSinceLastFed)
+
       setCurFullnessLvl(user_doki.lastFedFullnessLevel - hrsSinceLastFed);
 
-      // sets new moodlevel based on lastPlayedAt date
       const hrsSinceLastPlayed = Math.floor(
         (new Date(now).getTime() - new Date(user_doki.lastPlayedAt).getTime()) /
           3600000
       );
-      console.log('HOURS SINCE LAST PLAYED WITH', hrsSinceLastPlayed);
       setCurMoodLvl(user_doki.lastPlayedMoodLevel - hrsSinceLastPlayed);
     }
   }, [userDokiData, now]);
@@ -104,7 +107,10 @@ const DokiView = ({ now }) => {
       };
       userDokiMutation.mutate(userDokiUpdate, {
         onSuccess: ({ lastFedFullnessLevel }) => {
-          setCurFullnessLvl(lastFedFullnessLevel);
+          console.log("ON SUCCESS LASTFEDFULLNESS", lastFedFullnessLevel)
+          // setCurFullnessLvl(lastFedFullnessLevel);
+          console.log("ON SUCCESS CURFULLNESS", curFullnessLvl)
+          queryClient.invalidateQueries(['userDoki'])
         },
       });
       userMutation.mutate(
@@ -112,10 +118,12 @@ const DokiView = ({ now }) => {
         {
           onSuccess: ({ carrotCount }) => {
             setCurCarrotCount(carrotCount);
+            queryClient.invalidateQueries(['user'])
           },
         }
       );
       setMsgContent('OM NOM NOM');
+      createTriggerNotification();
     }
   };
 
@@ -153,14 +161,6 @@ const DokiView = ({ now }) => {
     );
   };
 
-  const onDisplayNotification = async () => {
-    await notifee.requestPermission();
-    await notifee.displayNotification({
-      title: "HELLO",
-      body: "HELLO HELLO FROM TEAM CARROT"
-    });
-  };
-
   return (
     <StyledDokiHomeBackground
       source={require('../../../assets/backgrounds/dokihome_background.png')}
@@ -182,7 +182,6 @@ const DokiView = ({ now }) => {
         <Button mode="contained" onPress={claimCarrots}>
             {`CLAIM ${carrotReward} CARROTS`}
         </Button>)}
-      <Button mode="contained" onPress={() => onDisplayNotification()}>GET NOTIFICATION</Button>
       <StyledDokiContainer>
         {userDoki && <Doki userDoki={userDoki} />}
         <StyledDokiName>
