@@ -21,7 +21,7 @@ export const createTriggerNotification = async (type) => {
     trigger,
     );
 
-    await notifee.getTriggerNotificationIds().then(ids => console.log('NOTIFICATIONS AFTER: ', ids));
+    // await notifee.getTriggerNotificationIds().then(ids => console.log('CURRENTLY SET UP NOTIFICATIONS:', ids));
   } catch (error) {
     console.log(error);
   }

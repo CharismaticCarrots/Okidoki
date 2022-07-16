@@ -129,6 +129,7 @@ const DokiView = ({ now }) => {
         },
       });
       setMsgContent('THIS IS SO MUCH FUN!');
+      createTriggerNotification('play');
     }
   };
 
