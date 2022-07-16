@@ -10,18 +10,19 @@ import { StyledHeading1,
   StyledFormButton,
   StyledFormButtonText, 
 } from './styles';
+import * as SecureStore from 'expo-secure-store';
 import { useUserData } from '../hooks/useUserData';
 import { API_URL } from '../../secrets';
+import { AuthContext } from '../AuthLoading';
 
 const UserSettings = ({navigation}) => {
   const [dailyStepGoal, setDailyStepGoal] = useState('0');
-
-  const { user } = useUserData();
+  const { user, logout } = useUserData();
+  const { signOut } = React.useContext(AuthContext);
   let token;
   if (user) {
     token = user.token;
   }
-  console.log('User on SetGoal: ', user);
 
   const mutation = useMutation(
     async (dailyStepGoal) => {
@@ -71,6 +72,11 @@ const UserSettings = ({navigation}) => {
         </StyledFormButton>
         <StyledFormButton
            style={{ marginTop: 20, width: 150 }}
+           onPress={() => {
+            logout();
+            SecureStore.deleteItemAsync('TOKEN');
+            signOut()
+          }}
         >
         <StyledFormButtonText>Log out</StyledFormButtonText>
         </StyledFormButton>
