@@ -5,19 +5,19 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { useUserItemData } from '../../hooks/useUserItemData';
 import UserItem from '../dokiPack/UserItem';
 import { Popable, usePopable } from 'react-native-popable';
+import DokiPackCarrots from '../dokiPack/DokiPackCarrots';
 
 const DokiDrawer = (props) => {
   const { ref, hide, show } = usePopable();
 
-  const handleFeed = () => {
-    props.feedDoki();
-    show();
-    setTimeout(() => hide(), 1000);
-  };
+  // const handleFeed = () => {
+  //   props.feedDoki();
+  //   show();
+  //   setTimeout(() => hide(), 1000);
+  // };
 
   const handlePlay = () => {
     props.playWithDoki();
@@ -49,23 +49,12 @@ const DokiDrawer = (props) => {
         bounces={false}
         nestedScrollEnabled={true}
       >
-        <TouchableOpacity onPress={handleFeed}>
-          <View style={styles.box}>
-            <FontAwesome5
-              name={'carrot'}
-              style={{ fontSize: 50, color: 'orange' }}
-            />
-            <Text style={styles.text}>{props.carrotCount}</Text>
-          </View>
-        </TouchableOpacity>
-        {userItemList}
+      <DokiPackCarrots
+        curCarrotCount={props.carrotCount}
+        curFullnessLvl={props.curFullnessLvl}
+      />
+      {userItemList}
       </ScrollView>
-      <Popable
-        ref={ref}
-        content={props.msgContent}
-        style={styles.popable}
-        animationType="spring"
-      ></Popable>
     </View>
   );
 };

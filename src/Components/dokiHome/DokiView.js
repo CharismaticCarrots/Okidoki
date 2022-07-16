@@ -122,9 +122,6 @@ const DokiView = ({ now }) => {
           {userDokiData && userDokiData.user_doki.dokiName}
         </StyledDokiName>
       </StyledDokiContainer>
-      {/* <Button onPress={feedDoki} mode="contained">
-        Feed Doki
-      </Button> */}
       <Button mode="contained" onPress={() => refRBSheet.current.open()}>
         DOKI PACK
       </Button>
@@ -148,46 +145,14 @@ const DokiView = ({ now }) => {
       >
         <DokiDrawer
           carrotCount={curCarrotCount}
-          feedDoki={feedDoki}
+          // feedDoki={feedDoki}
+          curFullnessLvl={curFullnessLvl}
           playWithDoki={playWithDoki}
           msgContent={msgContent}
         />
       </RBSheet>
     </StyledDokiHomeBackground>
   );
-
-  function feedDoki() {
-    if (curCarrotCount <= 0 || curFullnessLvl >= 100) {
-      if (curCarrotCount <= 0) {
-        setMsgContent("UH OH, YOU'RE OUT OF CARROTS!");
-      }
-      if (curFullnessLvl >= 100) {
-        setMsgContent("I'M TOO FULL RIGHT NOW!");
-      }
-    } else {
-      const newFullnessLevel = curFullnessLvl + 5;
-      const userDokiUpdate = {
-        lastFedAt: new Date(),
-        lastFedFullnessLevel:
-          curFullnessLvl + (newFullnessLevel > 100 ? 100 - curFullnessLvl : 5), // Carrot-FullnessLevel Increase Rate
-      };
-      userDokiMutation.mutate(userDokiUpdate, {
-        onSuccess: () => {
-          queryClient.invalidateQueries(['userDoki'])
-        },
-      });
-      userMutation.mutate(
-        { carrotCount: curCarrotCount - 1 },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries(['user'])
-          },
-        }
-      );
-      setMsgContent('OM NOM NOM');
-      createTriggerNotification('feed');
-    }
-  };
 
   function playWithDoki () {
     if (curMoodLvl >= 100) {
