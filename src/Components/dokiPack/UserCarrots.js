@@ -12,7 +12,7 @@ import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
 import { createTriggerNotification } from "../../helpers/createTriggerNotification";
 
-const DokiPackCarrots = ({curCarrotCount, curFullnessLvl}) => {
+const UserCarrots = ({curCarrotCount, curFullnessLvl}) => {
   const { ref, hide, show } = usePopable();
   const userDokiMutation = useUpdateUserDoki();
   const userMutation = useUpdateUser();
@@ -74,7 +74,7 @@ const DokiPackCarrots = ({curCarrotCount, curFullnessLvl}) => {
   };
 };
 
-export default DokiPackCarrots;
+export default UserCarrots;
 
 const styles = StyleSheet.create({
   container: {

@@ -8,7 +8,7 @@ import {
 import { useUserItemData } from '../../hooks/useUserItemData';
 import UserItem from '../dokiPack/UserItem';
 import { Popable, usePopable } from 'react-native-popable';
-import DokiPackCarrots from '../dokiPack/DokiPackCarrots';
+import UserCarrots from '../dokiPack/UserCarrots';
 
 const DokiDrawer = (props) => {
   const { ref, hide, show } = usePopable();
@@ -49,7 +49,7 @@ const DokiDrawer = (props) => {
         bounces={false}
         nestedScrollEnabled={true}
       >
-      <DokiPackCarrots
+      <UserCarrots
         curCarrotCount={props.carrotCount}
         curFullnessLvl={props.curFullnessLvl}
       />
