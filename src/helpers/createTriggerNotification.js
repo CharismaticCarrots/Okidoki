@@ -1,17 +1,12 @@
 import notifee, { TriggerType } from '@notifee/react-native';
 import add from 'date-fns/add';
 
-export const createTriggerNotification = async () => {
-  notifee.getTriggerNotificationIds().then(ids => console.log('NOTIFICATIONS BEFORE: ', ids));
+export const createTriggerNotification = async (type) => {
   try {
     const notifDate = add(new Date(), {
       seconds: 10 // 10 seconds for testing
       // days: 1
     });
-
-    console.log("NOTIFICATION DATE", notifDate.toLocaleString('en-US', {
-      timeZone: 'UTC',
-    }))
 
     const trigger = {
       type: TriggerType.TIMESTAMP,
@@ -19,9 +14,9 @@ export const createTriggerNotification = async () => {
     };
 
     await notifee.createTriggerNotification({
-      id: 'fullnessNotification',
+      id: `${type} notification`,
       title: "Okidoki",
-      body: `Don't forget to feed me!`
+      body: `Don't forget to ${type === 'feed' ? 'feed' : 'play with'} me!`
     },
     trigger,
     );

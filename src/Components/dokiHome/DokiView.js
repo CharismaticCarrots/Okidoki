@@ -93,27 +93,23 @@ const DokiView = ({ now }) => {
       const userDokiUpdate = {
         lastFedAt: new Date(),
         lastFedFullnessLevel:
-          curFullnessLvl + (newFullnessLevel > 100 ? 100 - curFullnessLvl : 5), // Carrot-FullnessLevel Exchange Rate
+          curFullnessLvl + (newFullnessLevel > 100 ? 100 - curFullnessLvl : 5), // Carrot-FullnessLevel Increase Rate
       };
       userDokiMutation.mutate(userDokiUpdate, {
-        onSuccess: ({ lastFedFullnessLevel }) => {
-          console.log("ON SUCCESS LASTFEDFULLNESS", lastFedFullnessLevel)
-          // setCurFullnessLvl(lastFedFullnessLevel);
-          console.log("ON SUCCESS CURFULLNESS", curFullnessLvl)
+        onSuccess: () => {
           queryClient.invalidateQueries(['userDoki'])
         },
       });
       userMutation.mutate(
         { carrotCount: curCarrotCount - 1 },
         {
-          onSuccess: ({ carrotCount }) => {
-            setCurCarrotCount(carrotCount);
+          onSuccess: () => {
             queryClient.invalidateQueries(['user'])
           },
         }
       );
       setMsgContent('OM NOM NOM');
-      createTriggerNotification();
+      createTriggerNotification('feed');
     }
   };
 
@@ -128,8 +124,8 @@ const DokiView = ({ now }) => {
           curMoodLvl + (newMoodLevel > 100 ? 100 - curMoodLvl : 5), // Mood Increase Rate
       };
       userDokiMutation.mutate(userDokiUpdate, {
-        onSuccess: ({ lastPlayedMoodLevel }) => {
-          setCurMoodLvl(lastPlayedMoodLevel);
+        onSuccess: () => {
+          queryClient.invalidateQueries(['userDoki'])
         },
       });
       setMsgContent('THIS IS SO MUCH FUN!');
