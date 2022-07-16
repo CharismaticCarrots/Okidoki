@@ -1,45 +1,10 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { useUserItemData } from '../../hooks/useUserItemData';
 import UserItem from '../dokiPack/UserItem';
-import { Popable, usePopable } from 'react-native-popable';
 import UserCarrots from '../dokiPack/UserCarrots';
 
-const DokiDrawer = (props) => {
-  const { ref, hide, show } = usePopable();
-
-  // const handleFeed = () => {
-  //   props.feedDoki();
-  //   show();
-  //   setTimeout(() => hide(), 1000);
-  // };
-
-  const handlePlay = () => {
-    props.playWithDoki();
-    show();
-    setTimeout(() => hide(), 1000);
-  };
-
+const DokiDrawer = ({curCarrotCount, curFullnessLevel, curMoodLvl}) => {
   const userItems = useUserItemData();
-  let userItemList;
-  if (userItems) {
-    userItemList = userItems.map((item) => {
-      return (
-        <UserItem
-          handlePlay={handlePlay}
-          key={item.id}
-          name={item.name}
-          quantity={item.user_item.quantity}
-        />
-      );
-    });
-  }
-  // console.log('PROPS INSIDE DOKI DRAWER', props);
 
   return (
     <View style={styles.container}>
@@ -50,10 +15,16 @@ const DokiDrawer = (props) => {
         nestedScrollEnabled={true}
       >
       <UserCarrots
-        curCarrotCount={props.carrotCount}
-        curFullnessLvl={props.curFullnessLvl}
+        curCarrotCount={curCarrotCount}
+        curFullnessLvl={curFullnessLevel}
       />
-      {userItemList}
+      {userItems && userItems.map(item => (
+        <UserItem
+          key={item.id}
+          name={item.name}
+          quantity={item.user_item.quantity}
+          curMoodLvl={curMoodLvl}
+        />))}
       </ScrollView>
     </View>
   );

@@ -12,15 +12,11 @@ import DokiProgressBar from './DokiProgressBar';
 import Doki from './Doki';
 import DokiDrawer from './DokiDrawer';
 import CountDisplay from './CountDisplay';
-import { useQueryClient } from 'react-query';
 import { useDailyStepCount } from '../../Healthkit';
 import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
-import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
 import { useCarrotReward } from '../../hooks/useCarrotReward';
-import { createTriggerNotification } from '../../helpers/createTriggerNotification';
-
 
 const DokiView = ({ now }) => {
   const refRBSheet = useRef();
@@ -30,15 +26,11 @@ const DokiView = ({ now }) => {
   const [carrotsClaimed, setCarrotsClaimed] = useState(false);
   const [curMoodLvl, setCurMoodLvl] = useState(0);
 
-  const [msgContent, setMsgContent] = useState(null);
-
   const stepCount = useDailyStepCount(now);
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
   const carrotReward = useCarrotReward(now);
-  const userDokiMutation = useUpdateUserDoki();
   const userMutation = useUpdateUser();
-  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (user) {
@@ -144,35 +136,13 @@ const DokiView = ({ now }) => {
         height={170}
       >
         <DokiDrawer
-          carrotCount={curCarrotCount}
-          // feedDoki={feedDoki}
+          curCarrotCount={curCarrotCount}
           curFullnessLvl={curFullnessLvl}
-          playWithDoki={playWithDoki}
-          msgContent={msgContent}
+          curMoodLvl={curMoodLvl}
         />
       </RBSheet>
     </StyledDokiHomeBackground>
   );
-
-  function playWithDoki () {
-    if (curMoodLvl >= 100) {
-      setMsgContent("I'M ALL PLAYED OUT!");
-    } else {
-      const newMoodLevel = curMoodLvl + 5;
-      const userDokiUpdate = {
-        lastPlayedAt: new Date(),
-        lastPlayedMoodLevel:
-          curMoodLvl + (newMoodLevel > 100 ? 100 - curMoodLvl : 5), // Mood Increase Rate
-      };
-      userDokiMutation.mutate(userDokiUpdate, {
-        onSuccess: () => {
-          queryClient.invalidateQueries(['userDoki'])
-        },
-      });
-      setMsgContent('THIS IS SO MUCH FUN!');
-      createTriggerNotification('play');
-    }
-  };
 };
 
 export default DokiView;
