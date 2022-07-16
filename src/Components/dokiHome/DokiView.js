@@ -20,7 +20,6 @@ import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
 import { useCarrotReward } from '../../hooks/useCarrotReward';
 import { createTriggerNotification } from '../../helpers/createTriggerNotification';
-import { lastDayOfYear } from 'date-fns';
 
 
 const DokiView = ({ now }) => {
@@ -54,17 +53,10 @@ const DokiView = ({ now }) => {
         console.log(
           `Can't claim carrots yet, last claimed at ${new Date(
             user.lastCarrotsClaimedAt
-          ).toLocaleString('en-US', {
-            timeZone: 'UTC',
-          })}. Check again tomorrow!`
+          ).toLocaleString('en-US')}. Check again tomorrow!`
         ); // Temporary Error Message
-      } else {
-        console.log(
-          `LAST CLAIMED CARROTS AT: ${new Date(
-            user.lastCarrotsClaimedAt
-          ).toLocaleString('en-US', { timeZone: 'UTC' })}`
-        ); // Temporary Console log to test
       }
+      // console.log(`LAST CLAIMED CARROTS AT: ${new Date(user.lastCarrotsClaimedAt).toLocaleString('en-US')}`); // FOR TESTING
     }
   }, [user, carrotReward, now]);
 
@@ -78,8 +70,6 @@ const DokiView = ({ now }) => {
         (new Date().getTime() - new Date(user_doki.lastFedAt).getTime()) /
           3600000
       );
-      console.log("NEW FULLNESS", user_doki.lastFedFullnessLevel - hrsSinceLastFed, hrsSinceLastFed)
-
       setCurFullnessLvl(user_doki.lastFedFullnessLevel - hrsSinceLastFed);
 
       const hrsSinceLastPlayed = Math.floor(
