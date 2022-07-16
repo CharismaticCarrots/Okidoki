@@ -23,34 +23,14 @@ const DokiView = ({ now }) => {
   const [userDoki, setUserDoki] = useState();
   const [curCarrotCount, setCurCarrotCount] = useState(0);
   const [curFullnessLvl, setCurFullnessLvl] = useState(0);
-  const [carrotsClaimed, setCarrotsClaimed] = useState(false);
   const [curMoodLvl, setCurMoodLvl] = useState(0);
+  const [carrotsClaimed, setCarrotsClaimed] = useState(false);
 
   const stepCount = useDailyStepCount(now);
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
   const carrotReward = useCarrotReward(now);
   const userMutation = useUpdateUser();
-
-  useEffect(() => {
-    if (user) {
-      setCurCarrotCount(user.carrotCount);
-      console.log('USER TOKEN:', user.token); // Temporary console log to view token
-      const claimedToday =
-        new Date(now).toDateString() ===
-        new Date(user.lastCarrotsClaimedAt).toDateString();
-
-      if (claimedToday) {
-        setCarrotsClaimed(true);
-        console.log(
-          `Can't claim carrots yet, last claimed at ${new Date(
-            user.lastCarrotsClaimedAt
-          ).toLocaleString('en-US')}. Check again tomorrow!`
-        ); // Temporary Error Message
-      }
-      // console.log(`LAST CLAIMED CARROTS AT: ${new Date(user.lastCarrotsClaimedAt).toLocaleString('en-US')}`); // FOR TESTING
-    }
-  }, [user, carrotReward, now]);
 
   useEffect(() => {
     if (userDokiData) {
@@ -71,6 +51,27 @@ const DokiView = ({ now }) => {
       setCurMoodLvl(user_doki.lastPlayedMoodLevel - hrsSinceLastPlayed);
     }
   }, [userDokiData, now]);
+
+  useEffect(() => {
+    if (user) {
+      setCurCarrotCount(user.carrotCount);
+      console.log('USER TOKEN:', user.token); // Temporary console log to view token
+
+      const claimedToday =
+        new Date(now).toDateString() ===
+        new Date(user.lastCarrotsClaimedAt).toDateString();
+
+      if (claimedToday) {
+        setCarrotsClaimed(true);
+        console.log(
+          `Can't claim carrots yet, last claimed at ${new Date(
+            user.lastCarrotsClaimedAt
+          ).toLocaleString('en-US')}. Check again tomorrow!`
+        ); // Temporary Error Message
+      }
+      // console.log(`LAST CLAIMED CARROTS AT: ${new Date(user.lastCarrotsClaimedAt).toLocaleString('en-US')}`); // FOR TESTING
+    }
+  }, [user, carrotReward, now]);
 
   const claimCarrots = () => {
     userMutation.mutate(

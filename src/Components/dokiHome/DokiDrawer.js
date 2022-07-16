@@ -3,7 +3,7 @@ import { useUserItemData } from '../../hooks/useUserItemData';
 import UserItem from '../dokiPack/UserItem';
 import UserCarrots from '../dokiPack/UserCarrots';
 
-const DokiDrawer = ({curCarrotCount, curFullnessLevel, curMoodLvl}) => {
+const DokiDrawer = ({curCarrotCount, curFullnessLvl, curMoodLvl}) => {
   const userItems = useUserItemData();
 
   return (
@@ -16,7 +16,7 @@ const DokiDrawer = ({curCarrotCount, curFullnessLevel, curMoodLvl}) => {
       >
       <UserCarrots
         curCarrotCount={curCarrotCount}
-        curFullnessLvl={curFullnessLevel}
+        curFullnessLvl={curFullnessLvl}
       />
       {userItems && userItems.map(item => (
         <UserItem
