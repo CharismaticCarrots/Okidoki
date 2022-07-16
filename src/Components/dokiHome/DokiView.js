@@ -80,59 +80,6 @@ const DokiView = ({ now }) => {
     }
   }, [userDokiData, now]);
 
-  const feedDoki = () => {
-    if (curCarrotCount <= 0 || curFullnessLvl >= 100) {
-      if (curCarrotCount <= 0) {
-        setMsgContent("UH OH, YOU'RE OUT OF CARROTS!");
-      }
-      if (curFullnessLvl >= 100) {
-        setMsgContent("I'M TOO FULL RIGHT NOW!");
-      }
-    } else {
-      const newFullnessLevel = curFullnessLvl + 5;
-      const userDokiUpdate = {
-        lastFedAt: new Date(),
-        lastFedFullnessLevel:
-          curFullnessLvl + (newFullnessLevel > 100 ? 100 - curFullnessLvl : 5), // Carrot-FullnessLevel Increase Rate
-      };
-      userDokiMutation.mutate(userDokiUpdate, {
-        onSuccess: () => {
-          queryClient.invalidateQueries(['userDoki'])
-        },
-      });
-      userMutation.mutate(
-        { carrotCount: curCarrotCount - 1 },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries(['user'])
-          },
-        }
-      );
-      setMsgContent('OM NOM NOM');
-      createTriggerNotification('feed');
-    }
-  };
-
-  const playWithDoki = () => {
-    if (curMoodLvl >= 100) {
-      setMsgContent("I'M ALL PLAYED OUT!");
-    } else {
-      const newMoodLevel = curMoodLvl + 5;
-      const userDokiUpdate = {
-        lastPlayedAt: new Date(),
-        lastPlayedMoodLevel:
-          curMoodLvl + (newMoodLevel > 100 ? 100 - curMoodLvl : 5), // Mood Increase Rate
-      };
-      userDokiMutation.mutate(userDokiUpdate, {
-        onSuccess: () => {
-          queryClient.invalidateQueries(['userDoki'])
-        },
-      });
-      setMsgContent('THIS IS SO MUCH FUN!');
-      createTriggerNotification('play');
-    }
-  };
-
   const claimCarrots = () => {
     userMutation.mutate(
       {
@@ -208,6 +155,59 @@ const DokiView = ({ now }) => {
       </RBSheet>
     </StyledDokiHomeBackground>
   );
+
+  function feedDoki() {
+    if (curCarrotCount <= 0 || curFullnessLvl >= 100) {
+      if (curCarrotCount <= 0) {
+        setMsgContent("UH OH, YOU'RE OUT OF CARROTS!");
+      }
+      if (curFullnessLvl >= 100) {
+        setMsgContent("I'M TOO FULL RIGHT NOW!");
+      }
+    } else {
+      const newFullnessLevel = curFullnessLvl + 5;
+      const userDokiUpdate = {
+        lastFedAt: new Date(),
+        lastFedFullnessLevel:
+          curFullnessLvl + (newFullnessLevel > 100 ? 100 - curFullnessLvl : 5), // Carrot-FullnessLevel Increase Rate
+      };
+      userDokiMutation.mutate(userDokiUpdate, {
+        onSuccess: () => {
+          queryClient.invalidateQueries(['userDoki'])
+        },
+      });
+      userMutation.mutate(
+        { carrotCount: curCarrotCount - 1 },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries(['user'])
+          },
+        }
+      );
+      setMsgContent('OM NOM NOM');
+      createTriggerNotification('feed');
+    }
+  };
+
+  function playWithDoki () {
+    if (curMoodLvl >= 100) {
+      setMsgContent("I'M ALL PLAYED OUT!");
+    } else {
+      const newMoodLevel = curMoodLvl + 5;
+      const userDokiUpdate = {
+        lastPlayedAt: new Date(),
+        lastPlayedMoodLevel:
+          curMoodLvl + (newMoodLevel > 100 ? 100 - curMoodLvl : 5), // Mood Increase Rate
+      };
+      userDokiMutation.mutate(userDokiUpdate, {
+        onSuccess: () => {
+          queryClient.invalidateQueries(['userDoki'])
+        },
+      });
+      setMsgContent('THIS IS SO MUCH FUN!');
+      createTriggerNotification('play');
+    }
+  };
 };
 
 export default DokiView;
