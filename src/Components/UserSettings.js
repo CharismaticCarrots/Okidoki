@@ -8,7 +8,8 @@ import { StyledHeading1,
   StyledFormContainer,
   StyledFormTextInput,
   StyledFormButton,
-  StyledFormButtonText, 
+  StyledFormButtonText,
+  StyledSettingsHeading, 
 } from './styles';
 import * as SecureStore from 'expo-secure-store';
 import { useUserData } from '../hooks/useUserData';
@@ -50,7 +51,8 @@ const UserSettings = ({navigation}) => {
       source={require('../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <StyledFormContainer>
+      <StyledSettingsHeading style={{marginVertical: 100, marginBottom:50}}>User Settings</StyledSettingsHeading>
+ 
         <StyledHeading1>Change Your Daily Step Goal</StyledHeading1>
 
         <StyledFormTextInput
@@ -80,7 +82,7 @@ const UserSettings = ({navigation}) => {
         >
         <StyledFormButtonText>Log out</StyledFormButtonText>
         </StyledFormButton>
-      </StyledFormContainer>
+    
     </StyledFormBackground>
   );
 };

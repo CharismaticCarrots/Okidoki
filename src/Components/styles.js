@@ -334,6 +334,17 @@ const StyledItemView = styled(View)`
   margin: 30px;
 `;
 
+//User Settings
+const StyledSettingsHeading = styled(Text)`
+  font-size: 50px;
+  color: ${colors.text.dark};
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: 'AntipastoBold';
+`;
+
+
 export {
   // General Styles
   StyledLogoHeading,
@@ -385,4 +396,6 @@ export {
   StyledItemQuantityText,
   StyledItemCard,
   StyledItemView,
+  //UserSettings Component
+  StyledSettingsHeading
 };
