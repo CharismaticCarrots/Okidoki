@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
+import React, { useContext} from 'react'
 import { Button, Card } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -29,6 +30,7 @@ import {
 
 import * as SecureStore from 'expo-secure-store';
 import { useUserData } from '../hooks/useUserData';
+import { AuthContext } from '../AuthLoading'
 
 const HealthStat = () => {
   const { user, logout } = useUserData();
@@ -37,6 +39,7 @@ const HealthStat = () => {
   const dailyDistance = useDistance();
   const activeEnergy = useActiveEnergy();
   const steps = useDailyStepCount();
+  const { signOut } = React.useContext(AuthContext);
 
   if (!dailySteps) {
     return <ActivityIndicator size="large" />;
@@ -125,7 +128,7 @@ const HealthStat = () => {
             onPress={() => {
               logout();
               SecureStore.deleteItemAsync('TOKEN');
-              // navigation.navigate('LoginOptions');
+              signOut()
             }}
           >
             LOGOUT
