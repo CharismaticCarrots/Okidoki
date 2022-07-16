@@ -3,15 +3,13 @@ import { API_URL } from '../../secrets.js';
 import * as SecureStore from 'expo-secure-store';
 import { useMutation } from 'react-query';
 
-// const userItemUpdate = { quantity: -1 };
-
-const updateUserItem = async (itemId) => {
-  // const { itemId, quantity } = userItemUpdateObj;
+// updatedItem = [itemId, {quantity: -1}]
+const updateUserItem = async (updatedItem) => {
   const token = await SecureStore.getItemAsync('TOKEN');
   if (token) {
     const { data: updatedUserItem } = await axios.put(
-      `http://${API_URL}/api/user/items/${itemId}`,
-      { quantity: -1 },
+      `http://${API_URL}/api/user/items/${updatedItem[0]}`,
+      updatedItem[1],
       {
         headers: {
           authorization: token,
