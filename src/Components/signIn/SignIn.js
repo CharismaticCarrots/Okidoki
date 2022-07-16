@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useMutation } from 'react-query';
+import { Formik } from 'formik';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import * as Google from 'expo-auth-session/providers/google';
@@ -64,20 +65,18 @@ const SignIn = ({ navigation }) => {
     }
   });
 
-  const mutation = useMutation(
-    async (userInfo) => {
-      try {
-        const { data: user } = await axios.post(
-          `http://${API_URL}/auth/signin`,
-          userInfo
-        );
-        await SecureStore.setItemAsync('TOKEN', user.token);
-        return navigation.navigate('DokiHome');
-      } catch (err) {
-        console.log(err);
-      }
+  const mutation = useMutation(async (userInfo) => {
+    try {
+      const { data: user } = await axios.post(
+        `http://${API_URL}/auth/signin`,
+        userInfo
+      );
+      await SecureStore.setItemAsync('TOKEN', user.token);
+      return navigation.navigate('DokiHome');
+    } catch (err) {
+      console.log(err);
     }
-  );
+  });
 
   if (isLoading) {
     console.log('loading');
@@ -95,62 +94,66 @@ const SignIn = ({ navigation }) => {
       source={require('../../../assets/backgrounds/loginOptions.png')}
       resizeMode="cover"
     >
-      <StyledFormContainer>
-        <StyledHeading1>Welcome Back</StyledHeading1>
-        <StyledFormTextInput
-          placeholder="Email"
-          autoCapitalize="none"
-          autoCorrect={false}
-          autoComplete="off"
-          onChangeText={(e) =>
-            setUserData((prevState) => ({ ...prevState, email: e }))
-          }
-        />
-        <StyledFormTextInput
-          placeholder="Password"
-          secureTextEntry={true}
-          autoCapitalize="none"
-          autoCorrect={false}
-          autoComplete="off"
-          onChangeText={(e) =>
-            setUserData((prevState) => ({ ...prevState, password: e }))
-          }
-        />
+      <Formik>
+        <StyledFormContainer>
+          <StyledHeading1>Welcome Back</StyledHeading1>
 
-        <StyledFormButton
-          style={{ marginTop: 20, marginBottom: 10, width: 150 }}
-          onPress={() => {
-            handleSubmit();
-          }}
-        >
-          <StyledFormButtonText>Sign In</StyledFormButtonText>
-        </StyledFormButton>
-        <StyledFormSuggest
-          onPress={() => {
-            navigation.navigate('SignUp');
-          }}
-        >
-          Don't have an account? Sign up
-        </StyledFormSuggest>
-        <StyledFormButton
-          style={{
-            marginTop: 20,
-            marginBottom: 10,
-            width: '95%',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-          }}
-          onPress={() => {
-            promptAsync();
-          }}
-        >
-          <FontAwesome5 name={'google'} style={styles.icons} />
-          <StyledFormButtonText style={{ textAlign: 'center' }}>
-            Sign in with Google
-          </StyledFormButtonText>
-        </StyledFormButton>
-      </StyledFormContainer>
+          <StyledFormTextInput
+            placeholder="Email"
+            autoCapitalize="none"
+            autoCorrect={false}
+            autoComplete="off"
+            onChangeText={(e) =>
+              setUserData((prevState) => ({ ...prevState, email: e }))
+            }
+          />
+          <StyledFormTextInput
+            placeholder="Password"
+            secureTextEntry={true}
+            autoCapitalize="none"
+            autoCorrect={false}
+            autoComplete="off"
+            onChangeText={(e) =>
+              setUserData((prevState) => ({ ...prevState, password: e }))
+            }
+          />
+
+          <StyledFormButton
+            style={{ marginTop: 20, marginBottom: 10, width: 150 }}
+            onPress={() => {
+              handleSubmit();
+            }}
+          >
+            <StyledFormButtonText>Sign In</StyledFormButtonText>
+          </StyledFormButton>
+
+          <StyledFormSuggest
+            onPress={() => {
+              navigation.navigate('SignUp');
+            }}
+          >
+            Don't have an account? Sign up
+          </StyledFormSuggest>
+          <StyledFormButton
+            style={{
+              marginTop: 20,
+              marginBottom: 10,
+              width: '95%',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+            }}
+            onPress={() => {
+              promptAsync();
+            }}
+          >
+            <FontAwesome5 name={'google'} style={styles.icons} />
+            <StyledFormButtonText style={{ textAlign: 'center' }}>
+              Sign in with Google
+            </StyledFormButtonText>
+          </StyledFormButton>
+        </StyledFormContainer>
+      </Formik>
     </StyledFormBackground>
   );
 };
