@@ -81,7 +81,7 @@ const StyledFormTextInput = styled(TextInput)`
   margin-bottom: 4px;
   font-family: 'Singularity';
   color: ${colors.text.dark};
-  border: solid grey 3px;
+  border: solid ${(props) => (props.error ? 'red' : 'grey')} 3px;
 `;
 
 const StyledFormButton = styled(TouchableOpacity)`
@@ -334,6 +334,14 @@ const StyledItemView = styled(View)`
   margin: 30px;
 `;
 
+const StyledFormInputError = styled(Text)`
+  color: red;
+  font-family: 'AntipastoBold';
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 50px;
+`;
+
 export {
   // General Styles
   StyledLogoHeading,
@@ -347,6 +355,7 @@ export {
   StyledFormButton,
   StyledFormButtonText,
   StyledFormSuggest,
+  StyledFormInputError,
   // LoginOptions Component
   StyledLoginOptionsContainer,
   StyledLoginOptionsDescription,

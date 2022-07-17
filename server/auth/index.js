@@ -12,7 +12,7 @@ router.post('/signin', async (req, res, next) => {
     const user = await User.authenticate(req.body);
     res.json(user);
   } catch (err) {
-    res.send('Invalid username or password');
+    res.status(422).json({ message: 'Invalid username or password' });
   }
 });
 
