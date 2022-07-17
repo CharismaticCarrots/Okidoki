@@ -38,6 +38,7 @@ const SetGoal = ({ navigation }) => {
       return navigation.navigate('SelectEgg');
     } catch (error) {
       setErrors({ form: 'Please set a goal' });
+      //need to add this to the put route. For now this is just front end.
     }
   });
 

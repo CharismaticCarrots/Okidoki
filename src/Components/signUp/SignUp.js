@@ -95,6 +95,7 @@ const SignUp = ({ navigation }) => {
           }
           return errors;
         }}
+        validateOnChange={false}
       >
         {({ handleChange, handleSubmit, values, errors }) => (
           <StyledFormContainer>
