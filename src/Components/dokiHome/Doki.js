@@ -1,22 +1,9 @@
 import React from "react";
-import { View } from "react-native";
 import Sprite from "../Sprite";
-import styled from "styled-components";
 import images from "../../images";
-
-const StyledInnerDokiContainer = styled(View)`
-  display: flex;
-  padding-top: 0px;
-  width: 250px;
-  height: 300px;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 30px;
-`;
+import { StyledInnerDokiContainer } from "../styles";
 
 const Doki = ({userDoki, dokiMood}) => {
-  console.log("DOKI MOOD", dokiMood)
-
   return(
     <StyledInnerDokiContainer>
       { userDoki.type === "cat" &&
