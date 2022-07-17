@@ -9,8 +9,8 @@ import { StyledHeading1,
   StyledFormTextInput,
   StyledFormButton,
   StyledFormButtonText,
-  StyledSettingsHeading, 
-  StyledSettingsHeading2
+  StyledSettingsHeading2, 
+  StyledHealthStatHeading,
 } from './styles';
 import * as SecureStore from 'expo-secure-store';
 import { useUserData } from '../hooks/useUserData';
@@ -55,7 +55,7 @@ const UserSettings = ({navigation}) => {
       source={require('../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <StyledSettingsHeading style={{marginVertical: 100}}>User Settings</StyledSettingsHeading>
+      <  StyledHealthStatHeading style={{marginVertical: 100}}>User Settings</  StyledHealthStatHeading>
  
         <StyledSettingsHeading2>Change Your Daily Step Goal</StyledSettingsHeading2>
         
