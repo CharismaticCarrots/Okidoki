@@ -344,6 +344,16 @@ const StyledSettingsHeading = styled(Text)`
   font-family: 'AntipastoBold';
 `;
 
+const StyledSettingsHeading2 = styled(Text)`
+  font-size: 30px;
+  color: ${colors.text.dark};
+  font-weight: 500;
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 40px;
+  font-family: 'AntipastoBold';
+`;
+
 
 export {
   // General Styles
@@ -397,5 +407,6 @@ export {
   StyledItemCard,
   StyledItemView,
   //UserSettings Component
-  StyledSettingsHeading
+  StyledSettingsHeading,
+  StyledSettingsHeading2
 };

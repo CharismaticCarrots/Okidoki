@@ -10,6 +10,7 @@ import { StyledHeading1,
   StyledFormButton,
   StyledFormButtonText,
   StyledSettingsHeading, 
+  StyledSettingsHeading2
 } from './styles';
 import * as SecureStore from 'expo-secure-store';
 import { useUserData } from '../hooks/useUserData';
@@ -44,17 +45,19 @@ const UserSettings = ({navigation}) => {
 
   const handleSubmit = async () => {
     mutation.mutate(dailyStepGoal);
+    this.textInput.clear()
   };
+  
 
   return (
     <StyledFormBackground
       source={require('../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <StyledSettingsHeading style={{marginVertical: 100, marginBottom:50}}>User Settings</StyledSettingsHeading>
+      <StyledSettingsHeading style={{marginVertical: 100}}>User Settings</StyledSettingsHeading>
  
-        <StyledHeading1>Change Your Daily Step Goal</StyledHeading1>
-
+        <StyledSettingsHeading2>Change Your Daily Step Goal</StyledSettingsHeading2>
+        
         <StyledFormTextInput
           placeholder="Example: 10,000"
           autoCapitalize="none"
@@ -62,6 +65,7 @@ const UserSettings = ({navigation}) => {
           autoComplete="off"
           onChangeText={setDailyStepGoal}
           style={{ width: 240 }}
+          ref={input => { this.textInput = input }}
         />
 
         <StyledFormButton
