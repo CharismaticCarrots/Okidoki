@@ -64,20 +64,18 @@ const SignIn = ({ navigation }) => {
     }
   });
 
-  const mutation = useMutation(
-    async (userInfo) => {
-      try {
-        const { data: user } = await axios.post(
-          `http://${API_URL}/auth/signin`,
-          userInfo
-        );
-        await SecureStore.setItemAsync('TOKEN', user.token);
-        return navigation.navigate('DokiHome');
-      } catch (err) {
-        console.log(err);
-      }
+  const mutation = useMutation(async (userInfo) => {
+    try {
+      const { data: user } = await axios.post(
+        `http://${API_URL}/auth/signin`,
+        userInfo
+      );
+      await SecureStore.setItemAsync('TOKEN', user.token);
+      return navigation.navigate('DokiHome');
+    } catch (err) {
+      console.log(err);
     }
-  );
+  });
 
   if (isLoading) {
     console.log('loading');
@@ -125,16 +123,9 @@ const SignIn = ({ navigation }) => {
         >
           <StyledFormButtonText>Sign In</StyledFormButtonText>
         </StyledFormButton>
-        <StyledFormSuggest
-          onPress={() => {
-            navigation.navigate('SignUp');
-          }}
-        >
-          Don't have an account? Sign up
-        </StyledFormSuggest>
+
         <StyledFormButton
           style={{
-            marginTop: 20,
             marginBottom: 10,
             width: '95%',
             display: 'flex',
@@ -150,6 +141,13 @@ const SignIn = ({ navigation }) => {
             Sign in with Google
           </StyledFormButtonText>
         </StyledFormButton>
+        <StyledFormSuggest
+          onPress={() => {
+            navigation.navigate('SignUp');
+          }}
+        >
+          Don't have an account? Sign up
+        </StyledFormSuggest>
       </StyledFormContainer>
     </StyledFormBackground>
   );
