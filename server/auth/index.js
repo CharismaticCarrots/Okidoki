@@ -54,6 +54,8 @@ router.post('/signup', async (req, res, next) => {
       res
         .status(401)
         .json({ message: 'That email address is already in use.' });
+    } else if (err.name === 'SequelizeValidationError') {
+      res.status(422).json({ message: 'Please submit a valid email' });
     } else {
       next(err);
     }
