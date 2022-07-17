@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Popable, usePopable } from 'react-native-popable';
 import { useQueryClient } from 'react-query';
 import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
-import { useUpdateUser } from '../../hooks/useUpdateUser';
-import { createTriggerNotification } from "../../helpers/createTriggerNotification";
+import { useUpdateUserItem } from '../../hooks/useUpdateUserItem';
+// import { useUpdateUser } from '../../hooks/useUpdateUser';
+import { createTriggerNotification } from '../../helpers/createTriggerNotification';
 import {
   StyledItemContainer,
   StyledItemImage,
@@ -21,13 +22,21 @@ const imageNames = {
   paintbrush: require('../../../assets/items/paintbrush.png'),
 };
 
-const UserItem = ({name, quantity, curMoodLvl}) => {
+const UserItem = ({ name, idNumber, quantity, curMoodLvl }) => {
+  // console.log('user item name:', name);
+  console.log('user item id:', idNumber);
+  // console.log('user item quantity:', quantity);
+  console.log('user item curMoodLvl:', curMoodLvl);
+
   const { ref, hide, show } = usePopable();
   const userDokiMutation = useUpdateUserDoki();
-  const userMutation = useUpdateUser();
+  // const userItemMutation = useUpdateUserItem();
+  // const userMutation = useUpdateUser();
   const queryClient = useQueryClient();
   const [msgContent, setMsgContent] = useState(null);
-
+  if (!idNumber) {
+    return null;
+  }
   return (
     <TouchableOpacity onPress={playWithDoki}>
       <StyledItemContainer>
@@ -45,7 +54,8 @@ const UserItem = ({name, quantity, curMoodLvl}) => {
     </TouchableOpacity>
   );
 
-  function playWithDoki () {
+  function playWithDoki(itemId) {
+    console.log('playwithdoki:', itemId);
     if (curMoodLvl >= 100) {
       setMsgContent("I'M ALL PLAYED OUT!");
       show();
@@ -59,15 +69,22 @@ const UserItem = ({name, quantity, curMoodLvl}) => {
       };
       userDokiMutation.mutate(userDokiUpdate, {
         onSuccess: () => {
-          queryClient.invalidateQueries(['userDoki'])
+          queryClient.invalidateQueries(['userDoki']);
         },
       });
+
+      // const userItemUpdate = [itemId, { quantity: -1 }];
+      // userItemMutation.mutate(userItemUpdate, {
+      //   onSuccess: () => {
+      //     queryClient.invalidateQueries(['userItems']);
+      //   },
+      // });
       setMsgContent('THIS IS SO MUCH FUN!');
       show();
       setTimeout(() => hide(), 1000);
       createTriggerNotification('play');
     }
-  };
+  }
 };
 
 export default UserItem;

@@ -3,8 +3,9 @@ import { useUserItemData } from '../../hooks/useUserItemData';
 import UserItem from '../dokiPack/UserItem';
 import UserCarrots from '../dokiPack/UserCarrots';
 
-const DokiDrawer = ({curCarrotCount, curFullnessLvl, curMoodLvl}) => {
+const DokiDrawer = ({ curCarrotCount, curFullnessLvl, curMoodLvl }) => {
   const userItems = useUserItemData();
+  console.log('userItems inside dokidrawer', userItems);
 
   return (
     <View style={styles.container}>
@@ -14,17 +15,20 @@ const DokiDrawer = ({curCarrotCount, curFullnessLvl, curMoodLvl}) => {
         bounces={false}
         nestedScrollEnabled={true}
       >
-      <UserCarrots
-        curCarrotCount={curCarrotCount}
-        curFullnessLvl={curFullnessLvl}
-      />
-      {userItems && userItems.map(item => (
-        <UserItem
-          key={item.id}
-          name={item.name}
-          quantity={item.user_item.quantity}
-          curMoodLvl={curMoodLvl}
-        />))}
+        <UserCarrots
+          curCarrotCount={curCarrotCount}
+          curFullnessLvl={curFullnessLvl}
+        />
+        {userItems &&
+          userItems.map((item) => (
+            <UserItem
+              key={item.id}
+              idNumber={item.id}
+              name={item.name}
+              quantity={item.user_item.quantity}
+              curMoodLvl={curMoodLvl}
+            />
+          ))}
       </ScrollView>
     </View>
   );
