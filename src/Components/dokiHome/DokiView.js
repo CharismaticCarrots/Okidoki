@@ -28,9 +28,9 @@ const DokiView = ({ now }) => {
   const [dokiMood, setDokiMood] = useState('');
 
   const stepCount = useDailyStepCount(now);
+  const carrotReward = useCarrotReward(now);
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
-  const carrotReward = useCarrotReward(now);
   const userMutation = useUpdateUser();
 
   useEffect(() => {
@@ -53,7 +53,7 @@ const DokiView = ({ now }) => {
       const newMoodLvl = user_doki.lastPlayedMoodLevel - hrsSinceLastPlayed;
       setCurMoodLvl(newMoodLvl <= 0 ? 0 : newMoodLvl);
     }
-  }, [userDokiData, now]);
+  }, [userDokiData]);
 
   useEffect(() => {
     if (user) {
@@ -61,20 +61,20 @@ const DokiView = ({ now }) => {
       console.log('USER TOKEN:', user.token); // Temporary console log to view token
 
       const claimedToday =
-        new Date(now).toDateString() ===
+        new Date().toDateString() ===
         new Date(user.lastCarrotsClaimedAt).toDateString();
 
       if (claimedToday) {
         setCarrotsClaimed(true);
-        console.log(
-          `Can't claim carrots yet, last claimed at ${new Date(
-            user.lastCarrotsClaimedAt
-          ).toLocaleString('en-US')}. Check again tomorrow!`
-        ); // Temporary Error Message
+        // console.log(
+        //   `Can't claim carrots yet, last claimed at ${new Date(
+        //     user.lastCarrotsClaimedAt
+        //   ).toLocaleString('en-US')}. Check again tomorrow!`
+        // ); // Temporary Error Message
       }
       // console.log(`LAST CLAIMED CARROTS AT: ${new Date(user.lastCarrotsClaimedAt).toLocaleString('en-US')}`); // FOR TESTING
     }
-  }, [user, carrotReward, now]);
+  }, [user, carrotReward]);
 
   useEffect(()=> {
     if (curFullnessLvl === 0 || curMoodLvl === 0) {
