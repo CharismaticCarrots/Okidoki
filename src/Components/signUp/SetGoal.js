@@ -26,7 +26,7 @@ const SetGoal = ({ navigation }) => {
   }
   console.log('User on SetGoal: ', user);
 
-  const mutation = useMutation(async (dailyStepGoal) => {
+  const mutation = useMutation(async ({ dailyStepGoal, setErrors }) => {
     try {
       await axios.put(
         `http://${API_URL}/api/user`,
@@ -37,13 +37,9 @@ const SetGoal = ({ navigation }) => {
       );
       return navigation.navigate('SelectEgg');
     } catch (error) {
-      console.log({ error });
+      setErrors({ form: 'Please set a goal' });
     }
   });
-
-  const handleSubmit = async () => {
-    mutation.mutate(dailyStepGoal);
-  };
 
   return (
     <StyledFormBackground
@@ -51,8 +47,10 @@ const SetGoal = ({ navigation }) => {
       resizeMode="cover"
     >
       <Formik
-        initialValues={{ dailyStepGoal: '0' }}
-        onSubmit={(values) => mutation.mutate(values)}
+        initialValues={{ dailyStepGoal: '' }}
+        onSubmit={(values, { setErrors }) =>
+          mutation.mutate({ values, setErrors })
+        }
         validate={(values) => {
           const errors = {};
           if (!values.dailyStepGoal) {
@@ -86,6 +84,9 @@ const SetGoal = ({ navigation }) => {
             >
               <StyledFormButtonText>Submit</StyledFormButtonText>
             </StyledFormButton>
+            {errors.form ? (
+              <StyledFormInputError>{errors.form}</StyledFormInputError>
+            ) : null}
           </StyledFormContainer>
         )}
       </Formik>
