@@ -3,13 +3,13 @@ import React, { useState } from 'react'
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import { TextInput } from 'react-native-paper';
-import { StyledHeading1,   
+import { StyledHeading1,
   StyledFormBackground,
   StyledFormContainer,
   StyledFormTextInput,
   StyledFormButton,
   StyledFormButtonText,
-  StyledSettingsHeading2, 
+  StyledSettingsHeading2,
   StyledHealthStatHeading,
 } from './styles';
 import * as SecureStore from 'expo-secure-store';
@@ -29,7 +29,7 @@ const UserSettings = ({navigation}) => {
   const mutation = useMutation(
     async (dailyStepGoal) => {
       try {
-         await axios.put(
+        await axios.put(
           `http://${API_URL}/api/user`,
           { dailyStepGoal },
           {
@@ -48,17 +48,17 @@ const UserSettings = ({navigation}) => {
     this.textInput.clear()
     setDailyStepGoal('0')
   };
-  
+
 
   return (
     <StyledFormBackground
       source={require('../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <  StyledHealthStatHeading style={{marginVertical: 100}}>User Settings</  StyledHealthStatHeading>
- 
+      <StyledHealthStatHeading style={{marginVertical: 80}}>Settings</  StyledHealthStatHeading>
+
         <StyledSettingsHeading2>Change Your Daily Step Goal</StyledSettingsHeading2>
-        
+
         <StyledFormTextInput
           placeholder="Example: 10,000"
           autoCapitalize="none"
@@ -79,8 +79,8 @@ const UserSettings = ({navigation}) => {
           <StyledFormButtonText>Submit</StyledFormButtonText>
         </StyledFormButton>
         <StyledFormButton
-           style={{ marginTop: 20, width: 150 }}
-           onPress={() => {
+          style={{ marginTop: 20, width: 150 }}
+          onPress={() => {
             logout();
             SecureStore.deleteItemAsync('TOKEN');
             signOut()
@@ -88,7 +88,7 @@ const UserSettings = ({navigation}) => {
         >
         <StyledFormButtonText>Log out</StyledFormButtonText>
         </StyledFormButton>
-    
+
     </StyledFormBackground>
   );
 };

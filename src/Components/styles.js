@@ -354,6 +354,7 @@ const StyledSettingsHeading = styled(Text)`
   color: ${colors.text.dark};
   font-weight: 300;
   text-align: center;
+  margin-top: 80px;
   margin-bottom: 10px;
   font-family: 'AntipastoBold';
 `;
