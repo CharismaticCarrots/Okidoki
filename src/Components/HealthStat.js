@@ -57,37 +57,48 @@ const HealthStat = () => {
       <StyledHealthStatContainer style={styles.background}>
         <StyledHealthStatHeading>Health Stats</StyledHealthStatHeading>
         <View>
-          <StyledHeading2>Steps: Last 7 Days</StyledHeading2>
-          <View>
+          <StyledHeading2>Steps Trend: Last 7 Days</StyledHeading2>
+          <View
+            >
             <BarChart
               data={data}
               width={350}
-              height={250}
+              height={300}
               fromZero={true}
               showValuesOnTopOfBars={true}
+              showBarTops={true}
               chartConfig={{
-                backgroundColor: '#4fa4b8',
-                backgroundGradientFrom: '#397887',
-                backgroundGradientTo: '#397887',
+                backgroundGradientFrom: 'white',
+                backgroundGradientTo: 'white',
+                fillShadowGradientFrom: '#91DEA6',
+                fillShadowGradientTo: '#598866',
+                fillShadowGradientFromOpacity: 1,
+                fillShadowGradientToOpacity: 1,
                 decimalPlaces: 0,
-                color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                color: (opacity = 1) => `rgba(5, 5, 5, ${opacity})`,
                 labelColor: (opacity = 1) => `rgba(5, 5, 5, ${opacity})`,
-                barPercentage: 0.7,
+                barPercentage: 0.8,
                 propsForLabels: {
-                  fontSize: '13',
+                  fontSize: '12',
                   fontWeight: 'bold',
+                  fontFamily: 'FredokaOne'
                 },
               }}
               style={{
-                borderRadius: 16,
-                margin: 5,
-                padding: 5,
+                borderRadius: 12,
+                fontFamily: 'FredokaOne',
+                borderColor: '#333',
+                borderWidth: 3,
+                paddingTop: 20,
+                backgroundColor: 'white',
               }}
             />
           </View>
         </View>
 
-        <StyledHeading2>Today&apos;s Activity</StyledHeading2>
+        <StyledHeading2
+          style={{marginTop: 30}}
+        >Today&apos;s Activity</StyledHeading2>
         <ScrollView style={styles.scrollView}>
           <Card.Title
             style={styles.card}
@@ -126,19 +137,6 @@ const HealthStat = () => {
 };
 
 const styles = StyleSheet.create({
-  surface: {
-    padding: 8,
-    height: 80,
-    width: Dimensions.get('window').width,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 8,
-  },
-  chart: {
-    paddingRight: 20,
-    paddingLeft: 30,
-    borderRadius: 16,
-  },
   card: {
     backgroundColor: '#ffefb4',
     borderRadius: 10,
@@ -147,6 +145,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 40,
     fontFamily: 'singularity',
+    fontSize: 20,
+    borderColor: '#333',
+    borderWidth: 3,
   },
   icons: {
     padding: 5,

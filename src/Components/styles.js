@@ -278,6 +278,7 @@ const StyledHealthStatHeading = styled(Text)`
   margin-bottom: 20px;
   font-family: 'AntipastoBold';
   letter-spacing: 1px;
+  color: ${colors.text.dark}
 `;
 
 const StyledDayContainer = styled(View)`
