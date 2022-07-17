@@ -2,6 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import Sprite from "../Sprite";
 import styled from "styled-components";
+import images from "../../images";
 
 const StyledInnerDokiContainer = styled(View)`
   display: flex;
@@ -16,69 +17,69 @@ const StyledInnerDokiContainer = styled(View)`
 const Doki = ({userDoki}) => {
   return(
     <StyledInnerDokiContainer>
+        {userDoki.type === "cat" &&
+        <Sprite
+          src={images.sprites.cat.idle}
+          totalSprites={6}
+          tile={{ width: 128, height: 90 }}
+          scale={3}
+          framesPerSprite={15}
+        />
+        // <Sprite
+        // src={images.sprites.cat.happy}
+        // totalSprites={18}
+        // tile={{ width: 128, height: 90 }}
+        // scale={2.5}
+        // framesPerSprite={15}
+        // />
+        // <Sprite
+        // src={images.sprites.cat.sleep}
+        // totalSprites={6}
+        // tile={{ width: 128, height: 80 }}
+        // scale={2.5}
+        // framesPerSprite={15}
+        // />
+      }
       {userDoki.type === "fox" &&
         <Sprite
-          src={require('../../../assets/sprites/fox_sprites/fox_idle.png')}
+          src={images.sprites.fox.idle}
           totalSprites={24}
           tile={{ width: 60, height: 60 }}
           scale={5}
           framesPerSprite={8}
         />
         // <Sprite
-        //   src={require('../../../assets/sprites/fox_sprites/fox_happy.png')}
+        //   src={images.sprites.fox.happy}
         //   totalSprites={8}
         //   tile={{ width: 60, height: 60 }}
         //   scale={5}
         //   framesPerSprite={8}
         // />
         // <Sprite
-        // src={require('../../../assets/sprites/fox_sprites/fox_sleep.png')}
+        // src={images.sprites.fox.sleep}
         // totalSprites={5}
         // tile={{ width: 60, height: 60 }}
         // scale={5}
         // framesPerSprite={25}
         // />
       }
-      {userDoki.type === "cat" &&
-        // <Sprite
-        //   src={require(`../../../assets/sprites/cat_sprites/cat_idle.png`)}
-        //   totalSprites={6}
-        //   tile={{ width: 128, height: 90 }}
-        //   scale={3}
-        //   framesPerSprite={15}
-        // />
-        // <Sprite
-        // src={require(`../../../assets/sprites/cat_sprites/cat_happy.png`)}
-        // totalSprites={18}
-        // tile={{ width: 128, height: 90 }}
-        // scale={2.5}
-        // framesPerSprite={15}
-        // />
-        <Sprite
-        src={require(`../../../assets/sprites/cat_sprites/cat_sleep.png`)}
-        totalSprites={6}
-        tile={{ width: 128, height: 80 }}
-        scale={2.5}
-        framesPerSprite={15}
-        />
-      }
       {userDoki.type === "whitefox" &&
         <Sprite
-          src={require('../../../assets/sprites/whitefox_sprites/whitefox_idle.png')}
+          src={images.sprites.whitefox.idle}
           totalSprites={24}
           tile={{ width: 60, height: 60 }}
           scale={5}
           framesPerSprite={8}
         />
         // <Sprite
-        //   src={require('../../../assets/sprites/whitefox_sprites/whitefox_happy.png')}
+        //   src={images.sprites.whitefox.happy}
         //   totalSprites={8}
         //   tile={{ width: 60, height: 60 }}
         //   scale={5}
         //   framesPerSprite={8}
         // />
         // <Sprite
-        //   src={require('../../../assets/sprites/whitefox_sprites/whitefox_sleep.png')}
+        //   src={images.sprites.whitefox.sleep}
         //   totalSprites={5}
         //   tile={{ width: 60, height: 60 }}
         //   scale={5}
