@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { useEffect } from 'react';
+import { StyleSheet } from 'react-native';
 import { useMutation } from 'react-query';
 import { Formik } from 'formik';
 import axios from 'axios';

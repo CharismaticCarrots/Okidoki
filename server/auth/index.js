@@ -51,7 +51,9 @@ router.post('/signup', async (req, res, next) => {
     res.status(201).json(newUser);
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
-      res.status(401).send('That email address is already in use.');
+      res
+        .status(401)
+        .json({ message: 'That email address is already in use.' });
     } else {
       next(err);
     }
