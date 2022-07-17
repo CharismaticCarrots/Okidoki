@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
@@ -30,7 +29,6 @@ const SignIn = ({ navigation }) => {
   });
 
   const { user, isLoading, isError } = useUserData();
-  // console.log('User on SignIn: ', user);
 
   useEffect(() => {
     if (response?.type === 'success') {
@@ -95,7 +93,29 @@ const SignIn = ({ navigation }) => {
     >
       <StyledFormContainer>
         <StyledHeading1>Welcome Back</StyledHeading1>
+        <StyledFormButton
+          style={{
+            marginTop: 20,
+            marginBottom: 30,
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            backgroundColor: '#59b2ff'
+          }}
+          onPress={() => {
+            promptAsync();
+          }}
+        >
+          <FontAwesome5 name={'google'} style={{fontSize: 27, overflow: "hidden", color: "black"}} />
+          <StyledFormButtonText style={{ textAlign: 'center' }}>
+            Sign in with Google
+          </StyledFormButtonText>
+        </StyledFormButton>
         <StyledFormTextInput
+          style={{
+            fontFamily: userData.email ? 'FredokaOne' : 'Singularity',
+            fontSize: userData.email ? 18 : 24 }}
           placeholder="Email"
           autoCapitalize="none"
           autoCorrect={false}
@@ -105,6 +125,9 @@ const SignIn = ({ navigation }) => {
           }
         />
         <StyledFormTextInput
+          style={{
+            fontFamily: userData.password ? 'FredokaOne' : 'Singularity',
+            fontSize: userData.password ? 18 : 24 }}
           placeholder="Password"
           secureTextEntry={true}
           autoCapitalize="none"
@@ -123,24 +146,6 @@ const SignIn = ({ navigation }) => {
         >
           <StyledFormButtonText>Sign In</StyledFormButtonText>
         </StyledFormButton>
-
-        <StyledFormButton
-          style={{
-            marginBottom: 10,
-            width: '95%',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-          }}
-          onPress={() => {
-            promptAsync();
-          }}
-        >
-          <FontAwesome5 name={'google'} style={styles.icons} />
-          <StyledFormButtonText style={{ textAlign: 'center' }}>
-            Sign in with Google
-          </StyledFormButtonText>
-        </StyledFormButton>
         <StyledFormSuggest
           onPress={() => {
             navigation.navigate('SignUp');
@@ -152,13 +157,5 @@ const SignIn = ({ navigation }) => {
     </StyledFormBackground>
   );
 };
-
-const styles = StyleSheet.create({
-  icons: {
-    fontSize: 27,
-    overflow: 'hidden',
-    color: '#59b2ff',
-  },
-});
 
 export default SignIn;
