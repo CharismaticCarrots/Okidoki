@@ -46,6 +46,7 @@ const UserSettings = ({navigation}) => {
   const handleSubmit = async () => {
     mutation.mutate(dailyStepGoal);
     this.textInput.clear()
+    setDailyStepGoal('0')
   };
   
 
@@ -66,6 +67,7 @@ const UserSettings = ({navigation}) => {
           onChangeText={setDailyStepGoal}
           style={{ width: 240 }}
           ref={input => { this.textInput = input }}
+          clearButtonMode="always"
         />
 
         <StyledFormButton
