@@ -43,13 +43,15 @@ const DokiView = ({ now }) => {
         (new Date().getTime() - new Date(user_doki.lastFedAt).getTime()) /
           3600000
       );
-      setCurFullnessLvl(user_doki.lastFedFullnessLevel - hrsSinceLastFed);
+      const newFullnessLvl = user_doki.lastFedFullnessLevel - hrsSinceLastFed;
+      setCurFullnessLvl(newFullnessLvl <= 0 ? 0 : newFullnessLvl);
 
       const hrsSinceLastPlayed = Math.floor(
         (new Date().getTime() - new Date(user_doki.lastPlayedAt).getTime()) /
           3600000
       );
-      setCurMoodLvl(user_doki.lastPlayedMoodLevel - hrsSinceLastPlayed);
+      const newMoodLvl = user_doki.lastPlayedMoodLevel - hrsSinceLastPlayed;
+      setCurMoodLvl(newMoodLvl <= 0 ? 0 : newMoodLvl);
     }
   }, [userDokiData, now]);
 
