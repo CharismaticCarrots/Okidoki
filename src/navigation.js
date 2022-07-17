@@ -25,10 +25,9 @@ export const LoginNavigator = ({ navigation }) => {
   useEffect(() => {
     if (user) {
       setUserToken(user.token)
-      console.log('INSIDE NAV', user)
     }
   },[user])
- 
+
 
   useEffect(() => {
     if (userDoki) {
@@ -51,12 +50,12 @@ export const LoginNavigator = ({ navigation }) => {
       {doki && userToken ? (
         <TabNavigator />
       ) : (
-        <Stack.Navigator headerMode="screen" 
+        <Stack.Navigator headerMode="screen"
       //     screenOptions={({route})=> ({
       //       presentation: "transparentModal",
       //   })
       // }
-        
+
         >
           <Stack.Screen
             name="LoginOptions"

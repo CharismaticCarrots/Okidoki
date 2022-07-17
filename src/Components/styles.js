@@ -166,7 +166,7 @@ const StyledDokiEggContainer = styled(StyledDokiContainer)`
   margin-top: 120px;
 `;
 
-// DokiView
+// DokiView Component
 const StyledOuterCountersContainer = styled(View)`
   display: flex;
   width: 350px;
@@ -183,6 +183,17 @@ const StyledDokiName = styled(Text)`
   text-align: center;
   font-family: 'Singularity';
   margin-bottom: 20px;
+`;
+
+// Doki Component
+const StyledInnerDokiContainer = styled(View)`
+  display: flex;
+  padding-top: 0px;
+  width: 250px;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
 `;
 
 // DokiProgressBar Component
@@ -368,6 +379,8 @@ export {
   // DokiView Component
   StyledOuterCountersContainer,
   StyledDokiName,
+  // Doki Component
+  StyledInnerDokiContainer,
   // CountDisplay Component
   StyledCountDisplayContainer,
   StyledCarrotCountContainer,

@@ -1,5 +1,3 @@
-import { Button } from 'react-native-paper';
-
 import {
   StyledDokiHomeBackground,
   StyledDokiEggContainer,
@@ -7,16 +5,14 @@ import {
   StyledOuterCountersContainer,
   StyledDokiName,
 } from '../styles';
-
 import DokiProgressBar from './DokiProgressBar';
 import DokiEgg from './DokiEgg';
 import CountDisplay from './CountDisplay';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
 
-const DokiEggView = ({ navigation, hatchProgressData }) => {
-  const { hatchProgress, totalSteps, dailyStepGoal } = hatchProgressData;
-
+const DokiEggView = ({hatchProgressData}) => {
   const userDokiData = useUserDokiData();
+  const { totalSteps, dailyStepGoal } = hatchProgressData;
 
   return (
     <StyledDokiHomeBackground

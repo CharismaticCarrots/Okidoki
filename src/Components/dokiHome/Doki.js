@@ -1,48 +1,92 @@
 import React from "react";
-import { View } from "react-native";
 import Sprite from "../Sprite";
-import styled from "styled-components";
+import images from "../../images";
+import { StyledInnerDokiContainer } from "../styles";
 
-const StyledInnerDokiContainer = styled(View)`
-  display: flex;
-  padding-top: 0px;
-  width: 250px;
-  height: 300px;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 30px;
-`;
-
-const Doki = ({userDoki}) => {
+const Doki = ({userDoki, dokiMood}) => {
   return(
     <StyledInnerDokiContainer>
-      {userDoki.type === "fox" &&
-        <Sprite
-          src={require('../../../assets/fox_crouch_strip8.png')}
-          totalSprites={8}
-          tile={{ width: 60, height: 60 }}
-          scale={5}
-          framesPerSprite={8}
-        />
-      }
-      {userDoki.type === "cat" &&
-        <Sprite
-          src={require('../../../assets/catSprites/cat.png')}
-          totalSprites={6}
-          tile={{ width: 128, height: 90 }}
-          scale={3}
-          framesPerSprite={15}
-        />
-      }
-      {userDoki.type === "bunny" &&
-        <Sprite
-          src={require('../../../assets/bunny_liedown_strip12.png')}
-          totalSprites={12}
-          tile={{ width: 40, height: 40 }}
-          scale={6}
-          framesPerSprite={15}
-        />
-      }
+      { userDoki.type === "cat" &&
+        (
+          dokiMood === 'idle' &&
+            (<Sprite
+                src={images.sprites.cat.idle}
+                totalSprites={6}
+                tile={{ width: 128, height: 90 }}
+                scale={3}
+                framesPerSprite={15}
+              />)
+          || dokiMood === 'happy' &&
+            (<Sprite
+                src={images.sprites.cat.happy}
+                totalSprites={18}
+                tile={{ width: 128, height: 90 }}
+                scale={2.5}
+                framesPerSprite={15}
+              />)
+          || dokiMood === 'sleep' &&
+            (<Sprite
+                src={images.sprites.cat.sleep}
+                totalSprites={6}
+                tile={{ width: 128, height: 80 }}
+                scale={2.5}
+                framesPerSprite={15}
+              />)
+      )}
+      { userDoki.type === "fox" &&
+        (
+          dokiMood === 'idle' &&
+            (<Sprite
+                src={images.sprites.fox.idle}
+                totalSprites={24}
+                tile={{ width: 60, height: 60 }}
+                scale={5}
+                framesPerSprite={8}
+              />)
+          || dokiMood === 'happy' &&
+            (<Sprite
+                src={images.sprites.fox.happy}
+                totalSprites={8}
+                tile={{ width: 60, height: 60 }}
+                scale={5}
+                framesPerSprite={8}
+              />)
+          || dokiMood === 'sleep' &&
+            (<Sprite
+                src={images.sprites.fox.sleep}
+                totalSprites={5}
+                tile={{ width: 60, height: 60 }}
+                scale={5}
+                framesPerSprite={25}
+              />)
+        )}
+        { userDoki.type === "whitefox" &&
+        (
+          dokiMood === 'idle' &&
+            (<Sprite
+                src={images.sprites.whitefox.idle}
+                totalSprites={24}
+                tile={{ width: 60, height: 60 }}
+                scale={5}
+                framesPerSprite={8}
+              />)
+          || dokiMood === 'happy' &&
+            (<Sprite
+                src={images.sprites.whitefox.happy}
+                totalSprites={8}
+                tile={{ width: 60, height: 60 }}
+                scale={5}
+                framesPerSprite={8}
+              />)
+          || dokiMood === 'sleep' &&
+            (<Sprite
+                src={images.sprites.whitefox.sleep}
+                totalSprites={5}
+                tile={{ width: 60, height: 60 }}
+                scale={5}
+                framesPerSprite={25}
+              />)
+        )}
     </StyledInnerDokiContainer>
   );
 };
