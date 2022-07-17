@@ -25,6 +25,7 @@ const DokiView = ({ now }) => {
   const [curFullnessLvl, setCurFullnessLvl] = useState(0);
   const [curMoodLvl, setCurMoodLvl] = useState(0);
   const [carrotsClaimed, setCarrotsClaimed] = useState(false);
+  const [dokiMood, setDokiMood] = useState('');
 
   const stepCount = useDailyStepCount(now);
   const { user } = useUserData();
@@ -34,7 +35,7 @@ const DokiView = ({ now }) => {
 
   useEffect(() => {
     if (userDokiData) {
-      userDokiData.type = 'whitefox'; // Dummy data to view different sprites
+      // userDokiData.type = 'whitefox'; // Dummy data to view different sprites
       setUserDoki(userDokiData);
       const { user_doki } = userDokiData;
 
@@ -73,20 +74,16 @@ const DokiView = ({ now }) => {
     }
   }, [user, carrotReward, now]);
 
-  const claimCarrots = () => {
-    userMutation.mutate(
-      {
-        lastCarrotsClaimedAt: new Date(),
-        carrotCount: curCarrotCount + carrotReward,
-      },
-      {
-        onSuccess: ({ carrotCount }) => {
-          setCurCarrotCount(carrotCount);
-          setCarrotsClaimed(true);
-        },
-      }
-    );
-  };
+  useEffect(()=> {
+    if (curFullnessLvl === 0 || curMoodLvl === 0) {
+      setDokiMood('sleep');
+    } else if (curFullnessLvl === 100 || curMoodLvl === 100) {
+      setDokiMood('happy');
+    }
+    else {
+      setDokiMood('idle');
+    }
+  }, [curFullnessLvl, curMoodLvl]);
 
   return (
     <StyledDokiHomeBackground
@@ -111,7 +108,7 @@ const DokiView = ({ now }) => {
         </Button>
       )}
       <StyledDokiContainer>
-        {userDoki && <Doki userDoki={userDoki} />}
+        {userDoki && <Doki userDoki={userDoki} dokiMood={dokiMood}/>}
         <StyledDokiName>
           {userDokiData && userDokiData.user_doki.dokiName}
         </StyledDokiName>
@@ -148,6 +145,21 @@ const DokiView = ({ now }) => {
       </RBSheet>
     </StyledDokiHomeBackground>
   );
+
+  function claimCarrots() {
+    userMutation.mutate(
+      {
+        lastCarrotsClaimedAt: new Date(),
+        carrotCount: curCarrotCount + carrotReward,
+      },
+      {
+        onSuccess: ({ carrotCount }) => {
+          setCurCarrotCount(carrotCount);
+          setCarrotsClaimed(true);
+        },
+      }
+    );
+  };
 };
 
 export default DokiView;
