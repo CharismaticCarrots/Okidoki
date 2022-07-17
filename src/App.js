@@ -13,6 +13,7 @@ export default function App() {
     Singularity: require('../assets/fonts/singularity.ttf'),
     Antipasto: require('../assets/fonts/Antipasto.ttf'),
     AntipastoBold: require('../assets/fonts/Antipasto-Bold.ttf'),
+    FredokaOne: require('../assets/fonts/FredokaOne.ttf'),
   });
 
   if (!fontsLoaded) {

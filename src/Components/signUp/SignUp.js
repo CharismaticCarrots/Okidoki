@@ -135,16 +135,8 @@ const SignUp = ({ navigation }) => {
           <StyledFormButtonText>Sign Up</StyledFormButtonText>
         </StyledFormButton>
 
-        <StyledFormSuggest
-          onPress={() => {
-            navigation.navigate('SignIn');
-          }}
-        >
-          Already have an account? Sign in
-        </StyledFormSuggest>
         <StyledFormButton
           style={{
-            marginTop: 20,
             marginBottom: 10,
             width: '95%',
             display: 'flex',
@@ -160,6 +152,13 @@ const SignUp = ({ navigation }) => {
             Sign up with Google
           </StyledFormButtonText>
         </StyledFormButton>
+        <StyledFormSuggest
+          onPress={() => {
+            navigation.navigate('SignIn');
+          }}
+        >
+          Already have an account? Sign in
+        </StyledFormSuggest>
       </StyledFormContainer>
     </StyledFormBackground>
   );

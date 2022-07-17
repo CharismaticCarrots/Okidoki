@@ -77,11 +77,12 @@ const StyledFormTextInput = styled(TextInput)`
   background-color: white;
   border-radius: 50px;
   padding: 15px;
-  font-size: 24px;
+  font-size: 18px;
   margin-bottom: 4px;
-  font-family: 'Singularity';
+  font-family: 'FredokaOne';
+  letter-spacing: 1px;
   color: ${colors.text.dark};
-  border: solid grey 3px;
+  border: solid grey 2px;
 `;
 
 const StyledFormButton = styled(TouchableOpacity)`
@@ -101,7 +102,7 @@ const StyledFormButtonText = styled(Text)`
 const StyledFormSuggest = styled(Text)`
   color: #333;
   font-family: 'Singularity';
-  font-size: 25px;
+  font-size: 22px;
   text-align: center;
 `;
 
