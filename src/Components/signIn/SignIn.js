@@ -99,6 +99,9 @@ const SignIn = ({ navigation }) => {
           if (!values.email) {
             errors.email = 'Required';
           }
+          if (!values.password) {
+            errors.password = 'Required';
+          }
           return errors;
         }}
       >
@@ -124,9 +127,13 @@ const SignIn = ({ navigation }) => {
               autoCapitalize="none"
               autoCorrect={false}
               autoComplete="off"
+              error={!!errors.password}
               value={values.password}
               onChangeText={handleChange('password')}
             />
+            {errors.password ? (
+              <StyledFormInputError>{errors.password}</StyledFormInputError>
+            ) : null}
             {errors.form ? (
               <StyledFormInputError>{errors.form}</StyledFormInputError>
             ) : null}
