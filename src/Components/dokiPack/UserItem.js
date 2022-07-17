@@ -4,7 +4,6 @@ import { Popable, usePopable } from 'react-native-popable';
 import { useQueryClient } from 'react-query';
 import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 import { useUpdateUserItem } from '../../hooks/useUpdateUserItem';
-// import { useUpdateUser } from '../../hooks/useUpdateUser';
 import { createTriggerNotification } from '../../helpers/createTriggerNotification';
 import {
   StyledItemContainer,
@@ -23,20 +22,12 @@ const imageNames = {
 };
 
 const UserItem = ({ name, idNumber, quantity, curMoodLvl }) => {
-  // console.log('user item name:', name);
-  console.log('user item id:', idNumber);
-  // console.log('user item quantity:', quantity);
-  console.log('user item curMoodLvl:', curMoodLvl);
-
   const { ref, hide, show } = usePopable();
   const userDokiMutation = useUpdateUserDoki();
-  // const userItemMutation = useUpdateUserItem();
-  // const userMutation = useUpdateUser();
+  const userItemMutation = useUpdateUserItem();
   const queryClient = useQueryClient();
   const [msgContent, setMsgContent] = useState(null);
-  if (!idNumber) {
-    return null;
-  }
+
   return (
     <TouchableOpacity onPress={playWithDoki}>
       <StyledItemContainer>
@@ -54,8 +45,9 @@ const UserItem = ({ name, idNumber, quantity, curMoodLvl }) => {
     </TouchableOpacity>
   );
 
-  function playWithDoki(itemId) {
-    console.log('playwithdoki:', itemId);
+  function playWithDoki() {
+    debugger;
+    console.log('playwithdoki:', idNumber);
     if (curMoodLvl >= 100) {
       setMsgContent("I'M ALL PLAYED OUT!");
       show();
@@ -73,12 +65,12 @@ const UserItem = ({ name, idNumber, quantity, curMoodLvl }) => {
         },
       });
 
-      // const userItemUpdate = [itemId, { quantity: -1 }];
-      // userItemMutation.mutate(userItemUpdate, {
-      //   onSuccess: () => {
-      //     queryClient.invalidateQueries(['userItems']);
-      //   },
-      // });
+      const userItemUpdate = [idNumber, { quantity: -1 }];
+      userItemMutation.mutate(userItemUpdate, {
+        onSuccess: () => {
+          queryClient.invalidateQueries(['userItem']);
+        },
+      });
       setMsgContent('THIS IS SO MUCH FUN!');
       show();
       setTimeout(() => hide(), 1000);
