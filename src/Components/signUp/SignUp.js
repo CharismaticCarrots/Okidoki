@@ -34,7 +34,7 @@ const SignUp = ({ navigation }) => {
           );
           const { email, family_name, given_name } = data;
 
-          mutation.mutate({
+          googleMutation.mutate({
             email: email,
             firstName: given_name,
             lastName: family_name,
@@ -46,11 +46,20 @@ const SignUp = ({ navigation }) => {
       };
       fetchUserData();
     }
-  }, [mutation, response]);
+  }, [googleMutation, response]);
 
-  // const { user } = useUserData();
-  // console.log('User on SignUp: ', user);
-  // console.log({ userData });
+  const googleMutation = useMutation(async (userInfo) => {
+    try {
+      const { data: user } = await axios.post(
+        `http://${API_URL}/auth/signup`,
+        userInfo
+      );
+      await SecureStore.setItemAsync('TOKEN', user.token);
+      navigation.navigate('SetGoal');
+    } catch (err) {
+      console.log(err);
+    }
+  });
 
   const mutation = useMutation(async ({ userInfo, setErrors }) => {
     try {

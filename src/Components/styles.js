@@ -336,10 +336,11 @@ const StyledItemView = styled(View)`
 
 const StyledFormInputError = styled(Text)`
   color: red;
-  font-family: 'AntipastoBold';
-  font-size: 20px;
+  font-family: 'Singularity';
+  font-size: 22px;
   padding: 5px;
   border-radius: 50px;
+  text-align: center;
 `;
 
 export {
