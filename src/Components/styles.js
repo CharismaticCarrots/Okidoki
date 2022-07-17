@@ -167,7 +167,7 @@ const StyledDokiEggContainer = styled(StyledDokiContainer)`
   margin-top: 120px;
 `;
 
-// DokiView
+// DokiView Component
 const StyledOuterCountersContainer = styled(View)`
   display: flex;
   width: 350px;
@@ -184,6 +184,17 @@ const StyledDokiName = styled(Text)`
   text-align: center;
   font-family: 'Singularity';
   margin-bottom: 20px;
+`;
+
+// Doki Component
+const StyledInnerDokiContainer = styled(View)`
+  display: flex;
+  padding-top: 0px;
+  width: 250px;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
 `;
 
 // DokiProgressBar Component
@@ -335,6 +346,27 @@ const StyledItemView = styled(View)`
   margin: 30px;
 `;
 
+//User Settings
+const StyledSettingsHeading = styled(Text)`
+  font-size: 50px;
+  color: ${colors.text.dark};
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: 'AntipastoBold';
+`;
+
+const StyledSettingsHeading2 = styled(Text)`
+  font-size: 30px;
+  color: ${colors.text.dark};
+  font-weight: 500;
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 40px;
+  font-family: 'AntipastoBold';
+`;
+
+
 export {
   // General Styles
   StyledLogoHeading,
@@ -369,6 +401,8 @@ export {
   // DokiView Component
   StyledOuterCountersContainer,
   StyledDokiName,
+  // Doki Component
+  StyledInnerDokiContainer,
   // CountDisplay Component
   StyledCountDisplayContainer,
   StyledCarrotCountContainer,
@@ -386,4 +420,7 @@ export {
   StyledItemQuantityText,
   StyledItemCard,
   StyledItemView,
+  //UserSettings Component
+  StyledSettingsHeading,
+  StyledSettingsHeading2
 };
