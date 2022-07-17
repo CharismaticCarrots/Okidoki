@@ -21,7 +21,7 @@ const LoginOptions = ({ navigation }) => {
         </View>
         <View>
           <StyledFormButton
-            style={{ width: 220, marginBottom: 10}}
+            style={{ width: 220, marginBottom: 10, backgroundColor: '#59b2ff'}}
             onPress={() => navigation.navigate('SignUp')}
           >
             <StyledFormButtonText>Create Account</StyledFormButtonText>
