@@ -5,6 +5,8 @@ import DokiView from './DokiView';
 import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { useTotalStepCount } from '../../Healthkit';
+import { useQueryClient } from 'react-query';
+
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -15,15 +17,16 @@ const DokiHome = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const now = currentDate.toISOString();
   const hatchProgressData = getHatchProgress();
+  const queryClient = useQueryClient();
 
   // const isEgg = hatchProgressData.hatchProgress < 1;
-  const isEgg = false;
-  // const isEgg = hatchProgressData.hatchProgress < 1;// FOR TESTING: Uncomment this to see Doki instead of DokiEgg
+  const isEgg = false; // FOR TESTING: Uncomment this to see Doki instead of DokiEgg
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     setCurrentDate(new Date());
-    console.log(new Date());
+    console.log("NOW:", new Date(now).toLocaleString('en-US'))
+    queryClient.invalidateQueries();
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
