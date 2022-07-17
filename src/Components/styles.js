@@ -77,9 +77,10 @@ const StyledFormTextInput = styled(TextInput)`
   background-color: white;
   border-radius: 50px;
   padding: 15px;
-  font-size: 24px;
+  font-size: 18px;
   margin-bottom: 4px;
-  font-family: 'Singularity';
+  font-family: 'FredokaOne';
+  letter-spacing: 1px;
   color: ${colors.text.dark};
   border: solid ${(props) => (props.error ? 'red' : 'grey')} 3px;
 `;
@@ -101,7 +102,7 @@ const StyledFormButtonText = styled(Text)`
 const StyledFormSuggest = styled(Text)`
   color: #333;
   font-family: 'Singularity';
-  font-size: 25px;
+  font-size: 22px;
   text-align: center;
 `;
 
@@ -166,7 +167,7 @@ const StyledDokiEggContainer = styled(StyledDokiContainer)`
   margin-top: 120px;
 `;
 
-// DokiView
+// DokiView Component
 const StyledOuterCountersContainer = styled(View)`
   display: flex;
   width: 350px;
@@ -183,6 +184,17 @@ const StyledDokiName = styled(Text)`
   text-align: center;
   font-family: 'Singularity';
   margin-bottom: 20px;
+`;
+
+// Doki Component
+const StyledInnerDokiContainer = styled(View)`
+  display: flex;
+  padding-top: 0px;
+  width: 250px;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
 `;
 
 // DokiProgressBar Component
@@ -343,6 +355,26 @@ const StyledFormInputError = styled(Text)`
   text-align: center;
 `;
 
+//User Settings
+const StyledSettingsHeading = styled(Text)`
+  font-size: 50px;
+  color: ${colors.text.dark};
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: 'AntipastoBold';
+`;
+
+const StyledSettingsHeading2 = styled(Text)`
+  font-size: 30px;
+  color: ${colors.text.dark};
+  font-weight: 500;
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 40px;
+  font-family: 'AntipastoBold';
+`;
+
 export {
   // General Styles
   StyledLogoHeading,
@@ -378,6 +410,8 @@ export {
   // DokiView Component
   StyledOuterCountersContainer,
   StyledDokiName,
+  // Doki Component
+  StyledInnerDokiContainer,
   // CountDisplay Component
   StyledCountDisplayContainer,
   StyledCarrotCountContainer,
@@ -395,4 +429,7 @@ export {
   StyledItemQuantityText,
   StyledItemCard,
   StyledItemView,
+  //UserSettings Component
+  StyledSettingsHeading,
+  StyledSettingsHeading2,
 };

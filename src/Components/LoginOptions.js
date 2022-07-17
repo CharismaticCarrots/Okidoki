@@ -18,9 +18,9 @@ const LoginOptions = ({ navigation }) => {
       <StyledLoginOptionsContainer>
         <View>
           <StyledLogoHeading>Okidoki</StyledLogoHeading>
-          <StyledLoginOptionsDescription>
+          {/* <StyledLoginOptionsDescription>
             some cool slogan
-          </StyledLoginOptionsDescription>
+          </StyledLoginOptionsDescription> */}
         </View>
         <View>
           <StyledFormButton

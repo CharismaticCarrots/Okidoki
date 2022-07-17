@@ -28,18 +28,13 @@ import {
   useDailyStepCount,
 } from '../Healthkit';
 
-import * as SecureStore from 'expo-secure-store';
-import { useUserData } from '../hooks/useUserData';
-import { AuthContext } from '../AuthLoading'
 
 const HealthStat = () => {
-  const { user, logout } = useUserData();
   const dailySteps = useStepCountSamples();
   const flights = useFlightsClimbed();
   const dailyDistance = useDistance();
   const activeEnergy = useActiveEnergy();
   const steps = useDailyStepCount();
-  const { signOut } = React.useContext(AuthContext);
 
   if (!dailySteps) {
     return <ActivityIndicator size="large" />;
@@ -124,15 +119,6 @@ const HealthStat = () => {
               <MaterialCommunityIcons name="fire" style={styles.icons} />
             )}
           />
-          <Button
-            onPress={() => {
-              logout();
-              SecureStore.deleteItemAsync('TOKEN');
-              signOut()
-            }}
-          >
-            LOGOUT
-          </Button>
         </ScrollView>
       </StyledHealthStatContainer>
     </StyledDokiHomeBackground>

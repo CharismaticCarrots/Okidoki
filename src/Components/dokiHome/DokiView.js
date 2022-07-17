@@ -25,16 +25,17 @@ const DokiView = ({ now }) => {
   const [curFullnessLvl, setCurFullnessLvl] = useState(0);
   const [curMoodLvl, setCurMoodLvl] = useState(0);
   const [carrotsClaimed, setCarrotsClaimed] = useState(false);
+  const [dokiMood, setDokiMood] = useState('');
 
   const stepCount = useDailyStepCount(now);
+  const carrotReward = useCarrotReward(now);
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
-  const carrotReward = useCarrotReward(now);
   const userMutation = useUpdateUser();
 
   useEffect(() => {
     if (userDokiData) {
-      // userDokiData.type = 'fox'; // Dummy data to view different sprites
+      // userDokiData.type = 'whitefox'; // Dummy data to view different sprites
       setUserDoki(userDokiData);
       const { user_doki } = userDokiData;
 
@@ -42,15 +43,17 @@ const DokiView = ({ now }) => {
         (new Date().getTime() - new Date(user_doki.lastFedAt).getTime()) /
           3600000
       );
-      setCurFullnessLvl(user_doki.lastFedFullnessLevel - hrsSinceLastFed);
+      const newFullnessLvl = user_doki.lastFedFullnessLevel - hrsSinceLastFed;
+      setCurFullnessLvl(newFullnessLvl <= 0 ? 0 : newFullnessLvl);
 
       const hrsSinceLastPlayed = Math.floor(
         (new Date().getTime() - new Date(user_doki.lastPlayedAt).getTime()) /
           3600000
       );
-      setCurMoodLvl(user_doki.lastPlayedMoodLevel - hrsSinceLastPlayed);
+      const newMoodLvl = user_doki.lastPlayedMoodLevel - hrsSinceLastPlayed;
+      setCurMoodLvl(newMoodLvl <= 0 ? 0 : newMoodLvl);
     }
-  }, [userDokiData, now]);
+  }, [userDokiData]);
 
   useEffect(() => {
     if (user) {
@@ -58,35 +61,31 @@ const DokiView = ({ now }) => {
       console.log('USER TOKEN:', user.token); // Temporary console log to view token
 
       const claimedToday =
-        new Date(now).toDateString() ===
+        new Date().toDateString() ===
         new Date(user.lastCarrotsClaimedAt).toDateString();
 
       if (claimedToday) {
         setCarrotsClaimed(true);
-        console.log(
-          `Can't claim carrots yet, last claimed at ${new Date(
-            user.lastCarrotsClaimedAt
-          ).toLocaleString('en-US')}. Check again tomorrow!`
-        ); // Temporary Error Message
+        // console.log(
+        //   `Can't claim carrots yet, last claimed at ${new Date(
+        //     user.lastCarrotsClaimedAt
+        //   ).toLocaleString('en-US')}. Check again tomorrow!`
+        // ); // Temporary Error Message
       }
       // console.log(`LAST CLAIMED CARROTS AT: ${new Date(user.lastCarrotsClaimedAt).toLocaleString('en-US')}`); // FOR TESTING
     }
-  }, [user, carrotReward, now]);
+  }, [user, carrotReward]);
 
-  const claimCarrots = () => {
-    userMutation.mutate(
-      {
-        lastCarrotsClaimedAt: new Date(),
-        carrotCount: curCarrotCount + carrotReward,
-      },
-      {
-        onSuccess: ({ carrotCount }) => {
-          setCurCarrotCount(carrotCount);
-          setCarrotsClaimed(true);
-        },
-      }
-    );
-  };
+  useEffect(()=> {
+    if (curFullnessLvl === 0 || curMoodLvl === 0) {
+      setDokiMood('sleep');
+    } else if (curFullnessLvl === 100 || curMoodLvl === 100) {
+      setDokiMood('happy');
+    }
+    else {
+      setDokiMood('idle');
+    }
+  }, [curFullnessLvl, curMoodLvl]);
 
   return (
     <StyledDokiHomeBackground
@@ -111,7 +110,7 @@ const DokiView = ({ now }) => {
         </Button>
       )}
       <StyledDokiContainer>
-        {userDoki && <Doki userDoki={userDoki} />}
+        {userDoki && <Doki userDoki={userDoki} dokiMood={dokiMood}/>}
         <StyledDokiName>
           {userDokiData && userDokiData.user_doki.dokiName}
         </StyledDokiName>
@@ -148,6 +147,21 @@ const DokiView = ({ now }) => {
       </RBSheet>
     </StyledDokiHomeBackground>
   );
+
+  function claimCarrots() {
+    userMutation.mutate(
+      {
+        lastCarrotsClaimedAt: new Date(),
+        carrotCount: curCarrotCount + carrotReward,
+      },
+      {
+        onSuccess: ({ carrotCount }) => {
+          setCurCarrotCount(carrotCount);
+          setCarrotsClaimed(true);
+        },
+      }
+    );
+  };
 };
 
 export default DokiView;
