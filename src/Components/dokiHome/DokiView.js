@@ -34,7 +34,7 @@ const DokiView = ({ now }) => {
 
   useEffect(() => {
     if (userDokiData) {
-      // userDokiData.type = 'fox'; // Dummy data to view different sprites
+      userDokiData.type = 'whitefox'; // Dummy data to view different sprites
       setUserDoki(userDokiData);
       const { user_doki } = userDokiData;
 

@@ -4,12 +4,9 @@ const sub = require('date-fns/sub');
 const dokis = [
   {
     type: 'cat',
-    spriteSheet: {
-      idle: '../../assets/catSprites/cat.png',
-    },
   },
   {
-    type: 'bunny',
+    type: 'whitefox',
   },
   {
     type: 'fox',

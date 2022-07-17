@@ -4,7 +4,7 @@ const db = require('../db');
 const Doki = db.define('doki', {
     type: {
         type: Sequelize.ENUM,
-        values: ['bunny', 'cat', 'fox'],
+        values: ['whitefox', 'cat', 'fox'],
         defaultValue: 'cat'
     },
     spriteSheet: {
