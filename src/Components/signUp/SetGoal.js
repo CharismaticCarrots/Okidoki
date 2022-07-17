@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import axios from 'axios';
-import { TextInput } from 'react-native-paper';
+import { Formik } from 'formik';
+
+import { useUserData } from '../../hooks/useUserData';
+import { API_URL } from '../../../secrets.js';
+
 import {
   StyledHeading1,
   StyledFormBackground,
@@ -9,9 +13,8 @@ import {
   StyledFormTextInput,
   StyledFormButton,
   StyledFormButtonText,
+  StyledFormInputError,
 } from '../styles';
-import { useUserData } from '../../hooks/useUserData';
-import { API_URL } from '../../../secrets.js';
 
 const SetGoal = ({ navigation }) => {
   const [dailyStepGoal, setDailyStepGoal] = useState('0');
@@ -23,22 +26,20 @@ const SetGoal = ({ navigation }) => {
   }
   console.log('User on SetGoal: ', user);
 
-  const mutation = useMutation(
-    async (dailyStepGoal) => {
-      try {
-         await axios.put(
-          `http://${API_URL}/api/user`,
-          { dailyStepGoal },
-          {
-            headers: { authorization: token },
-          }
-        );
-        return navigation.navigate('SelectEgg');
-      } catch (error) {
-        console.log({error})
-      }
-    },
-  );
+  const mutation = useMutation(async (dailyStepGoal) => {
+    try {
+      await axios.put(
+        `http://${API_URL}/api/user`,
+        { dailyStepGoal },
+        {
+          headers: { authorization: token },
+        }
+      );
+      return navigation.navigate('SelectEgg');
+    } catch (error) {
+      console.log({ error });
+    }
+  });
 
   const handleSubmit = async () => {
     mutation.mutate(dailyStepGoal);
@@ -49,27 +50,45 @@ const SetGoal = ({ navigation }) => {
       source={require('../../../assets/backgrounds/loginOptions.png')}
       resizeMode="cover"
     >
-      <StyledFormContainer>
-        <StyledHeading1>Set Your Daily Step Goal</StyledHeading1>
+      <Formik
+        initialValues={{ dailyStepGoal: '0' }}
+        onSubmit={(values) => mutation.mutate(values)}
+        validate={(values) => {
+          const errors = {};
+          if (!values.dailyStepGoal) {
+            errors.dailyStepGoal = 'Please submit a goal';
+          }
+          return errors;
+        }}
+      >
+        {({ handleChange, handleSubmit, values, errors }) => (
+          <StyledFormContainer>
+            <StyledHeading1>Set Your Daily Step Goal</StyledHeading1>
 
-        <StyledFormTextInput
-          placeholder="Example: 10,000"
-          autoCapitalize="none"
-          autoCorrect={false}
-          autoComplete="off"
-          onChangeText={setDailyStepGoal}
-          style={{ width: 240 }}
-        />
-
-        <StyledFormButton
-          onPress={() => {
-            handleSubmit();
-          }}
-          style={{ marginTop: 5, width: 150 }}
-        >
-          <StyledFormButtonText>Submit</StyledFormButtonText>
-        </StyledFormButton>
-      </StyledFormContainer>
+            <StyledFormTextInput
+              placeholder="Example: 10,000"
+              autoCapitalize="none"
+              autoCorrect={false}
+              autoComplete="off"
+              onChangeText={handleChange('dailyStepGoal')}
+              value={values.dailyStepGoal}
+              error={!!errors.dailyStepGoal}
+              style={{ width: 240 }}
+            />
+            {errors.dailyStepGoal ? (
+              <StyledFormInputError>
+                {errors.dailyStepGoal}
+              </StyledFormInputError>
+            ) : null}
+            <StyledFormButton
+              onPress={handleSubmit}
+              style={{ marginTop: 5, width: 150 }}
+            >
+              <StyledFormButtonText>Submit</StyledFormButtonText>
+            </StyledFormButton>
+          </StyledFormContainer>
+        )}
+      </Formik>
     </StyledFormBackground>
   );
 };
