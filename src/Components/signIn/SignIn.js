@@ -115,13 +115,16 @@ const SignIn = ({ navigation }) => {
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'space-around',
-                backgroundColor: '#59b2ff'
+                backgroundColor: '#59b2ff',
               }}
               onPress={() => {
                 promptAsync();
               }}
             >
-              <FontAwesome5 name={'google'} style={{fontSize: 27, overflow: "hidden", color: "black"}} />
+              <FontAwesome5
+                name={'google'}
+                style={{ fontSize: 27, overflow: 'hidden', color: '#333' }}
+              />
               <StyledFormButtonText style={{ textAlign: 'center' }}>
                 Sign in with Google
               </StyledFormButtonText>
@@ -136,7 +139,8 @@ const SignIn = ({ navigation }) => {
               value={values.email}
               style={{
                 fontFamily: values.email ? 'FredokaOne' : 'Singularity',
-                fontSize: values.email ? 18 : 24 }}
+                fontSize: values.email ? 18 : 24,
+              }}
             />
             {errors.email ? (
               <StyledFormInputError>{errors.email}</StyledFormInputError>
@@ -152,8 +156,8 @@ const SignIn = ({ navigation }) => {
               onChangeText={handleChange('password')}
               style={{
                 fontFamily: values.password ? 'FredokaOne' : 'Singularity',
-                fontSize: values.password ? 18 : 24 }}
-
+                fontSize: values.password ? 18 : 24,
+              }}
             />
             {errors.password ? (
               <StyledFormInputError>{errors.password}</StyledFormInputError>

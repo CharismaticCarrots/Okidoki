@@ -75,7 +75,8 @@ const StyledFormTextInput = styled(TextInput)`
   background: white;
   border-radius: 50px;
   margin-bottom: 10px;
-  border: solid ${(props) => (props.error ? `#C23B22` : `${colors.text.dark}`)} 4px;
+  border: solid ${(props) => (props.error ? `#C23B22` : `${colors.text.dark}`)}
+    4px;
 `;
 
 const StyledFormButton = styled(TouchableOpacity)`
@@ -83,13 +84,13 @@ const StyledFormButton = styled(TouchableOpacity)`
   padding: 15px;
   border-radius: 50px;
   align-items: center;
-  border: solid black 4px;
+  border: solid #333 4px;
 `;
 
 const StyledFormButtonText = styled(Text)`
   font-family: 'Singularity';
   font-size: 24px;
-  color: black;
+  color: #333;
   letter-spacing: 0.5px;
 `;
 
@@ -172,7 +173,7 @@ const StyledOuterCountersContainer = styled(View)`
 `;
 
 const StyledDokiName = styled(Text)`
-  color: black;
+  color: #333;
   font-size: 30px;
   font-weight: 800;
   text-align: center;
@@ -271,7 +272,7 @@ const StyledHealthStatHeading = styled(Text)`
   margin-bottom: 20px;
   font-family: 'AntipastoBold';
   letter-spacing: 1px;
-  color: ${colors.text.dark}
+  color: ${colors.text.dark};
 `;
 
 const StyledDayContainer = styled(View)`
@@ -326,7 +327,7 @@ const StyledItemQuantityText = styled(Text)`
 `;
 
 const StyledFormInputError = styled(Text)`
-  color: #C23B22;
+  color: #c23b22;
   font-family: 'Singularity';
   font-size: 22px;
   padding: 5px;
