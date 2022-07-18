@@ -22,15 +22,14 @@ const SelectEgg = ({ navigation }) => {
   if (user) {
     token = user.token;
   }
-  console.log('User on SelectEgg: ', user);
 
   const mutation = useMutation(
     async (dokiName) => {
       try {
-         await axios.post(
+        await axios.post(
           `http://${API_URL}/api/user/doki`,
           {
-             dokiName: dokiName,
+            dokiName: dokiName,
               eggColor: egg
             },
           { headers: { authorization: token } }
@@ -123,8 +122,8 @@ const SelectEgg = ({ navigation }) => {
               style={{
                 fontFamily: dokiName ? 'FredokaOne' : 'Singularity',
                 fontSize: dokiName ? 18 : 24,
-                width: 280,
-                marginTop: 50,
+                width: 250,
+                marginTop: 30,
               }}
             />
 

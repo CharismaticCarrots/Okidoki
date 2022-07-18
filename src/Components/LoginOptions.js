@@ -15,23 +15,29 @@ const LoginOptions = ({ navigation }) => {
       resizeMode="cover"
     >
       <StyledLoginOptionsContainer>
-        <View>
+        <View style={{ marginTop: 60}}>
           <Image
             source={require('../../assets/logoWegg3.png')}
             style={styles.title}
           />
         </View>
-        <View>
+        <View style={{ marginBottom: 150}}>
           <StyledFormButton
-            style={{ width: 220, marginBottom: 10, backgroundColor: '#59b2ff' }}
+            style={{
+              width: 220,
+              marginBottom: 10,
+              backgroundColor: '#C6D593'}}
             onPress={() => navigation.navigate('SignUp')}
           >
             <StyledFormButtonText>Create Account</StyledFormButtonText>
           </StyledFormButton>
           <StyledFormButton
-            style={{ width: 220, marginBottom: 10 }}
-            onPress={() => navigation.navigate('SignIn')}
-          >
+            style={{
+              width: 220,
+              marginBottom: 10,
+              backgroundColor: '#ffefb4',
+            }}
+            onPress={() => navigation.navigate('SignIn')}>
             <StyledFormButtonText>Sign In</StyledFormButtonText>
           </StyledFormButton>
         </View>
