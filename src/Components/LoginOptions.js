@@ -1,5 +1,4 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 import {
   StyledFormBackground,
   StyledLoginOptionsContainer,
@@ -17,18 +16,22 @@ const LoginOptions = ({ navigation }) => {
     >
       <StyledLoginOptionsContainer>
         <View>
-          <StyledLogoHeading>Okidoki</StyledLogoHeading>
+          <Image
+            source={require('../../assets/logoWegg3.png')}
+            style={styles.title}
+          />
         </View>
         <View>
           <StyledFormButton
-            style={{ width: 220, marginBottom: 10, backgroundColor: '#59b2ff'}}
+            style={{ width: 220, marginBottom: 10, backgroundColor: '#59b2ff' }}
             onPress={() => navigation.navigate('SignUp')}
           >
             <StyledFormButtonText>Create Account</StyledFormButtonText>
           </StyledFormButton>
           <StyledFormButton
-            style={{ width: 220, marginBottom: 10}}
-            onPress={() => navigation.navigate('SignIn')}>
+            style={{ width: 220, marginBottom: 10 }}
+            onPress={() => navigation.navigate('SignIn')}
+          >
             <StyledFormButtonText>Sign In</StyledFormButtonText>
           </StyledFormButton>
         </View>
@@ -36,5 +39,19 @@ const LoginOptions = ({ navigation }) => {
     </StyledFormBackground>
   );
 };
+
+const styles = StyleSheet.create({
+  logo: {
+    width: 200,
+    height: 66,
+    display: 'flex',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  title: {
+    width: 300,
+    height: 75,
+  },
+});
 
 export default LoginOptions;
