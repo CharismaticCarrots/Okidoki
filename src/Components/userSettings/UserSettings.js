@@ -5,6 +5,9 @@ import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { AuthContext } from '../../AuthLoading';
 import Doki from '../dokiHome/Doki';
+import Feather from 'react-native-vector-icons/Feather';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import {
   StyledFormBackground,
@@ -19,6 +22,7 @@ const UserSettings = ({ navigation }) => {
   const { user, logout } = useUserData();
   const { signOut } = React.useContext(AuthContext);
   const userDokiData = useUserDokiData();
+  console.log(user);
   useEffect(() => {
     if (userDokiData) {
       setUserDoki(userDokiData);
@@ -49,7 +53,7 @@ const UserSettings = ({ navigation }) => {
       source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <StyledHealthStatHeading style={{ marginTop: 80, marginBottom: 130 }}>
+      <StyledHealthStatHeading style={{ marginTop: 100, marginBottom: 110 }}>
         Settings
       </StyledHealthStatHeading>
       <StyledFormButton
@@ -61,23 +65,27 @@ const UserSettings = ({ navigation }) => {
         <StyledFormButtonText
           style={{ fontFamily: 'AntipastoBold', fontSize: 20 }}
         >
-          Change Step Goal
+          <FontAwesome5 name={'shoe-prints'} style={{ fontSize: 20 }} /> Change
+          Step Goal
         </StyledFormButtonText>
       </StyledFormButton>
-      <StyledFormButton
-        style={{ marginTop: 20, width: 250 }}
-        onPress={() => {
-          navigation.navigate('Change Password');
-        }}
-      >
-        <StyledFormButtonText
-          style={{ fontFamily: 'AntipastoBold', fontSize: 20 }}
+      {user.externalType !== 'google' ? (
+        <StyledFormButton
+          style={{ marginTop: 20, width: 250 }}
+          onPress={() => {
+            navigation.navigate('Change Password');
+          }}
         >
-          Change Password
-        </StyledFormButtonText>
-      </StyledFormButton>
+          <StyledFormButtonText
+            style={{ fontFamily: 'AntipastoBold', fontSize: 20 }}
+          >
+            <Fontisto name="key" size={18} /> Change Password
+          </StyledFormButtonText>
+        </StyledFormButton>
+      ) : null}
+
       <StyledFormButton
-        style={{ marginTop: 20, width: 250 }}
+        style={{ marginTop: 20, width: 250, backgroundColor: '#5FB8FD' }}
         onPress={() => {
           logout();
           SecureStore.deleteItemAsync('TOKEN');
@@ -87,7 +95,8 @@ const UserSettings = ({ navigation }) => {
         <StyledFormButtonText
           style={{ fontFamily: 'AntipastoBold', fontSize: 20 }}
         >
-          Log out
+          {' '}
+          <Feather name="log-out" size={20} /> Log out
         </StyledFormButtonText>
       </StyledFormButton>
 
