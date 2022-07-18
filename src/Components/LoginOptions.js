@@ -2,10 +2,8 @@ import { View, Image, StyleSheet } from 'react-native';
 import {
   StyledFormBackground,
   StyledLoginOptionsContainer,
-  StyledLoginOptionsDescription,
   StyledFormButton,
   StyledFormButtonText,
-  StyledLogoHeading,
 } from './styles';
 
 const LoginOptions = ({ navigation }) => {
