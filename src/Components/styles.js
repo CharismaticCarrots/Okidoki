@@ -145,7 +145,7 @@ const StyledDokiHomeBackground = styled(ImageBackground)`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  margin-bottom: 85px;
+  margin-bottom: 100px;
 `;
 
 const StyledDokiContainer = styled(View)`
@@ -334,13 +334,16 @@ const StyledFormInputError = styled(Text)`
 
 // Doki Pack Icon
 const StyledDokiPackContainer = styled(TouchableOpacity)`
-  width: 100px;
-  height: 100px;
+  // position: absolute;
+  // bottom: 0px;
+  // right: 0px;
+  width: 90px;
+  height: 90px;
   background-color: #ffefb4;
   border: solid 3px #333;
   border-radius: 50px;
-  align-items: center;
-  padding: 20px;
+  padding: 15px;
+  // margin: 15px;
 `;
 
 const StyledDokiPackImage = styled(Image)`
