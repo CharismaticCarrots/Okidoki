@@ -111,12 +111,12 @@ const DokiView = ({ now }) => {
         source={require('../../../assets/backgrounds/dokiNameTag.png')}
         style={{
           zIndex: 2,
-          width: 130,
-          height: 120,
+          width: 170,
+          height: 160,
           position: 'absolute',
           alignItems: 'center',
-          bottom: 130,
-          paddingTop: 22,
+          bottom: 80,
+          paddingTop: 32,
           paddingLeft: 12}}
       >
         <StyledDokiName>
