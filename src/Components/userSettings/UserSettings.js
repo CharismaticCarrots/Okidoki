@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
-
+import React, { useState, useEffect } from 'react'
+import Sprite from "../Sprite";
+import images from "../../images";
+import { StyledInnerDokiContainer } from "../styles";
 
 
 import {    
@@ -11,17 +13,36 @@ import {
 } from '../styles';
 import * as SecureStore from 'expo-secure-store';
 import { useUserData } from '../../hooks/useUserData';
+import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { AuthContext } from '../../AuthLoading';
+import Doki from '../dokiHome/Doki';
 
 const UserSettings = ({navigation}) => {
+  const [userDoki, setUserDoki] = useState();
+  const [dokiMood, setDokiMood] = useState('');
   const { user, logout } = useUserData();
   const { signOut } = React.useContext(AuthContext);
+  const userDokiData = useUserDokiData();
+  useEffect(() => {
+    if (userDokiData) {
+      setUserDoki(userDokiData)
+      const user_doki = userDokiData.user_doki
+      if (user_doki.lastFedFullnessLevel === 0 || user_doki.lastPlayedMoodLevel === 0) {
+        setDokiMood('sleep');
+      } else if (user_doki.lastFedFullnessLevel === 100 || user_doki.lastPlayedMoodLevel === 100) {
+        setDokiMood('happy');
+      }
+      else {
+        setDokiMood('idle');
+      }
+    }
+  }, [userDokiData]);
+
   let token;
   if (user) {
     token = user.token;
   }
 
-  
 
   return (
     <StyledFormBackground
@@ -56,7 +77,7 @@ const UserSettings = ({navigation}) => {
         <StyledFormButtonText style={{fontFamily: 'AntipastoBold'}}>Log out</StyledFormButtonText>
         </StyledFormButton>
 
-    
+        {userDoki && <Doki userDoki={userDoki} dokiMood={dokiMood}/>}
     </StyledFormBackground>
   );
 };
