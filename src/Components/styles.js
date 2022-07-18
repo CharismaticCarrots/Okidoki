@@ -153,7 +153,7 @@ const StyledDokiHomeBackground = styled(ImageBackground)`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  margin-bottom: 100px;
+  margin-bottom: 125px;
 `;
 
 const StyledDokiContainer = styled(View)`
@@ -180,11 +180,9 @@ const StyledOuterCountersContainer = styled(View)`
 
 const StyledDokiName = styled(Text)`
   color: #333;
-  font-size: 30px;
-  font-weight: 800;
+  font-size: 25px;
   text-align: center;
   font-family: 'Singularity';
-  margin-bottom: 20px;
 `;
 
 // Doki Component
