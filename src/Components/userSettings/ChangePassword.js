@@ -1,51 +1,50 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useMutation } from 'react-query';
 import axios from 'axios';
-import { 
+import {
   StyledFormBackground,
   StyledFormTextInput,
   StyledFormButton,
-  StyledFormButtonText, 
+  StyledFormButtonText,
   StyledHealthStatHeading,
   StyledChangeGoalContainer,
-  StyledSettingsError
+  StyledSettingsError,
 } from '../styles';
 import { useUserData } from '../../hooks/useUserData';
 import { API_URL } from '../../../secrets';
 import { Formik } from 'formik';
 
-
-const ChangePassword = ({navigation}) => {
-  const [password, setPassword] = useState('')
+const ChangePassword = ({ navigation }) => {
+  const [password, setPassword] = useState('');
   const { user } = useUserData();
   let token;
   if (user) {
     token = user.token;
   }
 
-  const mutation = useMutation(
-    async ({password, setErrors }) => {
-      try {
-         await axios.put(
-          `http://${API_URL}/api/user`,
-          { password },
-          {
-            headers: { authorization: token },
-          }
-        );
-        return navigation.navigate('User Settings')
-      } catch (error) {
-        console.log({error})
-      }
-    },
-  );
+  const mutation = useMutation(async ({ password, setErrors }) => {
+    try {
+      await axios.put(
+        `http://${API_URL}/api/user`,
+        { password },
+        {
+          headers: { authorization: token },
+        }
+      );
+      return navigation.navigate('User Settings');
+    } catch (error) {
+      console.log({ error });
+    }
+  });
 
   return (
     <StyledFormBackground
       source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <  StyledHealthStatHeading style={{marginTop: 80}}>Change Your Password</  StyledHealthStatHeading>
+      <StyledHealthStatHeading style={{ marginTop: 100 }}>
+        Change Your Password
+      </StyledHealthStatHeading>
       <Formik
         initialValues={{ password: '' }}
         onSubmit={(values, { setErrors }) =>
@@ -77,11 +76,9 @@ const ChangePassword = ({navigation}) => {
               }}
             />
             {errors.password ? (
-              <StyledSettingsError>
-                {errors.password}
-              </StyledSettingsError>
+              <StyledSettingsError>{errors.password}</StyledSettingsError>
             ) : null}
-             <StyledFormButton
+            <StyledFormButton
               onPress={handleSubmit}
               style={{
                 marginTop: 5,
@@ -92,20 +89,18 @@ const ChangePassword = ({navigation}) => {
               <StyledFormButtonText>Submit</StyledFormButtonText>
             </StyledFormButton>
             <StyledFormButton
-           style={{ marginTop: 10, width: 150 }}
-           onPress={() => {
-           navigation.navigate('User Settings')
-          }}
-        >
-        <StyledFormButtonText>Cancel</StyledFormButtonText>
-        </StyledFormButton>
+              style={{ marginTop: 10, width: 150 }}
+              onPress={() => {
+                navigation.navigate('User Settings');
+              }}
+            >
+              <StyledFormButtonText>Cancel</StyledFormButtonText>
+            </StyledFormButton>
           </StyledChangeGoalContainer>
         )}
       </Formik>
-   
     </StyledFormBackground>
   );
 };
 
-export default ChangePassword
-
+export default ChangePassword;

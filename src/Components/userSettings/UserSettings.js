@@ -1,9 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import Sprite from "../Sprite";
-import images from "../../images";
-import { StyledInnerDokiContainer } from "../styles";
-import {    
+import { View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
   StyledFormBackground,
   StyledFormButton,
   StyledFormButtonText,
@@ -14,27 +11,32 @@ import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { AuthContext } from '../../AuthLoading';
 import Doki from '../dokiHome/Doki';
-import Feather from 'react-native-vector-icons/Feather'
-import Fontisto from 'react-native-vector-icons/Fontisto'
+import Feather from 'react-native-vector-icons/Feather';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-const UserSettings = ({navigation}) => {
+const UserSettings = ({ navigation }) => {
   const [userDoki, setUserDoki] = useState();
   const [dokiMood, setDokiMood] = useState('');
   const { user, logout } = useUserData();
   const { signOut } = React.useContext(AuthContext);
   const userDokiData = useUserDokiData();
-  console.log(user)
+  console.log(user);
   useEffect(() => {
     if (userDokiData) {
-      setUserDoki(userDokiData)
-      const user_doki = userDokiData.user_doki
-      if (user_doki.lastFedFullnessLevel === 0 || user_doki.lastPlayedMoodLevel === 0) {
+      setUserDoki(userDokiData);
+      const user_doki = userDokiData.user_doki;
+      if (
+        user_doki.lastFedFullnessLevel === 0 ||
+        user_doki.lastPlayedMoodLevel === 0
+      ) {
         setDokiMood('sleep');
-      } else if (user_doki.lastFedFullnessLevel === 100 || user_doki.lastPlayedMoodLevel === 100) {
+      } else if (
+        user_doki.lastFedFullnessLevel === 100 ||
+        user_doki.lastPlayedMoodLevel === 100
+      ) {
         setDokiMood('happy');
-      }
-      else {
+      } else {
         setDokiMood('idle');
       }
     }
@@ -45,44 +47,78 @@ const UserSettings = ({navigation}) => {
     token = user.token;
   }
 
-
   return (
     <StyledFormBackground
       source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <  StyledHealthStatHeading style={{marginTop: 100, marginBottom:110}}>Settings</  StyledHealthStatHeading>
-        <StyledFormButton
-           style={{ marginTop: 20, width: 250 }}
-           onPress={() => {
-           navigation.navigate('Change Goal')
-          }}
+      <StyledHealthStatHeading style={{ marginTop: 100, marginBottom: 70 }}>
+        Settings
+      </StyledHealthStatHeading>
+      <StyledFormButton
+        style={{ width: 250 }}
+        onPress={() => {
+          navigation.navigate('Change Goal');
+        }}
+      >
+        <StyledFormButtonText
+          style={{ fontFamily: 'AntipastoBold', fontSize: 20 }}
         >
-        <StyledFormButtonText style={{fontFamily: 'AntipastoBold', fontSize:20}}><FontAwesome5 name={'shoe-prints'} style={{ fontSize: 20 }} />  Change Step Goal</StyledFormButtonText>
-        </StyledFormButton>     
-       {user.externalType !== 'google' ? <StyledFormButton
-           style={{ marginTop: 20, width: 250 }}
-           onPress={() => {
-           navigation.navigate('Change Password')
-          }}
-        >
-        <StyledFormButtonText style={{fontFamily: 'AntipastoBold',fontSize:20}}> <Fontisto name='key' size={18}/>   Change Password</StyledFormButtonText>
-        </StyledFormButton> : <View></View> }
+          <FontAwesome5 name={'trophy'} style={{ fontSize: 20 }} /> View
+          Achievements
+        </StyledFormButtonText>
+      </StyledFormButton>
 
+      <StyledFormButton
+        style={{ marginTop: 15, width: 250 }}
+        onPress={() => {
+          navigation.navigate('Change Goal');
+        }}
+      >
+        <StyledFormButtonText
+          style={{ fontFamily: 'AntipastoBold', fontSize: 20 }}
+        >
+          <FontAwesome5 name={'shoe-prints'} style={{ fontSize: 20 }} /> Change
+          Step Goal
+        </StyledFormButtonText>
+      </StyledFormButton>
+      {user.externalType !== 'google' ? (
         <StyledFormButton
-           style={{ marginTop: 20, width: 250, backgroundColor:'#5FB8FD' }}
-           onPress={() => {
-            logout();
-            SecureStore.deleteItemAsync('TOKEN');
-            signOut()
+          style={{ marginTop: 15, width: 250 }}
+          onPress={() => {
+            navigation.navigate('Change Password');
           }}
         >
-        <StyledFormButtonText style={{fontFamily: 'AntipastoBold', fontSize:20}}> <Feather name='log-out' size={20}/>  Log out</StyledFormButtonText>
+          <StyledFormButtonText
+            style={{ fontFamily: 'AntipastoBold', fontSize: 20 }}
+          >
+            {' '}
+            <Fontisto name="key" size={18} /> Change Password
+          </StyledFormButtonText>
         </StyledFormButton>
+      ) : (
+        <View></View>
+      )}
 
-        {userDoki && <Doki userDoki={userDoki} dokiMood={dokiMood}/>}
+      <StyledFormButton
+        style={{ marginTop: 15, width: 250, backgroundColor: '#5FB8FD' }}
+        onPress={() => {
+          logout();
+          SecureStore.deleteItemAsync('TOKEN');
+          signOut();
+        }}
+      >
+        <StyledFormButtonText
+          style={{ fontFamily: 'AntipastoBold', fontSize: 20 }}
+        >
+          {' '}
+          <Feather name="log-out" size={20} /> Log out
+        </StyledFormButtonText>
+      </StyledFormButton>
+
+      {userDoki && <Doki userDoki={userDoki} dokiMood={dokiMood} />}
     </StyledFormBackground>
   );
 };
 
-export default UserSettings
+export default UserSettings;
