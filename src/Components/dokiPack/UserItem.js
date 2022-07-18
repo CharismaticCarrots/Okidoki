@@ -13,7 +13,7 @@ import {
 } from '../styles';
 import images from '../../images';
 
-const UserItem = ({ name, idNumber, quantity, curMoodLvl }) => {
+const UserItem = ({ name, idNumber, price, quantity, curMoodLvl }) => {
   const { ref, hide, show } = usePopable();
   const userDokiMutation = useUpdateUserDoki();
   const userItemMutation = useUpdateUserItem();
@@ -44,11 +44,11 @@ const UserItem = ({ name, idNumber, quantity, curMoodLvl }) => {
       show();
       setTimeout(() => hide(), 1000);
     } else {
-      const newMoodLevel = curMoodLvl + 5;
+      const newMoodLevel = curMoodLvl + 5 * price;
       const userDokiUpdate = {
         lastPlayedAt: new Date(),
         lastPlayedMoodLevel:
-          curMoodLvl + (newMoodLevel > 100 ? 100 - curMoodLvl : 5), // Mood Increase Rate
+          curMoodLvl + (newMoodLevel > 100 ? 100 - curMoodLvl : 5 * price), // Mood Increase Rate
       };
       userDokiMutation.mutate(userDokiUpdate, {
         onSuccess: () => {
