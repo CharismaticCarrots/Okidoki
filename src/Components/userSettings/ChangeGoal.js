@@ -58,12 +58,10 @@ const ChangeGoal = ({navigation}) => {
       source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <StyledHealthStatHeading style={{marginVertical: 80}}>Settings</  StyledHealthStatHeading>
-
-        <StyledSettingsHeading2>Change Your Daily Step Goal</StyledSettingsHeading2>
+      <StyledHealthStatHeading style={{marginTop: 80, marginBottom: 200}}>Change Your Daily Step Goal</  StyledHealthStatHeading>
 
         <StyledFormTextInput
-          placeholder="Example: 10,000"
+          placeholder="New Step Goal"
           autoCapitalize="none"
           autoCorrect={false}
           autoComplete="off"
