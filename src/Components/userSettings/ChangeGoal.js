@@ -1,4 +1,3 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { useQueryClient } from 'react-query';
 import { useMutation } from 'react-query';
@@ -6,23 +5,21 @@ import axios from 'axios';
 import { TextInput } from 'react-native-paper';
 import { StyledHeading1,
   StyledFormBackground,
-  StyledFormContainer,
   StyledFormTextInput,
   StyledFormButton,
-  StyledFormButtonText,
+  StyledFormButtonText, 
   StyledSettingsHeading2,
   StyledHealthStatHeading,
-} from './styles';
-import * as SecureStore from 'expo-secure-store';
-import { useUserData } from '../hooks/useUserData';
-import { API_URL } from '../../secrets';
-import { AuthContext } from '../AuthLoading';
+} from '../styles';
+import { useUserData } from '../../hooks/useUserData';
+import { API_URL } from '../../../secrets';
 
-const UserSettings = ({navigation}) => {
+
+const ChangeGoal = ({navigation}) => {
   const queryClient = useQueryClient();
   const [dailyStepGoal, setDailyStepGoal] = useState('0');
-  const { user, logout } = useUserData();
-  const { signOut } = React.useContext(AuthContext);
+  const { user } = useUserData();
+
   let token;
   if (user) {
     token = user.token;
@@ -38,7 +35,7 @@ const UserSettings = ({navigation}) => {
             headers: { authorization: token },
           }
         );
-        return navigation.navigate('DokiHome');
+        return navigation.navigate('User Settings')
       } catch (error) {
         console.log({error})
       }
@@ -58,15 +55,13 @@ const UserSettings = ({navigation}) => {
 
   return (
     <StyledFormBackground
-      source={require('../../assets/backgrounds/dokihome_background4.png')}
+      source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <StyledHealthStatHeading style={{marginVertical: 80}}>Settings</  StyledHealthStatHeading>
-
-        <StyledSettingsHeading2>Change Your Daily Step Goal</StyledSettingsHeading2>
+      <StyledHealthStatHeading style={{marginTop: 80, marginBottom: 200}}>Change Your Daily Step Goal</  StyledHealthStatHeading>
 
         <StyledFormTextInput
-          placeholder="Example: 10,000"
+          placeholder="New Step Goal"
           autoCapitalize="none"
           autoCorrect={false}
           autoComplete="off"
@@ -89,20 +84,17 @@ const UserSettings = ({navigation}) => {
           <StyledFormButtonText>Submit</StyledFormButtonText>
         </StyledFormButton>
         <StyledFormButton
-          style={{ marginTop: 20, width: 150 }}
-          onPress={() => {
-            logout();
-            SecureStore.deleteItemAsync('TOKEN');
-            signOut()
+           style={{ marginTop: 20, width: 150 }}
+           onPress={() => {
+           navigation.navigate('User Settings')
           }}
         >
-        <StyledFormButtonText>Log out</StyledFormButtonText>
+        <StyledFormButtonText>Cancel</StyledFormButtonText>
         </StyledFormButton>
 
     </StyledFormBackground>
   );
 };
 
-export default UserSettings
+export default ChangeGoal
 
-const styles = StyleSheet.create({})
