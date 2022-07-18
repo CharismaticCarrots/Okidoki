@@ -199,7 +199,7 @@ const SignUp = ({ navigation }) => {
               <StyledFormInputError>{errors.form}</StyledFormInputError>
             ) : null}
             <StyledFormButton
-              style={{ marginTop: 20, marginBottom: 10, width: 150 }}
+              style={{ marginTop: 20, marginBottom: 10, width: 220 }}
               onPress={handleSubmit}
             >
               <StyledFormButtonText>Sign Up</StyledFormButtonText>

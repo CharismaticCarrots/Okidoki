@@ -50,7 +50,7 @@ const UserSettings = ({ navigation }) => {
       resizeMode="cover"
     >
       <StyledHealthStatHeading style={{ marginTop: 80, marginBottom: 130 }}>
-        User Settings
+        Settings
       </StyledHealthStatHeading>
       <StyledFormButton
         style={{ marginTop: 20, width: 250 }}
@@ -58,7 +58,9 @@ const UserSettings = ({ navigation }) => {
           navigation.navigate('Change Goal');
         }}
       >
-        <StyledFormButtonText style={{ fontFamily: 'AntipastoBold' }}>
+        <StyledFormButtonText
+          style={{ fontFamily: 'AntipastoBold', fontSize: 20 }}
+        >
           Change Step Goal
         </StyledFormButtonText>
       </StyledFormButton>
@@ -68,7 +70,9 @@ const UserSettings = ({ navigation }) => {
           navigation.navigate('Change Password');
         }}
       >
-        <StyledFormButtonText style={{ fontFamily: 'AntipastoBold' }}>
+        <StyledFormButtonText
+          style={{ fontFamily: 'AntipastoBold', fontSize: 20 }}
+        >
           Change Password
         </StyledFormButtonText>
       </StyledFormButton>
@@ -80,7 +84,9 @@ const UserSettings = ({ navigation }) => {
           signOut();
         }}
       >
-        <StyledFormButtonText style={{ fontFamily: 'AntipastoBold' }}>
+        <StyledFormButtonText
+          style={{ fontFamily: 'AntipastoBold', fontSize: 20 }}
+        >
           Log out
         </StyledFormButtonText>
       </StyledFormButton>

@@ -121,8 +121,8 @@ const SelectEgg = ({ navigation }) => {
               style={{
                 fontFamily: dokiName ? 'FredokaOne' : 'Singularity',
                 fontSize: dokiName ? 18 : 24,
-                width: 280,
-                marginTop: 50,
+                width: 250,
+                marginTop: 30,
               }}
             />
 

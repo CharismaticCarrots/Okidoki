@@ -57,9 +57,13 @@ const SetGoal = ({ navigation }) => {
         }}
       >
         {({ handleChange, handleSubmit, values, errors }) => (
-          <StyledFormContainer>
-            <StyledHeading1>Set Your Daily Step Goal</StyledHeading1>
-
+          <StyledFormContainer style={{
+            justifyContent: 'flex-start',
+            marginTop: 200
+            }}>
+            <StyledHeading1>
+              Set Your Daily Step Goal
+            </StyledHeading1>
             <StyledFormTextInput
               placeholder="Example: 10,000"
               autoCapitalize="none"
@@ -71,8 +75,8 @@ const SetGoal = ({ navigation }) => {
               style={{
                 fontFamily: values.dailyStepGoal ? 'FredokaOne' : 'Singularity',
                 fontSize: values.dailyStepGoal ? 18 : 24,
-                width: 280,
-                marginTop: 20,
+                width: 250,
+                marginTop: 180,
                 marginBottom: 20,
               }}
             />
