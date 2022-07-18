@@ -15,6 +15,8 @@ const colors = {
   yellow: '#ffefb4',
   blue: '#59b2ff',
   tan: '#EFD389',
+  green: '#C6D593',
+  pastelGreen: '#C2D8C0',
   text: {
     dark: '#333',
   },
@@ -91,6 +93,7 @@ const StyledFormButton = styled(TouchableOpacity)`
   border-radius: 50px;
   align-items: center;
   border: solid black 4px;
+  width: 220px;
 `;
 
 const StyledFormButtonText = styled(Text)`
@@ -101,9 +104,9 @@ const StyledFormButtonText = styled(Text)`
 `;
 
 const StyledFormSuggest = styled(Text)`
-  color: #333;
+  color: black;
   font-family: 'Singularity';
-  font-size: 22px;
+  font-size: 23px;
   text-align: center;
 `;
 

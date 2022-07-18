@@ -19,15 +19,22 @@ const LoginOptions = ({ navigation }) => {
         <View>
           <StyledLogoHeading>Okidoki</StyledLogoHeading>
         </View>
-        <View>
+        <View style={{ marginBottom: 120}}>
           <StyledFormButton
-            style={{ width: 220, marginBottom: 10, backgroundColor: '#59b2ff'}}
+            style={{
+              width: 220,
+              marginBottom: 10,
+              backgroundColor: '#ffefb4'}}
             onPress={() => navigation.navigate('SignUp')}
           >
             <StyledFormButtonText>Create Account</StyledFormButtonText>
           </StyledFormButton>
           <StyledFormButton
-            style={{ width: 220, marginBottom: 10}}
+            style={{
+              width: 220,
+              marginBottom: 10,
+              backgroundColor: '#ffefb4',
+            }}
             onPress={() => navigation.navigate('SignIn')}>
             <StyledFormButtonText>Sign In</StyledFormButtonText>
           </StyledFormButton>
