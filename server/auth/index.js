@@ -12,7 +12,7 @@ router.post('/signin', async (req, res, next) => {
     const user = await User.authenticate(req.body);
     res.json(user);
   } catch (err) {
-    res.send('Invalid username or password');
+    res.status(422).json({ message: 'Invalid username or password' });
   }
 });
 
@@ -51,7 +51,11 @@ router.post('/signup', async (req, res, next) => {
     res.status(201).json(newUser);
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
-      res.status(401).send('That email address is already in use.');
+      res
+        .status(401)
+        .json({ message: 'That email address is already in use.' });
+    } else if (err.name === 'SequelizeValidationError') {
+      res.status(422).json({ message: 'Please submit a valid email' });
     } else {
       next(err);
     }

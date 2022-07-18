@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import axios from 'axios';
+import { Formik } from 'formik';
+import { useUserData } from '../../hooks/useUserData';
+import { API_URL } from '../../../secrets.js';
+
 import {
   StyledHeading1,
   StyledFormBackground,
@@ -8,77 +12,92 @@ import {
   StyledFormTextInput,
   StyledFormButton,
   StyledFormButtonText,
+  StyledFormInputError,
 } from '../styles';
-import { useUserData } from '../../hooks/useUserData';
-import { API_URL } from '../../../secrets.js';
 
 const SetGoal = ({ navigation }) => {
-  const [dailyStepGoal, setDailyStepGoal] = useState('0');
-
   const { user } = useUserData();
   let token;
   if (user) {
     token = user.token;
   }
-  console.log('User on SetGoal: ', user);
 
-  const mutation = useMutation(
-    async (dailyStepGoal) => {
-      try {
-        await axios.put(
-          `http://${API_URL}/api/user`,
-          { dailyStepGoal },
-          {
-            headers: { authorization: token },
-          }
-        );
-        return navigation.navigate('SelectEgg');
-      } catch (error) {
-        console.log({error})
-      }
-    },
-  );
-
-  const handleSubmit = async () => {
-    mutation.mutate(dailyStepGoal);
-  };
+  const mutation = useMutation(async ({ dailyStepGoal, setErrors }) => {
+    try {
+      await axios.put(
+        `http://${API_URL}/api/user`,
+        { dailyStepGoal: dailyStepGoal },
+        {
+          headers: { authorization: token },
+        }
+      );
+      return navigation.navigate('SelectEgg');
+    } catch (error) {
+      console.log({ error });
+      setErrors({ form: error.response.data.message });
+      //need to add this to the put route. For now this is just front end.
+    }
+  });
 
   return (
     <StyledFormBackground
       source={require('../../../assets/backgrounds/loginOptions.png')}
       resizeMode="cover"
     >
-      <StyledFormContainer>
-        <StyledHeading1>Set Your Daily Step Goal</StyledHeading1>
+      <Formik
+        initialValues={{ dailyStepGoal: '' }}
+        onSubmit={(values, { setErrors }) =>
+          mutation.mutate({ dailyStepGoal: values.dailyStepGoal, setErrors })
+        }
+        validate={(values) => {
+          const errors = {};
+          if (!values.dailyStepGoal || parseInt(values.dailyStepGoal) <= 1000) {
+            errors.dailyStepGoal = 'Please submit a step goal above 1000';
+          }
+          return errors;
+        }}
+      >
+        {({ handleChange, handleSubmit, values, errors }) => (
+          <StyledFormContainer>
+            <StyledHeading1>Set Your Daily Step Goal</StyledHeading1>
 
-        <StyledFormTextInput
-          style={{
-            fontFamily: dailyStepGoal ? 'FredokaOne' : 'Singularity',
-            fontSize: dailyStepGoal ? 18 : 24,
-            width: 280,
-            marginTop: 20,
-            marginBottom: 20,
-          }}
-          placeholder="Example: 10,000"
-          autoCapitalize="none"
-          autoCorrect={false}
-          autoComplete="off"
-          onChangeText={setDailyStepGoal}
-        />
-
-        <StyledFormButton
-          onPress={() => {
-            handleSubmit();
-          }}
-          style={{
-            marginTop: 5,
-            width: 150,
-            backgroundColor: '#59b2ff',
-          }}
-        >
-          <StyledFormButtonText>Submit</StyledFormButtonText>
-        </StyledFormButton>
-      </StyledFormContainer>
+            <StyledFormTextInput
+              placeholder="Example: 10,000"
+              autoCapitalize="none"
+              autoCorrect={false}
+              autoComplete="off"
+              onChangeText={handleChange('dailyStepGoal')}
+              value={values.dailyStepGoal}
+              error={!!errors.dailyStepGoal}
+              style={{
+                fontFamily: values.dailyStepGoal ? 'FredokaOne' : 'Singularity',
+                fontSize: values.dailyStepGoal ? 18 : 24,
+                width: 280,
+                marginTop: 20,
+                marginBottom: 20,
+              }}
+            />
+            {errors.dailyStepGoal ? (
+              <StyledFormInputError>
+                {errors.dailyStepGoal}
+              </StyledFormInputError>
+            ) : null}
+            <StyledFormButton
+              onPress={handleSubmit}
+              style={{
+                marginTop: 5,
+                width: 150,
+                backgroundColor: '#59b2ff',
+              }}
+            >
+              <StyledFormButtonText>Submit</StyledFormButtonText>
+            </StyledFormButton>
+            {errors.form ? (
+              <StyledFormInputError>{errors.form}</StyledFormInputError>
+            ) : null}
+          </StyledFormContainer>
+        )}
+      </Formik>
     </StyledFormBackground>
   );
 };

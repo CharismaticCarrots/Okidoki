@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
+import { useQueryClient } from 'react-query';
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import { TextInput } from 'react-native-paper';
@@ -18,6 +19,7 @@ import { API_URL } from '../../secrets';
 import { AuthContext } from '../AuthLoading';
 
 const UserSettings = ({navigation}) => {
+  const queryClient = useQueryClient();
   const [dailyStepGoal, setDailyStepGoal] = useState('0');
   const { user, logout } = useUserData();
   const { signOut } = React.useContext(AuthContext);
@@ -44,7 +46,11 @@ const UserSettings = ({navigation}) => {
   );
 
   const handleSubmit = async () => {
-    mutation.mutate(dailyStepGoal);
+    mutation.mutate(dailyStepGoal, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['user'])
+      },
+    });
     this.textInput.clear()
     setDailyStepGoal('0')
   };
