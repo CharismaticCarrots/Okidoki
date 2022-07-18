@@ -10,12 +10,15 @@ import whitefox_happy from '../assets/sprites/whitefox_sprites/whitefox_happy.pn
 import whitefox_sleep from '../assets/sprites/whitefox_sprites/whitefox_sleep.png';
 
 // Items
-import video_game from '../assets/items/videogame.png';
 import slime from '../assets/items/slime.png';
 import ball from '../assets/items/ball.png';
-import teddy_bear from '../assets/items/teddybear.png';
 import leaf from '../assets/items/leaf.png';
-import paintbrush from '../assets/items/paintbrush.png';
+import video_game from '../assets/items/videogame.png';
+import plushie from '../assets/items/plushie.png';
+import flute from '../assets/items/flute.png';
+import gold_star from '../assets/items/goldstar.png';
+import wand from '../assets/items/wand.png';
+import tomato from '../assets/items/tomato.png';
 
 const images = {
   sprites: {
@@ -39,9 +42,12 @@ const images = {
     'video game': video_game,
     slime,
     ball,
-    'teddy bear': teddy_bear,
     leaf,
-    paintbrush,
+    plushie,
+    flute,
+    'gold star': gold_star,
+    wand,
+    tomato,
   },
 };
 

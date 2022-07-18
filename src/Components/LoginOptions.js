@@ -1,5 +1,4 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 import {
   StyledFormBackground,
   StyledLoginOptionsContainer,
@@ -17,7 +16,10 @@ const LoginOptions = ({ navigation }) => {
     >
       <StyledLoginOptionsContainer>
         <View>
-          <StyledLogoHeading>Okidoki</StyledLogoHeading>
+          <Image
+            source={require('../../assets/logoWegg3.png')}
+            style={styles.title}
+          />
         </View>
         <View style={{ marginBottom: 120}}>
           <StyledFormButton
@@ -43,5 +45,19 @@ const LoginOptions = ({ navigation }) => {
     </StyledFormBackground>
   );
 };
+
+const styles = StyleSheet.create({
+  logo: {
+    width: 200,
+    height: 66,
+    display: 'flex',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  title: {
+    width: 300,
+    height: 75,
+  },
+});
 
 export default LoginOptions;

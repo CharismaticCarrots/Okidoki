@@ -24,6 +24,7 @@ const DokiDrawer = ({ curCarrotCount, curFullnessLvl, curMoodLvl }) => {
               key={item.id}
               idNumber={item.id}
               name={item.name}
+              price={item.price}
               quantity={item.user_item.quantity}
               curMoodLvl={curMoodLvl}
             />

@@ -18,9 +18,6 @@ const Item = db.define('item', {
       min: 1,
     },
   },
-  imageUrl: {
-    type: Sequelize.STRING,
-  },
 });
 
 module.exports = Item;
