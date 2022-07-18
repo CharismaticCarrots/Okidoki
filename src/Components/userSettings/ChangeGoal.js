@@ -8,10 +8,10 @@ import { StyledHeading1,
   StyledFormTextInput,
   StyledFormButton,
   StyledFormButtonText, 
-  StyledSettingsHeading2,
   StyledHealthStatHeading,
   StyledFormInputError,
-  StyledFormContainer
+  StyledChangeGoalContainer,
+  StyledSettingsError
 } from '../styles';
 import { useUserData } from '../../hooks/useUserData';
 import { API_URL } from '../../../secrets';
@@ -61,7 +61,7 @@ const ChangeGoal = ({navigation}) => {
       source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <StyledHealthStatHeading style={{marginTop: 80}}>Change Your Daily Step Goal</  StyledHealthStatHeading>
+      <StyledHealthStatHeading style={{marginTop: 80, marginBottom:0}}>Change Your Daily Step Goal</  StyledHealthStatHeading>
 
       <Formik
         initialValues={{ dailyStepGoal: '' }}
@@ -77,9 +77,8 @@ const ChangeGoal = ({navigation}) => {
         }}
       >
         {({ handleChange, handleSubmit, values, errors }) => (
-          <StyledFormContainer>
-          
-
+          <StyledChangeGoalContainer>
+             {/* <StyledHealthStatHeading style={{marginBottom:50}}>Change Your Daily Step Goal</  StyledHealthStatHeading> */}
             <StyledFormTextInput
               placeholder="New Step Goal"
               autoCapitalize="none"
@@ -96,11 +95,15 @@ const ChangeGoal = ({navigation}) => {
               }}
             />
             {errors.dailyStepGoal ? (
-              <StyledFormInputError>
+              <StyledSettingsError>
                 {errors.dailyStepGoal}
-              </StyledFormInputError>
+              </StyledSettingsError>
             ) : null}
-            <StyledFormButton
+
+            {errors.form ? (
+              <StyledSettingsError>{errors.form}</StyledSettingsError>
+            ) : null}
+             <StyledFormButton
               onPress={handleSubmit}
               style={{
                 marginTop: 5,
@@ -110,9 +113,6 @@ const ChangeGoal = ({navigation}) => {
             >
               <StyledFormButtonText>Submit</StyledFormButtonText>
             </StyledFormButton>
-            {errors.form ? (
-              <StyledFormInputError style={{fontFamily:'FredokaOne', fontSize:18}}>{errors.form}</StyledFormInputError>
-            ) : null}
             <StyledFormButton
            style={{ marginTop: 20, width: 150 }}
            onPress={() => {
@@ -121,7 +121,7 @@ const ChangeGoal = ({navigation}) => {
         >
         <StyledFormButtonText>Cancel</StyledFormButtonText>
         </StyledFormButton>
-          </StyledFormContainer>
+          </StyledChangeGoalContainer>
         )}
       </Formik>
 
