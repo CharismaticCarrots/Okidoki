@@ -22,10 +22,9 @@ const DokiHome = () => {
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     setCurrentDate(new Date());
-    console.log('NOW:', new Date(now).toLocaleString('en-US'));
     queryClient.invalidateQueries();
     wait(2000).then(() => setRefreshing(false));
-  }, [now, queryClient]);
+  }, [queryClient]);
 
   return (
     <ScrollView

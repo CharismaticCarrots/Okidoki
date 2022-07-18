@@ -1,5 +1,3 @@
-import React from 'react';
-import { View } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {
   StyledCountDisplayContainer,
