@@ -16,14 +16,6 @@ const LoginOptions = ({ navigation }) => {
     >
       <StyledLoginOptionsContainer>
         <View>
-          {/* <StyledLogoHeading>Okidoki</StyledLogoHeading> */}
-          {/* <StyledLoginOptionsDescription>
-            some cool slogan
-          </StyledLoginOptionsDescription> */}
-          {/* <Image
-            source={require('../../assets/Untitled_Artwork.png')}
-            style={styles.logo}
-          /> */}
           <Image
             source={require('../../assets/logoWegg3.png')}
             style={styles.title}
