@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import {
@@ -21,7 +20,7 @@ const ChangePassword = ({ navigation }) => {
     token = user.token;
   }
 
-  const mutation = useMutation(async ({ password, setErrors }) => {
+  const mutation = useMutation(async ({ password }) => {
     try {
       await axios.put(
         `http://${API_URL}/api/user`,
@@ -41,14 +40,12 @@ const ChangePassword = ({ navigation }) => {
       source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <StyledHealthStatHeading style={{ marginTop: 80 }}>
+      <StyledHealthStatHeading style={{ marginTop: 100 }}>
         Change Your Password
       </StyledHealthStatHeading>
       <Formik
         initialValues={{ password: '' }}
-        onSubmit={(values, { setErrors }) =>
-          mutation.mutate({ password: values.password, setErrors })
-        }
+        onSubmit={(values) => mutation.mutate({ password: values.password })}
         validate={(values) => {
           const errors = {};
           if (!values.password) {

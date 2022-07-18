@@ -13,12 +13,15 @@ import whitefox_sleep from '../assets/sprites/whitefox_sprites/whitefox_sleep.pn
 import slime from '../assets/items/slime.png';
 import ball from '../assets/items/ball.png';
 import leaf from '../assets/items/leaf.png';
-import video_game from '../assets/items/videogame.png';
+import stress_ball from '../assets/items/stressball.png';
+import egg_game from '../assets/items/egggame.png';
 import plushie from '../assets/items/plushie.png';
 import flute from '../assets/items/flute.png';
+import cards from '../assets/items/cards.png';
 import gold_star from '../assets/items/goldstar.png';
 import wand from '../assets/items/wand.png';
 import tomato from '../assets/items/tomato.png';
+import game_girl from '../assets/items/gamegirl.png';
 
 const images = {
   sprites: {
@@ -39,15 +42,18 @@ const images = {
     },
   },
   store: {
-    'video game': video_game,
+    'egg game': egg_game,
     slime,
     ball,
     leaf,
+    'stress ball': stress_ball,
     plushie,
     flute,
+    cards,
     'gold star': gold_star,
     wand,
     tomato,
+    'game girl': game_girl,
   },
 };
 

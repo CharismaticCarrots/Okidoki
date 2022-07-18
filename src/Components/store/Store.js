@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   },
   popoverStyles: {
     alignSelf: 'center',
-    marginTop: 450,
+    bottom: '20%',
     width: 200,
   },
 });

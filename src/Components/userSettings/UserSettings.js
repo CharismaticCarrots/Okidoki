@@ -1,4 +1,11 @@
+import { View } from 'react-native';
 import React, { useState, useEffect } from 'react';
+import {
+  StyledFormBackground,
+  StyledFormButton,
+  StyledFormButtonText,
+  StyledHealthStatHeading,
+} from '../styles';
 import * as SecureStore from 'expo-secure-store';
 
 import { useUserData } from '../../hooks/useUserData';
@@ -9,20 +16,12 @@ import Feather from 'react-native-vector-icons/Feather';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-import {
-  StyledFormBackground,
-  StyledFormButton,
-  StyledFormButtonText,
-  StyledHealthStatHeading,
-} from '../styles';
-
 const UserSettings = ({ navigation }) => {
   const [userDoki, setUserDoki] = useState();
   const [dokiMood, setDokiMood] = useState('');
   const { user, logout } = useUserData();
   const { signOut } = React.useContext(AuthContext);
   const userDokiData = useUserDokiData();
-  console.log(user);
   useEffect(() => {
     if (userDokiData) {
       setUserDoki(userDokiData);
@@ -53,11 +52,25 @@ const UserSettings = ({ navigation }) => {
       source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <StyledHealthStatHeading style={{ marginTop: 100, marginBottom: 110 }}>
+      <StyledHealthStatHeading style={{ marginTop: 100, marginBottom: 70 }}>
         Settings
       </StyledHealthStatHeading>
       <StyledFormButton
-        style={{ marginTop: 20, width: 250 }}
+        style={{ width: 250 }}
+        onPress={() => {
+          navigation.navigate('Change Goal');
+        }}
+      >
+        <StyledFormButtonText
+          style={{ fontFamily: 'AntipastoBold', fontSize: 20 }}
+        >
+          <FontAwesome5 name={'trophy'} style={{ fontSize: 20 }} />
+          Achievements
+        </StyledFormButtonText>
+      </StyledFormButton>
+
+      <StyledFormButton
+        style={{ marginTop: 15, width: 250 }}
         onPress={() => {
           navigation.navigate('Change Goal');
         }}
@@ -71,7 +84,7 @@ const UserSettings = ({ navigation }) => {
       </StyledFormButton>
       {user.externalType !== 'google' ? (
         <StyledFormButton
-          style={{ marginTop: 20, width: 250 }}
+          style={{ marginTop: 15, width: 250 }}
           onPress={() => {
             navigation.navigate('Change Password');
           }}
@@ -79,13 +92,16 @@ const UserSettings = ({ navigation }) => {
           <StyledFormButtonText
             style={{ fontFamily: 'AntipastoBold', fontSize: 20 }}
           >
+            {' '}
             <Fontisto name="key" size={18} /> Change Password
           </StyledFormButtonText>
         </StyledFormButton>
-      ) : null}
+      ) : (
+        <View></View>
+      )}
 
       <StyledFormButton
-        style={{ marginTop: 20, width: 250, backgroundColor: '#5FB8FD' }}
+        style={{ marginTop: 15, width: 250, backgroundColor: '#5FB8FD' }}
         onPress={() => {
           logout();
           SecureStore.deleteItemAsync('TOKEN');

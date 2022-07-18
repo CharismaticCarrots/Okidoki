@@ -52,12 +52,15 @@ const items = [
   { name: 'slime', price: 1 },
   { name: 'ball', price: 1 },
   { name: 'leaf', price: 1 },
-  { name: 'video game', price: 2 },
+  { name: 'stress ball', price: 1 },
+  { name: 'egg game', price: 2 },
   { name: 'plushie', price: 2 },
   { name: 'flute', price: 2 },
+  { name: 'cards', price: 2 },
   { name: 'gold star', price: 3 },
   { name: 'wand', price: 3 },
   { name: 'tomato', price: 3 },
+  { name: 'game girl', price: 3 },
 ];
 
 const seed = async () => {
@@ -75,17 +78,7 @@ const seed = async () => {
       })
     );
 
-    const [
-      slime,
-      ball,
-      leaf,
-      videogame,
-      plushie,
-      flute,
-      goldstar,
-      wand,
-      tomato,
-    ] = await Promise.all(
+    await Promise.all(
       items.map((item) => {
         return Item.create(item);
       })

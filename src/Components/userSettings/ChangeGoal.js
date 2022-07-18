@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { useMutation } from 'react-query';
 import axios from 'axios';
@@ -46,7 +45,7 @@ const ChangeGoal = ({ navigation }) => {
       source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <StyledHealthStatHeading style={{ marginTop: 80 }}>
+      <StyledHealthStatHeading style={{ marginTop: 100 }}>
         Change Your Daily Step Goal
       </StyledHealthStatHeading>
 
