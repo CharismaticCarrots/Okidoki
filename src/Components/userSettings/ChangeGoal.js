@@ -35,7 +35,7 @@ const ChangeGoal = ({navigation}) => {
             headers: { authorization: token },
           }
         );
-        return navigation.navigate('DokiHome');
+        return navigation.navigate('User Settings')
       } catch (error) {
         console.log({error})
       }

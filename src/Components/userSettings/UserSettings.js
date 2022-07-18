@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react'
 import Sprite from "../Sprite";
 import images from "../../images";
 import { StyledInnerDokiContainer } from "../styles";
-
-
 import {    
   StyledFormBackground,
   StyledFormButton,
