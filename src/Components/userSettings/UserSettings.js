@@ -64,7 +64,7 @@ const UserSettings = ({ navigation }) => {
         <StyledFormButtonText
           style={{ fontFamily: 'AntipastoBold', fontSize: 20 }}
         >
-          <FontAwesome5 name={'trophy'} style={{ fontSize: 20 }} /> View
+          <FontAwesome5 name={'trophy'} style={{ fontSize: 20 }} />
           Achievements
         </StyledFormButtonText>
       </StyledFormButton>
