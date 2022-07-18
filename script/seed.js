@@ -46,12 +46,15 @@ const users = [
 ];
 
 const items = [
-  { name: 'slime', price: 2, imageUrl: 'assets/items/slime.png' },
-  { name: 'video game', price: 5, imageUrl: 'assets/items/videogame.png' },
-  { name: 'ball', price: 4, imageUrl: 'assets/items/ball.png' },
-  { name: 'teddy bear', price: 5, imageUrl: 'assets/items/teddybear.png' },
-  { name: 'leaf', price: 5, imageUrl: 'assets/items/leaf.png' },
-  { name: 'paintbrush', price: 10, imageUrl: 'assets/items/paintbrush.png' },
+  { name: 'slime', price: 1 },
+  { name: 'ball', price: 1 },
+  { name: 'leaf', price: 1 },
+  { name: 'video game', price: 2 },
+  { name: 'plushie', price: 2 },
+  { name: 'flute', price: 2 },
+  { name: 'gold star', price: 3 },
+  { name: 'wand', price: 3 },
+  { name: 'tomato', price: 3 },
 ];
 
 const seed = async () => {
@@ -69,35 +72,45 @@ const seed = async () => {
       })
     );
 
-    const [slime, videogame, ball, teddybear, leaf] = await Promise.all(
+    const [
+      slime,
+      ball,
+      leaf,
+      videogame,
+      plushie,
+      flute,
+      goldstar,
+      wand,
+      tomato,
+    ] = await Promise.all(
       items.map((item) => {
         return Item.create(item);
       })
     );
 
-    teddybear.addUser(user1, {
-      through: {
-        quantity: 3,
-      },
-    });
+    // slime.addUser(user1, {
+    //   through: {
+    //     quantity: 3,
+    //   },
+    // });
 
-    slime.addUser(user2, {
-      through: {
-        quantity: 2,
-      },
-    });
+    // ball.addUser(user2, {
+    //   through: {
+    //     quantity: 2,
+    //   },
+    // });
 
-    videogame.addUser(user3, {
-      through: {
-        quantity: 2,
-      },
-    });
+    // leaf.addUser(user3, {
+    //   through: {
+    //     quantity: 2,
+    //   },
+    // });
 
-    ball.addUser(user4, {
-      through: {
-        quantity: 3,
-      },
-    });
+    // videogame.addUser(user4, {
+    //   through: {
+    //     quantity: 3,
+    //   },
+    // });
 
     await catDoki.addUser(user1, {
       through: {
