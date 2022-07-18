@@ -30,15 +30,15 @@ const UserSettings = ({navigation}) => {
     >
       <  StyledHealthStatHeading style={{marginTop: 80, marginBottom:130}}>User Settings</  StyledHealthStatHeading>
         <StyledFormButton
-           style={{ marginTop: 20, width: 150 }}
+           style={{ marginTop: 20, width: 250 }}
            onPress={() => {
            navigation.navigate('Change Goal')
           }}
         >
-        <StyledFormButtonText>Change Goal</StyledFormButtonText>
+        <StyledFormButtonText>Change Step Goal</StyledFormButtonText>
         </StyledFormButton>     
         <StyledFormButton
-           style={{ marginTop: 20, width: 150 }}
+           style={{ marginTop: 20, width: 250 }}
            onPress={() => {
            navigation.navigate('Change Password')
           }}
@@ -46,7 +46,7 @@ const UserSettings = ({navigation}) => {
         <StyledFormButtonText>Change Password</StyledFormButtonText>
         </StyledFormButton>
         <StyledFormButton
-           style={{ marginTop: 20, width: 150 }}
+           style={{ marginTop: 20, width: 250 }}
            onPress={() => {
             logout();
             SecureStore.deleteItemAsync('TOKEN');
