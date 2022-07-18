@@ -17,7 +17,6 @@ const permissions = {
   },
 };
 
-//context
 export const HealthkitContext = React.createContext();
 
 export const HealthKitProvider = ({ children }) => {
@@ -25,8 +24,6 @@ export const HealthKitProvider = ({ children }) => {
 
   useEffect(() => {
     AppleHealthKit.initHealthKit(permissions, (error) => {
-      /* Called after we receive a response from the system */
-
       if (error) {
         console.log('[ERROR] Cannot grant permissions!');
       }
@@ -117,6 +114,7 @@ export const useTotalStepCount = (startDate, endDate) => {
     };
 
     if (isLoaded) {
+      let shouldRun = true;
       AppleHealthKit.getDailyStepCountSamples(options, (err, results) => {
         if (err) {
           return;
@@ -126,8 +124,11 @@ export const useTotalStepCount = (startDate, endDate) => {
           (totalSteps, curSample) => totalSteps + curSample.value,
           0
         );
-        setTotalSteps(totalSteps);
+        if (shouldRun) {
+          setTotalSteps(totalSteps);
+        }
       });
+      return () => (shouldRun = false);
     }
   }, [isLoaded, startDate, endDate, AppleHealthKit]);
 

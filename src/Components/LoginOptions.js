@@ -2,10 +2,8 @@ import { View, Image, StyleSheet } from 'react-native';
 import {
   StyledFormBackground,
   StyledLoginOptionsContainer,
-  StyledLoginOptionsDescription,
   StyledFormButton,
   StyledFormButtonText,
-  StyledLogoHeading,
 } from './styles';
 
 const LoginOptions = ({ navigation }) => {
@@ -26,7 +24,7 @@ const LoginOptions = ({ navigation }) => {
             style={{
               width: 220,
               marginBottom: 10,
-              backgroundColor: '#C6D593'}}
+              backgroundColor: '#5FB8FD'}}
             onPress={() => navigation.navigate('SignUp')}
           >
             <StyledFormButtonText>Create Account</StyledFormButtonText>

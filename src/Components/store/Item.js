@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   itemPrice: {
-    fontFamily: 'Singularity',
-    fontSize: 22,
+    fontFamily: 'FredokaOne',
+    fontSize: 15,
     color: '#333',
   },
 });
