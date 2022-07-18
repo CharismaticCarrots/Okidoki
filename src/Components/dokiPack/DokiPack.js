@@ -1,44 +1,46 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { useUserItemData } from '../../hooks/useUserItemData'
-import { StyledContainer, StyledHeading1, StyledDokiHomeBackground, StyledItemView } from '../styles'
-import UserItem from './UserItem'
+import { StyleSheet, Text, View } from 'react-native';
+import { useUserItemData } from '../../hooks/useUserItemData';
+import { StyledHeading1, StyledDokiHomeBackground } from '../styles';
+import UserItem from './UserItem';
 
 const DokiPack = () => {
-  const userItems = useUserItemData()
-  let userItemList
-  if (userItems){
-    userItemList = userItems.map(item => {
-      return <UserItem key={item.id} name={item.name} quantity={item.user_item.quantity}/>
-    })
+  const userItems = useUserItemData();
+  let userItemList;
+  if (userItems) {
+    userItemList = userItems.map((item) => {
+      return (
+        <UserItem
+          key={item.id}
+          name={item.name}
+          quantity={item.user_item.quantity}
+        />
+      );
+    });
   }
-  
+
   return (
-        <StyledDokiHomeBackground
-          source={require('../../../assets/backgrounds/selectEgg.png')}
-          resizeMode='cover'
-        >
-          <View style={styles.container}>
-          <StyledHeading1>Doki Backpack</StyledHeading1>
-          <View style={styles.box}>
-            {userItemList}
-          </View>
-          </View>
-      </StyledDokiHomeBackground>
+    <StyledDokiHomeBackground
+      source={require('../../../assets/backgrounds/selectEgg.png')}
+      resizeMode="cover"
+    >
+      <View style={styles.container}>
+        <StyledHeading1>Doki Backpack</StyledHeading1>
+        <View style={styles.box}>{userItemList}</View>
+      </View>
+    </StyledDokiHomeBackground>
+  );
+};
 
-  )
-}
-
-export default DokiPack
+export default DokiPack;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 80
+    marginTop: 80,
   },
   box: {
-  marginHorizontal: 10,
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  justifyContent: 'space-evenly',
-   },
-})
+    marginHorizontal: 10,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
+  },
+});

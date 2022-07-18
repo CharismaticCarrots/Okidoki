@@ -49,13 +49,6 @@ const StyledHeading2 = styled(Text)`
   font-family: 'Singularity';
 `;
 
-const StyledContainer = styled(View)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px 30px;
-`;
-
 // Forms — SignIn, SignUp, SetGoal
 const StyledFormBackground = styled(ImageBackground)`
   display: flex;
@@ -330,22 +323,6 @@ const StyledItemQuantityText = styled(Text)`
   padding: 6px;
 `;
 
-const StyledItemCard = styled(Card)`
-  height: 130px;
-  width: 150px;
-  background-color: ${colors.primary};
-  margin: 10px;
-  padding-top: 15px;
-  justify-content: space-evenly;
-`;
-
-const StyledItemView = styled(View)`
-  display: flex;
-  flexdirection: row;
-  // alignitems: center;
-  margin: 30px;
-`;
-
 //User Settings
 const StyledSettingsHeading = styled(Text)`
   font-size: 50px;
@@ -366,13 +343,11 @@ const StyledSettingsHeading2 = styled(Text)`
   font-family: 'AntipastoBold';
 `;
 
-
 export {
   // General Styles
   StyledLogoHeading,
   StyledHeading1,
   StyledHeading2,
-  StyledContainer,
   // Form Styles
   StyledFormBackground,
   StyledFormContainer,
@@ -418,9 +393,7 @@ export {
   StyledItemImage,
   StyledItemQuantity,
   StyledItemQuantityText,
-  StyledItemCard,
-  StyledItemView,
   //UserSettings Component
   StyledSettingsHeading,
-  StyledSettingsHeading2
+  StyledSettingsHeading2,
 };
