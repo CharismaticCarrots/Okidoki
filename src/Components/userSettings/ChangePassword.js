@@ -102,34 +102,7 @@ const ChangePassword = ({navigation}) => {
           </StyledChangeGoalContainer>
         )}
       </Formik>
-        {/* <StyledFormTextInput
-          placeholder="New Password"
-          autoCapitalize="none"
-          autoCorrect={false}
-          autoComplete="off"
-          onChangeText={setPassword}
-          style={{ width: 240 }}
-          ref={input => { this.textInput = input }}
-          clearButtonMode="always"
-        />
-
-        <StyledFormButton
-          onPress={() => {
-            handleSubmit();
-          }}
-          style={{ marginTop: 20, width: 150 }}
-        >
-          <StyledFormButtonText>Submit</StyledFormButtonText>
-        </StyledFormButton>
-        <StyledFormButton
-           style={{ marginTop: 20, width: 150 }}
-           onPress={() => {
-           navigation.navigate('User Settings')
-          }}
-        >
-        <StyledFormButtonText>Cancel</StyledFormButtonText>
-        </StyledFormButton> */}
-    
+   
     </StyledFormBackground>
   );
 };
