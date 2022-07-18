@@ -11,15 +11,7 @@ import {
   StyledItemQuantity,
   StyledItemQuantityText,
 } from '../styles';
-
-const imageNames = {
-  'video game': require('../../../assets/items/videogame.png'),
-  slime: require('../../../assets/items/slime.png'),
-  ball: require('../../../assets/items/ball.png'),
-  'teddy bear': require('../../../assets/items/teddybear.png'),
-  leaf: require('../../../assets/items/leaf.png'),
-  paintbrush: require('../../../assets/items/paintbrush.png'),
-};
+import images from '../../images';
 
 const UserItem = ({ name, idNumber, quantity, curMoodLvl }) => {
   const { ref, hide, show } = usePopable();
@@ -31,7 +23,7 @@ const UserItem = ({ name, idNumber, quantity, curMoodLvl }) => {
   return (
     <TouchableOpacity onPress={playWithDoki}>
       <StyledItemContainer>
-        <StyledItemImage source={imageNames[name]} />
+        <StyledItemImage source={images.store[name]} />
         <StyledItemQuantity>
           <StyledItemQuantityText>{quantity}</StyledItemQuantityText>
         </StyledItemQuantity>

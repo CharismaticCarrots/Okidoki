@@ -8,7 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import { ProgressBar, Card } from 'react-native-paper';
+import { ProgressBar } from 'react-native-paper';
 
 // Color Palette
 const colors = {
@@ -51,13 +51,6 @@ const StyledHeading2 = styled(Text)`
   font-family: 'Singularity';
 `;
 
-const StyledContainer = styled(View)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px 30px;
-`;
-
 // Forms — SignIn, SignUp, SetGoal
 const StyledFormBackground = styled(ImageBackground)`
   display: flex;
@@ -84,7 +77,8 @@ const StyledFormTextInput = styled(TextInput)`
   background: white;
   border-radius: 50px;
   margin-bottom: 10px;
-  border: solid ${(props) => (props.error ? `#C23B22` : `${colors.text.dark}`)} 4px;
+  border: solid ${(props) => (props.error ? `#C23B22` : `${colors.text.dark}`)}
+    4px;
 `;
 
 const StyledFormButton = styled(TouchableOpacity)`
@@ -92,19 +86,18 @@ const StyledFormButton = styled(TouchableOpacity)`
   padding: 15px;
   border-radius: 50px;
   align-items: center;
-  border: solid black 4px;
-  width: 220px;
+  border: solid ${colors.text.dark} 4px;
 `;
 
 const StyledFormButtonText = styled(Text)`
   font-family: 'Singularity';
   font-size: 24px;
-  color: black;
+  color: ${colors.text.dark};
   letter-spacing: 0.5px;
 `;
 
 const StyledFormSuggest = styled(Text)`
-  color: black;
+  color: ${colors.text.dark};
   font-family: 'Singularity';
   font-size: 23px;
   text-align: center;
@@ -156,7 +149,7 @@ const StyledDokiHomeBackground = styled(ImageBackground)`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  margin-bottom: 85px;
+  margin-bottom: 100px;
 `;
 
 const StyledDokiContainer = styled(View)`
@@ -182,7 +175,7 @@ const StyledOuterCountersContainer = styled(View)`
 `;
 
 const StyledDokiName = styled(Text)`
-  color: black;
+  color: #333;
   font-size: 30px;
   font-weight: 800;
   text-align: center;
@@ -281,7 +274,7 @@ const StyledHealthStatHeading = styled(Text)`
   margin-bottom: 20px;
   font-family: 'AntipastoBold';
   letter-spacing: 1px;
-  color: ${colors.text.dark}
+  color: ${colors.text.dark};
 `;
 
 const StyledDayContainer = styled(View)`
@@ -335,24 +328,8 @@ const StyledItemQuantityText = styled(Text)`
   padding: 6px;
 `;
 
-const StyledItemCard = styled(Card)`
-  height: 130px;
-  width: 150px;
-  background-color: ${colors.primary};
-  margin: 10px;
-  padding-top: 15px;
-  justify-content: space-evenly;
-`;
-
-const StyledItemView = styled(View)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 30px;
-`;
-
 const StyledFormInputError = styled(Text)`
-  color: #C23B22;
+  color: #c23b22;
   font-family: 'Singularity';
   font-size: 22px;
   padding: 5px;
@@ -360,7 +337,26 @@ const StyledFormInputError = styled(Text)`
   text-align: center;
 `;
 
-//User Settings
+// Doki Pack Icon
+const StyledDokiPackContainer = styled(TouchableOpacity)`
+  // position: absolute;
+  // bottom: 0px;
+  // right: 0px;
+  width: 90px;
+  height: 90px;
+  background-color: #ffefb4;
+  border: solid 3px ${colors.text.dark};
+  border-radius: 50px;
+  padding: 15px;
+  // margin: 15px;
+`;
+
+const StyledDokiPackImage = styled(Image)`
+  height: 100%;
+  width: 100%;
+`;
+
+// User Settings
 const StyledSettingsHeading = styled(Text)`
   font-size: 50px;
   color: ${colors.text.dark};
@@ -386,7 +382,6 @@ export {
   StyledLogoHeading,
   StyledHeading1,
   StyledHeading2,
-  StyledContainer,
   // Form Styles
   StyledFormBackground,
   StyledFormContainer,
@@ -428,14 +423,15 @@ export {
   StyledDayContainer,
   StyledInternalContainer,
   StyledHealthStatHeading,
-  // UserItem Component
+  // DokiDrawer and UserItem Component
   StyledItemContainer,
   StyledItemImage,
   StyledItemQuantity,
   StyledItemQuantityText,
-  StyledItemCard,
-  StyledItemView,
-  //UserSettings Component
+  // Doki Pack Icon
+  StyledDokiPackContainer,
+  StyledDokiPackImage,
+  // UserSettings Component
   StyledSettingsHeading,
   StyledSettingsHeading2,
 };
