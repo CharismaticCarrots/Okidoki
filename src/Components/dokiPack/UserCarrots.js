@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import { useState } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Popable, usePopable } from 'react-native-popable';
+import { useQueryClient } from 'react-query';
+
+import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
+import { useUpdateUser } from '../../hooks/useUpdateUser';
+import { createTriggerNotification } from '../../helpers/createTriggerNotification';
+
 import {
   StyledItemContainer,
   StyledItemImage,
   StyledItemQuantity,
   StyledItemQuantityText,
 } from '../styles';
-import { Popable, usePopable } from 'react-native-popable';
-import { useQueryClient } from 'react-query';
-import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
-import { useUpdateUser } from '../../hooks/useUpdateUser';
-import { createTriggerNotification } from "../../helpers/createTriggerNotification";
 
-const UserCarrots = ({curCarrotCount, curFullnessLvl}) => {
+const UserCarrots = ({ curCarrotCount, curFullnessLvl }) => {
   const { ref, hide, show } = usePopable();
   const userDokiMutation = useUpdateUserDoki();
   const userMutation = useUpdateUser();
@@ -22,13 +24,9 @@ const UserCarrots = ({curCarrotCount, curFullnessLvl}) => {
   return (
     <TouchableOpacity onPress={feedDoki}>
       <StyledItemContainer>
-        <StyledItemImage
-          source={require('../../../assets/items/carrot.png')}
-        />
+        <StyledItemImage source={require('../../../assets/items/carrot.png')} />
         <StyledItemQuantity>
-          <StyledItemQuantityText>
-            {curCarrotCount}
-          </StyledItemQuantityText>
+          <StyledItemQuantityText>{curCarrotCount}</StyledItemQuantityText>
         </StyledItemQuantity>
       </StyledItemContainer>
       <Popable
@@ -39,7 +37,6 @@ const UserCarrots = ({curCarrotCount, curFullnessLvl}) => {
       ></Popable>
     </TouchableOpacity>
   );
-
 
   function feedDoki() {
     if (curCarrotCount <= 0 || curFullnessLvl >= 100) {
@@ -62,14 +59,14 @@ const UserCarrots = ({curCarrotCount, curFullnessLvl}) => {
       };
       userDokiMutation.mutate(userDokiUpdate, {
         onSuccess: () => {
-          queryClient.invalidateQueries(['userDoki'])
+          queryClient.invalidateQueries(['userDoki']);
         },
       });
       userMutation.mutate(
         { carrotCount: curCarrotCount - 1 },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries(['user'])
+            queryClient.invalidateQueries(['user']);
           },
         }
       );
@@ -78,7 +75,7 @@ const UserCarrots = ({curCarrotCount, curFullnessLvl}) => {
       setTimeout(() => hide(), 1000);
       createTriggerNotification('feed');
     }
-  };
+  }
 };
 
 export default UserCarrots;
