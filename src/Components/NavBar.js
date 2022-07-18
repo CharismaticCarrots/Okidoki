@@ -6,7 +6,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import DokiView from './dokiHome/DokiHome';
 import HealthStat from './HealthStat';
 import Store from './store/Store';
-import UserSettings from './userSettings/UserSettings';
 import SettingsNavigator from './SettingsNavigator';
 
 const Tab = createBottomTabNavigator();
@@ -28,7 +27,6 @@ const TabNavigator = () => {
           {
             display: "flex",
             paddingTop: 13,
-            backgroundColor: '#59b2ff',
           },
           null,
         ],
@@ -38,33 +36,33 @@ const TabNavigator = () => {
               return (
                 <FontAwesome5
                   name={'home'}
-                  style={{fontSize: 32}}
+                  style={{fontSize: 34}}
                   color='#333'/>
-              )
-            case 'Health Data':
-              return (
-                <FontAwesome5
-                name={'chart-bar'}
-                style={{fontSize: 30}}
-                color='#333'
-              />
               )
             case 'Store':
               return (
                 <FontAwesome5
                 name={'store'}
-                style={{fontSize: 30}}
+                style={{fontSize: 28}}
                 color='#333'
               />
               )
-              case 'UserSettings':
-                return (
-                  <Ionicons
-                    name={'ios-settings-sharp'}
-                    style={{fontSize: 36}}
-                    color='#333'
-                  />
-                );
+            case 'Health Data':
+              return (
+                <FontAwesome5
+                name={'chart-bar'}
+                style={{fontSize: 34}}
+                color='#333'
+              />
+              )
+            case 'UserSettings':
+              return (
+                <Ionicons
+                  name={'ios-settings-sharp'}
+                  style={{fontSize: 36}}
+                  color='#333'
+                />
+              );
             default:
               return <View />;
           }
@@ -72,8 +70,8 @@ const TabNavigator = () => {
       })}
     >
       <Tab.Screen name="DokiHome" component={DokiView} />
-      <Tab.Screen name="Health Data" component={HealthStat} />
       <Tab.Screen name="Store" component={Store} />
+      <Tab.Screen name="Health Data" component={HealthStat} />
       <Tab.Screen name="UserSettings" component={SettingsNavigator} />
     </Tab.Navigator>
   );
