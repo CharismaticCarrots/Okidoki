@@ -22,7 +22,6 @@ const UserSettings = ({ navigation }) => {
   const { user, logout } = useUserData();
   const { signOut } = React.useContext(AuthContext);
   const userDokiData = useUserDokiData();
-  console.log(user);
   useEffect(() => {
     if (userDokiData) {
       setUserDoki(userDokiData);
