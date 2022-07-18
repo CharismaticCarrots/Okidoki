@@ -76,7 +76,9 @@ const SelectEgg = ({ navigation }) => {
       resizeMode="cover"
     >
       <View style={styles.container}>
-        <StyledHeading1>Select a Doki</StyledHeading1>
+        <StyledHeading1
+          style={{marginTop: 150}}
+        >Select a Doki</StyledHeading1>
 
         <View style={styles.eggSelection}>
           <View style={styles.eggRow}>
@@ -118,14 +120,23 @@ const SelectEgg = ({ navigation }) => {
               autoCorrect={false}
               autoComplete="off"
               onChangeText={setDokiName}
-              style={{ width: 240 }}
+              style={{
+                fontFamily: dokiName ? 'FredokaOne' : 'Singularity',
+                fontSize: dokiName ? 18 : 24,
+                width: 280,
+                marginTop: 50,
+              }}
             />
 
             <StyledFormButton
               onPress={() => {
                 handleSubmit();
               }}
-              style={{ marginTop: 5, width: 150 }}
+              style={{
+                marginTop: 5,
+                width: 150,
+                backgroundColor: '#59b2ff',
+              }}
             >
               <StyledFormButtonText>Submit</StyledFormButtonText>
             </StyledFormButton>
@@ -141,15 +152,14 @@ export default SelectEgg;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'space-around',
   },
   eggSelection: {
-    alignItems: 'center',
+    height: 450,
   },
   eggRow: {
     flexDirection: 'row',
-    marginBottom: 40,
+    marginBottom: 50,
   },
   eggImg: {
     height: 125,

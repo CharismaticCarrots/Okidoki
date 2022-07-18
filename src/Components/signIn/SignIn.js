@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
 import { useMutation } from 'react-query';
 import { Formik } from 'formik';
 import axios from 'axios';
@@ -27,7 +26,6 @@ const SignIn = ({ navigation }) => {
   });
 
   const { user, isLoading, isError } = useUserData();
-  // console.log('User on SignIn: ', user);
 
   useEffect(() => {
     if (response?.type === 'success') {
@@ -109,7 +107,25 @@ const SignIn = ({ navigation }) => {
         {({ handleChange, handleSubmit, values, errors }) => (
           <StyledFormContainer>
             <StyledHeading1>Welcome Back</StyledHeading1>
-
+            <StyledFormButton
+              style={{
+                marginTop: 20,
+                marginBottom: 30,
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                backgroundColor: '#59b2ff'
+              }}
+              onPress={() => {
+                promptAsync();
+              }}
+            >
+              <FontAwesome5 name={'google'} style={{fontSize: 27, overflow: "hidden", color: "black"}} />
+              <StyledFormButtonText style={{ textAlign: 'center' }}>
+                Sign in with Google
+              </StyledFormButtonText>
+            </StyledFormButton>
             <StyledFormTextInput
               placeholder="Email"
               autoCapitalize="none"
@@ -118,6 +134,9 @@ const SignIn = ({ navigation }) => {
               error={!!errors.email}
               onChangeText={handleChange('email')}
               value={values.email}
+              style={{
+                fontFamily: values.email ? 'FredokaOne' : 'Singularity',
+                fontSize: values.email ? 18 : 24 }}
             />
             {errors.email ? (
               <StyledFormInputError>{errors.email}</StyledFormInputError>
@@ -131,6 +150,10 @@ const SignIn = ({ navigation }) => {
               error={!!errors.password}
               value={values.password}
               onChangeText={handleChange('password')}
+              style={{
+                fontFamily: values.password ? 'FredokaOne' : 'Singularity',
+                fontSize: values.password ? 18 : 24 }}
+
             />
             {errors.password ? (
               <StyledFormInputError>{errors.password}</StyledFormInputError>
@@ -152,37 +175,11 @@ const SignIn = ({ navigation }) => {
             >
               Don't have an account? Sign up
             </StyledFormSuggest>
-            <StyledFormButton
-              style={{
-                marginTop: 20,
-                marginBottom: 10,
-                width: '95%',
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-              }}
-              onPress={() => {
-                promptAsync();
-              }}
-            >
-              <FontAwesome5 name={'google'} style={styles.icons} />
-              <StyledFormButtonText style={{ textAlign: 'center' }}>
-                Sign in with Google
-              </StyledFormButtonText>
-            </StyledFormButton>
           </StyledFormContainer>
         )}
       </Formik>
     </StyledFormBackground>
   );
 };
-
-const styles = StyleSheet.create({
-  icons: {
-    fontSize: 27,
-    overflow: 'hidden',
-    color: '#59b2ff',
-  },
-});
 
 export default SignIn;

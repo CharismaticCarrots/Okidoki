@@ -12,9 +12,9 @@ import { ProgressBar, Card } from 'react-native-paper';
 
 // Color Palette
 const colors = {
-  primary: '#ffefb4',
-  secondary: '#59b2ff',
-  tertiary: '#C7CDAB',
+  yellow: '#ffefb4',
+  blue: '#59b2ff',
+  tan: '#EFD389',
   text: {
     dark: '#333',
   },
@@ -25,14 +25,14 @@ const StyledLogoHeading = styled(Text)`
   font-size: 70px;
   font-weight: 500;
   text-align: center;
-  color: ${colors.primary};
+  color: ${colors.yellow};
   font-family: 'Singularity';
   letter-spacing: 2px;
 `;
 
 const StyledHeading1 = styled(Text)`
   font-size: 35px;
-  color: ${colors.primary};
+  color: ${colors.yellow};
   font-weight: 500;
   text-align: center;
   margin-bottom: 20px;
@@ -74,28 +74,29 @@ const StyledFormContainer = styled(View)`
 
 const StyledFormTextInput = styled(TextInput)`
   width: 100%;
-  background-color: white;
-  border-radius: 50px;
   padding: 15px;
   font-size: 18px;
-  margin-bottom: 4px;
   font-family: 'FredokaOne';
   letter-spacing: 1px;
   color: ${colors.text.dark};
-  border: solid ${(props) => (props.error ? 'red' : 'grey')} 3px;
+  background: white;
+  border-radius: 50px;
+  margin-bottom: 10px;
+  border: solid ${(props) => (props.error ? `#C23B22` : `${colors.text.dark}`)} 4px;
 `;
 
 const StyledFormButton = styled(TouchableOpacity)`
-  background-color: ${colors.primary};
+  background-color: ${colors.yellow};
   padding: 15px;
   border-radius: 50px;
   align-items: center;
+  border: solid black 4px;
 `;
 
 const StyledFormButtonText = styled(Text)`
   font-family: 'Singularity';
   font-size: 24px;
-  color: ${colors.secondary};
+  color: black;
   letter-spacing: 0.5px;
 `;
 
@@ -277,6 +278,7 @@ const StyledHealthStatHeading = styled(Text)`
   margin-bottom: 20px;
   font-family: 'AntipastoBold';
   letter-spacing: 1px;
+  color: ${colors.text.dark}
 `;
 
 const StyledDayContainer = styled(View)`
@@ -347,7 +349,7 @@ const StyledItemView = styled(View)`
 `;
 
 const StyledFormInputError = styled(Text)`
-  color: red;
+  color: #C23B22;
   font-family: 'Singularity';
   font-size: 22px;
   padding: 5px;
@@ -361,6 +363,7 @@ const StyledSettingsHeading = styled(Text)`
   color: ${colors.text.dark};
   font-weight: 300;
   text-align: center;
+  margin-top: 80px;
   margin-bottom: 10px;
   font-family: 'AntipastoBold';
 `;
