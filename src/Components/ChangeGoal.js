@@ -1,26 +1,21 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { useMutation } from 'react-query';
 import axios from 'axios';
-import { TextInput } from 'react-native-paper';
-import { StyledHeading1,   
+import { 
   StyledFormBackground,
-  StyledFormContainer,
   StyledFormTextInput,
   StyledFormButton,
-  StyledFormButtonText,
-  StyledSettingsHeading2, 
+  StyledFormButtonText, 
   StyledHealthStatHeading,
 } from './styles';
-import * as SecureStore from 'expo-secure-store';
 import { useUserData } from '../hooks/useUserData';
 import { API_URL } from '../../secrets';
-import { AuthContext } from '../AuthLoading';
+
 
 const ChangeGoal = ({navigation}) => {
   const [dailyStepGoal, setDailyStepGoal] = useState('0');
-  const { user, logout } = useUserData();
-  const { signOut } = React.useContext(AuthContext);
+  const { user } = useUserData();
+
   let token;
   if (user) {
     token = user.token;
@@ -55,10 +50,7 @@ const ChangeGoal = ({navigation}) => {
       source={require('../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <  StyledHealthStatHeading style={{marginVertical: 100}}>Change Daily Step Goal</  StyledHealthStatHeading>
- 
-
-        
+      <  StyledHealthStatHeading style={{marginTop: 80, marginBottom: 200}}>Change Daily Step Goal</  StyledHealthStatHeading>
         <StyledFormTextInput
           placeholder="Example: 10,000"
           autoCapitalize="none"
@@ -93,4 +85,3 @@ const ChangeGoal = ({navigation}) => {
 
 export default ChangeGoal
 
-const styles = StyleSheet.create({})

@@ -59,7 +59,7 @@ const User = db.define('user', {
   },
   dailyStepGoal: {
     type: INTEGER,
-    // defaultValue: 1000,
+    defaultValue: 1000,
     validate: {
       min: 1000,
     },
