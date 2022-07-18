@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import axios from 'axios';
-import { TextInput } from 'react-native-paper';
 import {
   StyledHeading1,
   StyledFormBackground,
@@ -26,7 +25,7 @@ const SetGoal = ({ navigation }) => {
   const mutation = useMutation(
     async (dailyStepGoal) => {
       try {
-         await axios.put(
+        await axios.put(
           `http://${API_URL}/api/user`,
           { dailyStepGoal },
           {
@@ -53,19 +52,29 @@ const SetGoal = ({ navigation }) => {
         <StyledHeading1>Set Your Daily Step Goal</StyledHeading1>
 
         <StyledFormTextInput
+          style={{
+            fontFamily: dailyStepGoal ? 'FredokaOne' : 'Singularity',
+            fontSize: dailyStepGoal ? 18 : 24,
+            width: 280,
+            marginTop: 20,
+            marginBottom: 20,
+          }}
           placeholder="Example: 10,000"
           autoCapitalize="none"
           autoCorrect={false}
           autoComplete="off"
           onChangeText={setDailyStepGoal}
-          style={{ width: 240 }}
         />
 
         <StyledFormButton
           onPress={() => {
             handleSubmit();
           }}
-          style={{ marginTop: 5, width: 150 }}
+          style={{
+            marginTop: 5,
+            width: 150,
+            backgroundColor: '#59b2ff',
+          }}
         >
           <StyledFormButtonText>Submit</StyledFormButtonText>
         </StyledFormButton>

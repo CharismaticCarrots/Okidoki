@@ -65,7 +65,11 @@ const UserSettings = ({navigation}) => {
           autoCorrect={false}
           autoComplete="off"
           onChangeText={setDailyStepGoal}
-          style={{ width: 240 }}
+          style={{
+            width: 240,
+            fontFamily: dailyStepGoal ? 'FredokaOne' : 'Singularity',
+            fontSize: dailyStepGoal ? 18 : 24,
+          }}
           ref={input => { this.textInput = input }}
           clearButtonMode="always"
         />
