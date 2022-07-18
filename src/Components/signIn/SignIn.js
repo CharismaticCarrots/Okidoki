@@ -72,13 +72,6 @@ const SignIn = ({ navigation }) => {
     }
   });
 
-  if (isLoading) {
-    console.log('loading');
-  }
-  if (isError) {
-    console.log('error');
-  }
-
   return (
     <StyledFormBackground
       source={require('../../../assets/backgrounds/loginOptions.png')}

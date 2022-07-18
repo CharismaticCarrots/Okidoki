@@ -7,6 +7,7 @@ import {
   StyledHealthStatHeading,
 } from '../styles';
 import * as SecureStore from 'expo-secure-store';
+
 import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { AuthContext } from '../../AuthLoading';

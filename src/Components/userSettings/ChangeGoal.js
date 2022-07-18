@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { useMutation } from 'react-query';
 import axios from 'axios';
-import { TextInput } from 'react-native-paper';
+import { useUserData } from '../../hooks/useUserData';
+import { API_URL } from '../../../secrets';
+import { Formik } from 'formik';
+
 import {
-  StyledHeading1,
   StyledFormBackground,
   StyledFormTextInput,
   StyledFormButton,
@@ -13,13 +14,9 @@ import {
   StyledChangeGoalContainer,
   StyledSettingsError,
 } from '../styles';
-import { useUserData } from '../../hooks/useUserData';
-import { API_URL } from '../../../secrets';
-import { Formik } from 'formik';
 
 const ChangeGoal = ({ navigation }) => {
   const queryClient = useQueryClient();
-  const [dailyStepGoal, setDailyStepGoal] = useState('0');
   const { user } = useUserData();
 
   let token;

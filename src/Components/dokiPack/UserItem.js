@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Popable, usePopable } from 'react-native-popable';
 import { useQueryClient } from 'react-query';
+
 import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 import { useUpdateUserItem } from '../../hooks/useUpdateUserItem';
 import { createTriggerNotification } from '../../helpers/createTriggerNotification';

@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import {
@@ -15,14 +14,13 @@ import { API_URL } from '../../../secrets';
 import { Formik } from 'formik';
 
 const ChangePassword = ({ navigation }) => {
-  const [password, setPassword] = useState('');
   const { user } = useUserData();
   let token;
   if (user) {
     token = user.token;
   }
 
-  const mutation = useMutation(async ({ password, setErrors }) => {
+  const mutation = useMutation(async ({ password }) => {
     try {
       await axios.put(
         `http://${API_URL}/api/user`,
@@ -47,9 +45,7 @@ const ChangePassword = ({ navigation }) => {
       </StyledHealthStatHeading>
       <Formik
         initialValues={{ password: '' }}
-        onSubmit={(values, { setErrors }) =>
-          mutation.mutate({ password: values.password, setErrors })
-        }
+        onSubmit={(values) => mutation.mutate({ password: values.password })}
         validate={(values) => {
           const errors = {};
           if (!values.password) {

@@ -1,6 +1,12 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
 import { Animated, Easing } from 'react-native';
+import { useMutation } from 'react-query';
+import axios from 'axios';
+
+import { API_URL } from '../../../secrets.js';
+import { useUserData } from '../../hooks/useUserData';
+
 import {
   StyledDokiHomeBackground,
   StyledHeading1,
@@ -8,10 +14,6 @@ import {
   StyledFormButton,
   StyledFormButtonText,
 } from '../styles';
-import { useMutation } from 'react-query';
-import { API_URL } from '../../../secrets.js';
-import { useUserData } from '../../hooks/useUserData';
-import axios from 'axios';
 
 const SelectEgg = ({ navigation }) => {
   const [egg, setEgg] = useState('');
@@ -23,24 +25,21 @@ const SelectEgg = ({ navigation }) => {
     token = user.token;
   }
 
-  const mutation = useMutation(
-    async (dokiName) => {
-      try {
-        await axios.post(
-          `http://${API_URL}/api/user/doki`,
-          {
-            dokiName: dokiName,
-              eggColor: egg
-            },
-          { headers: { authorization: token } }
-        );
-        return navigation.navigate('DokiHome');
-      } catch (error) {
-        console.log({error})
-      }
-    },
-  );
-
+  const mutation = useMutation(async (dokiName) => {
+    try {
+      await axios.post(
+        `http://${API_URL}/api/user/doki`,
+        {
+          dokiName: dokiName,
+          eggColor: egg,
+        },
+        { headers: { authorization: token } }
+      );
+      return navigation.navigate('DokiHome');
+    } catch (error) {
+      console.log({ error });
+    }
+  });
 
   const handleSubmit = async () => {
     mutation.mutate(dokiName);
@@ -75,9 +74,9 @@ const SelectEgg = ({ navigation }) => {
       resizeMode="cover"
     >
       <View style={styles.container}>
-        <StyledHeading1
-          style={{marginTop: 150}}
-        >Select a Doki</StyledHeading1>
+        <StyledHeading1 style={{ marginTop: 150 }}>
+          Select a Doki
+        </StyledHeading1>
 
         <View style={styles.eggSelection}>
           <View style={styles.eggRow}>

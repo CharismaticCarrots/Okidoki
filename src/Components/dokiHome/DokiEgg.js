@@ -1,16 +1,16 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Image, Animated, Easing } from 'react-native';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
 
 const eggImages = {
-  "red": require('../../../assets/eggs/egg1.png'),
-  "blue": require('../../../assets/eggs/egg3.png'),
-  "green": require('../../../assets/eggs/egg2.png'),
+  red: require('../../../assets/eggs/egg1.png'),
+  blue: require('../../../assets/eggs/egg3.png'),
+  green: require('../../../assets/eggs/egg2.png'),
 };
 
 const DokiEgg = () => {
   const spinValue = useRef(new Animated.Value(0)).current;
-  const UserDoki = useUserDokiData()
+  const UserDoki = useUserDokiData();
 
   Animated.loop(
     Animated.sequence([

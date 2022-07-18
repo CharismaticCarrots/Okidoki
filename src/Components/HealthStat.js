@@ -1,12 +1,5 @@
-import {
-  View,
-  ActivityIndicator,
-  Dimensions,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
-import React, { useContext} from 'react'
-import { Button, Card } from 'react-native-paper';
+import { View, ActivityIndicator, StyleSheet, ScrollView } from 'react-native';
+import { Card } from 'react-native-paper';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import parseISO from 'date-fns/parseISO';
@@ -27,7 +20,6 @@ import {
   useActiveEnergy,
   useDailyStepCount,
 } from '../Healthkit';
-
 
 const HealthStat = () => {
   const dailySteps = useStepCountSamples();
@@ -58,8 +50,7 @@ const HealthStat = () => {
         <StyledHealthStatHeading>Health Stats</StyledHealthStatHeading>
         <View>
           <StyledHeading2>Steps Trend: Last 7 Days</StyledHeading2>
-          <View
-            >
+          <View>
             <BarChart
               data={data}
               width={350}
@@ -81,7 +72,7 @@ const HealthStat = () => {
                 propsForLabels: {
                   fontSize: '12',
                   fontWeight: 'bold',
-                  fontFamily: 'FredokaOne'
+                  fontFamily: 'FredokaOne',
                 },
               }}
               style={{
@@ -96,9 +87,9 @@ const HealthStat = () => {
           </View>
         </View>
 
-        <StyledHeading2
-          style={{marginTop: 30}}
-        >Today&apos;s Activity</StyledHeading2>
+        <StyledHeading2 style={{ marginTop: 30 }}>
+          Today&apos;s Activity
+        </StyledHeading2>
         <ScrollView style={styles.scrollView}>
           <Card.Title
             style={styles.card}

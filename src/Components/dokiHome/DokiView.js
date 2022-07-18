@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import { ImageBackground } from 'react-native';
 import { Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
@@ -28,6 +29,7 @@ const DokiView = ({ now }) => {
   const [curMoodLvl, setCurMoodLvl] = useState(0);
   const [carrotsClaimed, setCarrotsClaimed] = useState(false);
   const [dokiMood, setDokiMood] = useState('');
+  const [dokiLevel, setDokiLevel] = useState(1);
 
   const stepCount = useDailyStepCount(now);
   const carrotReward = useCarrotReward(now);
@@ -104,10 +106,26 @@ const DokiView = ({ now }) => {
       )}
       <StyledDokiContainer>
         {userDoki && <Doki userDoki={userDoki} dokiMood={dokiMood} />}
+      </StyledDokiContainer>
+      <ImageBackground
+        source={require('../../../assets/backgrounds/dokiNameTag.png')}
+        style={{
+          zIndex: 2,
+          width: 170,
+          height: 160,
+          position: 'absolute',
+          alignItems: 'center',
+          bottom: 80,
+          paddingTop: 32,
+          paddingLeft: 12}}
+      >
         <StyledDokiName>
           {userDokiData && userDokiData.user_doki.dokiName}
         </StyledDokiName>
-      </StyledDokiContainer>
+        <StyledDokiName>
+          Lvl: {dokiLevel}
+        </StyledDokiName>
+      </ImageBackground>
 
       <StyledDokiPackContainer onPress={() => refRBSheet.current.open()}>
         <StyledDokiPackImage
