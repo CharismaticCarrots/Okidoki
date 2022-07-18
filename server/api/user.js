@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, Doki, User_Doki, User_Item, Item } = require('../db');
 const { requireToken } = require('./middleware.js');
+const bcrypt = require('bcrypt');
 
 module.exports = router;
 
@@ -14,8 +15,14 @@ router.get('/', requireToken, async (req, res, next) => {
 
 router.put('/', requireToken, async (req, res, next) => {
   try {
-    const updatedUser = await req.user.update(req.body);
-    res.json(updatedUser);
+    if(req.body.password){
+      const hashedPassword = await bcrypt.hash(req.body.password, 5)
+      const updatedUser = await req.user.update({password: hashedPassword});
+      res.json(updatedUser);
+    }
+    else {const updatedUser = await req.user.update(req.body);
+      res.json(updatedUser);
+      }
   } catch (err) {
     next(err);
   }

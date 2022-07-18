@@ -8,10 +8,10 @@ import {
   StyledFormButton,
   StyledFormButtonText,
   StyledHealthStatHeading,
-} from './styles';
+} from '../styles';
 import * as SecureStore from 'expo-secure-store';
-import { useUserData } from '../hooks/useUserData';
-import { AuthContext } from '../AuthLoading';
+import { useUserData } from '../../hooks/useUserData';
+import { AuthContext } from '../../AuthLoading';
 
 const UserSettings = ({navigation}) => {
   const { user, logout } = useUserData();
@@ -25,7 +25,7 @@ const UserSettings = ({navigation}) => {
 
   return (
     <StyledFormBackground
-      source={require('../../assets/backgrounds/dokihome_background4.png')}
+      source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
       <  StyledHealthStatHeading style={{marginTop: 80}}>User Settings</  StyledHealthStatHeading>
@@ -36,6 +36,14 @@ const UserSettings = ({navigation}) => {
           }}
         >
         <StyledFormButtonText>Change Goal</StyledFormButtonText>
+        </StyledFormButton>     
+        <StyledFormButton
+           style={{ marginTop: 20, width: 150 }}
+           onPress={() => {
+           navigation.navigate('Change Password')
+          }}
+        >
+        <StyledFormButtonText>Change Password</StyledFormButtonText>
         </StyledFormButton>
         <StyledFormButton
            style={{ marginTop: 20, width: 150 }}

@@ -7,9 +7,9 @@ import {
   StyledFormButton,
   StyledFormButtonText, 
   StyledHealthStatHeading,
-} from './styles';
-import { useUserData } from '../hooks/useUserData';
-import { API_URL } from '../../secrets';
+} from '../styles';
+import { useUserData } from '../../hooks/useUserData';
+import { API_URL } from '../../../secrets';
 
 
 const ChangeGoal = ({navigation}) => {
@@ -47,7 +47,7 @@ const ChangeGoal = ({navigation}) => {
 
   return (
     <StyledFormBackground
-      source={require('../../assets/backgrounds/dokihome_background4.png')}
+      source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
       <  StyledHealthStatHeading style={{marginTop: 80, marginBottom: 200}}>Change Daily Step Goal</  StyledHealthStatHeading>

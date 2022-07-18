@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import DokiView from './dokiHome/DokiHome';
 import HealthStat from './HealthStat';
 import Store from './store/Store';
-import UserSettings from './UserSettings';
+import UserSettings from './userSettings/UserSettings';
 import SettingsNavigator from './SettingsNavigator';
 
 const Tab = createBottomTabNavigator();
