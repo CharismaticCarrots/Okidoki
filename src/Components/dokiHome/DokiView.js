@@ -128,10 +128,10 @@ const DokiView = ({ now }) => {
             backgroundColor: '#134845',
           },
           container: {
-            backgroundColor: '#A57548',
+            backgroundColor: '#F7A24A',
           },
         }}
-        height={180}
+        height={160}
       >
         <DokiDrawer
           curCarrotCount={curCarrotCount}
