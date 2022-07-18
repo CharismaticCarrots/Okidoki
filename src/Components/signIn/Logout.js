@@ -1,4 +1,4 @@
-import { Text, View, Button, ActivityIndicator } from 'react-native';
+import { View, Button, ActivityIndicator } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 
 import { useUserData } from '../../hooks/useUserData';
@@ -9,7 +9,7 @@ const Logout = ({ navigation }) => {
     return <ActivityIndicator size="large" />;
   }
   return (
-    <View style={{margin:100}}>
+    <View style={{ margin: 100 }}>
       <Button
         title="logout"
         onPress={() => {

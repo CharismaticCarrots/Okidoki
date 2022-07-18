@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useUserItemData } from '../../hooks/useUserItemData';
 import { StyledHeading1, StyledDokiHomeBackground } from '../styles';
 import UserItem from './UserItem';
