@@ -68,7 +68,7 @@ const UserSettings = ({navigation}) => {
         <StyledFormButtonText style={{fontFamily: 'AntipastoBold',fontSize:20}}> <Fontisto name='key' size={18}/>   Change Password</StyledFormButtonText>
         </StyledFormButton>
         <StyledFormButton
-           style={{ marginTop: 20, width: 250, backgroundColor:'#59b2ff' }}
+           style={{ marginTop: 20, width: 250, backgroundColor:'#5FB8FD' }}
            onPress={() => {
             logout();
             SecureStore.deleteItemAsync('TOKEN');
