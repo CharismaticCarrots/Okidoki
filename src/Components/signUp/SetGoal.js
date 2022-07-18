@@ -53,7 +53,7 @@ const SetGoal = ({ navigation }) => {
         }
         validate={(values) => {
           const errors = {};
-          if (!values.dailyStepGoal || parseInt(values.dailyStepGoal || Number.isNaN(values.dailyStepGoal)) <= 1000) {
+          if (!values.dailyStepGoal || parseInt(values.dailyStepGoal) <= 1000) {
             errors.dailyStepGoal = 'Please submit a step goal above 1000';
           }
           return errors;
