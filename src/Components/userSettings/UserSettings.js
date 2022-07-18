@@ -47,7 +47,7 @@ const UserSettings = ({navigation}) => {
       source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <  StyledHealthStatHeading style={{marginTop: 80, marginBottom:130}}>User Settings</  StyledHealthStatHeading>
+      <  StyledHealthStatHeading style={{marginTop: 80, marginBottom:130}}>Settings</  StyledHealthStatHeading>
         <StyledFormButton
            style={{ marginTop: 20, width: 250 }}
            onPress={() => {

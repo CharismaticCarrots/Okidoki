@@ -10,9 +10,12 @@ import { StyledHeading1,
   StyledFormButtonText, 
   StyledSettingsHeading2,
   StyledHealthStatHeading,
+  StyledFormInputError,
+  StyledFormContainer
 } from '../styles';
 import { useUserData } from '../../hooks/useUserData';
 import { API_URL } from '../../../secrets';
+import { Formik } from 'formik';
 
 
 const ChangeGoal = ({navigation}) => {
@@ -25,8 +28,7 @@ const ChangeGoal = ({navigation}) => {
     token = user.token;
   }
 
-  const mutation = useMutation(
-    async (dailyStepGoal) => {
+  const mutation = useMutation(async ({ dailyStepGoal, setErrors }) => {
       try {
         await axios.put(
           `http://${API_URL}/api/user`,
@@ -38,6 +40,7 @@ const ChangeGoal = ({navigation}) => {
         return navigation.navigate('User Settings')
       } catch (error) {
         console.log({error})
+        setErrors({ form: error.response.data.message });
       }
     },
   );
@@ -58,32 +61,59 @@ const ChangeGoal = ({navigation}) => {
       source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <StyledHealthStatHeading style={{marginTop: 80, marginBottom: 200}}>Change Your Daily Step Goal</  StyledHealthStatHeading>
+      <StyledHealthStatHeading style={{marginTop: 80}}>Change Your Daily Step Goal</  StyledHealthStatHeading>
 
-        <StyledFormTextInput
-          placeholder="New Step Goal"
-          autoCapitalize="none"
-          autoCorrect={false}
-          autoComplete="off"
-          onChangeText={setDailyStepGoal}
-          style={{
-            width: 240,
-            fontFamily: dailyStepGoal ? 'FredokaOne' : 'Singularity',
-            fontSize: dailyStepGoal ? 18 : 24,
-          }}
-          ref={input => { this.textInput = input }}
-          clearButtonMode="always"
-        />
+      <Formik
+        initialValues={{ dailyStepGoal: '' }}
+        onSubmit={(values, { setErrors }) =>
+          mutation.mutate({ dailyStepGoal: values.dailyStepGoal, setErrors })
+        }
+        validate={(values) => {
+          const errors = {};
+          if (!values.dailyStepGoal || parseInt(values.dailyStepGoal) <= 1000) {
+            errors.dailyStepGoal = 'Please submit a step goal above 1000';
+          }
+          return errors;
+        }}
+      >
+        {({ handleChange, handleSubmit, values, errors }) => (
+          <StyledFormContainer>
+          
 
-        <StyledFormButton
-          onPress={() => {
-            handleSubmit();
-          }}
-          style={{ marginTop: 20, width: 150 }}
-        >
-          <StyledFormButtonText>Submit</StyledFormButtonText>
-        </StyledFormButton>
-        <StyledFormButton
+            <StyledFormTextInput
+              placeholder="New Step Goal"
+              autoCapitalize="none"
+              autoCorrect={false}
+              autoComplete="off"
+              onChangeText={handleChange('dailyStepGoal')}
+              value={values.dailyStepGoal}
+              error={!!errors.dailyStepGoal}
+              style={{
+                fontFamily: values.dailyStepGoal ? 'FredokaOne' : 'Singularity',
+                fontSize: values.dailyStepGoal ? 18 : 24,
+                width: 280,
+                marginBottom: 20,
+              }}
+            />
+            {errors.dailyStepGoal ? (
+              <StyledFormInputError>
+                {errors.dailyStepGoal}
+              </StyledFormInputError>
+            ) : null}
+            <StyledFormButton
+              onPress={handleSubmit}
+              style={{
+                marginTop: 5,
+                width: 150,
+                backgroundColor: '#59b2ff',
+              }}
+            >
+              <StyledFormButtonText>Submit</StyledFormButtonText>
+            </StyledFormButton>
+            {errors.form ? (
+              <StyledFormInputError style={{fontFamily:'FredokaOne', fontSize:18}}>{errors.form}</StyledFormInputError>
+            ) : null}
+            <StyledFormButton
            style={{ marginTop: 20, width: 150 }}
            onPress={() => {
            navigation.navigate('User Settings')
@@ -91,6 +121,9 @@ const ChangeGoal = ({navigation}) => {
         >
         <StyledFormButtonText>Cancel</StyledFormButtonText>
         </StyledFormButton>
+          </StyledFormContainer>
+        )}
+      </Formik>
 
     </StyledFormBackground>
   );
