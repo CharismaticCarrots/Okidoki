@@ -14,6 +14,9 @@ import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { AuthContext } from '../../AuthLoading';
 import Doki from '../dokiHome/Doki';
+import Feather from 'react-native-vector-icons/Feather'
+import Fontisto from 'react-native-vector-icons/Fontisto'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const UserSettings = ({navigation}) => {
   const [userDoki, setUserDoki] = useState();
@@ -21,6 +24,7 @@ const UserSettings = ({navigation}) => {
   const { user, logout } = useUserData();
   const { signOut } = React.useContext(AuthContext);
   const userDokiData = useUserDokiData();
+  console.log(user)
   useEffect(() => {
     if (userDokiData) {
       setUserDoki(userDokiData)
@@ -47,32 +51,33 @@ const UserSettings = ({navigation}) => {
       source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <  StyledHealthStatHeading style={{marginTop: 80, marginBottom:130}}>Settings</  StyledHealthStatHeading>
+      <  StyledHealthStatHeading style={{marginTop: 100, marginBottom:110}}>Settings</  StyledHealthStatHeading>
         <StyledFormButton
            style={{ marginTop: 20, width: 250 }}
            onPress={() => {
            navigation.navigate('Change Goal')
           }}
         >
-        <StyledFormButtonText style={{fontFamily: 'AntipastoBold', fontSize:20}}>Change Step Goal</StyledFormButtonText>
+        <StyledFormButtonText style={{fontFamily: 'AntipastoBold', fontSize:20}}><FontAwesome5 name={'shoe-prints'} style={{ fontSize: 20 }} />  Change Step Goal</StyledFormButtonText>
         </StyledFormButton>     
-        <StyledFormButton
+       {user.externalType !== 'google' ? <StyledFormButton
            style={{ marginTop: 20, width: 250 }}
            onPress={() => {
            navigation.navigate('Change Password')
           }}
         >
-        <StyledFormButtonText style={{fontFamily: 'AntipastoBold',fontSize:20}}>Change Password</StyledFormButtonText>
-        </StyledFormButton>
+        <StyledFormButtonText style={{fontFamily: 'AntipastoBold',fontSize:20}}> <Fontisto name='key' size={18}/>   Change Password</StyledFormButtonText>
+        </StyledFormButton> : <View></View> }
+
         <StyledFormButton
-           style={{ marginTop: 20, width: 250 }}
+           style={{ marginTop: 20, width: 250, backgroundColor:'#5FB8FD' }}
            onPress={() => {
             logout();
             SecureStore.deleteItemAsync('TOKEN');
             signOut()
           }}
         >
-        <StyledFormButtonText style={{fontFamily: 'AntipastoBold', fontSize:20}}>Log out</StyledFormButtonText>
+        <StyledFormButtonText style={{fontFamily: 'AntipastoBold', fontSize:20}}> <Feather name='log-out' size={20}/>  Log out</StyledFormButtonText>
         </StyledFormButton>
 
         {userDoki && <Doki userDoki={userDoki} dokiMood={dokiMood}/>}

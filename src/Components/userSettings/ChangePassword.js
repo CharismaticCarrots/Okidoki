@@ -86,13 +86,13 @@ const ChangePassword = ({navigation}) => {
               style={{
                 marginTop: 5,
                 width: 150,
-                backgroundColor: '#59b2ff',
+                backgroundColor: '#5FB8FD',
               }}
             >
               <StyledFormButtonText>Submit</StyledFormButtonText>
             </StyledFormButton>
             <StyledFormButton
-           style={{ marginTop: 20, width: 150 }}
+           style={{ marginTop: 10, width: 150 }}
            onPress={() => {
            navigation.navigate('User Settings')
           }}

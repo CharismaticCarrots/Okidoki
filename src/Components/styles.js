@@ -13,7 +13,7 @@ import { ProgressBar } from 'react-native-paper';
 // Color Palette
 const colors = {
   yellow: '#ffefb4',
-  blue: '#59b2ff',
+  blue: '#5FB8FD',
   tan: '#EFD389',
   green: '#C6D593',
   pastelGreen: '#C2D8C0',
