@@ -1,13 +1,5 @@
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
-
-const imageNames = {
-  'video game': require('../../../assets/items/videogame.png'),
-  slime: require('../../../assets/items/slime.png'),
-  ball: require('../../../assets/items/ball.png'),
-  'teddy bear': require('../../../assets/items/teddybear.png'),
-  leaf: require('../../../assets/items/leaf.png'),
-  paintbrush: require('../../../assets/items/paintbrush.png'),
-};
+import images from '../../images';
 
 const Item = (props) => {
   const purchaseItem = props.purchaseItem;
@@ -15,7 +7,7 @@ const Item = (props) => {
   return (
     <TouchableOpacity onPress={() => purchaseItem(props.id, props.price)}>
       <View style={styles.item}>
-        <Image style={styles.itemImg} source={imageNames[props.name]} />
+        <Image style={styles.itemImg} source={images.store[props.name]} />
         <Text style={styles.itemName}>{props.name}</Text>
         <Text style={styles.itemPrice}>{props.price}</Text>
       </View>
