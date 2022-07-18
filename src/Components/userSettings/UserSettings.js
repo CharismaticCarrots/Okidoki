@@ -35,7 +35,7 @@ const UserSettings = ({navigation}) => {
            navigation.navigate('Change Goal')
           }}
         >
-        <StyledFormButtonText>Change Step Goal</StyledFormButtonText>
+        <StyledFormButtonText style={{fontFamily: 'AntipastoBold'}}>Change Step Goal</StyledFormButtonText>
         </StyledFormButton>     
         <StyledFormButton
            style={{ marginTop: 20, width: 250 }}
@@ -43,7 +43,7 @@ const UserSettings = ({navigation}) => {
            navigation.navigate('Change Password')
           }}
         >
-        <StyledFormButtonText>Change Password</StyledFormButtonText>
+        <StyledFormButtonText style={{fontFamily: 'AntipastoBold'}}>Change Password</StyledFormButtonText>
         </StyledFormButton>
         <StyledFormButton
            style={{ marginTop: 20, width: 250 }}
@@ -53,7 +53,7 @@ const UserSettings = ({navigation}) => {
             signOut()
           }}
         >
-        <StyledFormButtonText>Log out</StyledFormButtonText>
+        <StyledFormButtonText style={{fontFamily: 'AntipastoBold'}}>Log out</StyledFormButtonText>
         </StyledFormButton>
 
     
