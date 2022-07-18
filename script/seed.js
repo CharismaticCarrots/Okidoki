@@ -15,14 +15,15 @@ const dokis = [
 
 const users = [
   {
-    email: 'hello@gmail.com',
+    email: 'oki@gmail.com',
     password: 't',
     firstName: 'Con',
     lastName: 'Man',
     carrotCount: 100,
+    dailyStepGoal: 1000,
   },
   {
-    email: 'bye@gmail.com',
+    email: 'carrot@gmail.com',
     password: 't',
     firstName: 'Angel',
     lastName: 'Y',
@@ -30,18 +31,20 @@ const users = [
     dailyStepGoal: 5050,
   },
   {
-    email: 'hey@gmail.com',
+    email: 'doki@gmail.com',
     password: 't',
     firstName: 'Kris',
     lastName: 'Tin',
     carrotCount: 100,
+    dailyStepGoal: 1000,
   },
   {
-    email: 'test@gmail.com',
+    email: 'okidoki@gmail.com',
     password: 't',
     firstName: 'Ly',
     lastName: 'Diaaa',
     carrotCount: 100,
+    dailyStepGoal: 1000,
   },
 ];
 
@@ -87,30 +90,6 @@ const seed = async () => {
         return Item.create(item);
       })
     );
-
-    // slime.addUser(user1, {
-    //   through: {
-    //     quantity: 3,
-    //   },
-    // });
-
-    // ball.addUser(user2, {
-    //   through: {
-    //     quantity: 2,
-    //   },
-    // });
-
-    // leaf.addUser(user3, {
-    //   through: {
-    //     quantity: 2,
-    //   },
-    // });
-
-    // videogame.addUser(user4, {
-    //   through: {
-    //     quantity: 3,
-    //   },
-    // });
 
     await catDoki.addUser(user1, {
       through: {
