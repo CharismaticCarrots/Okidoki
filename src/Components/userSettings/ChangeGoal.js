@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useQueryClient } from 'react-query';
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import { 
@@ -13,6 +14,7 @@ import { API_URL } from '../../../secrets';
 
 
 const ChangeGoal = ({navigation}) => {
+  const queryClient = useQueryClient();
   const [dailyStepGoal, setDailyStepGoal] = useState('0');
   const { user } = useUserData();
 
@@ -39,7 +41,11 @@ const ChangeGoal = ({navigation}) => {
   );
 
   const handleSubmit = async () => {
-    mutation.mutate(dailyStepGoal);
+    mutation.mutate(dailyStepGoal, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['user'])
+      },
+    });
     this.textInput.clear()
     setDailyStepGoal('0')
   };

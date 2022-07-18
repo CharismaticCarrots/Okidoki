@@ -24,7 +24,9 @@ router.put('/', requireToken, async (req, res, next) => {
       res.json(updatedUser);
       }
   } catch (err) {
-    next(err);
+    if (err.name === 'SequelizeValidationError') {
+      res.status(422).json({ message: 'Please submit a number' });
+    }
   }
 });
 
@@ -41,16 +43,20 @@ router.get('/doki', requireToken, async (req, res, next) => {
 router.post('/doki', requireToken, async (req, res, next) => {
   try {
     const user = req.user;
-    const randomDoki = ['fox', 'cat', 'whitefox'][Math.floor(Math.random() * 3)];
+    const randomDoki = ['fox', 'cat', 'whitefox'][
+      Math.floor(Math.random() * 3)
+    ];
     const doki = await Doki.findOne({
       where: {
         type: randomDoki,
       },
     });
-    await user.addDoki(doki, { through: {
-      dokiName: req.body.dokiName,
-      eggColor: req.body.eggColor
-    } });
+    await user.addDoki(doki, {
+      through: {
+        dokiName: req.body.dokiName,
+        eggColor: req.body.eggColor,
+      },
+    });
     res.send();
   } catch (err) {
     next(err);
@@ -75,40 +81,37 @@ router.put('/doki', requireToken, async (req, res, next) => {
 router.get('/items', requireToken, async (req, res, next) => {
   try {
     const user = req.user;
-    const items = await user.getItems()
-    res.send(items)
+    const items = await user.getItems();
+    res.send(items);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
-
+});
 
 router.put('/items/:id', requireToken, async (req, res, next) => {
   try {
     const user = req.user;
-    const item = await Item.findByPk(parseInt(req.params.id))
-    if (await user.hasItem(item)){
+    const item = await Item.findByPk(parseInt(req.params.id));
+    if (await user.hasItem(item)) {
       const userItem = await User_Item.findOne({
         where: {
           userId: user.id,
-          itemId: item.id
-        }
-      })
-      const newQuantity = userItem.quantity + req.body.quantity
-      if (newQuantity > 0){
-        await userItem.update({quantity: newQuantity})
+          itemId: item.id,
+        },
+      });
+      const newQuantity = userItem.quantity + req.body.quantity;
+      if (newQuantity > 0) {
+        await userItem.update({ quantity: newQuantity });
         res.send(await userItem.save());
+      } else if (newQuantity <= 0) {
+        user.removeItem(item);
+        res.send();
       }
-      else if (newQuantity <= 0){
-        user.removeItem(item)
-        res.send()
-      }
-    }
-    else {
-      user.addItem(item, { through: { quantity: req.body.quantity } } )
-      res.send()
+    } else {
+      user.addItem(item, { through: { quantity: req.body.quantity } });
+      res.send();
     }
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
