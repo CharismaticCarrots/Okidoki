@@ -9,7 +9,6 @@ import { StyledHeading1,
   StyledFormButton,
   StyledFormButtonText, 
   StyledHealthStatHeading,
-  StyledFormInputError,
   StyledChangeGoalContainer,
   StyledSettingsError
 } from '../styles';
@@ -45,28 +44,21 @@ const ChangeGoal = ({navigation}) => {
     },
   );
 
-  const handleSubmit = async () => {
-    mutation.mutate(dailyStepGoal, {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['user'])
-      },
-    });
-    this.textInput.clear()
-    setDailyStepGoal('0')
-  };
-
-
   return (
     <StyledFormBackground
       source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <StyledHealthStatHeading style={{marginTop: 80, marginBottom:0}}>Change Your Daily Step Goal</  StyledHealthStatHeading>
+      <StyledHealthStatHeading style={{marginTop: 80}}>Change Your Daily Step Goal</  StyledHealthStatHeading>
 
       <Formik
         initialValues={{ dailyStepGoal: '' }}
         onSubmit={(values, { setErrors }) =>
-          mutation.mutate({ dailyStepGoal: values.dailyStepGoal, setErrors })
+          mutation.mutate({ dailyStepGoal: values.dailyStepGoal, setErrors }, {
+            onSuccess: () => {
+              queryClient.invalidateQueries(['user'])
+            },
+          })
         }
         validate={(values) => {
           const errors = {};
@@ -78,7 +70,6 @@ const ChangeGoal = ({navigation}) => {
       >
         {({ handleChange, handleSubmit, values, errors }) => (
           <StyledChangeGoalContainer>
-             {/* <StyledHealthStatHeading style={{marginBottom:50}}>Change Your Daily Step Goal</  StyledHealthStatHeading> */}
             <StyledFormTextInput
               placeholder="New Step Goal"
               autoCapitalize="none"

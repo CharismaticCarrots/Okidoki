@@ -7,9 +7,12 @@ import {
   StyledFormButton,
   StyledFormButtonText, 
   StyledHealthStatHeading,
+  StyledChangeGoalContainer,
+  StyledSettingsError
 } from '../styles';
 import { useUserData } from '../../hooks/useUserData';
 import { API_URL } from '../../../secrets';
+import { Formik } from 'formik';
 
 
 const ChangePassword = ({navigation}) => {
@@ -21,7 +24,7 @@ const ChangePassword = ({navigation}) => {
   }
 
   const mutation = useMutation(
-    async (password) => {
+    async ({password, setErrors }) => {
       try {
          await axios.put(
           `http://${API_URL}/api/user`,
@@ -37,21 +40,69 @@ const ChangePassword = ({navigation}) => {
     },
   );
 
-  const handleSubmit = async () => {
-    console.log('PASSWORD CHANGE', password, user)
-    mutation.mutate(password);
-    this.textInput.clear()
-    setPassword('')
-  };
-  
-
   return (
     <StyledFormBackground
       source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <  StyledHealthStatHeading style={{marginTop: 80, marginBottom: 200}}>Change Your Password</  StyledHealthStatHeading>
-        <StyledFormTextInput
+      <  StyledHealthStatHeading style={{marginTop: 80}}>Change Your Password</  StyledHealthStatHeading>
+      <Formik
+        initialValues={{ password: '' }}
+        onSubmit={(values, { setErrors }) =>
+          mutation.mutate({ password: values.password, setErrors })
+        }
+        validate={(values) => {
+          const errors = {};
+          if (!values.password) {
+            errors.password = 'Please enter a password';
+          }
+          return errors;
+        }}
+      >
+        {({ handleChange, handleSubmit, values, errors }) => (
+          <StyledChangeGoalContainer>
+            <StyledFormTextInput
+              placeholder="New Password"
+              autoCapitalize="none"
+              autoCorrect={false}
+              autoComplete="off"
+              onChangeText={handleChange('password')}
+              value={values.password}
+              error={!!errors.password}
+              style={{
+                fontFamily: values.password ? 'FredokaOne' : 'Singularity',
+                fontSize: values.password ? 18 : 24,
+                width: 280,
+                marginBottom: 20,
+              }}
+            />
+            {errors.password ? (
+              <StyledSettingsError>
+                {errors.password}
+              </StyledSettingsError>
+            ) : null}
+             <StyledFormButton
+              onPress={handleSubmit}
+              style={{
+                marginTop: 5,
+                width: 150,
+                backgroundColor: '#59b2ff',
+              }}
+            >
+              <StyledFormButtonText>Submit</StyledFormButtonText>
+            </StyledFormButton>
+            <StyledFormButton
+           style={{ marginTop: 20, width: 150 }}
+           onPress={() => {
+           navigation.navigate('User Settings')
+          }}
+        >
+        <StyledFormButtonText>Cancel</StyledFormButtonText>
+        </StyledFormButton>
+          </StyledChangeGoalContainer>
+        )}
+      </Formik>
+        {/* <StyledFormTextInput
           placeholder="New Password"
           autoCapitalize="none"
           autoCorrect={false}
@@ -77,7 +128,7 @@ const ChangePassword = ({navigation}) => {
           }}
         >
         <StyledFormButtonText>Cancel</StyledFormButtonText>
-        </StyledFormButton>
+        </StyledFormButton> */}
     
     </StyledFormBackground>
   );
