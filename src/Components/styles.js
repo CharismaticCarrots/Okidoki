@@ -20,6 +20,9 @@ const colors = {
   text: {
     dark: '#333',
   },
+  // 6B4B3E — darker brown
+  // 725E54 — medium brown
+  // A57548 — lighter brown
 };
 
 // General Styles
@@ -339,13 +342,13 @@ const StyledFormInputError = styled(Text)`
 
 // Doki Pack Icon
 const StyledDokiPackContainer = styled(TouchableOpacity)`
-  // position: absolute;
-  // bottom: 0px;
-  // right: 0px;
-  width: 90px;
-  height: 90px;
-  background-color: #ffefb4;
-  border: solid 3px ${colors.text.dark};
+  position: absolute;
+  top: 250px;
+  right: 20px;
+  width: 100px;
+  height: 100px;
+  // background-color: #ffefb4;
+  // border: solid 3px ${colors.text.dark};
   border-radius: 50px;
   padding: 15px;
   // margin: 15px;

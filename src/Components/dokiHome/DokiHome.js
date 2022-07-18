@@ -18,8 +18,8 @@ const DokiHome = () => {
   const hatchProgressData = getHatchProgress();
   const queryClient = useQueryClient();
 
-  const isEgg = hatchProgressData.hatchProgress < 1;
-  // const isEgg = false; // FOR TESTING: Uncomment this to see Doki instead of DokiEgg
+  // const isEgg = hatchProgressData.hatchProgress < 1;
+  const isEgg = false; // FOR TESTING: Uncomment this to see Doki instead of DokiEgg
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);

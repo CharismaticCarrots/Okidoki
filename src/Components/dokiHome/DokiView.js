@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import { Image, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
@@ -38,7 +37,6 @@ const DokiView = ({ now }) => {
 
   useEffect(() => {
     if (userDokiData) {
-      // userDokiData.type = 'whitefox'; // Dummy data to view different sprites
       setUserDoki(userDokiData);
       const { user_doki } = userDokiData;
 
@@ -61,7 +59,6 @@ const DokiView = ({ now }) => {
   useEffect(() => {
     if (user) {
       setCurCarrotCount(user.carrotCount);
-      console.log('USER TOKEN:', user.token); // Temporary console log to view token
 
       const claimedToday =
         new Date().toDateString() ===
@@ -69,13 +66,7 @@ const DokiView = ({ now }) => {
 
       if (claimedToday) {
         setCarrotsClaimed(true);
-        // console.log(
-        //   `Can't claim carrots yet, last claimed at ${new Date(
-        //     user.lastCarrotsClaimedAt
-        //   ).toLocaleString('en-US')}. Check again tomorrow!`
-        // ); // Temporary Error Message
       }
-      // console.log(`LAST CLAIMED CARROTS AT: ${new Date(user.lastCarrotsClaimedAt).toLocaleString('en-US')}`); // FOR TESTING
     }
   }, [user, carrotReward]);
 
@@ -138,12 +129,9 @@ const DokiView = ({ now }) => {
           },
           container: {
             backgroundColor: '#A57548',
-            // 6B4B3E — darker brown
-            // 725E54 — medium brown
-            // A57548 — lighter brown
           },
         }}
-        height={170}
+        height={180}
       >
         <DokiDrawer
           curCarrotCount={curCarrotCount}
