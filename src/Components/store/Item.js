@@ -19,13 +19,16 @@ export default Item;
 
 const styles = StyleSheet.create({
   item: {
-    width: 100,
-    height: 100,
+    width: 105,
+    height: 105,
     backgroundColor: '#ffefb4',
     borderRadius: 10,
     alignItems: 'center',
     margin: 10,
-    padding: 10,
+    padding: 8,
+    paddingBottom: 15,
+    borderColor: '#333',
+    borderWidth: 3,
   },
   itemImg: {
     height: '60%',
@@ -35,12 +38,12 @@ const styles = StyleSheet.create({
   itemName: {
     fontFamily: 'Singularity',
     fontSize: 18,
-    color: '#59b2ff',
+    color: '#333',
     marginBottom: 2,
   },
   itemPrice: {
     fontFamily: 'Singularity',
     fontSize: 22,
-    color: '#59b2ff',
+    color: '#333',
   },
 });
