@@ -2,9 +2,7 @@ import { useState, useCallback } from 'react';
 import { View, ScrollView, RefreshControl, StyleSheet } from 'react-native';
 import DokiEggView from './DokiEggView';
 import DokiView from './DokiView';
-import { useUserData } from '../../hooks/useUserData';
-import { useUserDokiData } from '../../hooks/useUserDokiData';
-import { useTotalStepCount } from '../../Healthkit';
+import { useHatchProgress } from '../../hooks/useHatchProgress';
 import { useQueryClient } from 'react-query';
 
 const wait = (timeout) => {
@@ -15,7 +13,7 @@ const DokiHome = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const now = currentDate.toISOString();
-  const hatchProgressData = getHatchProgress();
+  const hatchProgressData = useHatchProgress(now);
   const queryClient = useQueryClient();
 
   const isEgg = hatchProgressData.hatchProgress < 1;
@@ -27,7 +25,7 @@ const DokiHome = () => {
     console.log('NOW:', new Date(now).toLocaleString('en-US'));
     queryClient.invalidateQueries();
     wait(2000).then(() => setRefreshing(false));
-  }, []);
+  }, [now, queryClient]);
 
   return (
     <ScrollView
@@ -45,33 +43,6 @@ const DokiHome = () => {
       </View>
     </ScrollView>
   );
-
-  function getHatchProgress() {
-    const userDoki = useUserDokiData();
-    const { user } = useUserData();
-
-    let dokiCreatedDate = null;
-
-    if (userDoki) {
-      dokiCreatedDate = userDoki.user_doki.createdAt;
-      // console.log('DOKI CREATED DATE:', new Date(dokiCreatedDate).toLocaleString('en-US'));
-    }
-
-    const totalSteps = useTotalStepCount(dokiCreatedDate, now);
-
-    if (userDoki && user) {
-      const { dailyStepGoal } = user;
-      const hatchProgress = totalSteps / dailyStepGoal;
-
-      return {
-        hatchProgress,
-        totalSteps,
-        dailyStepGoal,
-      };
-    } else {
-      return {};
-    }
-  }
 };
 
 const styles = StyleSheet.create({
