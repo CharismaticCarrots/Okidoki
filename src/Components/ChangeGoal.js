@@ -17,7 +17,7 @@ import { useUserData } from '../hooks/useUserData';
 import { API_URL } from '../../secrets';
 import { AuthContext } from '../AuthLoading';
 
-const UserSettings = ({navigation}) => {
+const ChangeGoal = ({navigation}) => {
   const [dailyStepGoal, setDailyStepGoal] = useState('0');
   const { user, logout } = useUserData();
   const { signOut } = React.useContext(AuthContext);
@@ -81,14 +81,6 @@ const UserSettings = ({navigation}) => {
         <StyledFormButton
            style={{ marginTop: 20, width: 150 }}
            onPress={() => {
-           navigation.navigate('Change Goal')
-          }}
-        >
-        <StyledFormButtonText>Change Goal</StyledFormButtonText>
-        </StyledFormButton>
-        <StyledFormButton
-           style={{ marginTop: 20, width: 150 }}
-           onPress={() => {
             logout();
             SecureStore.deleteItemAsync('TOKEN');
             signOut()
@@ -96,12 +88,11 @@ const UserSettings = ({navigation}) => {
         >
         <StyledFormButtonText>Log out</StyledFormButtonText>
         </StyledFormButton>
-
     
     </StyledFormBackground>
   );
 };
 
-export default UserSettings
+export default ChangeGoal
 
 const styles = StyleSheet.create({})

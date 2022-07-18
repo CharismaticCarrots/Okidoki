@@ -7,6 +7,7 @@ import DokiView from './dokiHome/DokiHome';
 import HealthStat from './HealthStat';
 import Store from './store/Store';
 import UserSettings from './UserSettings';
+import SettingsNavigator from './SettingsNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -73,7 +74,7 @@ const TabNavigator = () => {
       <Tab.Screen name="DokiHome" component={DokiView} />
       <Tab.Screen name="Health Data" component={HealthStat} />
       <Tab.Screen name="Store" component={Store} />
-      <Tab.Screen name="UserSettings" component={UserSettings} />
+      <Tab.Screen name="UserSettings" component={SettingsNavigator} />
     </Tab.Navigator>
   );
 };
