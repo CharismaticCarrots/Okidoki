@@ -82,7 +82,7 @@ const StyledFormTextInput = styled(TextInput)`
   font-family: 'FredokaOne';
   letter-spacing: 1px;
   color: ${colors.text.dark};
-  border: solid grey 2px;
+  border: solid ${(props) => (props.error ? 'red' : 'grey')} 3px;
 `;
 
 const StyledFormButton = styled(TouchableOpacity)`
@@ -346,6 +346,15 @@ const StyledItemView = styled(View)`
   margin: 30px;
 `;
 
+const StyledFormInputError = styled(Text)`
+  color: red;
+  font-family: 'Singularity';
+  font-size: 22px;
+  padding: 5px;
+  border-radius: 50px;
+  text-align: center;
+`;
+
 //User Settings
 const StyledSettingsHeading = styled(Text)`
   font-size: 50px;
@@ -366,7 +375,6 @@ const StyledSettingsHeading2 = styled(Text)`
   font-family: 'AntipastoBold';
 `;
 
-
 export {
   // General Styles
   StyledLogoHeading,
@@ -380,6 +388,7 @@ export {
   StyledFormButton,
   StyledFormButtonText,
   StyledFormSuggest,
+  StyledFormInputError,
   // LoginOptions Component
   StyledLoginOptionsContainer,
   StyledLoginOptionsDescription,
@@ -422,5 +431,5 @@ export {
   StyledItemView,
   //UserSettings Component
   StyledSettingsHeading,
-  StyledSettingsHeading2
+  StyledSettingsHeading2,
 };
