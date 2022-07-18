@@ -14,6 +14,9 @@ import { useUserData } from '../../hooks/useUserData';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { AuthContext } from '../../AuthLoading';
 import Doki from '../dokiHome/Doki';
+import Feather from 'react-native-vector-icons/Feather'
+import Fontisto from 'react-native-vector-icons/Fontisto'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const UserSettings = ({navigation}) => {
   const [userDoki, setUserDoki] = useState();
@@ -54,7 +57,7 @@ const UserSettings = ({navigation}) => {
            navigation.navigate('Change Goal')
           }}
         >
-        <StyledFormButtonText style={{fontFamily: 'AntipastoBold', fontSize:20}}>Change Step Goal</StyledFormButtonText>
+        <StyledFormButtonText style={{fontFamily: 'AntipastoBold', fontSize:20}}><FontAwesome5 name={'shoe-prints'} style={{ fontSize: 20 }} />  Change Step Goal</StyledFormButtonText>
         </StyledFormButton>     
         <StyledFormButton
            style={{ marginTop: 20, width: 250 }}
@@ -62,17 +65,17 @@ const UserSettings = ({navigation}) => {
            navigation.navigate('Change Password')
           }}
         >
-        <StyledFormButtonText style={{fontFamily: 'AntipastoBold',fontSize:20}}>Change Password</StyledFormButtonText>
+        <StyledFormButtonText style={{fontFamily: 'AntipastoBold',fontSize:20}}> <Fontisto name='key' size={18}/>   Change Password</StyledFormButtonText>
         </StyledFormButton>
         <StyledFormButton
-           style={{ marginTop: 20, width: 250 }}
+           style={{ marginTop: 20, width: 250, backgroundColor:'#59b2ff' }}
            onPress={() => {
             logout();
             SecureStore.deleteItemAsync('TOKEN');
             signOut()
           }}
         >
-        <StyledFormButtonText style={{fontFamily: 'AntipastoBold', fontSize:20}}>Log out</StyledFormButtonText>
+        <StyledFormButtonText style={{fontFamily: 'AntipastoBold', fontSize:20}}> <Feather name='log-out' size={20}/>  Log out</StyledFormButtonText>
         </StyledFormButton>
 
         {userDoki && <Doki userDoki={userDoki} dokiMood={dokiMood}/>}

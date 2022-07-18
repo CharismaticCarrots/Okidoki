@@ -105,7 +105,7 @@ const ChangeGoal = ({navigation}) => {
               <StyledFormButtonText>Submit</StyledFormButtonText>
             </StyledFormButton>
             <StyledFormButton
-           style={{ marginTop: 20, width: 150 }}
+           style={{ marginTop: 10, width: 150 }}
            onPress={() => {
            navigation.navigate('User Settings')
           }}
