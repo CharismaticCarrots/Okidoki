@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useMutation } from 'react-query';
+import { Formik } from 'formik';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import * as Google from 'expo-auth-session/providers/google';
@@ -17,14 +18,10 @@ import {
   StyledFormButton,
   StyledFormButtonText,
   StyledFormSuggest,
+  StyledFormInputError,
 } from '../styles';
 
 const SignIn = ({ navigation }) => {
-  const [userData, setUserData] = useState({
-    email: '',
-    password: '',
-  });
-
   const [request, response, promptAsync] = Google.useAuthRequest({
     iosClientId: GOOGLECLIENTID,
   });
@@ -64,7 +61,7 @@ const SignIn = ({ navigation }) => {
     }
   });
 
-  const mutation = useMutation(async (userInfo) => {
+  const mutation = useMutation(async ({ userInfo, setErrors }) => {
     try {
       const { data: user } = await axios.post(
         `http://${API_URL}/auth/signin`,
@@ -73,7 +70,7 @@ const SignIn = ({ navigation }) => {
       await SecureStore.setItemAsync('TOKEN', user.token);
       return navigation.navigate('DokiHome');
     } catch (err) {
-      console.log(err);
+      setErrors({ form: err.response.data.message });
     }
   });
 
@@ -84,71 +81,98 @@ const SignIn = ({ navigation }) => {
     console.log('error');
   }
 
-  const handleSubmit = () => {
-    mutation.mutate({ ...userData, externalType: 'postgres' });
-  };
-
   return (
     <StyledFormBackground
       source={require('../../../assets/backgrounds/loginOptions.png')}
       resizeMode="cover"
     >
-      <StyledFormContainer>
-        <StyledHeading1>Welcome Back</StyledHeading1>
-        <StyledFormTextInput
-          placeholder="Email"
-          autoCapitalize="none"
-          autoCorrect={false}
-          autoComplete="off"
-          onChangeText={(e) =>
-            setUserData((prevState) => ({ ...prevState, email: e }))
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        onSubmit={(values, { setErrors }) =>
+          mutation.mutate({
+            userInfo: { ...values, externalType: 'postgres' },
+            setErrors,
+          })
+        }
+        validate={(values) => {
+          const errors = {};
+          if (!values.email) {
+            errors.email = 'Required';
           }
-        />
-        <StyledFormTextInput
-          placeholder="Password"
-          secureTextEntry={true}
-          autoCapitalize="none"
-          autoCorrect={false}
-          autoComplete="off"
-          onChangeText={(e) =>
-            setUserData((prevState) => ({ ...prevState, password: e }))
+          if (!values.password) {
+            errors.password = 'Required';
           }
-        />
+          return errors;
+        }}
+        validateOnChange={false}
+      >
+        {({ handleChange, handleSubmit, values, errors }) => (
+          <StyledFormContainer>
+            <StyledHeading1>Welcome Back</StyledHeading1>
 
-        <StyledFormButton
-          style={{ marginTop: 20, marginBottom: 10, width: 150 }}
-          onPress={() => {
-            handleSubmit();
-          }}
-        >
-          <StyledFormButtonText>Sign In</StyledFormButtonText>
-        </StyledFormButton>
+            <StyledFormTextInput
+              placeholder="Email"
+              autoCapitalize="none"
+              autoCorrect={false}
+              autoComplete="off"
+              error={!!errors.email}
+              onChangeText={handleChange('email')}
+              value={values.email}
+            />
+            {errors.email ? (
+              <StyledFormInputError>{errors.email}</StyledFormInputError>
+            ) : null}
+            <StyledFormTextInput
+              placeholder="Password"
+              secureTextEntry={true}
+              autoCapitalize="none"
+              autoCorrect={false}
+              autoComplete="off"
+              error={!!errors.password}
+              value={values.password}
+              onChangeText={handleChange('password')}
+            />
+            {errors.password ? (
+              <StyledFormInputError>{errors.password}</StyledFormInputError>
+            ) : null}
+            {errors.form ? (
+              <StyledFormInputError>{errors.form}</StyledFormInputError>
+            ) : null}
+            <StyledFormButton
+              style={{ marginTop: 20, marginBottom: 10, width: 150 }}
+              onPress={handleSubmit}
+            >
+              <StyledFormButtonText>Sign In</StyledFormButtonText>
+            </StyledFormButton>
 
-        <StyledFormButton
-          style={{
-            marginBottom: 10,
-            width: '95%',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-          }}
-          onPress={() => {
-            promptAsync();
-          }}
-        >
-          <FontAwesome5 name={'google'} style={styles.icons} />
-          <StyledFormButtonText style={{ textAlign: 'center' }}>
-            Sign in with Google
-          </StyledFormButtonText>
-        </StyledFormButton>
-        <StyledFormSuggest
-          onPress={() => {
-            navigation.navigate('SignUp');
-          }}
-        >
-          Don't have an account? Sign up
-        </StyledFormSuggest>
-      </StyledFormContainer>
+            <StyledFormSuggest
+              onPress={() => {
+                navigation.navigate('SignUp');
+              }}
+            >
+              Don't have an account? Sign up
+            </StyledFormSuggest>
+            <StyledFormButton
+              style={{
+                marginTop: 20,
+                marginBottom: 10,
+                width: '95%',
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+              }}
+              onPress={() => {
+                promptAsync();
+              }}
+            >
+              <FontAwesome5 name={'google'} style={styles.icons} />
+              <StyledFormButtonText style={{ textAlign: 'center' }}>
+                Sign in with Google
+              </StyledFormButtonText>
+            </StyledFormButton>
+          </StyledFormContainer>
+        )}
+      </Formik>
     </StyledFormBackground>
   );
 };
