@@ -346,8 +346,8 @@ const StyledItemCard = styled(Card)`
 
 const StyledItemView = styled(View)`
   display: flex;
-  flexdirection: row;
-  // alignitems: center;
+  flex-direction: row;
+  align-items: center;
   margin: 30px;
 `;
 

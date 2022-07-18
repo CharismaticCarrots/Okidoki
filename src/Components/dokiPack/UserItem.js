@@ -46,8 +46,6 @@ const UserItem = ({ name, idNumber, quantity, curMoodLvl }) => {
   );
 
   function playWithDoki() {
-    debugger;
-    console.log('playwithdoki:', idNumber);
     if (curMoodLvl >= 100) {
       setMsgContent("I'M ALL PLAYED OUT!");
       show();
