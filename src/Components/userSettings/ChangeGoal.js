@@ -1,26 +1,25 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
+import { useQueryClient } from 'react-query';
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import { TextInput } from 'react-native-paper';
-import { StyledHeading1,   
+import { StyledHeading1,
   StyledFormBackground,
-  StyledFormContainer,
   StyledFormTextInput,
   StyledFormButton,
-  StyledFormButtonText,
-  StyledSettingsHeading2, 
+  StyledFormButtonText, 
+  StyledSettingsHeading2,
   StyledHealthStatHeading,
-} from './styles';
-import * as SecureStore from 'expo-secure-store';
-import { useUserData } from '../hooks/useUserData';
-import { API_URL } from '../../secrets';
-import { AuthContext } from '../AuthLoading';
+} from '../styles';
+import { useUserData } from '../../hooks/useUserData';
+import { API_URL } from '../../../secrets';
 
-const UserSettings = ({navigation}) => {
+
+const ChangeGoal = ({navigation}) => {
+  const queryClient = useQueryClient();
   const [dailyStepGoal, setDailyStepGoal] = useState('0');
-  const { user, logout } = useUserData();
-  const { signOut } = React.useContext(AuthContext);
+  const { user } = useUserData();
+
   let token;
   if (user) {
     token = user.token;
@@ -29,14 +28,14 @@ const UserSettings = ({navigation}) => {
   const mutation = useMutation(
     async (dailyStepGoal) => {
       try {
-         await axios.put(
+        await axios.put(
           `http://${API_URL}/api/user`,
           { dailyStepGoal },
           {
             headers: { authorization: token },
           }
         );
-        return navigation.navigate('DokiHome');
+        return navigation.navigate('User Settings')
       } catch (error) {
         console.log({error})
       }
@@ -44,28 +43,34 @@ const UserSettings = ({navigation}) => {
   );
 
   const handleSubmit = async () => {
-    mutation.mutate(dailyStepGoal);
+    mutation.mutate(dailyStepGoal, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['user'])
+      },
+    });
     this.textInput.clear()
     setDailyStepGoal('0')
   };
-  
+
 
   return (
     <StyledFormBackground
-      source={require('../../assets/backgrounds/dokihome_background4.png')}
+      source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <  StyledHealthStatHeading style={{marginVertical: 100}}>User Settings</  StyledHealthStatHeading>
- 
-        <StyledSettingsHeading2>Change Your Daily Step Goal</StyledSettingsHeading2>
-        
+      <StyledHealthStatHeading style={{marginTop: 80, marginBottom: 200}}>Change Your Daily Step Goal</  StyledHealthStatHeading>
+
         <StyledFormTextInput
-          placeholder="Example: 10,000"
+          placeholder="New Step Goal"
           autoCapitalize="none"
           autoCorrect={false}
           autoComplete="off"
           onChangeText={setDailyStepGoal}
-          style={{ width: 240 }}
+          style={{
+            width: 240,
+            fontFamily: dailyStepGoal ? 'FredokaOne' : 'Singularity',
+            fontSize: dailyStepGoal ? 18 : 24,
+          }}
           ref={input => { this.textInput = input }}
           clearButtonMode="always"
         />
@@ -81,18 +86,15 @@ const UserSettings = ({navigation}) => {
         <StyledFormButton
            style={{ marginTop: 20, width: 150 }}
            onPress={() => {
-            logout();
-            SecureStore.deleteItemAsync('TOKEN');
-            signOut()
+           navigation.navigate('User Settings')
           }}
         >
-        <StyledFormButtonText>Log out</StyledFormButtonText>
+        <StyledFormButtonText>Cancel</StyledFormButtonText>
         </StyledFormButton>
-    
+
     </StyledFormBackground>
   );
 };
 
-export default UserSettings
+export default ChangeGoal
 
-const styles = StyleSheet.create({})

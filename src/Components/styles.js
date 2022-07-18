@@ -8,13 +8,13 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import { ProgressBar, Card } from 'react-native-paper';
+import { ProgressBar } from 'react-native-paper';
 
 // Color Palette
 const colors = {
-  primary: '#ffefb4',
-  secondary: '#59b2ff',
-  tertiary: '#C7CDAB',
+  yellow: '#ffefb4',
+  blue: '#59b2ff',
+  tan: '#EFD389',
   text: {
     dark: '#333',
   },
@@ -25,14 +25,14 @@ const StyledLogoHeading = styled(Text)`
   font-size: 70px;
   font-weight: 500;
   text-align: center;
-  color: ${colors.primary};
+  color: ${colors.yellow};
   font-family: 'Singularity';
   letter-spacing: 2px;
 `;
 
 const StyledHeading1 = styled(Text)`
   font-size: 35px;
-  color: ${colors.primary};
+  color: ${colors.yellow};
   font-weight: 500;
   text-align: center;
   margin-bottom: 20px;
@@ -47,13 +47,6 @@ const StyledHeading2 = styled(Text)`
   text-align: center;
   margin-bottom: 10px;
   font-family: 'Singularity';
-`;
-
-const StyledContainer = styled(View)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px 30px;
 `;
 
 // Forms — SignIn, SignUp, SetGoal
@@ -74,33 +67,35 @@ const StyledFormContainer = styled(View)`
 
 const StyledFormTextInput = styled(TextInput)`
   width: 100%;
-  background-color: white;
-  border-radius: 50px;
   padding: 15px;
   font-size: 18px;
-  margin-bottom: 4px;
   font-family: 'FredokaOne';
   letter-spacing: 1px;
   color: ${colors.text.dark};
-  border: solid ${(props) => (props.error ? 'red' : 'grey')} 3px;
+  background: white;
+  border-radius: 50px;
+  margin-bottom: 10px;
+  border: solid ${(props) => (props.error ? `#C23B22` : `${colors.text.dark}`)}
+    4px;
 `;
 
 const StyledFormButton = styled(TouchableOpacity)`
-  background-color: ${colors.primary};
+  background-color: ${colors.yellow};
   padding: 15px;
   border-radius: 50px;
   align-items: center;
+  border: solid ${colors.text.dark} 4px;
 `;
 
 const StyledFormButtonText = styled(Text)`
   font-family: 'Singularity';
   font-size: 24px;
-  color: ${colors.secondary};
+  color: ${colors.text.dark};
   letter-spacing: 0.5px;
 `;
 
 const StyledFormSuggest = styled(Text)`
-  color: #333;
+  color: ${colors.text.dark};
   font-family: 'Singularity';
   font-size: 22px;
   text-align: center;
@@ -152,7 +147,7 @@ const StyledDokiHomeBackground = styled(ImageBackground)`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  margin-bottom: 85px;
+  margin-bottom: 100px;
 `;
 
 const StyledDokiContainer = styled(View)`
@@ -178,7 +173,7 @@ const StyledOuterCountersContainer = styled(View)`
 `;
 
 const StyledDokiName = styled(Text)`
-  color: black;
+  color: #333;
   font-size: 30px;
   font-weight: 800;
   text-align: center;
@@ -277,6 +272,7 @@ const StyledHealthStatHeading = styled(Text)`
   margin-bottom: 20px;
   font-family: 'AntipastoBold';
   letter-spacing: 1px;
+  color: ${colors.text.dark};
 `;
 
 const StyledDayContainer = styled(View)`
@@ -330,24 +326,8 @@ const StyledItemQuantityText = styled(Text)`
   padding: 6px;
 `;
 
-const StyledItemCard = styled(Card)`
-  height: 130px;
-  width: 150px;
-  background-color: ${colors.primary};
-  margin: 10px;
-  padding-top: 15px;
-  justify-content: space-evenly;
-`;
-
-const StyledItemView = styled(View)`
-  display: flex;
-  flexdirection: row;
-  // alignitems: center;
-  margin: 30px;
-`;
-
 const StyledFormInputError = styled(Text)`
-  color: red;
+  color: #c23b22;
   font-family: 'Singularity';
   font-size: 22px;
   padding: 5px;
@@ -355,12 +335,32 @@ const StyledFormInputError = styled(Text)`
   text-align: center;
 `;
 
-//User Settings
+// Doki Pack Icon
+const StyledDokiPackContainer = styled(TouchableOpacity)`
+  // position: absolute;
+  // bottom: 0px;
+  // right: 0px;
+  width: 90px;
+  height: 90px;
+  background-color: #ffefb4;
+  border: solid 3px ${colors.text.dark};
+  border-radius: 50px;
+  padding: 15px;
+  // margin: 15px;
+`;
+
+const StyledDokiPackImage = styled(Image)`
+  height: 100%;
+  width: 100%;
+`;
+
+// User Settings
 const StyledSettingsHeading = styled(Text)`
   font-size: 50px;
   color: ${colors.text.dark};
   font-weight: 300;
   text-align: center;
+  margin-top: 80px;
   margin-bottom: 10px;
   font-family: 'AntipastoBold';
 `;
@@ -380,7 +380,6 @@ export {
   StyledLogoHeading,
   StyledHeading1,
   StyledHeading2,
-  StyledContainer,
   // Form Styles
   StyledFormBackground,
   StyledFormContainer,
@@ -422,14 +421,15 @@ export {
   StyledDayContainer,
   StyledInternalContainer,
   StyledHealthStatHeading,
-  // UserItem Component
+  // DokiDrawer and UserItem Component
   StyledItemContainer,
   StyledItemImage,
   StyledItemQuantity,
   StyledItemQuantityText,
-  StyledItemCard,
-  StyledItemView,
-  //UserSettings Component
+  // Doki Pack Icon
+  StyledDokiPackContainer,
+  StyledDokiPackImage,
+  // UserSettings Component
   StyledSettingsHeading,
   StyledSettingsHeading2,
 };

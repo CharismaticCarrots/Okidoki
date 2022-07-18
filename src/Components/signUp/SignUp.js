@@ -3,7 +3,6 @@ import { Formik } from 'formik';
 import { useMutation } from 'react-query';
 import * as SecureStore from 'expo-secure-store';
 import * as Google from 'expo-auth-session/providers/google';
-import { StyleSheet } from 'react-native';
 import { useEffect } from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
@@ -109,6 +108,28 @@ const SignUp = ({ navigation }) => {
         {({ handleChange, handleSubmit, values, errors }) => (
           <StyledFormContainer>
             <StyledHeading1>Create Account</StyledHeading1>
+            <StyledFormButton
+              style={{
+                marginTop: 20,
+                marginBottom: 30,
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                backgroundColor: '#59b2ff',
+              }}
+              onPress={() => {
+                promptAsync();
+              }}
+            >
+              <FontAwesome5
+                name={'google'}
+                style={{ fontSize: 27, overflow: 'hidden', color: '#333' }}
+              />
+              <StyledFormButtonText style={{ textAlign: 'center' }}>
+                Sign up with Google
+              </StyledFormButtonText>
+            </StyledFormButton>
             <StyledFormTextInput
               placeholder="First Name"
               autoCapitalize="none"
@@ -117,6 +138,10 @@ const SignUp = ({ navigation }) => {
               error={!!errors.firstName}
               onChangeText={handleChange('firstName')}
               value={values.firstName}
+              style={{
+                fontFamily: values.firstName ? 'FredokaOne' : 'Singularity',
+                fontSize: values.firstName ? 18 : 24,
+              }}
             />
             {errors.firstName ? (
               <StyledFormInputError>{errors.firstName}</StyledFormInputError>
@@ -129,6 +154,10 @@ const SignUp = ({ navigation }) => {
               error={!!errors.lastName}
               onChangeText={handleChange('lastName')}
               value={values.lastName}
+              style={{
+                fontFamily: values.lastName ? 'FredokaOne' : 'Singularity',
+                fontSize: values.lastName ? 18 : 24,
+              }}
             />
             {errors.lastName ? (
               <StyledFormInputError>{errors.lastName}</StyledFormInputError>
@@ -141,6 +170,10 @@ const SignUp = ({ navigation }) => {
               error={!!errors.email}
               onChangeText={handleChange('email')}
               value={values.email}
+              style={{
+                fontFamily: values.email ? 'FredokaOne' : 'Singularity',
+                fontSize: values.email ? 18 : 24,
+              }}
             />
             {errors.email ? (
               <StyledFormInputError>{errors.email}</StyledFormInputError>
@@ -154,9 +187,16 @@ const SignUp = ({ navigation }) => {
               error={!!errors.password}
               onChangeText={handleChange('password')}
               value={values.password}
+              style={{
+                fontFamily: values.password ? 'FredokaOne' : 'Singularity',
+                fontSize: values.password ? 18 : 24,
+              }}
             />
             {errors.password ? (
               <StyledFormInputError>{errors.password}</StyledFormInputError>
+            ) : null}
+            {errors.form ? (
+              <StyledFormInputError>{errors.form}</StyledFormInputError>
             ) : null}
             <StyledFormButton
               style={{ marginTop: 20, marginBottom: 10, width: 150 }}
@@ -164,9 +204,6 @@ const SignUp = ({ navigation }) => {
             >
               <StyledFormButtonText>Sign Up</StyledFormButtonText>
             </StyledFormButton>
-            {errors.form ? (
-              <StyledFormInputError>{errors.form}</StyledFormInputError>
-            ) : null}
             <StyledFormSuggest
               onPress={() => {
                 navigation.navigate('SignIn');
@@ -174,39 +211,11 @@ const SignUp = ({ navigation }) => {
             >
               Already have an account? Sign in
             </StyledFormSuggest>
-            <StyledFormButton
-              style={{
-                marginTop: 20,
-                marginBottom: 10,
-                width: '95%',
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-              }}
-              onPress={() => {
-                promptAsync();
-              }}
-            >
-              <FontAwesome5 name={'google'} style={styles.icons} />
-              <StyledFormButtonText style={{ textAlign: 'center' }}>
-                Sign up with Google
-              </StyledFormButtonText>
-            </StyledFormButton>
           </StyledFormContainer>
         )}
       </Formik>
     </StyledFormBackground>
   );
 };
-
-// left={() => <FontAwesome5 name={'google'} style={styles.icons} />}
-
-const styles = StyleSheet.create({
-  icons: {
-    fontSize: 27,
-    overflow: 'hidden',
-    color: '#59b2ff',
-  },
-});
 
 export default SignUp;

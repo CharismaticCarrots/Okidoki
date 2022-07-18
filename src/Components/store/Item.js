@@ -1,13 +1,5 @@
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
-
-const imageNames = {
-  'video game': require('../../../assets/items/videogame.png'),
-  slime: require('../../../assets/items/slime.png'),
-  ball: require('../../../assets/items/ball.png'),
-  'teddy bear': require('../../../assets/items/teddybear.png'),
-  leaf: require('../../../assets/items/leaf.png'),
-  paintbrush: require('../../../assets/items/paintbrush.png'),
-};
+import images from '../../images';
 
 const Item = (props) => {
   const purchaseItem = props.purchaseItem;
@@ -15,7 +7,7 @@ const Item = (props) => {
   return (
     <TouchableOpacity onPress={() => purchaseItem(props.id, props.price)}>
       <View style={styles.item}>
-        <Image style={styles.itemImg} source={imageNames[props.name]} />
+        <Image style={styles.itemImg} source={images.store[props.name]} />
         <Text style={styles.itemName}>{props.name}</Text>
         <Text style={styles.itemPrice}>{props.price}</Text>
       </View>
@@ -27,13 +19,16 @@ export default Item;
 
 const styles = StyleSheet.create({
   item: {
-    width: 100,
-    height: 100,
+    width: 105,
+    height: 105,
     backgroundColor: '#ffefb4',
     borderRadius: 10,
     alignItems: 'center',
     margin: 10,
-    padding: 10,
+    padding: 8,
+    paddingBottom: 15,
+    borderColor: '#333',
+    borderWidth: 3,
   },
   itemImg: {
     height: '60%',
@@ -43,12 +38,12 @@ const styles = StyleSheet.create({
   itemName: {
     fontFamily: 'Singularity',
     fontSize: 18,
-    color: '#59b2ff',
+    color: '#333',
     marginBottom: 2,
   },
   itemPrice: {
     fontFamily: 'Singularity',
     fontSize: 22,
-    color: '#59b2ff',
+    color: '#333',
   },
 });

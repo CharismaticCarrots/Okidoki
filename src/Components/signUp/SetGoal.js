@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useMutation } from 'react-query';
 import axios from 'axios';
 import { Formik } from 'formik';
-
 import { useUserData } from '../../hooks/useUserData';
 import { API_URL } from '../../../secrets.js';
 
@@ -22,7 +21,6 @@ const SetGoal = ({ navigation }) => {
   if (user) {
     token = user.token;
   }
-  console.log('User on SetGoal: ', user);
 
   const mutation = useMutation(async ({ dailyStepGoal, setErrors }) => {
     try {
@@ -71,7 +69,13 @@ const SetGoal = ({ navigation }) => {
               onChangeText={handleChange('dailyStepGoal')}
               value={values.dailyStepGoal}
               error={!!errors.dailyStepGoal}
-              style={{ width: 240 }}
+              style={{
+                fontFamily: values.dailyStepGoal ? 'FredokaOne' : 'Singularity',
+                fontSize: values.dailyStepGoal ? 18 : 24,
+                width: 280,
+                marginTop: 20,
+                marginBottom: 20,
+              }}
             />
             {errors.dailyStepGoal ? (
               <StyledFormInputError>
@@ -80,7 +84,11 @@ const SetGoal = ({ navigation }) => {
             ) : null}
             <StyledFormButton
               onPress={handleSubmit}
-              style={{ marginTop: 5, width: 150 }}
+              style={{
+                marginTop: 5,
+                width: 150,
+                backgroundColor: '#59b2ff',
+              }}
             >
               <StyledFormButtonText>Submit</StyledFormButtonText>
             </StyledFormButton>

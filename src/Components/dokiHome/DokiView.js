@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import { Image, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-paper';
 import {
   StyledDokiHomeBackground,
@@ -7,6 +8,8 @@ import {
   StyledOuterProgressBarContainer,
   StyledOuterCountersContainer,
   StyledDokiName,
+  StyledDokiPackContainer,
+  StyledDokiPackImage,
 } from '../styles';
 import DokiProgressBar from './DokiProgressBar';
 import Doki from './Doki';
@@ -76,13 +79,12 @@ const DokiView = ({ now }) => {
     }
   }, [user, carrotReward]);
 
-  useEffect(()=> {
+  useEffect(() => {
     if (curFullnessLvl === 0 || curMoodLvl === 0) {
       setDokiMood('sleep');
     } else if (curFullnessLvl === 100 || curMoodLvl === 100) {
       setDokiMood('happy');
-    }
-    else {
+    } else {
       setDokiMood('idle');
     }
   }, [curFullnessLvl, curMoodLvl]);
@@ -110,14 +112,18 @@ const DokiView = ({ now }) => {
         </Button>
       )}
       <StyledDokiContainer>
-        {userDoki && <Doki userDoki={userDoki} dokiMood={dokiMood}/>}
+        {userDoki && <Doki userDoki={userDoki} dokiMood={dokiMood} />}
         <StyledDokiName>
           {userDokiData && userDokiData.user_doki.dokiName}
         </StyledDokiName>
       </StyledDokiContainer>
-      <Button mode="contained" onPress={() => refRBSheet.current.open()}>
-        DOKI PACK
-      </Button>
+
+      <StyledDokiPackContainer onPress={() => refRBSheet.current.open()}>
+        <StyledDokiPackImage
+          source={require('../../../assets/items/dokipack.png')}
+        />
+      </StyledDokiPackContainer>
+
       <RBSheet
         ref={refRBSheet}
         closeOnSwipeDown={false}
@@ -131,7 +137,7 @@ const DokiView = ({ now }) => {
             backgroundColor: '#134845',
           },
           container: {
-            backgroundColor: '#6B4B3E',
+            backgroundColor: '#A57548',
             // 6B4B3E — darker brown
             // 725E54 — medium brown
             // A57548 — lighter brown
@@ -161,7 +167,7 @@ const DokiView = ({ now }) => {
         },
       }
     );
-  };
+  }
 };
 
 export default DokiView;
