@@ -332,7 +332,23 @@ const StyledFormInputError = styled(Text)`
   text-align: center;
 `;
 
-//User Settings
+// Doki Pack Icon
+const StyledDokiPackContainer = styled(TouchableOpacity)`
+  width: 100px;
+  height: 100px;
+  background-color: #ffefb4;
+  border: solid 3px #333;
+  border-radius: 50px;
+  align-items: center;
+  padding: 20px;
+`;
+
+const StyledDokiPackImage = styled(Image)`
+  height: 100%;
+  width: 100%;
+`;
+
+// User Settings
 const StyledSettingsHeading = styled(Text)`
   font-size: 50px;
   color: ${colors.text.dark};
@@ -398,12 +414,15 @@ export {
   StyledDayContainer,
   StyledInternalContainer,
   StyledHealthStatHeading,
-  // UserItem Component
+  // DokiDrawer and UserItem Component
   StyledItemContainer,
   StyledItemImage,
   StyledItemQuantity,
   StyledItemQuantityText,
-  //UserSettings Component
+  // Doki Pack Icon
+  StyledDokiPackContainer,
+  StyledDokiPackImage,
+  // UserSettings Component
   StyledSettingsHeading,
   StyledSettingsHeading2,
 };
