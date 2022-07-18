@@ -25,7 +25,7 @@ const LoginOptions = ({ navigation }) => {
             style={styles.logo}
           /> */}
           <Image
-            source={require('../../assets/LogoWEgg.png')}
+            source={require('../../assets/logoWegg3.png')}
             style={styles.title}
           />
         </View>
