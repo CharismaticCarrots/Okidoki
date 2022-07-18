@@ -55,9 +55,9 @@ const ChangeGoal = ({navigation}) => {
       source={require('../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <  StyledHealthStatHeading style={{marginVertical: 100}}>User Settings</  StyledHealthStatHeading>
+      <  StyledHealthStatHeading style={{marginVertical: 100}}>Change Daily Step Goal</  StyledHealthStatHeading>
  
-        <StyledSettingsHeading2>Change Your Daily Step Goal</StyledSettingsHeading2>
+
         
         <StyledFormTextInput
           placeholder="Example: 10,000"
@@ -81,12 +81,10 @@ const ChangeGoal = ({navigation}) => {
         <StyledFormButton
            style={{ marginTop: 20, width: 150 }}
            onPress={() => {
-            logout();
-            SecureStore.deleteItemAsync('TOKEN');
-            signOut()
+           navigation.navigate('User Settings')
           }}
         >
-        <StyledFormButtonText>Log out</StyledFormButtonText>
+        <StyledFormButtonText>Cancel</StyledFormButtonText>
         </StyledFormButton>
     
     </StyledFormBackground>

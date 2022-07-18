@@ -18,7 +18,6 @@ import { API_URL } from '../../secrets';
 import { AuthContext } from '../AuthLoading';
 
 const UserSettings = ({navigation}) => {
-  const [dailyStepGoal, setDailyStepGoal] = useState('0');
   const { user, logout } = useUserData();
   const { signOut } = React.useContext(AuthContext);
   let token;
@@ -26,28 +25,6 @@ const UserSettings = ({navigation}) => {
     token = user.token;
   }
 
-  const mutation = useMutation(
-    async (dailyStepGoal) => {
-      try {
-         await axios.put(
-          `http://${API_URL}/api/user`,
-          { dailyStepGoal },
-          {
-            headers: { authorization: token },
-          }
-        );
-        return navigation.navigate('DokiHome');
-      } catch (error) {
-        console.log({error})
-      }
-    },
-  );
-
-  const handleSubmit = async () => {
-    mutation.mutate(dailyStepGoal);
-    this.textInput.clear()
-    setDailyStepGoal('0')
-  };
   
 
   return (
@@ -57,27 +34,9 @@ const UserSettings = ({navigation}) => {
     >
       <  StyledHealthStatHeading style={{marginVertical: 100}}>User Settings</  StyledHealthStatHeading>
  
-        <StyledSettingsHeading2>Change Your Daily Step Goal</StyledSettingsHeading2>
+    
         
-        <StyledFormTextInput
-          placeholder="Example: 10,000"
-          autoCapitalize="none"
-          autoCorrect={false}
-          autoComplete="off"
-          onChangeText={setDailyStepGoal}
-          style={{ width: 240 }}
-          ref={input => { this.textInput = input }}
-          clearButtonMode="always"
-        />
-
-        <StyledFormButton
-          onPress={() => {
-            handleSubmit();
-          }}
-          style={{ marginTop: 20, width: 150 }}
-        >
-          <StyledFormButtonText>Submit</StyledFormButtonText>
-        </StyledFormButton>
+        
         <StyledFormButton
            style={{ marginTop: 20, width: 150 }}
            onPress={() => {
