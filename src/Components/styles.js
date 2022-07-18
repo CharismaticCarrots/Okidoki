@@ -68,6 +68,7 @@ const StyledFormContainer = styled(View)`
   height: 100%;
   justify-content: center;
   align-items: center;
+  margin-top:0px
 `;
 
 const StyledFormTextInput = styled(TextInput)`
@@ -370,14 +371,21 @@ const StyledSettingsHeading = styled(Text)`
   font-family: 'AntipastoBold';
 `;
 
-const StyledSettingsHeading2 = styled(Text)`
-  font-size: 30px;
-  color: ${colors.text.dark};
-  font-weight: 500;
+const StyledSettingsError = styled(Text)`
+  color: #C23B22;
+  font-family: 'FredokaOne';
+  font-size: 18px;
+  padding: 5px;
+  border-radius: 50px;
   text-align: center;
-  margin-top: 100px;
-  margin-bottom: 40px;
-  font-family: 'AntipastoBold';
+`;
+
+const StyledChangeGoalContainer = styled(View)`
+max-width: 70%;
+width: 100%;
+height: 100%;
+align-items: center;
+margin-top:180px
 `;
 
 export {
@@ -436,5 +444,6 @@ export {
   StyledDokiPackImage,
   // UserSettings Component
   StyledSettingsHeading,
-  StyledSettingsHeading2,
+  StyledSettingsError,
+  StyledChangeGoalContainer
 };

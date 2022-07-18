@@ -47,14 +47,14 @@ const UserSettings = ({navigation}) => {
       source={require('../../../assets/backgrounds/dokihome_background4.png')}
       resizeMode="cover"
     >
-      <  StyledHealthStatHeading style={{marginTop: 80, marginBottom:130}}>User Settings</  StyledHealthStatHeading>
+      <  StyledHealthStatHeading style={{marginTop: 80, marginBottom:130}}>Settings</  StyledHealthStatHeading>
         <StyledFormButton
            style={{ marginTop: 20, width: 250 }}
            onPress={() => {
            navigation.navigate('Change Goal')
           }}
         >
-        <StyledFormButtonText style={{fontFamily: 'AntipastoBold'}}>Change Step Goal</StyledFormButtonText>
+        <StyledFormButtonText style={{fontFamily: 'AntipastoBold', fontSize:20}}>Change Step Goal</StyledFormButtonText>
         </StyledFormButton>     
         <StyledFormButton
            style={{ marginTop: 20, width: 250 }}
@@ -62,7 +62,7 @@ const UserSettings = ({navigation}) => {
            navigation.navigate('Change Password')
           }}
         >
-        <StyledFormButtonText style={{fontFamily: 'AntipastoBold'}}>Change Password</StyledFormButtonText>
+        <StyledFormButtonText style={{fontFamily: 'AntipastoBold',fontSize:20}}>Change Password</StyledFormButtonText>
         </StyledFormButton>
         <StyledFormButton
            style={{ marginTop: 20, width: 250 }}
@@ -72,7 +72,7 @@ const UserSettings = ({navigation}) => {
             signOut()
           }}
         >
-        <StyledFormButtonText style={{fontFamily: 'AntipastoBold'}}>Log out</StyledFormButtonText>
+        <StyledFormButtonText style={{fontFamily: 'AntipastoBold', fontSize:20}}>Log out</StyledFormButtonText>
         </StyledFormButton>
 
         {userDoki && <Doki userDoki={userDoki} dokiMood={dokiMood}/>}
