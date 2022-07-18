@@ -24,6 +24,7 @@ const UserSettings = ({navigation}) => {
   const { user, logout } = useUserData();
   const { signOut } = React.useContext(AuthContext);
   const userDokiData = useUserDokiData();
+  console.log(user)
   useEffect(() => {
     if (userDokiData) {
       setUserDoki(userDokiData)
@@ -59,14 +60,15 @@ const UserSettings = ({navigation}) => {
         >
         <StyledFormButtonText style={{fontFamily: 'AntipastoBold', fontSize:20}}><FontAwesome5 name={'shoe-prints'} style={{ fontSize: 20 }} />  Change Step Goal</StyledFormButtonText>
         </StyledFormButton>     
-        <StyledFormButton
+       {user.externalType !== 'google' ? <StyledFormButton
            style={{ marginTop: 20, width: 250 }}
            onPress={() => {
            navigation.navigate('Change Password')
           }}
         >
         <StyledFormButtonText style={{fontFamily: 'AntipastoBold',fontSize:20}}> <Fontisto name='key' size={18}/>   Change Password</StyledFormButtonText>
-        </StyledFormButton>
+        </StyledFormButton> : <View></View> }
+
         <StyledFormButton
            style={{ marginTop: 20, width: 250, backgroundColor:'#5FB8FD' }}
            onPress={() => {
