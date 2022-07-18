@@ -84,18 +84,18 @@ const StyledFormButton = styled(TouchableOpacity)`
   padding: 15px;
   border-radius: 50px;
   align-items: center;
-  border: solid #333 4px;
+  border: solid ${colors.text.dark} 4px;
 `;
 
 const StyledFormButtonText = styled(Text)`
   font-family: 'Singularity';
   font-size: 24px;
-  color: #333;
+  color: ${colors.text.dark};
   letter-spacing: 0.5px;
 `;
 
 const StyledFormSuggest = styled(Text)`
-  color: #333;
+  color: ${colors.text.dark};
   font-family: 'Singularity';
   font-size: 22px;
   text-align: center;
@@ -343,7 +343,7 @@ const StyledDokiPackContainer = styled(TouchableOpacity)`
   width: 90px;
   height: 90px;
   background-color: #ffefb4;
-  border: solid 3px #333;
+  border: solid 3px ${colors.text.dark};
   border-radius: 50px;
   padding: 15px;
   // margin: 15px;
