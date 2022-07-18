@@ -15,18 +15,18 @@ const LoginOptions = ({ navigation }) => {
       resizeMode="cover"
     >
       <StyledLoginOptionsContainer>
-        <View>
+        <View style={{ marginTop: 60}}>
           <Image
             source={require('../../assets/logoWegg3.png')}
             style={styles.title}
           />
         </View>
-        <View style={{ marginBottom: 120}}>
+        <View style={{ marginBottom: 150}}>
           <StyledFormButton
             style={{
               width: 220,
               marginBottom: 10,
-              backgroundColor: '#ffefb4'}}
+              backgroundColor: '#C6D593'}}
             onPress={() => navigation.navigate('SignUp')}
           >
             <StyledFormButtonText>Create Account</StyledFormButtonText>
