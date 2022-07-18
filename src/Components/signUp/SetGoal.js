@@ -17,8 +17,6 @@ import {
 } from '../styles';
 
 const SetGoal = ({ navigation }) => {
-  const [dailyStepGoal, setDailyStepGoal] = useState('0');
-
   const { user } = useUserData();
   let token;
   if (user) {
@@ -30,14 +28,15 @@ const SetGoal = ({ navigation }) => {
     try {
       await axios.put(
         `http://${API_URL}/api/user`,
-        { dailyStepGoal },
+        { dailyStepGoal: dailyStepGoal },
         {
           headers: { authorization: token },
         }
       );
       return navigation.navigate('SelectEgg');
     } catch (error) {
-      setErrors({ form: 'Please set a goal' });
+      console.log({ error });
+      setErrors({ form: error.response.data.message });
       //need to add this to the put route. For now this is just front end.
     }
   });
@@ -50,7 +49,7 @@ const SetGoal = ({ navigation }) => {
       <Formik
         initialValues={{ dailyStepGoal: '' }}
         onSubmit={(values, { setErrors }) =>
-          mutation.mutate({ values, setErrors })
+          mutation.mutate({ dailyStepGoal: values.dailyStepGoal, setErrors })
         }
         validate={(values) => {
           const errors = {};
