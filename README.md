@@ -10,9 +10,23 @@ Okidoki is a gamified health app designed to gently motivate you into a more act
 ![Team_Angel (1)](https://user-images.githubusercontent.com/101146704/179840255-6980561d-0435-4ee7-9d70-d2dacb5a97d9.png)  | ![Team_Connie (1)](https://user-images.githubusercontent.com/101146704/179840276-df1dd862-407d-427e-8a2b-88c3da701bcb.png) | ![Team_Kristin (1)](https://user-images.githubusercontent.com/101146704/179840287-e3585a2f-398d-4bb8-a660-08675df1e18d.png)  | ![Team_Lydia (1)](https://user-images.githubusercontent.com/101146704/179840299-91379a54-aeee-405e-93c5-7e16aae9d2a4.png) |
 |     :---:     |     :---:     |     :---:     |     :---:     |
 | [Github](https://github.com/angely119)  | [Github](https://github.com/Conniec321)  | [Github](https://github.com/kristinlam)  | [Github](https://github.com/lydiakwa)  |
-| [LinkedIn](https://www.linkedin.com/in/angel-yang-pharmd/)  | [LinkedIn](https://www.linkedin.com/in/conniekaichan/)  | [LinkedIn](https://www.linkedin.com/in/kristin-lam/)  | [LinkedIn](https://github.com/lydiakwa)  
+| [LinkedIn](https://www.linkedin.com/in/angel-yang-pharmd/)  | [LinkedIn](https://www.linkedin.com/in/conniekaichan/)  | [LinkedIn](https://www.linkedin.com/in/kristin-lam/)  | [LinkedIn](https://github.com/lydiakwa)
+
 ### App Demo
 ------
-
 _this is where gifs will go_
 
+
+### Credits
+------
+* Video created by Shirley Cheng • [Portfolio](https://www.shirleycheng.work/) • [LinkedIn](https://www.linkedin.com/in/shirleyness/)
+* Sprites
+  * Fat Cat by [MariaParraGames](https://mariaparragames.itch.io/)
+  * Foxpack by [SeethingSwarm](https://seethingswarm.itch.io/)
+* Backgrounds
+  * Home, Health Stats — [Tofu](https://twitter.com/TofuPixel)
+  * Doki Mart — [miuks](https://twitter.com/sheepscreed)
+  * User Settings – [Jubilee](https://twitter.com/16pxl)
+* Fonts
+  * [Singularity](https://www.dafont.com/FR/singularity-2.font) by 93fresh
+  * [Antipasto](https://www.dafont.com/antipasto.font) by Cosimo Lorenzo Pancini
