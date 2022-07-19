@@ -5,6 +5,7 @@ import { Popable, usePopable } from 'react-native-popable';
 import axios from 'axios';
 import { API_URL } from '../../../secrets.js';
 import { useQuery } from 'react-query';
+import { useQueryClient } from 'react-query';
 import { useUserData } from '../../hooks/useUserData';
 import { useUpdateUser } from '../../hooks/useUpdateUser.js';
 import { useMutation } from 'react-query';
@@ -35,6 +36,7 @@ export const useItemsData = () => {
 };
 
 const Store = () => {
+  const queryClient = useQueryClient();
   const userMutation = useUpdateUser();
   const { ref, hide, show } = usePopable();
   const [msgContent, setMsgContent] = useState(null);
@@ -75,6 +77,7 @@ const Store = () => {
       userMutation.mutate(updatedCarrotCount, {
         onSuccess: ({ carrotCount }) => {
           setCurCarrotCount(carrotCount);
+          queryClient.invalidateQueries(['user']);
         },
       });
       userItemMutation.mutate(itemId, {
