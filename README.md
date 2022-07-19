@@ -14,7 +14,14 @@ Okidoki is a gamified health app designed to gently motivate you into a more act
 
 ### App Demo
 ------
-_this is where gifs will go_
+In the app you can also take a closer look at your health goals in the stats page, where you can see your progress from the last seven day. If you need to update your daily step goal, you can do so in the user settings. And lastly, you will receive popup notifications reminding you to feed and play with your Doki. 
+
+
+<p align="center">
+      <img src="https://media.giphy.com/media/0dOuXZJLrcg84JTHZ9/giphy.gif" />          
+      <img src="https://media.giphy.com/media/7jiyuwTR37FaNw1hLN/giphy.gif" />         
+      <img src="https://media.giphy.com/media/GjpdcCUga7V56q8NOe/giphy.gif" />
+</p>
 
 
 ### Credits
