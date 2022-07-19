@@ -5,6 +5,8 @@
 
 Okidoki is a gamified health app designed to gently motivate you into a more active lifestyle. The app connects to Healthkit on your iPhone and lets you set your daily step goal. Once that is set you will be given a virtual pet or “Doki” to take care of. The aim of the app is to encourage you to keep walking as when you reach your daily goal you are rewarded with currency which can be used to buy new treats and toys for your Doki. 
 
+Check out our wiki for more information on how our app works and how we set it up!
+
 ### Meet the Team
 ------
 ![Team_Angel (1)](https://user-images.githubusercontent.com/101146704/179840255-6980561d-0435-4ee7-9d70-d2dacb5a97d9.png)  | ![Team_Connie (1)](https://user-images.githubusercontent.com/101146704/179840276-df1dd862-407d-427e-8a2b-88c3da701bcb.png) | ![Team_Kristin (1)](https://user-images.githubusercontent.com/101146704/179840287-e3585a2f-398d-4bb8-a660-08675df1e18d.png)  | ![Team_Lydia (1)](https://user-images.githubusercontent.com/101146704/179840299-91379a54-aeee-405e-93c5-7e16aae9d2a4.png) |
@@ -14,6 +16,17 @@ Okidoki is a gamified health app designed to gently motivate you into a more act
 
 ### App Demo
 ------
+#### Full Video Demo: youtube link here
+
+When you open the app, you will be requested to allow the app permission to your Apple Healthkit Data and push notifications. You can sign up as a new user through our form by submitting your name and email or you can sign up through your google account. You are then directed to a page to set your step goal and to select your Doki!
+
+<p align="center">
+<img src="https://media.giphy.com/media/eDSEThmrhVSg7tueam/giphy.gif" />
+<img src="https://media.giphy.com/media/areJPpYHgv2W77TXKL/giphy.gif" />
+<img src="https://media.giphy.com/media/nuTWTnr7MQSDtylhEp/giphy.gif" />
+</p>
+
+
 In the app you can also take a closer look at your health goals in the stats page, where you can see your progress from the last seven day. If you need to update your daily step goal, you can do so in the user settings. And lastly, you will receive popup notifications reminding you to feed and play with your Doki. 
 
 
