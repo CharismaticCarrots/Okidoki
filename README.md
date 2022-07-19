@@ -18,7 +18,7 @@ Check out our wiki for more information on how our app works and how we set it u
 ------
 #### Full Video Demo: youtube link here
 
-When you open the app, you will be requested to allow the app permission to your Apple Healthkit Data and push notifications. You can sign up as a new user through our form by submitting your name and email or you can sign up through your google account. You are then directed to a page to set your step goal and to select your Doki!
+When the user opens the app, they will be requested to allow the app permission to their Apple Healthkit Data and push notifications. They can sign up as a new user through our form by submitting their name and email or they can sign up with their Google account. They are then directed to a page to set their step goal and to select their Doki!
 
 <p align="center">
 <img src="https://media.giphy.com/media/eDSEThmrhVSg7tueam/giphy.gif" />
@@ -26,8 +26,11 @@ When you open the app, you will be requested to allow the app permission to your
 <img src="https://media.giphy.com/media/nuTWTnr7MQSDtylhEp/giphy.gif" />
 </p>
 
+Users can spend their carrots in the Doki Mart, where they can purchase toys for their Doki. They can access all of their items in the Doki Pack. Feeding their Doki carrots will increase its fullness, while tapping on a toy will increase its mood.
+<p align="center">Gifs will go here</p>
 
-In the app you can also take a closer look at your health goals in the stats page, where you can see your progress from the last seven day. If you need to update your daily step goal, you can do so in the user settings. And lastly, you will receive popup notifications reminding you to feed and play with your Doki. 
+
+The user can take a closer look at their health goals in the stats page. Users can update their daily step goal in their settings. Lastly, they will receive popup notifications reminding them to feed and play with their Doki. 
 
 
 <p align="center">
