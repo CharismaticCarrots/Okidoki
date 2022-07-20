@@ -14,7 +14,6 @@ const wait = (timeout) => {
 const DokiHome = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
-  // const [isEgg, setIsEgg ] = useState(true);
   const hatchProgressData = useHatchProgress(now);
   const userDoki = useUserDokiData();
   const userDokiMutation = useUpdateUserDoki();
@@ -24,21 +23,26 @@ const DokiHome = () => {
   // const isEgg = hatchProgressData.hatchProgress < 1;
   // const isEgg = false; // FOR TESTING: Uncomment this to see Doki instead of DokiEgg
 
-  useEffect(() => {
-    if (hatchProgressData.hatchProgress) {
-      console.log("did this useEffect run")
-      const isEggNow = hatchProgressData.hatchProgress < 1;
-      console.log(typeof isEggUpdate)
+  console.log(hatchProgressData)
 
-      userDokiMutation.mutate({
-        isEgg: isEggNow
-      }, {
-        onSuccess: () => {
-          queryClient.invalidateQueries(['userDoki']);
-        }
-      });
+  useEffect(() => {
+    console.log("USE EFFECT RAN")
+    if (hatchProgressData.hatchProgress && userDoki) {
+      const isEggNow = hatchProgressData.hatchProgress < 1;
+      if (userDoki.user_doki.isEgg && !isEggNow) {
+        console.log("IS IT AN EGG IN THE DATABASE", userDoki.user_doki.isEgg)
+        console.log("IS IT AN EGG NOW", isEggNow)
+
+        userDokiMutation.mutate({
+          isEgg: false
+        }, {
+          onSuccess: () => {
+            queryClient.invalidateQueries(['userDoki']);
+          }
+        });
+      }
     }
-  }, [hatchProgressData])
+  }, [hatchProgressData, userDoki])
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
