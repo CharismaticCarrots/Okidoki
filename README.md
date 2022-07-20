@@ -46,7 +46,11 @@ Before the user can interact with their Doki, they will first need to reach thei
 ### Interacting with Doki and the Store
 
 Users can spend their carrots in the Doki Mart, where they can purchase toys for their Doki. They can access all of their items in the Doki Pack. Feeding their Doki carrots will increase its fullness, while tapping on a toy will increase its mood.
-<p align="center">Gifs will go here</p>
+<p align="center">
+<img align="left" src="https://media.giphy.com/media/oYRmjSh3EH5ljBL3Pw/giphy.gif" />          
+<img align="center" src="https://media.giphy.com/media/Ty4Xb6Ra2MNt5SC3QI/giphy.gif" />          
+<img align="right" src="https://media.giphy.com/media/wDCozWzYmoogtNyuCE/giphy.gif" />
+</p>
 
 ---
 ### Viewing Health Stats and Settings and Receiving Push Notifications
