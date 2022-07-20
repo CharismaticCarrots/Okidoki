@@ -1,9 +1,11 @@
-import { useState, useCallback } from 'react';
-import { View, ScrollView, RefreshControl, StyleSheet } from 'react-native';
+import { useState, useCallback, useEffect } from 'react';
+import { View, ScrollView, RefreshControl } from 'react-native';
+import { useQueryClient } from 'react-query';
+import { useHatchProgress } from '../../hooks/useHatchProgress';
+import { useUserDokiData } from '../../hooks/useUserDokiData';
+import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 import DokiEggView from './DokiEggView';
 import DokiView from './DokiView';
-import { useHatchProgress } from '../../hooks/useHatchProgress';
-import { useQueryClient } from 'react-query';
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -12,12 +14,31 @@ const wait = (timeout) => {
 const DokiHome = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const now = currentDate.toISOString();
+  // const [isEgg, setIsEgg ] = useState(true);
   const hatchProgressData = useHatchProgress(now);
+  const userDoki = useUserDokiData();
+  const userDokiMutation = useUpdateUserDoki();
   const queryClient = useQueryClient();
+  const now = currentDate.toISOString();
 
   // const isEgg = hatchProgressData.hatchProgress < 1;
-  const isEgg = false; // FOR TESTING: Uncomment this to see Doki instead of DokiEgg
+  // const isEgg = false; // FOR TESTING: Uncomment this to see Doki instead of DokiEgg
+
+  useEffect(() => {
+    if (hatchProgressData.hatchProgress) {
+      console.log("did this useEffect run")
+      const isEggNow = hatchProgressData.hatchProgress < 1;
+      console.log(typeof isEggUpdate)
+
+      userDokiMutation.mutate({
+        isEgg: isEggNow
+      }, {
+        onSuccess: () => {
+          queryClient.invalidateQueries(['userDoki']);
+        }
+      });
+    }
+  }, [hatchProgressData])
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -28,13 +49,13 @@ const DokiHome = () => {
 
   return (
     <ScrollView
-      style={styles.scrollView}
+      style={{ flex: 1, backgroundColor: '#134845' }}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
       <View>
-        {isEgg ? (
+        { userDoki && userDoki.user_doki.isEgg ? (
           <DokiEggView now={now} hatchProgressData={hatchProgressData} />
         ) : (
           <DokiView now={now} />
@@ -43,15 +64,5 @@ const DokiHome = () => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  scrollView: {
-    flex: 1,
-    backgroundColor: '#134845',
-  },
-});
 
 export default DokiHome;
