@@ -26,9 +26,9 @@ Check out our [wiki](https://github.com/CharismaticCarrots/Okidoki/wiki) for mor
 When the user opens the app, they will be requested to allow the app permission to their Apple Healthkit Data and push notifications. They can sign up as a new user through our form by submitting their name and email or they can sign up with their Google account. They are then directed to a page to set their step goal and to select their Doki!
 
 <p align="center">
-<img src="https://media.giphy.com/media/eDSEThmrhVSg7tueam/giphy.gif" />
-<img src="https://media.giphy.com/media/areJPpYHgv2W77TXKL/giphy.gif" />
-<img src="https://media.giphy.com/media/nuTWTnr7MQSDtylhEp/giphy.gif" />
+<pre>
+          <img src="https://media.giphy.com/media/eDSEThmrhVSg7tueam/giphy.gif" />          <img src="https://media.giphy.com/media/areJPpYHgv2W77TXKL/giphy.gif" />          <img src="https://media.giphy.com/media/nuTWTnr7MQSDtylhEp/giphy.gif" />
+<pre>
 </p>
 
 ---
@@ -37,9 +37,9 @@ When the user opens the app, they will be requested to allow the app permission 
 Before the user can interact with their Doki, they will first need to reach their step goal to hatch it. Once hatched, they can monitor and maintain its fullness and mood levels, which will decrement in the background by the hour. As the user meets their daily step goals, they will be rewarded with currency, in carrots, to care for their Doki.
 
 <p align="center">
-<img src="https://media.giphy.com/media/U7leoWCrDmLr88r026/giphy.gif" />
-<img src="https://media.giphy.com/media/TINdQhqSkbee6qEJ1d/giphy.gif" />
-<img src="https://media.giphy.com/media/jtLF2Vl9wJjDFYTTlq/giphy.gif" />
+<pre>
+          <img src="https://media.giphy.com/media/U7leoWCrDmLr88r026/giphy.gif" />            <img src="https://media.giphy.com/media/TINdQhqSkbee6qEJ1d/giphy.gif" />            <img src="https://media.giphy.com/media/jtLF2Vl9wJjDFYTTlq/giphy.gif" />
+</pre>
 </p>
 
 ---
@@ -55,9 +55,9 @@ The user can take a closer look at their health goals in the stats page. Users c
 
 
 <p align="center">
-      <img src="https://media.giphy.com/media/0dOuXZJLrcg84JTHZ9/giphy.gif" />          
-      <img src="https://media.giphy.com/media/7jiyuwTR37FaNw1hLN/giphy.gif" />         
-      <img src="https://media.giphy.com/media/GjpdcCUga7V56q8NOe/giphy.gif" />
+<pre>
+          <img src="https://media.giphy.com/media/0dOuXZJLrcg84JTHZ9/giphy.gif" />            <img src="https://media.giphy.com/media/7jiyuwTR37FaNw1hLN/giphy.gif" />            <img src="https://media.giphy.com/media/GjpdcCUga7V56q8NOe/giphy.gif" />
+</pre>
 </p>
 
 
