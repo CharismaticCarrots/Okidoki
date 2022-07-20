@@ -25,47 +25,46 @@ Check out our [wiki](https://github.com/CharismaticCarrots/Okidoki/wiki) for mor
 
 When the user opens the app, they will be requested to allow the app permission to their Apple Healthkit Data and push notifications. They can sign up as a new user through our form by submitting their name and email or they can sign up with their Google account. They are then directed to a page to set their step goal and to select their Doki!
 
-<p align="center">
-<img align="left"src="https://media.giphy.com/media/eDSEThmrhVSg7tueam/giphy.gif" />
-<img align="center" src="https://media.giphy.com/media/areJPpYHgv2W77TXKL/giphy.gif" />        
-<img align="right" src="https://media.giphy.com/media/nuTWTnr7MQSDtylhEp/giphy.gif" />
-</p>
+<div align="center">
+ <img src="https://media.giphy.com/media/eDSEThmrhVSg7tueam/giphy.gif" width="280"/>&nbsp;&nbsp;&nbsp;
+ <img src="https://media.giphy.com/media/areJPpYHgv2W77TXKL/giphy.gif" width="280"/>&nbsp;&nbsp;&nbsp;
+ <img src="https://media.giphy.com/media/nuTWTnr7MQSDtylhEp/giphy.gif" width="280"/>&nbsp;&nbsp;&nbsp;
+</div>
 
 ---
 ### Hatching Doki and Tracking Steps
 
 Before the user can interact with their Doki, they will first need to reach their step goal to hatch it. Once hatched, they can monitor and maintain its fullness and mood levels, which will decrement in the background by the hour. As the user meets their daily step goals, they will be rewarded with currency, in carrots, to care for their Doki.
 
-<p align="center">
-<img align="left" src="https://media.giphy.com/media/U7leoWCrDmLr88r026/giphy.gif" />
-<img align="center" src="https://media.giphy.com/media/TINdQhqSkbee6qEJ1d/giphy.gif" />          
-<img align="right" src="https://media.giphy.com/media/jtLF2Vl9wJjDFYTTlq/giphy.gif" />
-</p>
+<div align="center">
+<img src="https://media.giphy.com/media/U7leoWCrDmLr88r026/giphy.gif" width="280"/>&nbsp;&nbsp;&nbsp;
+<img src="https://media.giphy.com/media/TINdQhqSkbee6qEJ1d/giphy.gif" width="280"/>&nbsp;&nbsp;&nbsp;
+<img src="https://media.giphy.com/media/jtLF2Vl9wJjDFYTTlq/giphy.gif" width="280"/>&nbsp;&nbsp;&nbsp;
+</div>
 
----
+----
 ### Interacting with Doki and the Store
 
 Users can spend their carrots in the Doki Mart, where they can purchase toys for their Doki. They can access all of their items in the Doki Pack. Feeding their Doki carrots will increase its fullness, while tapping on a toy will increase its mood.
-<p align="center">
-<img align="left" src="https://media.giphy.com/media/oYRmjSh3EH5ljBL3Pw/giphy.gif" />          
-<img align="center" src="https://media.giphy.com/media/Ty4Xb6Ra2MNt5SC3QI/giphy.gif" />          
-<img align="right" src="https://media.giphy.com/media/wDCozWzYmoogtNyuCE/giphy.gif" />
-</p>
+
+<div align="center">
+<img src="https://media.giphy.com/media/oYRmjSh3EH5ljBL3Pw/giphy.gif" width="280"/>&nbsp;&nbsp;&nbsp;
+<img src="https://media.giphy.com/media/Ty4Xb6Ra2MNt5SC3QI/giphy.gif" width="280"/>&nbsp;&nbsp;&nbsp;
+<img src="https://media.giphy.com/media/wDCozWzYmoogtNyuCE/giphy.gif" width="280"/>&nbsp;&nbsp;&nbsp;
+</div>
 
 ---
 ### Viewing Health Stats and Settings and Receiving Push Notifications
 
 The user can take a closer look at their health goals in the stats page. Users can update their daily step goal in their settings. Lastly, they will receive popup notifications reminding them to feed and play with their Doki. 
 
+<div align="center">
+<img src="https://media.giphy.com/media/0dOuXZJLrcg84JTHZ9/giphy.gif" width="280"/>&nbsp;&nbsp;&nbsp;
+<img src="https://media.giphy.com/media/7jiyuwTR37FaNw1hLN/giphy.gif" width="280"/>&nbsp;&nbsp;&nbsp;
+<img src="https://media.giphy.com/media/GjpdcCUga7V56q8NOe/giphy.gif" width="280"/>&nbsp;&nbsp;&nbsp;
+</div>
 
-<p align="center">
-<img align="left" src="https://media.giphy.com/media/0dOuXZJLrcg84JTHZ9/giphy.gif" />          
-<img align="center" src="https://media.giphy.com/media/7jiyuwTR37FaNw1hLN/giphy.gif" />          
-<img align="right" src="https://media.giphy.com/media/GjpdcCUga7V56q8NOe/giphy.gif" />
-</p>
-
-
-
+---
 ## Credits
 
 * Video created by Shirley Cheng • [Portfolio](https://www.shirleycheng.work/) • [LinkedIn](https://www.linkedin.com/in/shirleyness/)
