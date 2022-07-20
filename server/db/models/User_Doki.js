@@ -9,6 +9,10 @@ const User_Doki = db.define('user_doki', {
       notEmpty: true,
     },
   },
+  isEgg: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true,
+  },
   eggColor: {
     type: Sequelize.STRING,
     allowNull: false,
