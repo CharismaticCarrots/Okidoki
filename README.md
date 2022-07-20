@@ -2,10 +2,13 @@
 
 ## About
 
+### Watch the Video Demo
 
 Okidoki is a gamified health app designed to gently motivate you into a more active lifestyle. The app connects to Healthkit on your iPhone and lets you set your daily step goal. Once that is set you will be given a virtual pet or “Doki” to take care of. The aim of the app is to encourage you to keep walking as when you reach your daily goal you are rewarded with currency which can be used to buy new treats and toys for your Doki. 
 
 Check out our [wiki](https://github.com/CharismaticCarrots/Okidoki/wiki) for more information on how our app works and how we set it up!
+
+
 
 ## Meet the Team
 
@@ -14,9 +17,11 @@ Check out our [wiki](https://github.com/CharismaticCarrots/Okidoki/wiki) for mor
 | [Github](https://github.com/angely119)  | [Github](https://github.com/Conniec321)  | [Github](https://github.com/kristinlam)  | [Github](https://github.com/lydiakwa)  |
 | [LinkedIn](https://www.linkedin.com/in/angel-yang-pharmd/)  | [LinkedIn](https://www.linkedin.com/in/conniekaichan/)  | [LinkedIn](https://www.linkedin.com/in/kristin-lam/)  | [LinkedIn](https://www.linkedin.com/in/lydia-kwa/)
 
+
+
 ## App Demo
 
-#### Full Video Demo: youtube link here
+### Sign in and Sign up
 
 When the user opens the app, they will be requested to allow the app permission to their Apple Healthkit Data and push notifications. They can sign up as a new user through our form by submitting their name and email or they can sign up with their Google account. They are then directed to a page to set their step goal and to select their Doki!
 
@@ -27,11 +32,25 @@ When the user opens the app, they will be requested to allow the app permission 
 </p>
 
 ---
+### Hatching Doki and Tracking Steps
+
+Before the user can interact with their Doki, they will first need to reach their step goal to hatch it. Once hatched, they can monitor and maintain its fullness and mood levels, which will decrement in the background by the hour. As the user meets their daily step goals, they will be rewarded with currency, in carrots, to care for their Doki.
+
+<p align="center">
+<img src="https://media.giphy.com/media/U7leoWCrDmLr88r026/giphy.gif" />
+<img src="https://media.giphy.com/media/TINdQhqSkbee6qEJ1d/giphy.gif" />
+<img src="https://media.giphy.com/media/jtLF2Vl9wJjDFYTTlq/giphy.gif" />
+</p>
+
+---
+### Interacting with Doki and the Store
 
 Users can spend their carrots in the Doki Mart, where they can purchase toys for their Doki. They can access all of their items in the Doki Pack. Feeding their Doki carrots will increase its fullness, while tapping on a toy will increase its mood.
 <p align="center">Gifs will go here</p>
 
 ---
+### Viewing Health Stats and Settings and Receiving Push Notifications
+
 The user can take a closer look at their health goals in the stats page. Users can update their daily step goal in their settings. Lastly, they will receive popup notifications reminding them to feed and play with their Doki. 
 
 
@@ -40,6 +59,8 @@ The user can take a closer look at their health goals in the stats page. Users c
       <img src="https://media.giphy.com/media/7jiyuwTR37FaNw1hLN/giphy.gif" />         
       <img src="https://media.giphy.com/media/GjpdcCUga7V56q8NOe/giphy.gif" />
 </p>
+
+
 
 ## Credits
 
