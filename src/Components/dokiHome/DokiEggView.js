@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Popable, usePopable } from 'react-native-popable';
+import notifee from '@notifee/react-native';
 import {
   StyledDokiHomeBackground,
   StyledDokiEggContainer,
@@ -31,10 +32,10 @@ const DokiEggView = ({now}) => {
 
   useEffect(() => {
     if (!isEggNow) {
-      setMsgContent('PRESS TO HATCH');
+      setMsgContent('PRESS TO HATCH ME');
       show();
     }
-  }, [isEggNow])
+  }, [now])
 
   return (
     <StyledDokiHomeBackground
