@@ -29,6 +29,13 @@ const DokiEggView = ({now}) => {
   const [isHatching, setIsHatching] = useState(null);
   const isEggNow = hatchProgressData.hatchProgress < 1;
 
+  useEffect(() => {
+    if (!isEggNow) {
+      setMsgContent('PRESS TO HATCH');
+      show();
+    }
+  }, [isEggNow])
+
   return (
     <StyledDokiHomeBackground
       source={require('../../../assets/backgrounds/dokihome_background.png')}
