@@ -1,4 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
+import { TouchableOpacity } from 'react-native';
+import { Popable, usePopable } from 'react-native-popable';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { ImageBackground } from 'react-native';
 import { Button } from 'react-native-paper';
@@ -21,6 +23,7 @@ import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
 import { useCarrotReward } from '../../hooks/useCarrotReward';
 
+
 const DokiView = ({ now }) => {
   const refRBSheet = useRef();
   const [userDoki, setUserDoki] = useState();
@@ -30,12 +33,14 @@ const DokiView = ({ now }) => {
   const [carrotsClaimed, setCarrotsClaimed] = useState(false);
   const [dokiMood, setDokiMood] = useState('');
   const [dokiLevel, setDokiLevel] = useState(1);
+  const [msgContent, setMsgContent] = useState(null);
 
   const stepCount = useDailyStepCount(now);
   const carrotReward = useCarrotReward(now);
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
   const userMutation = useUpdateUser();
+  const { ref, hide, show } = usePopable();
 
   useEffect(() => {
     if (userDokiData) {
@@ -105,7 +110,15 @@ const DokiView = ({ now }) => {
         </Button>
       )}
       <StyledDokiContainer>
-        {userDoki && <Doki userDoki={userDoki} dokiMood={dokiMood} />}
+        <Popable
+          ref={ref}
+          content={msgContent}
+          style={{ alignSelf: "center", width: 250, marginTop: 330}}
+          animationType="spring"
+        ></Popable>
+        <TouchableOpacity onPress={pressDoki}>
+          {userDoki && <Doki userDoki={userDoki} dokiMood={dokiMood} />}
+        </TouchableOpacity>
       </StyledDokiContainer>
       <ImageBackground
         source={require('../../../assets/backgrounds/dokiNameTag.png')}
@@ -173,7 +186,13 @@ const DokiView = ({ now }) => {
         },
       }
     );
-  }
+  };
+
+  function pressDoki() {
+    setMsgContent("HEY THAT TICKLES!");
+    show();
+    setTimeout(() => hide(), 1000);
+  };
 };
 
 export default DokiView;

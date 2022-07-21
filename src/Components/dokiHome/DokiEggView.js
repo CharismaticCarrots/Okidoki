@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Popable, usePopable } from 'react-native-popable';
 import {
@@ -48,7 +48,7 @@ const DokiEggView = ({now}) => {
         <Popable
           ref={ref}
           content={msgContent}
-          style={{ alignSelf: "center", width: 250, marginTop: 350, fontColor: "black"}}
+          style={{ alignSelf: "center", width: 250, marginTop: 350}}
           animationType="spring"
           backgroundColor="#59b2ff"
         ></Popable>
