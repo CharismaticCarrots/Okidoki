@@ -1,3 +1,4 @@
+import { TouchableOpacity } from 'react-native';
 import {
   StyledDokiHomeBackground,
   StyledDokiEggContainer,
@@ -8,9 +9,15 @@ import {
 import DokiProgressBar from './DokiProgressBar';
 import DokiEgg from './DokiEgg';
 import CountDisplay from './CountDisplay';
+import { useQueryClient } from 'react-query';
+import { useHatchProgress } from '../../hooks/useHatchProgress';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
+import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 
-const DokiEggView = ({hatchProgressData}) => {
+const DokiEggView = ({now}) => {
+  const hatchProgressData = useHatchProgress(now);
+  const userDokiMutation = useUpdateUserDoki();
+  const queryClient = useQueryClient();
   const userDokiData = useUserDokiData();
   const { totalSteps, dailyStepGoal } = hatchProgressData;
 
@@ -34,13 +41,29 @@ const DokiEggView = ({hatchProgressData}) => {
         />
       </StyledOuterCountersContainer>
       <StyledDokiEggContainer>
-        <DokiEgg />
+        <TouchableOpacity onPress={hatchDokiEgg}>
+          <DokiEgg />
+        </TouchableOpacity>
         <StyledDokiName>
           {userDokiData && userDokiData.user_doki.dokiName}
         </StyledDokiName>
       </StyledDokiEggContainer>
     </StyledDokiHomeBackground>
   );
+
+  function hatchDokiEgg () {
+    console.log("HATCH!")
+    const isEggNow = hatchProgressData.hatchProgress < 1;
+    if (userDokiData.user_doki.isEgg && !isEggNow) {
+      userDokiMutation.mutate({
+        isEgg: false
+      }, {
+        onSuccess: () => {
+          queryClient.invalidateQueries(['userDoki']);
+        }
+      });
+    }
+  }
 };
 
 export default DokiEggView;

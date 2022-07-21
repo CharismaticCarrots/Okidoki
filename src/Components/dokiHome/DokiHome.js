@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { View, ScrollView, RefreshControl } from 'react-native';
+import { View, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
 import { useQueryClient } from 'react-query';
 import { useHatchProgress } from '../../hooks/useHatchProgress';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
@@ -19,30 +19,6 @@ const DokiHome = () => {
   const userDokiMutation = useUpdateUserDoki();
   const queryClient = useQueryClient();
   const now = currentDate.toISOString();
-
-  // const isEgg = hatchProgressData.hatchProgress < 1;
-  // const isEgg = false; // FOR TESTING: Uncomment this to see Doki instead of DokiEgg
-
-  console.log(hatchProgressData)
-
-  useEffect(() => {
-    console.log("USE EFFECT RAN")
-    if (hatchProgressData.hatchProgress && userDoki) {
-      const isEggNow = hatchProgressData.hatchProgress < 1;
-      if (userDoki.user_doki.isEgg && !isEggNow) {
-        console.log("IS IT AN EGG IN THE DATABASE", userDoki.user_doki.isEgg)
-        console.log("IS IT AN EGG NOW", isEggNow)
-
-        userDokiMutation.mutate({
-          isEgg: false
-        }, {
-          onSuccess: () => {
-            queryClient.invalidateQueries(['userDoki']);
-          }
-        });
-      }
-    }
-  }, [hatchProgressData, userDoki])
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
