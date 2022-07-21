@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Popable, usePopable } from 'react-native-popable';
-import notifee from '@notifee/react-native';
 import {
   StyledDokiHomeBackground,
   StyledDokiEggContainer,
   StyledOuterProgressBarContainer,
   StyledOuterCountersContainer,
+  StyledDokiNameTag,
   StyledDokiName,
 } from '../styles';
 import DokiProgressBar from './DokiProgressBar';
@@ -80,10 +80,17 @@ const DokiEggView = ({now}) => {
           <DokiEgg />
           </TouchableOpacity>
         }
-        <StyledDokiName>
-          {userDokiData && userDokiData.user_doki.dokiName}
-        </StyledDokiName>
       </StyledDokiEggContainer>
+      <StyledDokiNameTag
+          source={require('../../../assets/backgrounds/dokiNameTag.png')}
+        >
+          <StyledDokiName>
+            {userDokiData && userDokiData.user_doki.dokiName}
+          </StyledDokiName>
+          <StyledDokiName>
+          Lvl: egg
+        </StyledDokiName>
+        </StyledDokiNameTag>
     </StyledDokiHomeBackground>
   );
   function wait (timeout) {
@@ -91,7 +98,6 @@ const DokiEggView = ({now}) => {
   };
 
   function hatchDokiEgg () {
-    // const isEggNow = hatchProgressData.hatchProgress < 1;
     if (userDokiData.user_doki.isEgg && !isEggNow) {
       userDokiMutation.mutate({
         isEgg: false

@@ -23,7 +23,6 @@ import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { useUpdateUser } from '../../hooks/useUpdateUser';
 import { useCarrotReward } from '../../hooks/useCarrotReward';
 
-
 const DokiView = ({ now }) => {
   const refRBSheet = useRef();
   const [userDoki, setUserDoki] = useState();

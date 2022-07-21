@@ -178,6 +178,17 @@ const StyledOuterCountersContainer = styled(View)`
   margin-top: 10px;
 `;
 
+const StyledDokiNameTag = styled(ImageBackground)`
+  z-index: 2;
+  width: 170px;
+  height: 160px;
+  position: absolute;
+  align-items: center;
+  bottom: 80px;
+  padding-top: 32px;
+  padding-left: 12px;
+`;
+
 const StyledDokiName = styled(Text)`
   color: #333;
   font-size: 25px;
@@ -419,6 +430,7 @@ export {
   StyledProgressTextSmall,
   // DokiView Component
   StyledOuterCountersContainer,
+  StyledDokiNameTag,
   StyledDokiName,
   // Doki Component
   StyledInnerDokiContainer,
