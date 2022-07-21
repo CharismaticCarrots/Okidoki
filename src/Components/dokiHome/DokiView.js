@@ -9,6 +9,7 @@ import {
   StyledDokiContainer,
   StyledOuterProgressBarContainer,
   StyledOuterCountersContainer,
+  StyledDokiNameTag,
   StyledDokiName,
   StyledDokiPackContainer,
   StyledDokiPackImage,
@@ -119,17 +120,8 @@ const DokiView = ({ now }) => {
           {userDoki && <Doki userDoki={userDoki} dokiMood={dokiMood} />}
         </TouchableOpacity>
       </StyledDokiContainer>
-      <ImageBackground
+      <StyledDokiNameTag
         source={require('../../../assets/backgrounds/dokiNameTag.png')}
-        style={{
-          zIndex: 2,
-          width: 170,
-          height: 160,
-          position: 'absolute',
-          alignItems: 'center',
-          bottom: 80,
-          paddingTop: 32,
-          paddingLeft: 12}}
       >
         <StyledDokiName>
           {userDokiData && userDokiData.user_doki.dokiName}
@@ -137,7 +129,7 @@ const DokiView = ({ now }) => {
         <StyledDokiName>
           Lvl: {dokiLevel}
         </StyledDokiName>
-      </ImageBackground>
+      </StyledDokiNameTag>
 
       <StyledDokiPackContainer onPress={() => refRBSheet.current.open()}>
         <StyledDokiPackImage
