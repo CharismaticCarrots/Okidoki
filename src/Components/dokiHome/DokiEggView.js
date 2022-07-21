@@ -15,10 +15,10 @@ import { useUserDokiData } from '../../hooks/useUserDokiData';
 import { useUpdateUserDoki } from '../../hooks/useUpdateUserDoki';
 
 const DokiEggView = ({now}) => {
-  const hatchProgressData = useHatchProgress(now);
-  const userDokiMutation = useUpdateUserDoki();
   const queryClient = useQueryClient();
   const userDokiData = useUserDokiData();
+  const userDokiMutation = useUpdateUserDoki();
+  const hatchProgressData = useHatchProgress(now);
   const { totalSteps, dailyStepGoal } = hatchProgressData;
 
   return (
@@ -52,7 +52,6 @@ const DokiEggView = ({now}) => {
   );
 
   function hatchDokiEgg () {
-    console.log("HATCH!")
     const isEggNow = hatchProgressData.hatchProgress < 1;
     if (userDokiData.user_doki.isEgg && !isEggNow) {
       userDokiMutation.mutate({
