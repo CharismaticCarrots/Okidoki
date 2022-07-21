@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { Popable, usePopable } from 'react-native-popable';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { Button } from 'react-native-paper';
@@ -35,8 +35,7 @@ const DokiView = ({ now }) => {
   const [msgContent, setMsgContent] = useState(null);
 
   const stepCount = useDailyStepCount(now);
-  // const carrotReward = useCarrotReward(now);
-  const carrotReward = 100;
+  const carrotReward = useCarrotReward(now);
   const { user } = useUserData();
   const userDokiData = useUserDokiData();
   const userMutation = useUpdateUser();
@@ -108,20 +107,31 @@ const DokiView = ({ now }) => {
         <Button
           mode="contained"
           onPress={claimCarrots}
-          style={{ position: "absolute", top: 250, backgroundColor: "#5FB8FD"}}>
+          style={{
+            position: "absolute",
+            top: 280,
+            zIndex: 5,
+            backgroundColor: "#8C401C"}}>
           {`CLAIM ${carrotReward} CARROTS`}
         </Button>
       )}
+      <TouchableOpacity onPress={pressDoki} style={{
+        position: "absolute",
+        top: 400,
+        zIndex: 5,}}>
+        <View style={{
+          width: 150,
+          height: 150,
+        }}/>
+      </TouchableOpacity>
       <StyledDokiContainer>
         <Popable
           ref={ref}
           content={msgContent}
-          style={{ alignSelf: "center", width: 250, marginTop: 330 }}
+          style={{ alignSelf: "center", width: 170, marginTop: 330 }}
           animationType="spring"
         ></Popable>
-        <TouchableOpacity onPress={pressDoki}>
           {userDoki && <Doki userDoki={userDoki} dokiMood={dokiMood} />}
-        </TouchableOpacity>
       </StyledDokiContainer>
       <StyledDokiNameTag
         source={require('../../../assets/backgrounds/dokiNameTag.png')}
