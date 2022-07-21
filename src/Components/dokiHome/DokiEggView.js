@@ -1,4 +1,6 @@
+import { useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
+import { Popable, usePopable } from 'react-native-popable';
 import {
   StyledDokiHomeBackground,
   StyledDokiEggContainer,
@@ -20,6 +22,8 @@ const DokiEggView = ({now}) => {
   const userDokiMutation = useUpdateUserDoki();
   const hatchProgressData = useHatchProgress(now);
   const { totalSteps, dailyStepGoal } = hatchProgressData;
+  const { ref, hide, show } = usePopable();
+  const [msgContent, setMsgContent] = useState(null);
 
   return (
     <StyledDokiHomeBackground
@@ -41,6 +45,13 @@ const DokiEggView = ({now}) => {
         />
       </StyledOuterCountersContainer>
       <StyledDokiEggContainer>
+        <Popable
+          ref={ref}
+          content={msgContent}
+          style={{ alignSelf: "center", width: 250, marginTop: 350, fontColor: "black"}}
+          animationType="spring"
+          backgroundColor="#59b2ff"
+        ></Popable>
         <TouchableOpacity onPress={hatchDokiEgg}>
           <DokiEgg />
         </TouchableOpacity>
@@ -61,6 +72,10 @@ const DokiEggView = ({now}) => {
           queryClient.invalidateQueries(['userDoki']);
         }
       });
+    } else {
+      setMsgContent('REACH YOUR GOAL TO HATCH ME');
+      show();
+      setTimeout(() => hide(), 1500);
     }
   }
 };
