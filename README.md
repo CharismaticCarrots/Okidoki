@@ -65,6 +65,28 @@ The user can take a closer look at their health goals in the stats page. Users c
 </div>
 
 ---
+## Getting Started
+Download [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) and install the [Expo CLI](https://reactnative.dev/docs/environment-setup) to experience Okidoki on an iOS simulator.
+Create a file called ```secrets.js```. To find your IP address, run ```ipconfig getifaddr en0```.
+```
+export const API_URL = "[YOUR IP ADDRESS.19002]";
+export const GOOGLECLIENTID = "[GOOGLECLIENTID]"
+```
+Create a file called ```.env```.
+```
+PORT=19002
+JWT="[SECRETKEY]"
+GOOGLECLIENTID="[GOOGLECLIENTID]"
+```
+After creating these files, run the following commands to build the app:
+```
+npm install
+cd ios &&  pod install
+cd .. && expo run:ios
+```
+
+
+---
 ## Credits
 
 * Video created by Shirley Cheng • [Portfolio](https://www.shirleycheng.work/) • [LinkedIn](https://www.linkedin.com/in/shirleyness/)
