@@ -37,9 +37,9 @@ When the user opens the app, they will be requested to allow the app permission 
 Before the user can interact with their Doki, they will first need to reach their step goal to hatch it. Once hatched, they can monitor and maintain its fullness and mood levels, which will decrement in the background by the hour. As the user meets their daily step goals, they will be rewarded with currency, in carrots, to care for their Doki.
 
 <div align="center">
-<img src="https://media.giphy.com/media/U7leoWCrDmLr88r026/giphy.gif" width="250"/>&nbsp;&nbsp;&nbsp;
-<img src="https://media.giphy.com/media/TINdQhqSkbee6qEJ1d/giphy.gif" width="250"/>&nbsp;&nbsp;&nbsp;
-<img src="https://media.giphy.com/media/jtLF2Vl9wJjDFYTTlq/giphy.gif" width="250"/>&nbsp;&nbsp;&nbsp;
+<img src="https://media.giphy.com/media/v697A1L5Eg4rUZ1e2z/giphy.gif" width="250"/>&nbsp;&nbsp;&nbsp;
+<img src="https://media.giphy.com/media/kVIGInWsJsKSdmuNPo/giphy.gif" width="250"/>&nbsp;&nbsp;&nbsp;
+<img src="https://media.giphy.com/media/7uuUcRX4tLHAFLTACu/giphy.gif" width="250"/>&nbsp;&nbsp;&nbsp;
 </div>
 
 ----
