@@ -2,7 +2,7 @@
 
 ## About
 
-### Watch the Video Demo
+### [Watch the Video Demo](https://youtu.be/pvkmPt4Fc00)
 
 Okidoki is a gamified health app designed to gently motivate you into a more active lifestyle. The app connects to Healthkit on your iPhone and lets you set your daily step goal. Once that is set you will be given a virtual pet or “Doki” to take care of. The aim of the app is to encourage you to keep walking as when you reach your daily goal you are rewarded with currency which can be used to buy new treats and toys for your Doki. 
 
