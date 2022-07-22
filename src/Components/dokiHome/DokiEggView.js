@@ -1,16 +1,19 @@
-import { useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { useState, useEffect } from 'react';
+import { View, TouchableOpacity } from 'react-native';
 import { Popable, usePopable } from 'react-native-popable';
 import {
   StyledDokiHomeBackground,
   StyledDokiEggContainer,
   StyledOuterProgressBarContainer,
   StyledOuterCountersContainer,
+  StyledDokiNameTag,
   StyledDokiName,
 } from '../styles';
 import DokiProgressBar from './DokiProgressBar';
 import DokiEgg from './DokiEgg';
 import CountDisplay from './CountDisplay';
+import Sprite from '../Sprite';
+import images from '../../images';
 import { useQueryClient } from 'react-query';
 import { useHatchProgress } from '../../hooks/useHatchProgress';
 import { useUserDokiData } from '../../hooks/useUserDokiData';
@@ -24,6 +27,15 @@ const DokiEggView = ({now}) => {
   const { totalSteps, dailyStepGoal } = hatchProgressData;
   const { ref, hide, show } = usePopable();
   const [msgContent, setMsgContent] = useState(null);
+  const [isHatching, setIsHatching] = useState(null);
+  const isEggNow = hatchProgressData.hatchProgress < 1;
+
+  useEffect(() => {
+    if (!isEggNow) {
+      setMsgContent('PRESS TO HATCH ME');
+      show();
+    }
+  }, [now])
 
   return (
     <StyledDokiHomeBackground
@@ -52,24 +64,48 @@ const DokiEggView = ({now}) => {
           animationType="spring"
           backgroundColor="#59b2ff"
         ></Popable>
-        <TouchableOpacity onPress={hatchDokiEgg}>
+        {
+          isHatching ?
+          <View style={{marginTop: 100, marginBottom: 100}}>
+            <Sprite
+              src={images.sprites.egg.hatch}
+              totalSprites={6}
+              tile={{ width: 209, height: 208 }}
+              scale={1}
+              framesPerSprite={30}
+            />
+          </View>
+          :
+          <TouchableOpacity onPress={hatchDokiEgg}>
           <DokiEgg />
-        </TouchableOpacity>
-        <StyledDokiName>
-          {userDokiData && userDokiData.user_doki.dokiName}
-        </StyledDokiName>
+          </TouchableOpacity>
+        }
       </StyledDokiEggContainer>
+      <StyledDokiNameTag
+          source={require('../../../assets/backgrounds/dokiNameTag.png')}
+        >
+          <StyledDokiName>
+            {userDokiData && userDokiData.user_doki.dokiName}
+          </StyledDokiName>
+          <StyledDokiName>
+          Lvl: egg
+        </StyledDokiName>
+        </StyledDokiNameTag>
     </StyledDokiHomeBackground>
   );
+  function wait (timeout) {
+    return new Promise((resolve) => setTimeout(resolve, timeout));
+  };
 
   function hatchDokiEgg () {
-    const isEggNow = hatchProgressData.hatchProgress < 1;
     if (userDokiData.user_doki.isEgg && !isEggNow) {
       userDokiMutation.mutate({
         isEgg: false
       }, {
         onSuccess: () => {
-          queryClient.invalidateQueries(['userDoki']);
+          setIsHatching(true);
+          wait(2000).then(() =>
+          queryClient.invalidateQueries(['userDoki']));
         }
       });
     } else {

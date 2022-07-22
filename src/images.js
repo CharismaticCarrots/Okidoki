@@ -8,6 +8,7 @@ import fox_sleep from '../assets/sprites/fox_sprites/fox_sleep.png';
 import whitefox_idle from '../assets/sprites/whitefox_sprites/whitefox_idle.png';
 import whitefox_happy from '../assets/sprites/whitefox_sprites/whitefox_happy.png';
 import whitefox_sleep from '../assets/sprites/whitefox_sprites/whitefox_sleep.png';
+import smoke from '../assets/sprites/smoke_spritesheet.png';
 
 // Items
 import slime from '../assets/items/slime.png';
@@ -40,6 +41,9 @@ const images = {
       happy: whitefox_happy,
       sleep: whitefox_sleep,
     },
+    egg: {
+      hatch: smoke
+    }
   },
   store: {
     'egg game': egg_game,
