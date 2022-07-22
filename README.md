@@ -8,7 +8,7 @@ Okidoki is a gamified health app designed to gently motivate you into a more act
 
 _Why Okidoki?_
 
-Derived from the Japanese word for wristwatch, udedokei, and the sound of your heart, “dokidoki”, "Okidoki" encapsulates our integration with Apple and Android fitness technology and our goal to promote a heart healthy lifestyle
+Derived from the Japanese word for wristwatch, _udedokei_, and the sound of your heart, _dokidoki_, "Okidoki" encapsulates our integration with Apple and Android fitness technology and our goal to promote a heart healthy lifestyle
 
 Check out our [wiki](https://github.com/CharismaticCarrots/Okidoki/wiki) for more information on how our app works and how we set it up!
 
